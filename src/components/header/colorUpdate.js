@@ -1,10 +1,16 @@
 import React from 'react';
 import './title.css';
 
-const ColorUpdate = () => {
+const ColorUpdate = ({popupController}) => {
   return (
     <div>
-      <button type="button" className="updateColorButton">Update Colors</button>
+      <button 
+        type="button" 
+        className="updateColorButton"
+        onClick={() => popupController(true)}
+      >
+        Update Colors
+      </button>
     </div>
   );
 }

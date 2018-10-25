@@ -68,8 +68,22 @@
   justify-content: center;
 }
 
-.correctCircle{
-  margin-right: 300px;
+@media (min-width: 600px) and (max-width:1200px){
+  .correctCircle{
+    margin-right: 300px;
+  }
+}
+
+@media (max-width: 600px){
+  .correctCircle{
+    margin-right: 100px;
+  }
+}
+
+@media (min-width: 1200px){
+  .correctCircle{
+    margin-right: 500px;
+  }
 }
 
 .incorrectCircle{
