@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './App.css';
+import Title from './components/header/title';
+import ColorUpdate from './components/header/colorUpdate';
 
 import {changeColors, selectGameOption, startGame} from './controllers/actions';
 
@@ -25,12 +27,12 @@ const mapDispatchToProps = (dispatch) => {
 
 class App extends Component {
   render() {
-    const {onChangeColors, onStartGame, onSelectOption} = this.props
-
+    const {onChangeColors, onStartGame, onSelectOption, background} = this.props
+      
     return (
-      <div>
-        <h1>Color Clicker</h1>
-        <p>How fast can you click the right colored circle?</p>
+      <div style={{background: `${background}`}}>
+        <ColorUpdate />
+        <Title />
       </div>
     );
   }

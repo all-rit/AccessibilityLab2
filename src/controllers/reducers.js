@@ -5,7 +5,7 @@ import{
 } from "./constants.js"
 
 const initialColors = {
-  background: "",
+  background: "#FFA64D",
   rightCircle: "",
   wrongCircleOne: "",
   wrongCircleTwo: ""
