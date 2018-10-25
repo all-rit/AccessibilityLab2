@@ -1,0 +1,77 @@
+.center{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.inline{
+  flex-direction: nowrap;
+  padding: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.start{
+  margin-top: 40px;
+  font-size: 30px;
+  color: light-grey;
+  padding: 10px 10px;
+  box-shadow: 0 10px 20px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.start:hover{
+  cursor:pointer
+}
+
+.thirdTitle{
+  font-size: 35px;
+}
+
+.fourthTitle{
+  font-size: 25px;
+}
+
+.instruction{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.Left{
+  margin-left: 50px;
+  margin-right: 20px;
+  text-align: center;
+}
+
+.Right{
+  margin-left: 20px;
+  margin-right: 50px;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.selection{
+  width: 300px;
+  height: 30px;
+}
+
+.textSelection{
+  font-size: 20px;
+}
+
+.circles{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.correctCircle{
+  margin-right: 300px;
+}
+
+.incorrectCircle{
+  margin-left: 50px;
+}

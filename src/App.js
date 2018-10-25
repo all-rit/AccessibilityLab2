@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import './App.css';
 import Title from './components/header/title';
 import ColorUpdate from './components/header/colorUpdate';
+import Home from './components/home/Home';
 
 import {changeColors, selectGameOption, startGame} from './controllers/actions';
 
@@ -27,12 +28,17 @@ const mapDispatchToProps = (dispatch) => {
 
 class App extends Component {
   render() {
-    const {onChangeColors, onStartGame, onSelectOption, background} = this.props
+    const {onChangeColors, onStartGame, onSelectOption, background, rightCircle, wrongCircleOne, wrongCircleTwo} = this.props
       
     return (
-      <div style={{background: `${background}`}}>
+      <div style={{background: `${background}`}} className='main'>
         <ColorUpdate />
         <Title />
+        <Home 
+          correctColor={rightCircle} 
+          incorrectColorOne={wrongCircleOne} 
+          incorrectColorTwo={wrongCircleTwo} 
+        />
       </div>
     );
   }

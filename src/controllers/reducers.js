@@ -6,9 +6,9 @@ import{
 
 const initialColors = {
   background: "#FFA64D",
-  rightCircle: "",
-  wrongCircleOne: "",
-  wrongCircleTwo: ""
+  rightCircle: "#00D67D",
+  wrongCircleOne: "#FFC2C2",
+  wrongCircleTwo: "#B8B800"
 }
 
 export const changeColors = (state = initialColors, action = {}) => {
