@@ -5,8 +5,9 @@ import {
   ACTIVATE_POPUP
 } from './constants.js';
 
-export const changeColors = () => ({
-  type: UPDATE_COLORS
+export const changeColors = (colors) => ({
+  type: UPDATE_COLORS,
+  payload: colors
 })
 
 export const selectGameOption = (gameType) => ({
