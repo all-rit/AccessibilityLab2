@@ -11,3 +11,21 @@
   margin-top: 100px;
   margin-bottom: 100px;
 }
+
+.scoreLine{
+  margin-top: 35px;
+  display: flex;
+  justify-content: space-around;
+  background: black;
+} 
+
+@media (min-width: 1200px) {
+  .scoreLine{
+    margin-top: 85px;
+  }
+}
+
+.scoreElement{
+  color:white;
+  font-size: 20px;
+}

@@ -3,7 +3,11 @@ import{
   END_GAME,
   SELECT_OPTION, 
   UPDATE_COLORS,
-  ACTIVATE_POPUP
+  ACTIVATE_POPUP,
+  SCORE,
+  RIGHT,
+  WRONG,
+  TIME
 } from "./constants.js"
 
 const initialColors = {
@@ -41,7 +45,11 @@ export const selectGameOption = (state = initialOption, action = {}) => {
 }
 
 const initialGameState = {
-  gameStarted: false
+  gameStarted: false,
+  score: 0,
+  numRight: 0,
+  numWrong: 0,
+  amountTime: 15.0,
 }
 
 export const gameState = (state = initialGameState, action = {}) => {
@@ -50,6 +58,14 @@ export const gameState = (state = initialGameState, action = {}) => {
       return {...state, gameStarted: true};
     case END_GAME:
       return {...state, gameStarted: false};
+    case SCORE: 
+      return {...state, score: action.payload};
+    case RIGHT:
+      return {...state, numRight: state.numRight + 1};
+    case WRONG:
+      return {...state, numWrong: state.numWrong + 1};
+    case TIME:
+      return {...state, amountTime: action.payload};
     default:
       return state;
   }
