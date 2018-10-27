@@ -1,6 +1,13 @@
 .circle{
-  height: 60px;
-  width: 60px;
+  height: 75px;
+  width: 75px;
   border-radius: 50%;
   display: inline-block;
+}
+
+.circleClicked{
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }

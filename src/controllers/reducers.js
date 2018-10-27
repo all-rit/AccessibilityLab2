@@ -1,5 +1,6 @@
 import{
   START_GAME,
+  END_GAME,
   SELECT_OPTION, 
   UPDATE_COLORS,
   ACTIVATE_POPUP
@@ -43,10 +44,12 @@ const initialGameState = {
   gameStarted: false
 }
 
-export const startGame = (state = initialGameState, action = {}) => {
+export const gameState = (state = initialGameState, action = {}) => {
   switch(action.type) {
     case START_GAME:
-      return {...state, option: action.payload};
+      return {...state, gameStarted: true};
+    case END_GAME:
+      return {...state, gameStarted: false};
     default:
       return state;
   }

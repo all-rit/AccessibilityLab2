@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import {Provider} from 'react-redux';
 import {createStore, combineReducers} from 'redux';
-import {changeColors, selectGameOption, startGame} from './controllers/reducers';
+import {changeColors, selectGameOption, gameState} from './controllers/reducers';
 
-const rootReducer = combineReducers({changeColors, selectGameOption, startGame});
+const rootReducer = combineReducers({changeColors, selectGameOption, gameState});
 
 const store = createStore(rootReducer);
 

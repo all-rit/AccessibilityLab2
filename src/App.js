@@ -4,9 +4,10 @@ import './App.css';
 import Title from './components/header/title';
 import ColorUpdate from './components/header/colorUpdate';
 import Home from './components/home/Home';
+import Game from './components/game/game';
 import ColorChangePopup from './components/home/colorChangePopup'
 
-import {changeColors, selectGameOption, activatePopup, startGame} from './controllers/actions';
+import {changeColors, selectGameOption, activatePopup, startGame, endGame} from './controllers/actions';
 
 const mapStateToProps = state => {
   return {
@@ -15,7 +16,7 @@ const mapStateToProps = state => {
     wrongCircleOne: state.changeColors.wrongCircleOne,
     wrongCircleTwo: state.changeColors.wrongCircleTwo,
     gameOption: state.selectGameOption.option,
-    gameState: state.startGame.gameStartedm,
+    gameState: state.gameState.gameStarted,
     popup: state.changeColors.popup
   }
 }
@@ -25,29 +26,44 @@ const mapDispatchToProps = (dispatch) => {
     onChangeColors: (event) => dispatch(changeColors(event)),
     onSelectOption: (event) => dispatch(selectGameOption(event.target.value)),
     onStartGame: () => dispatch(startGame()),
+    onEndGame: () => dispatch(endGame()),
     popupController: (event) => dispatch(activatePopup(event)),
   }
 }
 
 class App extends Component {
   render() {
-    const {onChangeColors, onStartGame, onSelectOption, background, rightCircle, wrongCircleOne, wrongCircleTwo, popupController, popup} = this.props
+    const {onChangeColors, onStartGame, onEndGame, onSelectOption, gameState, background, rightCircle, wrongCircleOne, wrongCircleTwo, popupController, popup} = this.props
       
     return (
       <div style={{background: `${background}`}} className='main'>
-        <ColorUpdate popupController={popupController}/>
-        <Title />
-        <Home 
-          correctColor={rightCircle} 
-          incorrectColorOne={wrongCircleOne} 
-          incorrectColorTwo={wrongCircleTwo} 
-        />
-        {popup ?
-          <ColorChangePopup
-            changeColors = {onChangeColors}
-            popupController={popupController}
-          />
-          : null
+        {gameState ?
+          <div>
+            <Title gameState={gameState} gameEnded={onEndGame}/>
+            <Game 
+              correctColor={rightCircle}
+              incorrectColorOne={wrongCircleOne}
+              incorrectColorTwo={wrongCircleTwo}
+            />
+          </div>
+          :
+          <div>
+            <ColorUpdate popupController={popupController}/>
+            <Title gameState={gameState}/>
+            <Home 
+              correctColor={rightCircle} 
+              incorrectColorOne={wrongCircleOne} 
+              incorrectColorTwo={wrongCircleTwo} 
+              startGame={onStartGame}
+            />
+          {popup ?
+            <ColorChangePopup
+              changeColors = {onChangeColors}
+              popupController={popupController}
+            />
+            : null
+          }
+          </div>
         }
       </div>
     );

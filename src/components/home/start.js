@@ -1,11 +1,17 @@
 import React from 'react';
 import './homeStyle.css';
 
-const Start = () => {
+const Start = ({startGame}) => {
   return (
     <div className='center'>
       <p className='thirdTitle center inline'>Ready?</p>
-      <button className='start center inline' type='submit'>Start</button>
+      <button 
+        className='start center inline' 
+        type='submit'
+        onClick={startGame}
+      >
+        Start
+      </button>
     </div>
   );
 }

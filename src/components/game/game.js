@@ -1,14 +1,14 @@
 import React from 'react';
-import './homeStyle.css'
-import Start from './start';
+import Circle from './circle';
 import Instructions from '../instructions/instructions';
-import Dropdown from './dropdown';
+import './gameStyle.css';
 
-const Home = ({correctColor, incorrectColorOne, incorrectColorTwo, startGame}) => {
+const Game = ({correctColor, incorrectColorOne, incorrectColorTwo}) => {
   return (
     <div>
-      <Start startGame = {startGame}/>
-      <Dropdown />
+      <div className='circleClicked'>
+        <Circle color={correctColor}/>
+      </div>
       <Instructions 
         correctColor={correctColor} 
         incorrectColorOne={incorrectColorOne}
@@ -18,4 +18,4 @@ const Home = ({correctColor, incorrectColorOne, incorrectColorTwo, startGame}) =
   );
 }
 
-export default Home;
+export default Game;
