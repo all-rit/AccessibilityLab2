@@ -7,7 +7,6 @@ import{
   SCORE,
   RIGHT,
   WRONG,
-  TIME
 } from "./constants.js"
 
 const initialColors = {
@@ -64,8 +63,6 @@ export const gameState = (state = initialGameState, action = {}) => {
       return {...state, numRight: state.numRight + 1};
     case WRONG:
       return {...state, numWrong: state.numWrong + 1};
-    case TIME:
-      return {...state, amountTime: action.payload};
     default:
       return state;
   }

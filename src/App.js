@@ -4,10 +4,10 @@ import './App.css';
 import Title from './components/header/title';
 import ColorUpdate from './components/header/colorUpdate';
 import Home from './components/home/Home';
-import Game from './components/game/game';
+import GameCenter from './components/game/GameCenter';
 import ColorChangePopup from './components/home/colorChangePopup'
 
-import {changeColors, selectGameOption, activatePopup, startGame, endGame, score, gotRight, gotWrong, updateTime} from './controllers/actions';
+import {changeColors, selectGameOption, activatePopup, startGame, endGame, score, gotRight, gotWrong} from './controllers/actions';
 
 const mapStateToProps = state => {
   return {
@@ -21,7 +21,6 @@ const mapStateToProps = state => {
     numberRight: state.gameState.numRight,
     numberWrong: state.gameState.numWrong,
     currentScore: state.gameState.score,
-    timeRemaining: state.gameState.amountTime
   }
 }
 
@@ -32,23 +31,22 @@ const mapDispatchToProps = (dispatch) => {
     onStartGame: () => dispatch(startGame()),
     onEndGame: () => dispatch(endGame()),
     popupController: (event) => dispatch(activatePopup(event)),
-    onUpdateScore: (event) => dispatch(score(event)),
     onGotRight: () => dispatch(gotRight()),
     onGotWrong: () => dispatch(gotWrong()),
-    updateTime: (event) => dispatch(updateTime(event))
+    onUpdateScore: (event) => dispatch(score(event)),
   }
 }
 
 class App extends Component {
   render() {
-    const {onChangeColors, onStartGame, onEndGame, onSelectOption, gameState, background, rightCircle, wrongCircleOne, wrongCircleTwo, popupController, popup, numberRight, numberWrong, currentScore, timeRemaining, onUpdateScore, onGotRight, onGotWrong, updateTime} = this.props
+    const {onChangeColors, onStartGame, onEndGame, onSelectOption, gameState, background, rightCircle, wrongCircleOne, wrongCircleTwo, popupController, popup, numberRight, numberWrong, currentScore,  onUpdateScore, onGotRight, onGotWrong} = this.props
       
     return (
       <div style={{background: `${background}`}} className='main'>
         {gameState ?
           <div>
             <Title gameState={gameState} gameEnded={onEndGame}/>
-            <Game 
+            <GameCenter
               correctColor={rightCircle}
               incorrectColorOne={wrongCircleOne}
               incorrectColorTwo={wrongCircleTwo}
@@ -58,8 +56,6 @@ class App extends Component {
               wrong={numberWrong}
               gotRight={onGotRight}
               gotWrong={onGotWrong}
-              timeRemaining={timeRemaining}
-              updateTime={updateTime}
             />
           </div>
           :

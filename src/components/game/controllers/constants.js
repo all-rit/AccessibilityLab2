@@ -1,0 +1,1 @@
+export const UPDATE_RAND_COLOR = "UPDATE_RAND_COLOR";

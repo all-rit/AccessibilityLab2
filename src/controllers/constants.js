@@ -4,6 +4,7 @@ export const SCORE = "SCORE";
 export const RIGHT = "RIGHT";
 export const WRONG = "WRONG";
 export const TIME = "TIME";
+export const UPDATE_RAND_COLOR = "UPDATE_RAND_COLOR";
 
 export const SELECT_OPTION = "SELECT_OPTION";
 

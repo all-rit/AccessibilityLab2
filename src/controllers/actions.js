@@ -7,7 +7,6 @@ import {
   SCORE,
   RIGHT,
   WRONG,
-  TIME
 } from './constants.js';
 
 export const changeColors = (colors) => ({
@@ -44,8 +43,4 @@ export const gotRight = () => ({
 
 export const gotWrong = () => ({
   type: WRONG
-})
-
-export const updateTime = (time) => ({
-  type: TIME
 })
