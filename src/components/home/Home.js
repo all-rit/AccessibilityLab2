@@ -4,11 +4,11 @@ import Start from './start';
 import Instructions from '../instructions/instructions';
 import Dropdown from './dropdown';
 
-const Home = ({correctColor, incorrectColorOne, incorrectColorTwo, startGame}) => {
+const Home = ({correctColor, incorrectColorOne, incorrectColorTwo, startGame, selectOption}) => {
   return (
     <div>
       <Start startGame = {startGame}/>
-      <Dropdown />
+      <Dropdown selectOption = {selectOption} />
       <Instructions 
         correctColor={correctColor} 
         incorrectColorOne={incorrectColorOne}

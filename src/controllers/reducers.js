@@ -1,12 +1,9 @@
 import{
-  START_GAME,
-  END_GAME,
   SELECT_OPTION, 
   UPDATE_COLORS,
   ACTIVATE_POPUP,
-  SCORE,
-  RIGHT,
-  WRONG,
+  START_GAME, 
+  END_GAME
 } from "./constants.js"
 
 const initialColors = {
@@ -44,25 +41,15 @@ export const selectGameOption = (state = initialOption, action = {}) => {
 }
 
 const initialGameState = {
-  gameStarted: false,
-  score: 0,
-  numRight: 0,
-  numWrong: 0,
-  amountTime: 15.0,
+  gameState: false
 }
 
-export const gameState = (state = initialGameState, action = {}) => {
+export const changeGameState = (state = initialGameState, action = {}) => {
   switch(action.type) {
     case START_GAME:
-      return {...state, gameStarted: true};
+      return {...state, gameState: true}
     case END_GAME:
-      return {...state, gameStarted: false};
-    case SCORE: 
-      return {...state, score: action.payload};
-    case RIGHT:
-      return {...state, numRight: state.numRight + 1};
-    case WRONG:
-      return {...state, numWrong: state.numWrong + 1};
+      return {...state, gameState: false}
     default:
       return state;
   }

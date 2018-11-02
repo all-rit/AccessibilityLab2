@@ -1,12 +1,9 @@
 import {
   UPDATE_COLORS,
-  START_GAME,
-  END_GAME,
   SELECT_OPTION, 
   ACTIVATE_POPUP,
-  SCORE,
-  RIGHT,
-  WRONG,
+  START_GAME, 
+  END_GAME
 } from './constants.js';
 
 export const changeColors = (colors) => ({
@@ -19,28 +16,15 @@ export const selectGameOption = (gameType) => ({
   payload: gameType
 })
 
+export const activatePopup = (popup) => ({
+  type: ACTIVATE_POPUP,
+  payload: popup
+})
+
 export const startGame = () => ({
   type: START_GAME
 })
 
 export const endGame = () => ({
   type: END_GAME
-})
-
-export const activatePopup = (popup) => ({
-  type: ACTIVATE_POPUP,
-  payload: popup
-})
-
-export const score = (points) => ({
-  type: SCORE,
-  payload: points
-})
-
-export const gotRight = () => ({
-  type: RIGHT
-})
-
-export const gotWrong = () => ({
-  type: WRONG
 })

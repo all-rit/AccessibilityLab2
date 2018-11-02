@@ -1,13 +1,33 @@
 import React from 'react';
 import './homeStyle.css';
 
-const Dropdown = () => {
+const Dropdown = ({selectOption}) => {
+
+  const handleChosenOption = (event) => {
+    selectOption(event);
+  }
+
   return (
     <div className='center'>
-      <select className='selection'>
-        <option value='default' className='textSelection'>---</option>
-        <option value='hex' className='textSelection'>Hex Numbers</option>
-        <option value='Protanopia' className='textSelection'>Protanopia (Red Blindness)</option>
+      <select className='selection' onChange={handleChosenOption}>
+        <option 
+          value='default' 
+          className='textSelection'
+        >
+        ---
+        </option>
+        <option 
+          value='hex' 
+          className='textSelection'
+        >
+        Hex Numbers
+        </option>
+        <option 
+          value='Protanopia' 
+          className='textSelection'
+        >
+        Protanopia (Red Blindness)
+        </option>
         <option 
           value='Deuteranopia'
           className='textSelection'

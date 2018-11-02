@@ -5,17 +5,25 @@ import Instructions from '../instructions/instructions';
 import Score from './score';
 import './gameStyle.css';
 
-import {updateColor} from './controllers/actions';
+import {startGame, endGame, score, gotRight, gotWrong} from './controllers/actions';
 
 const mapStateToProps = state => {
   return {
-    currentColor: state.changeColor.clickableColor,
+    gameStarted: state.changeColor.gameStarted,
+    score: state.changeColor.score,
+    numRight: state.changeColor.numRight,
+    numWrong: state.changeColor.numWrong,
+    amountTime: state.changeColor.amountTime
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    onChangeColors: (event) => dispatch(updateColor(event)),
+    onStartGame: () => dispatch(startGame()),
+    onEndGame: () => dispatch(endGame()),
+    onScore: (event) => dispatch(score(event)),
+    onGotRight: () => dispatch(gotRight()),
+    onGotWrong: () => dispatch(gotWrong())
   }
 }
 
@@ -31,7 +39,7 @@ const game = ({correctColor, incorrectColorOne, incorrectColorTwo, score, right,
         incorrectColorOne={incorrectColorOne}
         incorrectColorTwo={incorrectColorTwo}
       />
-      <Score score={score} right={right} wrong={wrong} updateColor={updateColor}/>
+      <Score score={score} right={right} wrong={wrong}/>
     </div>
   );
 }
