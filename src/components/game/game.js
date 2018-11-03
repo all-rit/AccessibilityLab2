@@ -3,9 +3,10 @@ import { connect }  from 'react-redux';
 import Circle from './circle';
 import Instructions from '../instructions/instructions';
 import Score from './score';
+import Countdown from 'react-countdown-now';
 import './gameStyle.css';
 
-import {startGame, endGame, score, gotRight, gotWrong} from './controllers/actions';
+import {score, gotRight, clicked, noClick, gotWrong, updateTime} from './controllers/actions';
 
 const mapStateToProps = state => {
   return {
@@ -13,33 +14,52 @@ const mapStateToProps = state => {
     score: state.changeColor.score,
     numRight: state.changeColor.numRight,
     numWrong: state.changeColor.numWrong,
-    amountTime: state.changeColor.amountTime
+    amountTime: state.changeColor.amountTime,
+    clicked: state.circleClick.clicked,
+    correct: state.circleClick.correct,
+    startTime: state.changeColor.startTime
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    onStartGame: () => dispatch(startGame()),
-    onEndGame: () => dispatch(endGame()),
     onScore: (event) => dispatch(score(event)),
     onGotRight: () => dispatch(gotRight()),
-    onGotWrong: () => dispatch(gotWrong())
+    onGotWrong: () => dispatch(gotWrong()),
+    onClick: (event) => dispatch(clicked(event)),
+    onNoClick: (event) => dispatch(noClick()),
+    onUpdateTime: (event) => dispatch(updateTime(event))
   }
 }
 
-const game = ({correctColor, incorrectColorOne, incorrectColorTwo, score, right, wrong, onChangeColors, currentColor}) => {
+const game = ({correctColor, incorrectColorOne, incorrectColorTwo, startTime, onUpdateTime, onClick, numRight, numWrong}) => {
+
+  if (numRight === 0 && numWrong === 0 && startTime === 0) {
+    onUpdateTime(Date.now())
+  }
 
   return (
     <div>
+      <Countdown 
+        date={startTime + 15000} 
+        intervalDelay={0} 
+        precision={3} 
+        renderer={props => <div className='timer'>Time Remaining: {props.total}</div>}
+      />
       <div className='circleClicked'>
-        <Circle color={currentColor} clickable={true} colors={[correctColor, incorrectColorOne, incorrectColorTwo]}/>
+        <Circle 
+          clickable={true} 
+          colors={[correctColor, incorrectColorOne, incorrectColorTwo]} 
+          userClicked={onClick}
+          startTime={startTime}
+        />
       </div>
       <Instructions 
-        correctColor={correctColor} 
+        correctColor={correctColor}
         incorrectColorOne={incorrectColorOne}
         incorrectColorTwo={incorrectColorTwo}
       />
-      <Score score={score} right={right} wrong={wrong}/>
+      <Score score={score} right={numRight} wrong={numWrong}/>
     </div>
   );
 }

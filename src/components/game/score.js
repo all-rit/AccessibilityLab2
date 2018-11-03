@@ -1,35 +1,50 @@
 import React from 'react';
 import './gameStyle.css';
 
-const Score = ({score, right, wrong, updateColor}) => {
+const Score = ({score, right, wrong, scored, clicked, gotRight, gotWrong, correct}) => {
 
-  let startTime, interval
-
-  const start = () => {
-    startTime = Date.now();
-    interval = setInterval(function() {
-      updateTime(Date.now() - startTime);
-    }, 50);
-  }
-
-  const updateTime = (time) => {
-    if (time/1000 > 15) {
-      clearInterval(interval);
-      document.getElementById('time').innerHTML = 0
+  const calculateScore = (time) => {
+    if (clicked) {
+      if (correct) {
+        gotRight();
+        const timeCalculation = time % 1
+        if (timeCalculation < .1) {
+          scored(100);
+        } else if (timeCalculation > .1 && timeCalculation < .21) {
+          scored(75);
+        } else if (timeCalculation > .20 && timeCalculation < .31) {
+          scored(50);
+        } else if (timeCalculation > .30 && timeCalculation < .41) {
+          scored(35);
+        } else if (timeCalculation > .40 && timeCalculation < .51) {
+          scored(25);
+        } else if (timeCalculation > .50 && timeCalculation < .61) {
+          scored(15);
+        } else if (timeCalculation > .60 && timeCalculation < .71) {
+          scored(10);
+        } else {
+          scored(5);
+        }
+      } else {
+        gotWrong();
+        scored(-75);
+      }
     } else {
-      document.getElementById('time').innerHTML = (15 - (time / 1000)).toFixed(3);
-      console.log('timer: ', 15-(time/1000));
+      if (correct) {
+        gotWrong();
+        scored(-200);
+      } else {
+        gotRight();
+        scored(10);
+      }
     }
   }
-
-  start();
 
   return (
     <div className='scoreLine'>
       <p className='scoreElement'>Score: {score}</p>
       <p className='scoreElement'>Number Right: {right}</p>
       <p className='scoreElement'>Number Wrong: {wrong}</p>
-      <p className='scoreElement'>Amount of Time Left: <span id='time'></span>s</p>
     </div>
   );
 }

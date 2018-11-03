@@ -8,26 +8,34 @@
 .circleClicked{
   display: flex;
   justify-content: center;
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 75px;
+  margin-bottom: 75px;
+}
+
+.timer{
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  padding-top: 10px;
 }
 
 .scoreLine{
-  margin-top: 35px;
+  margin-top: 10px;
   display: flex;
   justify-content: space-around;
   background: black;
-} 
-
-@media (min-width: 1200px) {
-  .scoreLine{
-    margin-top: 85px;
-  }
 }
 
 .scoreElement{
-  color:white;
+  color: white;
   font-size: 20px;
+}
+
+
+@media (min-width: 1200px) {
+  .scoreLine{
+    margin-top: 60px;
+  }
 }
 
 .clickable:hover {

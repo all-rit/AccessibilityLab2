@@ -1,18 +1,11 @@
 import {
-  START_GAME, 
-  END_GAME,
   SCORE, 
   RIGHT, 
-  WRONG
+  WRONG,
+  CLICKED,
+  NOCLICK,
+  STARTTIME
 } from './constants';
-
-export const startGame = () => ({
-  type: START_GAME
-})
-
-export const endGame = () => ({
-  type: END_GAME
-})
 
 export const score = (points) => ({
   type: SCORE,
@@ -26,3 +19,17 @@ export const gotRight = () => ({
 export const gotWrong = () => ({
   type: WRONG
 })
+
+export const updateTime = (time) => ({
+  type: STARTTIME,
+  payload: time
+})
+
+export const clicked = (correct) => ({
+  type: CLICKED,
+  payload: correct
+})
+
+export const noClick = (correct) => ({
+  type: NOCLICK
+});

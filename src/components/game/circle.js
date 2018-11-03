@@ -1,50 +1,58 @@
 import React from 'react';
+import Countdown from 'react-countdown-now'; 
 import './gameStyle.css';
 
-const Circle = ({color, clickable, colors}) => {
+const Circle = ({color, clickable, colors, userClicked, startTime}) => {
+
+  var hasClicked = false;
+  let currentColor;
 
   const click = () => {
-    console.log('click');
+    if (!hasClicked) {
+      if (currentColor === colors[0]) {
+        userClicked([true, Date.now()]);
+      } else {
+        userClicked([false, Date.now()]);
+      }
+      hasClicked = true;
+    }
   }
-
-  var count = 15;
 
   if(clickable) {
     const calculateRandomcolor = () => {
       let options = [colors[0], colors[1], colors[2]];
       let position = Math.floor(Math.random() * (3));
       console.log(options[position]);
+      hasClicked = false;
       return options[position];
     }
 
-    const setColor = () => {
-      if (count === 1) {
-          clearInterval(setColor);
-      } else {
-        var doc = document.getElementById('middleColor');
-        var color = calculateRandomcolor();
-        doc.style.background = color;
-        count --;
-        console.log(Date.now());
-      }
+    const renderer = () => {
+      return (
+        <span
+          className='circle clickable'
+          id='middleColor'
+          onClick={() => click()}
+          style={{background: calculateRandomcolor()}}
+        ></span>
+      );
     }
-    setInterval(setColor, 1000);
 
     return (
       <div>
-        <span 
-          className='circle clickable' 
-          id='middleColor'
-          onClick={() => click()} 
-          style={{background: colors[0]}}
-        ></span>
+        <Countdown
+          date={startTime + 15000}
+          intervalDelay={1000}
+          precision={2}
+          renderer={renderer} 
+        />
       </div>
     );
-  } else {
+  } 
+  
+  else {
     return (
-      <div>
-        <span className='circle' style={{backgroundColor: `${color}`}}></span>
-      </div>
+      <span className='circle' style={{backgroundColor: `${color}`}}></span>
     );
   }
 }
