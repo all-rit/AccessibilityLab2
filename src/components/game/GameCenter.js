@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
-import {changeColor, circleClick} from './controllers/reducers';
+import {changeColor} from './controllers/reducers';
 import Game from './game.js';
 
 class GameCenter extends Component {
   constructor(props) {
     super(props)
-    this.rootReducer = combineReducers({changeColor, circleClick})
+    this.rootReducer = combineReducers({changeColor})
     this.store = createStore(this.rootReducer)
   }
 

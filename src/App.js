@@ -5,6 +5,7 @@ import Title from './components/header/title';
 import ColorUpdate from './components/header/colorUpdate';
 import Home from './components/home/Home';
 import GameCenter from './components/game/GameCenter';
+import ColorVision from './components/colors/colorVision';
 import ColorChangePopup from './components/home/colorChangePopup'
 
 import {changeColors, selectGameOption, activatePopup, startGame, endGame} from './controllers/actions';
@@ -31,9 +32,20 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+let counter = 0;
+
 class App extends Component {
   render() {
     const {onChangeColors, gameState, onStartGame, onEndGame, onSelectOption, background, rightCircle, wrongCircleOne, gameOption, wrongCircleTwo, popupController, popup} = this.props
+
+    if (gameOption !== 'default' && gameOption !== 'hex' && counter === 0) {
+      console.log('gameOption: ' + gameOption);
+      console.log(background);
+      const colors = [background, rightCircle, wrongCircleOne, wrongCircleTwo];
+      console.log('Calling colorvision');
+      ColorVision(onChangeColors, gameOption, colors);
+      counter += 1;
+    }
       
     return (
       <div style={{background: `${background}`}} className='main'>
