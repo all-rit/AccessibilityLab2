@@ -1,10 +1,6 @@
 const Protanopia = (changeColors, colors) => {
-  console.log(colors);
   let changedColors = [];
   for (let i = 0; i < colors.length; i++) {
-    console.log(colors[i]);
-    console.log(colors[i][0]);
-    console.log(colors[i][1]);
     if (colors[i][1] < 20 && colors[i][1] > 0) {
       changedColors[i] = '#FFFFFF';
     } else if (colors[i][1] > 90) {
@@ -31,7 +27,6 @@ const Protanopia = (changeColors, colors) => {
       }
     }
   }
-  console.log(changedColors);
   changeColors(changedColors);
 }
 

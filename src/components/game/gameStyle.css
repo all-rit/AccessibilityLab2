@@ -12,6 +12,25 @@
   margin-bottom: 75px;
 }
 
+.clickable {
+  animation-duration: 1s;
+  animation-name: boarder;
+  animation-iteration-count: 15;
+}
+
+@keyframes boarder {
+  0% {
+    boarder-color: transparent;
+  }
+  3% {
+    border: 2px solid black;
+    boarder-color: black;
+  }
+  100% {
+    boarder-color: transparent;
+  }
+}
+
 .timer{
   display: flex;
   justify-content: center;
@@ -31,7 +50,6 @@
   font-size: 20px;
 }
 
-
 @media (min-width: 1200px) {
   .scoreLine{
     margin-top: 60px;
@@ -41,4 +59,18 @@
 .clickable:hover {
   cursor: pointer;
   transform: scale(1.1);
+}
+
+.oneline {
+  display: flex;
+  word-wrap: none;
+}
+
+.spaceRight {
+  margin-left: 0px;
+  margin-right: 20px;
+}
+
+.spaceLeft {
+  margin-left: 20px;
 }

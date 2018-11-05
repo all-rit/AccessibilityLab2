@@ -1,6 +1,8 @@
 import{
   SELECT_OPTION, 
   UPDATE_COLORS,
+  RESET_COLORS,
+  RESET_OPTION,
   ACTIVATE_POPUP,
   START_GAME, 
   END_GAME
@@ -22,19 +24,24 @@ export const changeColors = (state = initialColors, action = {}) => {
         wrongCircleTwo: action.payload[3]});
     case ACTIVATE_POPUP:
       return {...state, popup: action.payload};
+    case RESET_COLORS:
+      return Object.assign({}, state, {background: '#FFA64D', rightCircle: '#00D670', 
+        wrongCircleOne: '#FFC2C2', wrongCircleTwo: '#B8B800'});
     default:
       return state;
   }
 }
 
 const initialOption = {
-  option: "default"
+  option: "default",
 }
 
 export const selectGameOption = (state = initialOption, action = {}) => {
   switch(action.type) {
     case SELECT_OPTION:
       return {...state, option: action.payload};
+    case RESET_OPTION:
+      return {...state, option: 'default'};
     default:
       return state;
   }

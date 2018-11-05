@@ -5,10 +5,9 @@ import Title from './components/header/title';
 import ColorUpdate from './components/header/colorUpdate';
 import Home from './components/home/Home';
 import GameCenter from './components/game/GameCenter';
-import ColorVision from './components/colors/colorVision';
 import ColorChangePopup from './components/home/colorChangePopup'
 
-import {changeColors, selectGameOption, activatePopup, startGame, endGame} from './controllers/actions';
+import {changeColors, selectGameOption, activatePopup, startGame, endGame, resetOption, resetColors} from './controllers/actions';
 
 const mapStateToProps = state => {
   return {
@@ -18,7 +17,7 @@ const mapStateToProps = state => {
     wrongCircleTwo: state.changeColors.wrongCircleTwo,
     gameOption: state.selectGameOption.option,
     popup: state.changeColors.popup,
-    gameState: state.changeGameState.gameState
+    gameState: state.changeGameState.gameState,
   }
 }
 
@@ -28,35 +27,32 @@ const mapDispatchToProps = (dispatch) => {
     onSelectOption: (event) => dispatch(selectGameOption(event.target.value)),
     popupController: (event) => dispatch(activatePopup(event)),
     onStartGame: () => dispatch(startGame()),
-    onEndGame: () => dispatch(endGame())
+    onEndGame: () => dispatch(endGame()),
+    onResetOption: () => dispatch(resetOption()),
+    onResetColors: () => dispatch(resetColors())
   }
 }
 
-let counter = 0;
-
 class App extends Component {
   render() {
-    const {onChangeColors, gameState, onStartGame, onEndGame, onSelectOption, background, rightCircle, wrongCircleOne, gameOption, wrongCircleTwo, popupController, popup} = this.props
+    const {onChangeColors, gameState, onStartGame, onEndGame, onSelectOption, background, rightCircle, wrongCircleOne, gameOption, wrongCircleTwo, popupController, popup, onResetOption} = this.props
 
-    if (gameOption !== 'default' && gameOption !== 'hex' && counter === 0) {
-      console.log('gameOption: ' + gameOption);
-      console.log(background);
-      const colors = [background, rightCircle, wrongCircleOne, wrongCircleTwo];
-      console.log('Calling colorvision');
-      ColorVision(onChangeColors, gameOption, colors);
-      counter += 1;
-    }
-      
     return (
       <div style={{background: `${background}`}} className='main'>
         {gameState ?
           <div>
-            <Title gameState={gameState} gameEnded={onEndGame}/>
+            <Title 
+              gameState={gameState} 
+              gameEnded={onEndGame} 
+              resetOption={onResetOption}
+              resetColors={resetColors}
+            />
             <GameCenter
               correctColor={rightCircle}
               incorrectColorOne={wrongCircleOne}
               incorrectColorTwo={wrongCircleTwo}
               gameOption={gameOption}
+              background={background}
             />
           </div>
           :
@@ -64,6 +60,9 @@ class App extends Component {
             <ColorUpdate popupController={popupController}/>
             <Title gameState={gameState}/>
             <Home 
+              background={background}
+              onChangeColors={onChangeColors}
+              gameOption={gameOption}
               correctColor={rightCircle} 
               incorrectColorOne={wrongCircleOne} 
               incorrectColorTwo={wrongCircleTwo} 

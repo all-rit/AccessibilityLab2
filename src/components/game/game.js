@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const game = ({correctColor, incorrectColorOne, incorrectColorTwo, startTime, onUpdateTime}) => {
+const game = ({correctColor, incorrectColorOne, incorrectColorTwo, startTime, onUpdateTime, background, gameOption}) => {
 
   if (startTime === 0) {
     onUpdateTime(Date.now())
@@ -37,6 +37,8 @@ const game = ({correctColor, incorrectColorOne, incorrectColorTwo, startTime, on
         incorrectColorOne={incorrectColorOne}
         incorrectColorTwo={incorrectColorTwo}
         startTime={startTime}
+        background={background}
+        gameOption={gameOption}
       />
     </div>
   );

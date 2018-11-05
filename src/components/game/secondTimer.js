@@ -4,7 +4,7 @@ import Instructions from './../instructions/instructions';
 import Circle from './circle';
 import Countdown from 'react-countdown-now';
 
-const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startTime}) => {
+const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startTime, gameOption, background}) => {
 
   let currentColor, correct;
   let clicked = false;
@@ -12,6 +12,8 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
   let score = 0;
   let numRight = 0;
   let numWrong = 0;
+
+  const isHex = (gameOption === 'hex');
 
   const calculateScore = () => {
     if (clicked) {
@@ -87,6 +89,9 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
           score={score}
           right={numRight}
           wrong={numWrong}
+          isHex={isHex}
+          background={background}
+          currentColor={currentColor}
         />
       </div>
     );

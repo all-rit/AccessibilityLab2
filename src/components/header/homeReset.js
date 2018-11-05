@@ -1,12 +1,20 @@
 import React from 'react';
 
-const HomeReset = ({gameEnded}) => {
+const HomeReset = ({gameEnded, resetOption, resetColors}) => {
+
+  const handleClick = () => {
+    gameEnded();
+    console.log('resetting colors');
+    resetColors();
+    resetOption();
+  }
+
   return (
     <div>
       <button 
         type='submit' 
         className='backButton' 
-        onClick={gameEnded}
+        onClick={handleClick}
       > 
         Home
       </button>

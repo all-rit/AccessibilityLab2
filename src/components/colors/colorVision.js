@@ -59,7 +59,6 @@ const ColorVision = (changeColors, gameOption, colors) => {
     const results = calculateHue(hexResults.red, hexResults.green, hexResults.blue);
     correctedColors[counter] = results;
   }
-  console.log(correctedColors);
   if (gameOption === 'Protanopia') {
     Protanopia(changeColors, correctedColors);
   } else if (gameOption === 'Deuteranopia') {
