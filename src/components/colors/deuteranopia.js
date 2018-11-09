@@ -3,8 +3,12 @@ const Deuteranopia = (changeColors, colors) => {
   for (let i = 0; i < colors.length; i++) {
     if (colors[i][1] < 20 && colors[i][1] > 0) {
       changedColors[i] = '#FFFFFF';
-    } else if (colors[i][1] > 90) {
-      changedColors[i] = '#4D3D00';
+    } else if (colors[i][1] < 35 && colors[i][1] > 20) {
+      changedColors[i] = '#FFdb4D';
+    } else if (colors[i][1] < 105 && colors[i][1] > 90) {
+      changedColors[i] = '#FFCC00';
+    } else if (colors[i][1] > 105) {
+      changedColors[i] = '#CCCCFF';
     } else {
       if (colors[i][0] >= 0 && colors[i][0] <= 14) {
         changedColors[i] = '#332900';
@@ -13,9 +17,9 @@ const Deuteranopia = (changeColors, colors) => {
       } else if (colors[i][0] >= 15 && colors[i][0] <= 49) {
         changedColors[i] = '#806600';
       } else if (colors[i][0] >= 50 && colors[i][0] <= 59) {
-        changedColors[i] = '#FFE6CC';
+        changedColors[i] = '#FFBB33';
       } else if (colors[i][0] >= 60 && colors[i][0] <= 159) {
-        changedColors[i] = '#FFE6CC';
+        changedColors[i] = '#FFBB33';
       } else if (colors[i][0] >= 160 && colors[i][0] <= 199) {
         changedColors[i] = '#0000E6';
       } else if (colors[i][0] >= 200 && colors[i][0] <= 259) {

@@ -4,9 +4,9 @@ const HomeReset = ({gameEnded, resetOption, resetColors}) => {
 
   const handleClick = () => {
     gameEnded();
-    console.log('resetting colors');
-    resetColors();
-    resetOption();
+    //console.log('resetting colors');
+    //resetColors();
+    //resetOption();
   }
 
   return (

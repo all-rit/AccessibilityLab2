@@ -45,7 +45,7 @@ const calculateHue = (red, green, blue) => {
       hue = 0;
     }
   }
-  return [hue, luminosity];
+  return [hue, Math.abs(luminosity)];
 }
 
 const calculateLuminosity = (max, min) => {
@@ -60,6 +60,7 @@ const ColorVision = (changeColors, gameOption, colors) => {
     correctedColors[counter] = results;
   }
   if (gameOption === 'Protanopia') {
+    console.log(correctedColors);
     Protanopia(changeColors, correctedColors);
   } else if (gameOption === 'Deuteranopia') {
     Deuteranopia(changeColors, correctedColors);

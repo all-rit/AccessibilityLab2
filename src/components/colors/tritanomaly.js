@@ -3,7 +3,11 @@ const Tritanomaly = (changeColors, colors) => {
   for (let i = 0; i < colors.length; i++) {
     if (colors[i][1] < 20 && colors[i][1] > 0) {
       changedColors[i] = '#FFFFFF';
-    } else if (colors[i][1] > 90) {
+    } else if (colors[i][1] < 35 && colors[i][1] > 20) {
+      changedColors[i] = '#FFCCFF';
+    } else if (colors[i][1] < 105 && colors[i][1] > 90) {
+      changedColors[i] = '#CCCCFF';
+    } else if (colors[i][1] > 105) {
       changedColors[i] = '#B3FFFF';
     } else {
       if (colors[i][0] >= 0 && colors[i][0] <= 14) {

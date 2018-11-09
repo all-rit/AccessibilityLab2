@@ -1,10 +1,15 @@
 const Protanopia = (changeColors, colors) => {
+  console.log(colors);
   let changedColors = [];
   for (let i = 0; i < colors.length; i++) {
     if (colors[i][1] < 20 && colors[i][1] > 0) {
       changedColors[i] = '#FFFFFF';
-    } else if (colors[i][1] > 90) {
-      changedColors[i] = '#4D3D00';
+    } else if (colors[i][1] < 35 && colors[i][1] > 20) {
+      changedColors[i] = '#FFdb4D';
+    } else if (colors[i][1] < 105 && colors[i][1] > 90) {
+      changedColors[i] = '#FFCC00';
+    } else if (colors[i][1] > 105) {
+      changedColors[i] = '#E6AC00';
     } else {
       if (colors[i][0] >= 0 && colors[i][0] <= 14) {
         changedColors[i] = '#332900';
@@ -27,6 +32,7 @@ const Protanopia = (changeColors, colors) => {
       }
     }
   }
+  console.log(changedColors);
   changeColors(changedColors);
 }
 

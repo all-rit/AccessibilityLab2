@@ -2,9 +2,10 @@ import React from 'react';
 import Score from './score';
 import Instructions from './../instructions/instructions';
 import Circle from './circle';
+import Replay from './replay';
 import Countdown from 'react-countdown-now';
 
-const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startTime, gameOption, background}) => {
+const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startTime, gameOption, background, onUpdateTime}) => {
 
   let currentColor, correct;
   let clicked = false;
@@ -12,6 +13,7 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
   let score = 0;
   let numRight = 0;
   let numWrong = 0;
+  let first = true;
 
   const isHex = (gameOption === 'hex');
 
@@ -67,12 +69,24 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
     }
   }
 
-  const renderer = () => {
+  const renderer = (props) => {
     correct = (currentColor === correctColor);
     calculateRandomColor();
-    calculateScore();
+    if (!first) {
+      calculateScore();
+    } else {
+      first = false;
+    }
     return (
       <div>
+        {props.total === 0 ?
+        <Replay 
+          onUpdateTime={onUpdateTime}
+          score={score}
+          right={numRight}
+          wrong={numWrong}
+        />
+        :
         <div className='circleClicked'>
           <Circle 
             clickable={true}
@@ -80,6 +94,7 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
             onClick={onClick}
           />
         </div>
+        }
         <Instructions
           correctColor={correctColor}
           incorrectColorOne={incorrectColorOne}
@@ -100,7 +115,7 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
   return(
     <div>
       <Countdown
-        date={startTime + 14000}
+        date={startTime + 18000}
         intervalDelay={1000}
         precision={2}
         renderer={renderer}
