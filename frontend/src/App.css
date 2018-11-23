@@ -1,0 +1,23 @@
+.App {
+  text-align: center;
+}
+
+*{
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.main{
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 875px){
+  .main{
+    overflow: scroll;
+  }
+}
