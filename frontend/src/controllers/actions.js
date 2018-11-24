@@ -5,7 +5,8 @@ import {
   RESET_COLORS,
   RESET_OPTION,
   START_GAME, 
-  END_GAME
+  END_GAME,
+  LOGIN
 } from './constants.js';
 
 export const changeColors = (colors) => ({
@@ -37,4 +38,9 @@ export const resetOption = () => ({
 
 export const resetColors = () => ({
   type: RESET_COLORS
+})
+
+export const login = (user) => ({
+  type: LOGIN,
+  payload: user
 })

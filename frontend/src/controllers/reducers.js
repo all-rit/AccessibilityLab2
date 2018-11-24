@@ -5,7 +5,8 @@ import{
   RESET_OPTION,
   ACTIVATE_POPUP,
   START_GAME, 
-  END_GAME
+  END_GAME,
+  LOGIN
 } from "./constants.js"
 
 const initialColors = {
@@ -57,6 +58,20 @@ export const changeGameState = (state = initialGameState, action = {}) => {
       return {...state, gameState: true}
     case END_GAME:
       return {...state, gameState: false}
+    default:
+      return state;
+  }
+}
+
+const initialLoginState = {
+  user: null,
+  loggedIn: false
+}
+
+export const changeUser = (state = initialLoginState, action = {}) => {
+  switch(action.type) {
+    case LOGIN:
+      return Object.assign({}, state, {user: action.payload, loggedIn: true})
     default:
       return state;
   }

@@ -49,3 +49,44 @@
   margin-top: 10px;
   margin-right: 10px;
 }
+
+.username {
+  font-size: 25px;
+  height: 30px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content button {
+  color: black;
+  padding: 12px 0px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  border: none;
+}
+
+.dropdown-content button:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.dropdown:hover .dropdown-content {
+  display:block;
+}
+
+.dropdown p {
+  margin: 0px;
+}

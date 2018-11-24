@@ -7,7 +7,7 @@ import GameCenter from './components/game/GameCenter';
 import ColorChangePopup from './components/home/colorChangePopup'
 import Header from './components/header/headerMain';
 
-import {changeColors, selectGameOption, activatePopup, startGame, endGame, resetOption, resetColors} from './controllers/actions';
+import {changeColors, selectGameOption, activatePopup, startGame, endGame, resetOption, resetColors, login} from './controllers/actions';
 
 const mapStateToProps = state => {
   return {
@@ -18,6 +18,8 @@ const mapStateToProps = state => {
     gameOption: state.selectGameOption.option,
     popup: state.changeColors.popup,
     gameState: state.changeGameState.gameState,
+    user: state.changeUser.user,
+    loggedIn: state.changeUser.loggedIn
   }
 }
 
@@ -29,7 +31,8 @@ const mapDispatchToProps = (dispatch) => {
     onStartGame: () => dispatch(startGame()),
     onEndGame: () => dispatch(endGame()),
     onResetOption: () => dispatch(resetOption()),
-    onResetColors: () => dispatch(resetColors())
+    onResetColors: () => dispatch(resetColors()),
+    onLogin: (event) => dispatch(login(event))
   }
 }
 
@@ -37,7 +40,13 @@ class App extends Component {
 
   componentDidMount() {
     this.callBackendAPI()
-      .then(res => console.log(res))
+      .then(res => {
+        if (res.status === 'session cookie set') {
+          this.props.onLogin(res.user);                    
+        } else {
+          console.log(res.status);
+        }
+      })
       .catch(err => console.log(err));
     };
 
@@ -53,11 +62,17 @@ class App extends Component {
     };
 
   render() {
-    const {onChangeColors, gameState, onStartGame, onEndGame, onSelectOption, background, rightCircle, wrongCircleOne, gameOption, wrongCircleTwo, popupController, popup, onResetOption} = this.props
+    const {onChangeColors, gameState, onStartGame, onEndGame, onSelectOption, background, rightCircle, wrongCircleOne, gameOption, wrongCircleTwo, popupController, popup, onResetOption, loggedIn, user} = this.props
 
     return (
       <div style={{background: `${background}`}} className='main'>
-        <Header gameState={gameState} gameEnded={onEndGame} popupController={popupController}/>
+        <Header 
+          gameState={gameState} 
+          gameEnded={onEndGame} 
+          popupController={popupController}
+          loggedIn={loggedIn}
+          user={user}
+        />
         {gameState ?
           <div>
             <Title 

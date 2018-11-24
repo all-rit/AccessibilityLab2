@@ -1,9 +1,10 @@
 import React from 'react';
 import ColorUpdate from './buttons/colorUpdate';
 import {Google} from './buttons/google';
+import Signout from './buttons/signout';
 import Home from './buttons/homeReset.js';
 
-const Header = ({gameState, popupController, gameEnded}) => {
+const Header = ({gameState, popupController, gameEnded, loggedIn, user}) => {
   return (
     <div className='headerStyle'>
       {gameState? 
@@ -11,7 +12,11 @@ const Header = ({gameState, popupController, gameEnded}) => {
         :
         <ColorUpdate popupController={popupController}/>
       }
-      <Google />
+      {loggedIn? 
+        <Signout user={user} />
+        :
+        <Google />
+      }
     </div>
   );
 }
