@@ -36,5 +36,16 @@
 }
 
 .backButton:hover {
-  cursor: pointer
+  cursor: pointer;
+}
+
+.headerStyle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.signinButton {
+  margin-top: 10px;
+  margin-right: 10px;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import './title.css';
+import './../title.css';
 
 const ColorUpdate = ({popupController}) => {
   return (

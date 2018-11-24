@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './App.css';
 import Title from './components/header/title';
-import ColorUpdate from './components/header/colorUpdate';
 import Home from './components/home/Home';
 import GameCenter from './components/game/GameCenter';
 import ColorChangePopup from './components/home/colorChangePopup'
+import Header from './components/header/headerMain';
 
 import {changeColors, selectGameOption, activatePopup, startGame, endGame, resetOption, resetColors} from './controllers/actions';
 
@@ -34,16 +34,34 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class App extends Component {
+
+  componentDidMount() {
+    this.callBackendAPI()
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+    };
+
+    callBackendAPI = async () => {
+      console.log('sending request to backend');
+      const response = await fetch('http://localhost:5000/main');
+      const body = await response.json();
+
+      if (response.status !== 200) {
+        throw Error(body.message)
+      }
+      return body;
+    };
+
   render() {
     const {onChangeColors, gameState, onStartGame, onEndGame, onSelectOption, background, rightCircle, wrongCircleOne, gameOption, wrongCircleTwo, popupController, popup, onResetOption} = this.props
 
     return (
       <div style={{background: `${background}`}} className='main'>
+        <Header gameState={gameState} gameEnded={onEndGame} popupController={popupController}/>
         {gameState ?
           <div>
             <Title 
               gameState={gameState} 
-              gameEnded={onEndGame} 
               resetOption={onResetOption}
               resetColors={resetColors}
             />
@@ -57,7 +75,6 @@ class App extends Component {
           </div>
           :
           <div>
-            <ColorUpdate popupController={popupController}/>
             <Title gameState={gameState}/>
             <Home 
               background={background}

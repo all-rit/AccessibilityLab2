@@ -11,6 +11,7 @@
   "dependencies": {
     "cookie-parser": "^1.4.3",
     "cookie-session": "^2.0.0-beta.3",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-generator": "^4.16.0",
     "passport": "^0.4.0",

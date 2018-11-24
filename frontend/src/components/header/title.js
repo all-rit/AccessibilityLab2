@@ -1,5 +1,4 @@
 import React from 'react';
-import HomeReset from './homeReset';
 import './title.css';
 
 const Title = ({gameState, gameEnded, resetOption, resetColors}) => {
@@ -7,11 +6,6 @@ const Title = ({gameState, gameEnded, resetOption, resetColors}) => {
     <div>
       {gameState? 
         <div>
-          <HomeReset 
-            gameEnded={gameEnded} 
-            resetOption={resetOption} 
-            resetColors={resetColors}
-          />
           <p 
             className='mainTitle'
           >
