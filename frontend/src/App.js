@@ -41,7 +41,7 @@ class App extends Component {
   componentDidMount() {
     this.callBackendAPI()
       .then(res => {
-        if (res.status === 'session cookie set') {
+        if (res.status === 'user logged into system') {
           this.props.onLogin(res.user);                    
         } else {
           console.log(res.status);

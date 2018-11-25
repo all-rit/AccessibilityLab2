@@ -1,7 +1,13 @@
 import React from 'react';
 
-const handleSignout = () => {
-  console.log('click');
+const handleSignout = async () => {
+  const response = await fetch('http://localhost:5000/logout');
+
+  if (response.status !== 200) {
+    throw Error(response.message)
+  }
+  console.log(response.url);
+  window.location = response.url;
 }
 
 const Signout = ({user}) => {

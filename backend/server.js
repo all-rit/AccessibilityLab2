@@ -20,11 +20,11 @@ app.use(cookieSession({
 }));
 app.use(cookieParser());
 
-var hold = null;
-var users = 0;
+let hold = null;
+let users = 1;
 
-var whitelist = ['http://localhost:3000', 'http://localhost:5000', 'http://tempwebsite.com:3000'];
-var corsOptions = {
+let whitelist = ['http://localhost:3000', 'http://localhost:5000', 'http://tempwebsite.com:3000'];
+let corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
@@ -46,20 +46,48 @@ db.serialize(function() {
 app.use(cors(corsOptions));
 
 app.get('/main', (req, res) => {
+  console.log(req.session.views);
   if (req.session.token) {
     res.cookie('token', req.session.token);
+    let user = 'temp';
+    db.serialize(function() {
+      let sql = 'SELECT * FROM Login JOIN Users on UserID';
+      db.all(sql, [], (err, rows) => {
+        if (err) {
+          console.log(err);
+        }
+        rows.forEach((row) => {
+          if (row.UserSessionID === req.session.token) {
+            user = row.FirstName;
+          }
+        });
+      });
+    });
     res.json({ 
-      status: 'session cookie set',
-      user: 'temp'
+      status: 'user logged into system',
+      user: `${user}`
     });
   } else if (hold !== null) {
     req.session.token = hold;
     res.cookie('token', hold);
     hold = null;
-    console.log(req.cookies);
-    res.json({
-      status: 'session cookie set',
-      user: `temp`
+    db.serialize(function() {
+      let sql = 'SELECT Users.FirstName, Login.UserSessionID FROM Login JOIN Users ON Users.UserID = Login.UserID';
+      let user = '';
+      db.all(sql, [], (err, rows) => {
+        if (err) {
+          console.log(err);
+        }
+        rows.forEach((row) => {
+          if (row.UserSessionID === req.session.token) {
+            user = row.FirstName;
+          }
+        });
+        res.json({
+          status: 'user logged into system',
+          user: `${user}`
+        });
+      });
     });
   } else {
     res.cookie('token', '')
@@ -70,20 +98,14 @@ app.get('/main', (req, res) => {
       const allLogin = db.prepare(`INSERT INTO AllLogins VALUES (?,?,?,?,?)`, [null, users, req.session.token, '', Date.now()]);
       user.run();
       user.finalize();
-      console.log('insert 1 worked');
       login.run();
       login.finalize();
-      console.log('insert 2 worked');
       allLogin.run();
       allLogin.finalize();
-      console.log('insert 3 worked');
       users++;
-      db.each('SELECT * FROM Users', function(err, user) {
-        console.log(user.UserID + ': ' + user.FirstName);
-      })
     });
     res.json({
-      status: 'session cookie not set'
+      status: 'user not logged into system'
     });
   }
 });
@@ -101,12 +123,10 @@ app.get('/auth/google/callback',
   (req,res) => {
     req.session.token = req.user.token;
     req.session.views = 1;
-    //console.log(req.user.profile.name.givenName); //First name for user
-    //console.log(req.session.token);
     db.serialize(function() {
-      const user = db.prepare(`INSERT INTO Users (FirstName, NickName) VALUES (${req.user.profile.name.givenName}, NULL)`);
-      const login = db.prepare(`INSERT INTO Login (UserSessionID, UserID) VALUES (${req.session.token}, ${users})`);
-      const allLogin = db.prepare(`INSERT INTO AllLogins (UserID, UserSessionID, Location, Login) VALUES (${users}, ${req.session.token}, NULL, ${Date.now()})`);
+      const user = db.prepare(`INSERT INTO Users VALUES (?,?,?)`, [null, req.user.profile.name.givenName, '']);
+      const login = db.prepare(`INSERT INTO Login VALUES (?,?)`, [req.session.token, users]);
+      const allLogin = db.prepare(`INSERT INTO AllLogins VALUES (?,?,?,?,?)`, [null, users, req.session.token, '', Date.now()]);
       user.run();
       user.finalize();
       login.run();
@@ -114,8 +134,11 @@ app.get('/auth/google/callback',
       allLogin.run();
       allLogin.finalize();
       users++;
-      db.each('SELECT userCheck AS UserID, FirstName FROM Users', function(err, user) {
+      db.each('SELECT * FROM Users', function(err, user) {
         console.log(user.UserID + ': ' + user.FirstName);
+      })
+      db.each('SELECT * FROM Login', function(err, login) {
+        console.log(login.UserID + ': ' + login.UserSessionID);
       })
     });
     hold = req.session.token;
@@ -126,7 +149,7 @@ app.get('/auth/google/callback',
 app.get('/logout', (req, res) => {
   req.logout();
   req.session = null;
-  res.redirect('/');
+  res.redirect('http://localhost:3000');
 });
 
 app.post('/gameStats', (req, res) => {
@@ -135,7 +158,6 @@ app.post('/gameStats', (req, res) => {
 
 process.on('SIGINT', () => {
   db.close();
-  server.close();
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
