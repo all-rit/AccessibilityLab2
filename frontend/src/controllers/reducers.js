@@ -1,6 +1,7 @@
 import{
   SELECT_OPTION, 
-  UPDATE_COLORS,
+  UPDATE_DEFAULT_COLORS,
+  UPDATE_GAME_COLORS,
   RESET_COLORS,
   RESET_OPTION,
   ACTIVATE_POPUP,
@@ -10,19 +11,27 @@ import{
 } from "./constants.js"
 
 const initialColors = {
-  background: "#FFA64D",
-  rightCircle: "#00D67D",
-  wrongCircleOne: "#FFC2C2",
-  wrongCircleTwo: "#B8B800",
+  baseBackground: "#FFA64D",
+  baseRightCircle: "#00D67D",
+  baseWrongCircleOne: "#FFC2C2",
+  baseWrongCircleTwo: "#B8B800",
+  gameBackground: '#FFA64D',
+  gameRightCircle: '#00D67D',
+  gameWrongCircleOne: '#FFC2C2',
+  gameWrongCircleTwo: '#B8B800',
   popup: false
 }
 
 export const changeColors = (state = initialColors, action = {}) => {
   switch(action.type) {
-    case UPDATE_COLORS:
-      return Object.assign({}, state, {background: action.payload[0], 
-        rightCircle: action.payload[1], wrongCircleOne: action.payload[2], 
-        wrongCircleTwo: action.payload[3]});
+    case UPDATE_DEFAULT_COLORS:
+      return Object.assign({}, state, {baseBackground: action.payload[0], 
+        baseRightCircle: action.payload[1], baseWrongCircleOne: action.payload[2], 
+        baseWrongCircleTwo: action.payload[3]});
+    case UPDATE_GAME_COLORS:
+      return Object.assign({}, state, {gameBackground: action.payload[0],
+        gameRightCircle: action.payload[1], gameWrongCircleOne: action.payload[2],
+        gameWrongCircleTwo: action.payload[3]});
     case ACTIVATE_POPUP:
       return {...state, popup: action.payload};
     case RESET_COLORS:

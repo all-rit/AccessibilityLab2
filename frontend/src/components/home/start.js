@@ -2,11 +2,11 @@ import React from 'react';
 import './homeStyle.css';
 import ColorVision from '../colors/colorVision';
 
-const Start = ({startGame, gameOption, onChangeColors, colors}) => {
+const Start = ({startGame, gameOption, onChangeGameColors, colors}) => {
 
   const startClick = () => {
     if (gameOption !== 'default' && gameOption !== 'hex') {
-      ColorVision(onChangeColors, gameOption, colors);
+      ColorVision(onChangeGameColors, gameOption, colors);
     };
     startGame();
   }

@@ -1,12 +1,10 @@
 import React from 'react';
 
-const HomeReset = ({gameEnded, resetOption, resetColors}) => {
+const HomeReset = ({gameEnded, changeGameColors, baseBackground, baseRightCircle, baseWrongCircleOne, baseWrongCircleTwo}) => {
 
   const handleClick = () => {
+    changeGameColors([baseBackground, baseRightCircle, baseWrongCircleOne, baseWrongCircleTwo]);
     gameEnded();
-    //console.log('resetting colors');
-    //resetColors();
-    //resetOption();
   }
 
   return (

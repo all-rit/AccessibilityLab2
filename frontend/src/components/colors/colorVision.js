@@ -60,7 +60,6 @@ const ColorVision = (changeColors, gameOption, colors) => {
     correctedColors[counter] = results;
   }
   if (gameOption === 'Protanopia') {
-    console.log(correctedColors);
     Protanopia(changeColors, correctedColors);
   } else if (gameOption === 'Deuteranopia') {
     Deuteranopia(changeColors, correctedColors);

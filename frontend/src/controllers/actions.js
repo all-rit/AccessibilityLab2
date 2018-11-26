@@ -1,5 +1,6 @@
 import {
-  UPDATE_COLORS,
+  UPDATE_DEFAULT_COLORS,
+  UPDATE_GAME_COLORS,
   SELECT_OPTION, 
   ACTIVATE_POPUP,
   RESET_COLORS,
@@ -9,8 +10,13 @@ import {
   LOGIN
 } from './constants.js';
 
-export const changeColors = (colors) => ({
-  type: UPDATE_COLORS,
+export const changeDefaultColors = (colors) => ({
+  type: UPDATE_DEFAULT_COLORS,
+  payload: colors
+})
+
+export const changeGameColors = (colors) => ({
+  type: UPDATE_GAME_COLORS,
   payload: colors
 })
 

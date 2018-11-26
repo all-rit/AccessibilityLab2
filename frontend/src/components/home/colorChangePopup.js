@@ -134,7 +134,8 @@ class ColorChangePopup extends React.Component{
     this.setState({errorHex: false})
     this.setState({errorDarkBackground: false})
     if (this.verifyInput()) {
-      this.props.changeColors(colors); 
+      this.props.changeDefaultColors(colors); 
+      this.props.changeGameColors(colors);
       this.props.popupController(false);
     } else {
       this.errorInInput = true;

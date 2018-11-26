@@ -4,11 +4,11 @@ import Start from './start';
 import Instructions from '../instructions/instructions';
 import Dropdown from './dropdown';
 
-const Home = ({correctColor, incorrectColorOne, incorrectColorTwo, startGame, selectOption, background, gameOption, onChangeColors}) => {
+const Home = ({correctColor, incorrectColorOne, incorrectColorTwo, startGame, selectOption, background, gameOption, onChangeGameColors}) => {
   const colors = [background, correctColor, incorrectColorOne, incorrectColorTwo];
 
   if(gameOption !== 'default') {
-    onChangeColors(['#FFA64D', '#00D67D', '#FFC2C2', '#B8B800'])
+    onChangeGameColors([`${background}`, `${correctColor}`, `${incorrectColorOne}`, `${incorrectColorTwo}`])
   }
 
   return (
@@ -16,7 +16,7 @@ const Home = ({correctColor, incorrectColorOne, incorrectColorTwo, startGame, se
       <Start 
         startGame={startGame} 
         gameOption={gameOption}
-        onChangeColors={onChangeColors}
+        onChangeGameColors={onChangeGameColors}
         colors={colors} 
       />
       <Dropdown selectOption = {selectOption} />

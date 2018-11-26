@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import ReactGA from 'react-ga';
 import './App.css';
 import Title from './components/header/title';
 import Home from './components/home/Home';
@@ -7,14 +8,18 @@ import GameCenter from './components/game/GameCenter';
 import ColorChangePopup from './components/home/colorChangePopup'
 import Header from './components/header/headerMain';
 
-import {changeColors, selectGameOption, activatePopup, startGame, endGame, resetOption, resetColors, login} from './controllers/actions';
+import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup, startGame, endGame, resetOption, resetColors, login} from './controllers/actions';
 
 const mapStateToProps = state => {
   return {
-    background: state.changeColors.background,
-    rightCircle: state.changeColors.rightCircle,
-    wrongCircleOne: state.changeColors.wrongCircleOne,
-    wrongCircleTwo: state.changeColors.wrongCircleTwo,
+    baseBackground: state.changeColors.baseBackground,
+    baseRightCircle: state.changeColors.baseRightCircle,
+    baseWrongCircleOne: state.changeColors.baseWrongCircleOne,
+    baseWrongCircleTwo: state.changeColors.baseWrongCircleTwo,
+    gameBackground: state.changeColors.gameBackground,
+    gameRightCircle: state.changeColors.gameRightCircle,
+    gameWrongCircleOne: state.changeColors.gameWrongCircleOne,
+    gameWrongCircleTwo: state.changeColors.gameWrongCircleTwo,
     gameOption: state.selectGameOption.option,
     popup: state.changeColors.popup,
     gameState: state.changeGameState.gameState,
@@ -25,7 +30,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    onChangeColors: (event) => dispatch(changeColors(event)),
+    onChangeDefaultColors: (event) => dispatch(changeDefaultColors(event)),
+    onChangeGameColors: (event) => dispatch(changeGameColors(event)),
     onSelectOption: (event) => dispatch(selectGameOption(event.target.value)),
     popupController: (event) => dispatch(activatePopup(event)),
     onStartGame: () => dispatch(startGame()),
@@ -61,44 +67,55 @@ class App extends Component {
       return body;
     };
 
+  initializeReactGA() {
+    ReactGA.initialize('UA-129523795-1');
+    ReactGA.pageView('/');
+  }
+
   render() {
-    const {onChangeColors, gameState, onStartGame, onEndGame, onSelectOption, background, rightCircle, wrongCircleOne, gameOption, wrongCircleTwo, popupController, popup, loggedIn, user} = this.props
+    const {onChangeDefaultColors, onChangeGameColors, gameState, onStartGame, onEndGame, onSelectOption, baseBackground, baseRightCircle, baseWrongCircleOne, baseWrongCircleTwo, gameBackground, gameRightCircle, gameWrongCircleOne, gameWrongCircleTwo, gameOption, popupController, popup, loggedIn, user} = this.props
 
     return (
-      <div style={{background: `${background}`}} className='main'>
+      <div style={{background: `${gameBackground}`}} className='main'>
         <Header 
           gameState={gameState} 
           gameEnded={onEndGame} 
           popupController={popupController}
           loggedIn={loggedIn}
           user={user}
+          baseBackground={baseBackground}
+          baseRightCircle={baseRightCircle}
+          baseWrongCircleOne={baseWrongCircleOne}
+          baseWrongCircleTwo={baseWrongCircleTwo}
+          changeGameColors={onChangeGameColors}
         />
         {gameState ?
           <div>
             <GameCenter
-              correctColor={rightCircle}
-              incorrectColorOne={wrongCircleOne}
-              incorrectColorTwo={wrongCircleTwo}
+              correctColor={gameRightCircle}
+              incorrectColorOne={gameWrongCircleOne}
+              incorrectColorTwo={gameWrongCircleTwo}
               gameOption={gameOption}
-              background={background}
+              background={gameBackground}
             />
           </div>
           :
           <div>
             <Title gameState={gameState}/>
             <Home 
-              background={background}
-              onChangeColors={onChangeColors}
+              background={gameBackground}
+              onChangeGameColors={onChangeGameColors} 
               gameOption={gameOption}
-              correctColor={rightCircle} 
-              incorrectColorOne={wrongCircleOne} 
-              incorrectColorTwo={wrongCircleTwo} 
+              correctColor={gameRightCircle} 
+              incorrectColorOne={gameWrongCircleOne} 
+              incorrectColorTwo={gameWrongCircleTwo} 
               startGame={onStartGame}
               selectOption={onSelectOption}
             />
           {popup ?
             <ColorChangePopup
-              changeColors = {onChangeColors}
+              changeDefaultColors={onChangeDefaultColors} 
+              changeGameColors={onChangeGameColors}
               popupController={popupController}
             />
             : null
