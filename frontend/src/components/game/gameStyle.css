@@ -8,7 +8,7 @@
 .circleClicked{
   display: flex;
   justify-content: center;
-  margin-top: 65px;
+  margin-top: 90px;
   margin-bottom: 65px;
 }
 
@@ -58,11 +58,19 @@
 
 .timeEnd {
   font-size: 30px;
+  text-align: center;
 }
 
 .center{
   display: flex;
   justify-content: center;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 25px;
+  margin-top: 10px;
 }
 
 .prescreen {

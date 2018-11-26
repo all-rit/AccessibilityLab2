@@ -4,6 +4,7 @@ import Countdown from 'react-countdown-now';
 import SecondTimer from './secondTimer';
 import Instructions from '../instructions/instructions';
 import Circle from './circle';
+import Title from './../header/title';
 import './gameStyle.css';
 
 import {updateTime} from './controllers/actions';
@@ -32,9 +33,7 @@ class game extends Component {
     const {correctColor, incorrectColorOne, incorrectColorTwo, background, gameOption} = this.props;
 
   if (this.state.startTime === 0) {
-    console.log(this.state.startTime);
     this.setState({startTime: Date.now()})
-    console.log(this.state.startTime);
   }
 
   const updateTime = () => {
@@ -45,21 +44,23 @@ class game extends Component {
     if (props.total === 0) {
       return null;
     } else {
-      return (<div className='timer'>Time Remaining: {props.total}</div>);
+      let milliseconds = props.milliseconds;
+      milliseconds = milliseconds / 100;
+      return (<div className='timer right'>{props.seconds}.{milliseconds}</div>);
     }
   }
 
   const renderer = (props) => {
-    console.log(props.total);
     if (props.total === 0) {
       return(
         <div>
           <Countdown 
             date={this.state.startTime + 18000} 
             intervalDelay={0} 
-            precision={3} 
+            precision={1} 
             renderer={mainTimerRenderer}
           />
+          <Title gameState={true} />
           <SecondTimer
             onUpdateTime={updateTime}
             correctColor={correctColor}
@@ -74,6 +75,7 @@ class game extends Component {
     }
     return (
       <div>
+        <Title gameState={true} />
         <div className='timer startTimer'>
           {props.seconds}
         </div>
@@ -96,8 +98,6 @@ class game extends Component {
       </div>
     );
   }
-
-  console.log(this.state.startTime);
 
   return (
     <div>

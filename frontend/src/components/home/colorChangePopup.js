@@ -180,7 +180,7 @@ class ColorChangePopup extends React.Component{
             <div className='inlineForm'>
               <p className='tab boarder'>background: </p>
               <input
-                type='text'
+                type='color'
                 name='background'
                 className='form'
                 onChange={this.onBackgroundChange}
@@ -192,7 +192,7 @@ class ColorChangePopup extends React.Component{
             <div className='inlineForm'>
               <p className='tab boarder'>color: </p>
               <input
-                type='text'
+                type='color'
                 name='correctColor'
                 className='form'
                 onChange={this.onCorrectColorChange}
@@ -204,7 +204,7 @@ class ColorChangePopup extends React.Component{
             <div className='inlineForm'>
               <p className='tab boarder'>color: </p>
               <input
-                type='text'
+                type='color'
                 name='incorrectColorOne'
                 className='form'
                 onChange={this.onIncorrectColorOne}
@@ -216,7 +216,7 @@ class ColorChangePopup extends React.Component{
             <div className='inlineForm'>
               <p className='tab boarder'>color: </p>
               <input
-                type='text'
+                type='color'
                 name='incorrectColorTwo'
                 className='form'
                 onChange={this.onIncorrectColorTwo}

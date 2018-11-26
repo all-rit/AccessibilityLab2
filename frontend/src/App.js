@@ -62,7 +62,7 @@ class App extends Component {
     };
 
   render() {
-    const {onChangeColors, gameState, onStartGame, onEndGame, onSelectOption, background, rightCircle, wrongCircleOne, gameOption, wrongCircleTwo, popupController, popup, onResetOption, loggedIn, user} = this.props
+    const {onChangeColors, gameState, onStartGame, onEndGame, onSelectOption, background, rightCircle, wrongCircleOne, gameOption, wrongCircleTwo, popupController, popup, loggedIn, user} = this.props
 
     return (
       <div style={{background: `${background}`}} className='main'>
@@ -75,11 +75,6 @@ class App extends Component {
         />
         {gameState ?
           <div>
-            <Title 
-              gameState={gameState} 
-              resetOption={onResetOption}
-              resetColors={resetColors}
-            />
             <GameCenter
               correctColor={rightCircle}
               incorrectColorOne={wrongCircleOne}

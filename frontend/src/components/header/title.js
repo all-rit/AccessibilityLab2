@@ -1,7 +1,7 @@
 import React from 'react';
 import './title.css';
 
-const Title = ({gameState, gameEnded, resetOption, resetColors}) => {
+const Title = ({gameState}) => {
   return (
     <div>
       {gameState? 
