@@ -89,3 +89,14 @@
 .incorrectCircle{
   margin-left: 50px;
 }
+
+.submitColorPopup:hover{
+  cursor: pointer;
+}
+
+.popupArrow{
+  color: grey;
+  background: #1a1a1a;
+  margin-top: 0px;
+  padding-top: 11px;
+}
