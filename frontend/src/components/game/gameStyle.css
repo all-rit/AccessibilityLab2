@@ -111,15 +111,19 @@
 }
 
 .scoreLine{
-  margin-top: 10px;
+  margin-top: 5px;
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   background: black;
 }
 
 .scoreElement{
   color: white;
-  font-size: 20px;
+  font-size: 18px;
+  text-align: center;
+  word-wrap: normal;
+  width: 150px;
 }
 
 @media (min-width: 1200px) {

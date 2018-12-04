@@ -11,8 +11,10 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
   let clicked = false;
   let time = 1;
   let score = 0;
-  let numRight = 0;
-  let numWrong = 0;
+  let numRightOnClick = 0;
+  let numRightOnNoClick = 0;
+  let numWrongOnClick = 0;
+  let numWrongOnNoClick = 0;
   let first = true;
 
   const isHex = (gameOption === 'hex');
@@ -20,7 +22,7 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
   const calculateScore = () => {
     if (clicked) {
       if (correct) {
-        numRight ++;
+        numRightOnClick ++;
         if (time < .1) {
           score += 100;
         } else if (time > .1 && time < .21) {
@@ -39,17 +41,17 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
           score += 5;
         }
       } else {
-        numWrong ++;
+        numWrongOnClick ++;
         score -= 75;
       }
       clicked = false;
       time = 1;
     } else {
       if (correct) {
-        numWrong ++;
+        numWrongOnNoClick ++;
         score -= 200;
       } else {
-        numRight ++;
+        numRightOnNoClick ++;
         score += 10;
       }
     }
@@ -69,6 +71,27 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
     }
   }
 
+  const recordData = () => {
+    const data = {
+      score,
+      numRightOnClick,
+      numWrongOnClick,
+      numRightOnNoClick,
+      numWrongOnNoClick,
+      Mode: 'DEFAULT',
+    };
+
+    const dataJSON = JSON.stringify(data);
+    console.log(dataJSON);
+
+    fetch('http://localhost:5000/gameStats', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+    .then(response => console.log(response))
+    .catch(err => console.log(err));
+  }
+
   const renderer = (props) => {
     correct = (currentColor === correctColor);
     calculateRandomColor();
@@ -77,14 +100,20 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
     } else {
       first = false;
     }
+    if (props.total === 0) {
+      recordData();
+    }
+
     return (
       <div>
         {props.total === 0 ?
         <Replay 
           onUpdateTime={onUpdateTime}
           score={score}
-          right={numRight}
-          wrong={numWrong}
+          rightClick={numRightOnClick}
+          rightNoClick={numRightOnNoClick}
+          wrongClick={numWrongOnClick}
+          wrongNoClick={numWrongOnNoClick}
         />
         :
         <div className='circleClicked'>
@@ -102,8 +131,10 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
         />
         <Score
           score={score}
-          right={numRight}
-          wrong={numWrong}
+          rightClick={numRightOnClick}
+          wrongClick={numWrongOnClick}
+          rightNoClick={numRightOnNoClick}
+          wrongNoClick={numWrongOnNoClick}
           isHex={isHex}
           background={background}
           currentColor={currentColor}

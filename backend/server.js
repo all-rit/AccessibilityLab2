@@ -19,11 +19,12 @@ app.use(cookieSession({
   httpOnly: false
 }));
 app.use(cookieParser());
+app.use(express.json());
 
 let hold = null;
 let users = 1;
 
-let whitelist = ['http://localhost:3000', 'http://localhost:5000', 'http://tempwebsite.com:3000'];
+let whitelist = ['http://localhost:3000', 'http://localhost:5000', 'http://tempwebsite.com:3000', 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'];
 let corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -40,7 +41,12 @@ db.serialize(function() {
   db.run('CREATE TABLE Users (UserID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, FirstName TEXT , NickName TEXT)');
   db.run('CREATE TABLE AllLogins (LoginID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, UserID INTEGER NOT NULL, UserSssionID INTEGER NOT NULL, Location TEXT, Login NUMERIC NOT NULL)');
   db.run('CREATE TABLE Login (UserSessionID NOT NULL PRIMARY KEY, UserID INTEGER NOT NULL)');
-  db.run('CREATE TABLE GameStats (GameStatsID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Score INTEGER NOT NULL, Correct INTEGER NOT NULL, Incorrect INTEGER NOT NULL, Mode TEXT NOT NULL, UserID INTEGER NOT NULL)');
+  db.run('CREATE TABLE GameStats (GameStatsID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Score INTEGER NOT NULL, CorrectOnClick INTEGER NOT NULL, IncorrectOnClick INTEGER NOT NULL, CorrectOnNoClick INTEGER NOT NULL, IncorrectOnNoClick INTEGER NOT NULL, Mode INTEGER NOT NULL, UserID INTEGER NOT NULL)');
+  db.run('CREATE TABLE Mode (MODEID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Type TEXT)');
+  db.run('INSERT INTO Mode VALUES (?,?)', [null, 'DEFAULT']);
+  db.run('INSERT INTO Mode VALUES (?,?)', [null, 'PROTANOPIA']);
+  db.run('INSERT INTO Mode VALUES (?,?)', [null, 'DEUTERANOPIA']);
+  db.run('INSERT INTO Mode VALUES (?,?)', [null, 'TRITANOMALY']);
 });
 
 app.use(cors(corsOptions));
@@ -90,8 +96,8 @@ app.get('/main', (req, res) => {
       });
     });
   } else {
-    res.cookie('token', '')
-    req.session.token = '';
+    res.cookie('token', `${users}`)
+    req.session.token = `${users}`;
     db.serialize(function() {
       const user = db.prepare('INSERT INTO Users VALUES (?,?,?)', [null, '', '']);
       const login = db.prepare(`INSERT INTO Login VALUES (?,?)`, [req.session.token, users]);
@@ -153,7 +159,12 @@ app.get('/logout', (req, res) => {
 });
 
 app.post('/gameStats', (req, res) => {
-  console.log(req);
+  console.log('Overall info' + req);
+  const Score = req.body.score,
+    Correct = req.body.numRight,
+    Incorrect = req.body.numWrong, 
+    Mode = req.body.Mode;
+  console.log('Score: ' + Score);
 });
 
 process.on('SIGINT', () => {

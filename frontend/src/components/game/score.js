@@ -1,13 +1,15 @@
 import React from 'react';
 import './gameStyle.css';
 
-const Score = ({score, right, wrong, isHex, background, currentColor}) => {
+const Score = ({score, rightClick, wrongClick, rightNoClick, wrongNoClick, isHex, background, currentColor}) => {
 
   return (
     <div className='scoreLine'>
       <p className='scoreElement'>Score: {score}</p>
-      <p className='scoreElement'>Number Right: {right}</p>
-      <p className='scoreElement'>Number Wrong: {wrong}</p>
+      <p className='scoreElement'>Number Correct From Click: {rightClick}</p>
+      <p className='scoreElement'>Number Incorrect From Click: {wrongClick}</p>
+      <p className='scoreElement'>Number Correct From Not Clicking: {rightNoClick}</p>
+      <p className='scoreElement'>Number Incorrect From Not Clicking: {wrongNoClick}</p>
       {isHex ? 
         <div className='oneline'>
           <p className='scoreElement spaceRight'>Background: {background}</p>
