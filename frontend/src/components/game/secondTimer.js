@@ -110,10 +110,8 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
         <Replay 
           onUpdateTime={onUpdateTime}
           score={score}
-          rightClick={numRightOnClick}
-          rightNoClick={numRightOnNoClick}
-          wrongClick={numWrongOnClick}
-          wrongNoClick={numWrongOnNoClick}
+          right={numRightOnClick+numRightOnNoClick}
+          wrong={numWrongOnClick+numWrongOnNoClick}
         />
         :
         <div className='circleClicked'>

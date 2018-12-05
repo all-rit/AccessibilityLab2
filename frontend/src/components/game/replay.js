@@ -14,12 +14,12 @@ const Replay = ({score, right, wrong, onUpdateTime}) => {
         {score > 0 ?
         <div>
           <p className='timeEnd'>Good job! Your final score was {score}.</p>
-          <p className='timeEnd'>That equates to {right} right clicks and {wrong} wrong clicks.</p>
+          <p className='timeEnd'>That equates to {right} correct clicks and {wrong} incorrect clicks.</p>
         </div>
         :
         <div>
           <p className='timeEnd'>Better luck next time! Your final score was {score}.</p>
-          <p className='timeEnd'>That equates to {right} right clicks and {wrong} wrong clicks.</p>
+          <p className='timeEnd'>That equates to {right} correct clicks and {wrong} incorrect clicks.</p>
         </div>
         }
       </div>

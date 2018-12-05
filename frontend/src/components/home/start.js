@@ -12,8 +12,6 @@ const Start = ({startGame, gameOption, onChangeGameColors, colors}) => {
   }
 
   return (
-    <div className='center'>
-      <p className='thirdTitle center inline'>Ready?</p>
       <button 
         className='start center inline' 
         type='submit'
@@ -21,7 +19,6 @@ const Start = ({startGame, gameOption, onChangeGameColors, colors}) => {
       >
         Start
       </button>
-    </div>
   );
 }
 

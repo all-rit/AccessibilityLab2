@@ -1,7 +1,8 @@
 import React from 'react';
+import Start from './start';
 import './homeStyle.css';
 
-const Dropdown = ({selectOption}) => {
+const Dropdown = ({selectOption, startGame, gameOption, onChangeGameColors, colors}) => {
 
   const handleChosenOption = (event) => {
     selectOption(event);
@@ -10,9 +11,15 @@ const Dropdown = ({selectOption}) => {
   return (
     <div>
       <div className='center fourthTitle'>
-        <p>Choose a color option or optional hex display below:</p>
+        <p>Choose a color option or optional hex display below and start the game!</p>
       </div>
       <div className='center'>
+        <Start 
+          startGame={startGame}
+          gameOption={gameOption}
+          onChangeGameColors={onChangeGameColors}
+          colors={colors}
+        />
         <select className='selection' onChange={handleChosenOption}>
           <option 
             value='default' 

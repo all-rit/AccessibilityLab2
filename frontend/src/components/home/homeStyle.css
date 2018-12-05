@@ -28,6 +28,13 @@
   font-size: 35px;
 }
 
+@media (max-width: 800px) {
+  .thirdTitle{
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
 .fourthTitle{
   font-size: 25px;
 }
@@ -54,7 +61,10 @@
 
 .selection{
   width: 300px;
-  height: 40px;
+  height: 60px;
+  margin-top:10px;
+  font-size: 20px;
+  margin-left: 5px;
 }
 
 .textSelection{
@@ -68,9 +78,20 @@
   justify-content: center;
 }
 
+.popupArrow{
+  color: grey;
+  background: #1a1a1a;
+  margin-top: 0px;
+  padding-top: 11px;
+}
+
 @media (min-width: 600px) and (max-width:1200px){
   .correctCircle{
     margin-right: 300px;
+  }
+  .popupArrow{
+    height:15px;
+    padding-top: 13px;
   }
 }
 
@@ -92,11 +113,4 @@
 
 .submitColorPopup:hover{
   cursor: pointer;
-}
-
-.popupArrow{
-  color: grey;
-  background: #1a1a1a;
-  margin-top: 0px;
-  padding-top: 11px;
 }

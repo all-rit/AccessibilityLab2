@@ -187,7 +187,7 @@ class ColorChangePopup extends React.Component{
                 onChange={this.onBackgroundChange}
               ></input>
               <p className='popupArrow'>&#8690;</p>
-              <p className='boarder'>; &#47;&#47;Change this to change the background of the page</p>
+              <p className='boarder'>; &#47;&#47;Adjust this to change the background of the page</p>
             </div>
             <p className='boarder'> &#125;</p>
             <p className='boarder'>.correctCircle &#123;</p>
@@ -200,7 +200,7 @@ class ColorChangePopup extends React.Component{
                 onChange={this.onCorrectColorChange}
               ></input>
               <p className='popupArrow'>&#8690;</p>
-              <p className='boarder'>; &#47;&#47;Change this to change the correct color option</p>
+              <p className='boarder'>; &#47;&#47;Adjust this to change the correct color option</p>
             </div>
             <p className='boarder'> &#125;</p>
             <p className='boarder'>.incorrectCircleOne &#123;</p>
@@ -213,7 +213,7 @@ class ColorChangePopup extends React.Component{
                 onChange={this.onIncorrectColorOne}
               ></input>
               <p className='popupArrow'>&#8690;</p>
-              <p className='boarder'>; &#47;&#47;Change this to change the first incorrect color option</p>
+              <p className='boarder'>; &#47;&#47;Adjust this to change the first incorrect color option</p>
             </div>
             <p className='boarder'> &#125;</p>
             <p className='boarder'>.incorrectCircleTwo &#123;</p>
@@ -226,7 +226,7 @@ class ColorChangePopup extends React.Component{
                 onChange={this.onIncorrectColorTwo}
               ></input>
               <p className='popupArrow'>&#8690;</p>
-              <p className='boarder'>; &#47;&#47;Change this to change the other incorrect color option</p>
+              <p className='boarder'>; &#47;&#47;Adjust this to change the other incorrect color option</p>
             </div>
             <p className='boarder'> &#125;</p>
             <p className='boarder'> .center &#123;</p>

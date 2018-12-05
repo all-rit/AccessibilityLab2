@@ -12,9 +12,9 @@
 
 .popup_inner{
   position: absolute;
-  left: 10%;
+  left: 5%;
   top: 10%;
-  bottom: 10%;
+  bottom: 5%;
   right: 10%;
   margin: auto;
   background: rgba(38,38,38,1);
@@ -101,5 +101,8 @@
     height: 40px;
     font-size: 25px;
     margin-left: 45%;
+  }
+  .popupArrow{
+    height:10px;
   }
 }

@@ -8,6 +8,17 @@
   font-size: 40px;
 }
 
+@media (min-width: 400px and max-width: 2000px) {
+  .mainTitle{
+    margin-top:40px;
+    margin-bottom:40px;
+  }
+  .secondTitle{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
 .updateColorButton{
   word-wrap: break-word;
   margin-top: 10px;
