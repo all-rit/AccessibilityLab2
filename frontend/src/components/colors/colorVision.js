@@ -1,71 +1,68 @@
-import Protanopia from './protanopia';
-import Deuteranopia from './deuteranopia';
-import Tritanomaly from './tritanomaly';
-import hexRgb from 'hex-rgb';
+import hexToRgba from 'hex-to-rgba';
 
-const calculateHue = (red, green, blue) => {
-  let hue, delta, luminosity;
-  if (red > green && red > blue) {
-    if (green > blue) {
-      delta = green - blue;
-      luminosity = calculateLuminosity(red, blue);
-    } else {
-      delta = blue - green;
-      luminosity = calculateLuminosity(red, green);
-    }
-    if (delta !== 0) {
-      hue = 60 * (((green - blue) / delta) % 6);
-    } else {
-      hue = 0;
-    }
-  } else if (green > red && green > blue) {
-    if (red > blue) {
-      delta = red - blue;
-      luminosity = calculateLuminosity(green, blue);
-    } else {
-      delta = blue - red;
-      luminosity = calculateLuminosity(green, red);
-    }
-    if (delta !== 0) {
-      hue = 60 * (((blue - red) / delta) + 2);
-    } else {
-      hue = 0;
-    }
+const adjustment = (value) => {
+  if (value < 0) {
+    return 0;
+  } else if(value > 255) {
+    return 255;
   } else {
-    if (red > green) {
-      delta = red - green;
-      luminosity = calculateLuminosity(blue, green);
-    } else {
-      delta = green - red;
-      luminosity = calculateLuminosity(blue, red);
-    } 
-    if (delta !== 0) {
-      hue = 60 * (((red - green) / delta) + 4);
-    } else {
-      hue = 0;
-    }
+    return value;
   }
-  return [hue, Math.abs(luminosity)];
 }
 
-const calculateLuminosity = (max, min) => {
-  return (max - min) / 2;
+const switchColors = (colors, matrix) => {
+  var red =((colors.R*matrix[0])+(colors.G*matrix[1])+(colors.B*matrix[2])+(colors.A*matrix[3])+matrix[4]);
+  var green = ((colors.R*matrix[5])+(colors.G*matrix[6])+(colors.B*matrix[7])+(colors.A*matrix[8])+matrix[9]);
+  var blue = ((colors.R*matrix[10])+(colors.G*matrix[11])+(colors.B*matrix[12])+(colors.A*matrix[13])+matrix[14]);
+  var alpha = ((colors.R*matrix[15])+(colors.G*matrix[16])+(colors.B*matrix[17])+(colors.A*matrix[18])+matrix[19]); 
+  
+  return({'red':adjustment(red), 'green':adjustment(green), 'blue':adjustment(blue), 'alpha':adjustment(alpha)});
 }
+
+const matrix = { 
+  'Protanopia':[0.567,0.433,0,0,0, 0.558,0.442,0,0,0, 0,0.242,0.758,0,0, 0,0,0,1,0],
+  'Deuteranopia':[0.625,0.375,0,0,0, 0.7,0.3,0,0,0, 0,0.3,0.7,0,0, 0,0,0,1,0],
+  'Tritanomaly':[0.95,0.05,0,0,0, 0,0.433,0.567,0,0, 0,0.475,0.525,0,0, 0,0,0,1,0]
+}
+
 
 const ColorVision = (changeColors, gameOption, colors) => {
-  let correctedColors = [];
-  for (let counter = 0; counter < colors.length; counter++) {
-    let hexResults = hexRgb(colors[counter]);
-    const results = calculateHue(hexResults.red, hexResults.green, hexResults.blue);
-    correctedColors[counter] = results;
+
+  const rgbaColors = {
+    'R': 0,
+    'G': 0,
+    'B': 0,
+    'A': 0
   }
-  if (gameOption === 'Protanopia') {
-    Protanopia(changeColors, correctedColors);
-  } else if (gameOption === 'Deuteranopia') {
-    Deuteranopia(changeColors, correctedColors);
-  } else {
-    Tritanomaly(changeColors, correctedColors);
-  }
+
+  var updatedColors = [];
+  var position = 0;
+
+  colors.forEach((color) => {
+    var tempColor = hexToRgba(color);
+    tempColor = tempColor.split('rgba');
+    tempColor = tempColor[1];
+    tempColor = tempColor.split('(');
+    tempColor = tempColor[1].split(')');
+    tempColor = tempColor[0].split(',');
+    rgbaColors.R = parseInt(tempColor[0]);
+    rgbaColors.G = parseInt(tempColor[1].slice(1));
+    rgbaColors.B = parseInt(tempColor[2].slice(1));
+    rgbaColors.A = parseInt(tempColor[3].slice(1));
+    var result;
+    if (gameOption === 'Protanopia') {
+      result = switchColors(rgbaColors, matrix.Protanopia); 
+    } else if (gameOption === 'Deuteranopia') {
+      result = switchColors(rgbaColors, matrix.Deuteranopia);
+    } else {
+      result = switchColors(rgbaColors, matrix.Tritanomaly);
+    }
+    console.log(result);
+    updatedColors[position] = `rgba(${result.red}, ${result.green}, ${result.blue}, ${result.alpha})`;
+    position++;
+  })
+  console.log(updatedColors);
+  changeColors(updatedColors);
 }
 
 export default ColorVision;
