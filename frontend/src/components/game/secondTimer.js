@@ -86,6 +86,7 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
 
     fetch('http://localhost:5000/gameStats', {
       method: 'POST',
+      headers: new Headers({'content-type': 'application/json'}),
       body: JSON.stringify(data)
     })
     .then(response => console.log(response))

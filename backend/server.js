@@ -3,6 +3,7 @@ const app = express();
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(':memory:');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 const auth = require('./auth');
 const key = require('./serverConstants');
 const port = process.env.PORT || 5000;
@@ -12,6 +13,8 @@ const cookieSession = require('cookie-session');
 
 auth(passport);
 app.use(passport.initialize());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieSession({
   name: 'session',
   keys: [key.key],
@@ -160,12 +163,21 @@ app.get('/logout', (req, res) => {
 });
 
 app.post('/gameStats', (req, res) => {
-  console.log('Overall info' + req);
+  console.log('Overall info' + req.body);
   const Score = req.body.score,
     Correct = req.body.numRight,
     Incorrect = req.body.numWrong, 
     Mode = req.body.Mode;
   console.log('Score: ' + Score);
+  console.log('Score from body: ' + req.body.score);
+  console.log('Mode: ' + Mode);
+  if(Score === undefined) {
+    res.status(500);
+    res.send('error with information provided');
+  } else {
+    res.status(200);
+    res.send('information recorded');
+  }
 });
 
 process.on('SIGINT', () => {
