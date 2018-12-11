@@ -18,7 +18,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieSession({
   name: 'session',
   keys: [key.key],
-  path: '/main',
   httpOnly: false
 }));
 app.use(cookieParser());
@@ -61,7 +60,7 @@ app.get('/main', (req, res) => {
     res.cookie('token', req.session.token);
     let user = 'temp';
     db.serialize(function() {
-      let sql = 'SELECT * FROM Login JOIN Users on UserID';
+      let sql = 'select * from login join users on userid';
       db.all(sql, [], (err, rows) => {
         if (err) {
           console.log(err);
@@ -163,25 +162,39 @@ app.get('/logout', (req, res) => {
 });
 
 app.post('/gameStats', (req, res) => {
-  console.log('Overall info' + req.body);
   const Score = req.body.score,
-    Correct = req.body.numRight,
-    Incorrect = req.body.numWrong, 
-    Mode = req.body.Mode;
-  console.log('Score: ' + Score);
-  console.log('Score from body: ' + req.body.score);
-  console.log('Mode: ' + Mode);
+    CorrectOnClick = req.body.numRightOnClick,
+    IncorrectOnClick = req.body.numWrongOnClick, 
+    CorrectOnNoClick = req.body.numRightOnNoClick,
+    IncorrectOnNoClick = req.body.numWrongOnNoClick,
+    Mode = req.body.Mode[0];
   if(Score === undefined) {
     res.status(500);
     res.send('error with information provided');
   } else {
+    let userID = 1;
+    let sql = 'select * from login';
+      db.all(sql, [], (err, rows) => {
+        if (err) {
+          console.log(err);
+        }
+        rows.forEach((row) => {
+          if (req.session.token === undefined) {
+            userID = 1;
+            console.log(userID)
+          }
+          else if (row.UserSessionID === req.session.token) {
+            userID = row.UserID
+          }
+        });
+      });
+    console.log(userID);
+    const info = db.prepare(`INSERT INTO GameStats VALUES (?,?,?,?,?,?,?,?)`, [null, Score, CorrectOnClick, IncorrectOnClick, CorrectOnNoClick, IncorrectOnNoClick, Mode, userID]);
+    info.run();
+    info.finalize()
     res.status(200);
     res.send('information recorded');
   }
-});
-
-process.on('SIGINT', () => {
-  db.close();
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

@@ -12,27 +12,6 @@
   margin-bottom: 65px;
 }
 
-.clickable {
-  animation-duration: 1s;
-  animation-name: boarder;
-  animation-iteration-count: 15;
-}
-
-@keyframes boarder {
-  0% {
-    border: 2px solid transparent;
-    border-color: transparent;
-  }
-  3% {
-    border: 2px solid black;
-    border-color: black;
-  }
-  100% {
-    border: 2px solid transparent;
-    border-color: transparent;
-  }
-}
-
 .timer{
   display: flex;
   justify-content: center;

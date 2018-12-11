@@ -14,12 +14,6 @@ const Dropdown = ({selectOption, startGame, gameOption, onChangeGameColors, colo
         <p>Choose a color option or optional hex display below and start the game!</p>
       </div>
       <div className='center'>
-        <Start 
-          startGame={startGame}
-          gameOption={gameOption}
-          onChangeGameColors={onChangeGameColors}
-          colors={colors}
-        />
         <select className='selection' onChange={handleChosenOption}>
           <option 
             value='default' 
@@ -52,6 +46,12 @@ const Dropdown = ({selectOption, startGame, gameOption, onChangeGameColors, colo
             Tritanomaly (Blue Weakness)
           </option>
         </select>
+        <Start 
+          startGame={startGame}
+          gameOption={gameOption}
+          onChangeGameColors={onChangeGameColors}
+          colors={colors}
+        />
       </div>
     </div>
   );

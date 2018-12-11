@@ -78,7 +78,7 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
       numWrongOnClick,
       numRightOnNoClick,
       numWrongOnNoClick,
-      Mode: 'DEFAULT',
+      Mode: [gameOption.toUpperCase()],
     };
 
     const dataJSON = JSON.stringify(data);

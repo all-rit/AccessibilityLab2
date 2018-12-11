@@ -11,14 +11,14 @@ import{
 } from "./constants.js"
 
 const initialColors = {
-  baseBackground: "#FFA64D",
-  baseRightCircle: "#00D67D",
-  baseWrongCircleOne: "#FFC2C2",
-  baseWrongCircleTwo: "#B8B800",
-  gameBackground: '#FFA64D',
-  gameRightCircle: '#00D67D',
-  gameWrongCircleOne: '#FFC2C2',
-  gameWrongCircleTwo: '#B8B800',
+  baseBackground: "#00CC00",
+  baseRightCircle: "#0000E6",
+  baseWrongCircleOne: "#0000CC",
+  baseWrongCircleTwo: "#0000FF",
+  gameBackground: '#00CC00',
+  gameRightCircle: '#0000E6',
+  gameWrongCircleOne: '#0000CC',
+  gameWrongCircleTwo: '#0000FF',
   popup: false
 }
 
