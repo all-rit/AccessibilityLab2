@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ScoreBreakdown from './scoreBreakdown';
 import PreviousGames from './previousGames';
+import Dropdown from '../home/dropdown';
 import './gameStyle.css';
 
 class Replay extends Component {
@@ -15,7 +16,6 @@ class Replay extends Component {
   render(){
 
     const click = () => {
-      console.log('click');
       this.props.onUpdateTime();
     }
 
@@ -43,10 +43,14 @@ class Replay extends Component {
             }
           </div>
           <div className='center'>
+            <Dropdown
+              selectOption = {this.props.selectOption}
+            />
             <button className='replay' onClick={click}>Play again?</button>
           </div>
         </div>
         <div id='right'>
+          <PreviousGames />
         </div>
       </div>
     );

@@ -48,7 +48,7 @@ class App extends Component {
     this.callBackendAPI()
       .then(res => {
         if (res.status === 'user logged into system') {
-          this.props.onLogin(res.user);                    
+          this.props.onLogin(res.user);
         } else {
           console.log(res.status);
         }
@@ -77,9 +77,9 @@ class App extends Component {
 
     return (
       <div style={{background: `${gameBackground}`}} className='main'>
-        <Header 
-          gameState={gameState} 
-          gameEnded={onEndGame} 
+        <Header
+          gameState={gameState}
+          gameEnded={onEndGame}
           popupController={popupController}
           loggedIn={loggedIn}
           user={user}
@@ -97,24 +97,25 @@ class App extends Component {
               incorrectColorTwo={gameWrongCircleTwo}
               gameOption={gameOption}
               background={gameBackground}
+              selectOption={onSelectOption}
             />
           </div>
           :
           <div>
             <Title gameState={gameState}/>
-            <Home 
+            <Home
               background={gameBackground}
-              onChangeGameColors={onChangeGameColors} 
+              onChangeGameColors={onChangeGameColors}
               gameOption={gameOption}
-              correctColor={gameRightCircle} 
-              incorrectColorOne={gameWrongCircleOne} 
-              incorrectColorTwo={gameWrongCircleTwo} 
+              correctColor={gameRightCircle}
+              incorrectColorOne={gameWrongCircleOne}
+              incorrectColorTwo={gameWrongCircleTwo}
               startGame={onStartGame}
               selectOption={onSelectOption}
             />
           {popup ?
             <ColorChangePopup
-              changeDefaultColors={onChangeDefaultColors} 
+              changeDefaultColors={onChangeDefaultColors}
               changeGameColors={onChangeGameColors}
               popupController={popupController}
             />

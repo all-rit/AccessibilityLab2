@@ -6,7 +6,8 @@ import Replay from './replay';
 import Countdown from 'react-countdown-now';
 
 //Component for the secondary timer used for each of the circles per second
-const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startTime, gameOption, background, onUpdateTime}) => {
+const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo,
+  startTime, gameOption, background, onUpdateTime, selectOption}) => {
 
   let currentColor, correct;
   let clicked = false;
@@ -123,6 +124,7 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
           score={score}
           right={numRightOnClick+numRightOnNoClick}
           wrong={numWrongOnClick+numWrongOnNoClick}
+          selectOption={selectOption}
         />
         :
         <div className='circleClicked'>

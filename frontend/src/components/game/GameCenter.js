@@ -12,20 +12,22 @@ class GameCenter extends Component {
   }
 
   render() {
-    const {correctColor, incorrectColorOne, incorrectColorTwo, background, gameOption} = this.props; 
+    const {correctColor, incorrectColorOne,
+      incorrectColorTwo, background, gameOption, selectOption} = this.props;
 
     return (
       <Provider store={this.store}>
-        <Game 
+        <Game
           correctColor={correctColor}
           incorrectColorOne={incorrectColorOne}
           incorrectColorTwo={incorrectColorTwo}
           background={background}
           gameOption={gameOption}
+          selectOption={selectOption}
         />
       </Provider>
     );
   }
 }
 
-export default GameCenter; 
+export default GameCenter;

@@ -1,7 +1,7 @@
 import React from 'react';
 import './homeStyle.css'
 import Instructions from '../instructions/instructions';
-import Dropdown from './dropdown';
+import StartGame from './startGame';
 
 const Home = ({correctColor, incorrectColorOne, incorrectColorTwo, startGame, selectOption, background, gameOption, onChangeGameColors}) => {
   const colors = [background, correctColor, incorrectColorOne, incorrectColorTwo];
@@ -13,16 +13,16 @@ const Home = ({correctColor, incorrectColorOne, incorrectColorTwo, startGame, se
   return (
     <div>
       <div>
-        <Dropdown 
-          selectOption = {selectOption} 
+        <StartGame
+          selectOption = {selectOption}
           startGame = {startGame}
           gameOption = {gameOption}
           onChangeGameColors = {onChangeGameColors}
           colors = {colors}
         />
       </div>
-      <Instructions 
-        correctColor={correctColor} 
+      <Instructions
+        correctColor={correctColor}
         incorrectColorOne={incorrectColorOne}
         incorrectColorTwo={incorrectColorTwo}
       />

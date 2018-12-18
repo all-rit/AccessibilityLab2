@@ -30,7 +30,8 @@ class game extends Component {
   }
 
   render() {
-    const {correctColor, incorrectColorOne, incorrectColorTwo, background, gameOption} = this.props;
+    const {correctColor, incorrectColorOne, incorrectColorTwo,
+      background, gameOption} = this.props;
 
   if (this.state.startTime === 0) {
     this.setState({startTime: Date.now()})
@@ -54,10 +55,10 @@ class game extends Component {
     if (props.total === 0) {
       return(
         <div>
-          <Countdown 
-            date={this.state.startTime + 18000} 
-            intervalDelay={0} 
-            precision={1} 
+          <Countdown
+            date={this.state.startTime + 18000}
+            intervalDelay={0}
+            precision={1}
             renderer={mainTimerRenderer}
           />
           <Title gameState={true} />
@@ -69,6 +70,7 @@ class game extends Component {
             startTime={this.state.startTime}
             background={background}
             gameOption={gameOption}
+            selectOption={this.props.selectOption}
           />
         </div>
       );
@@ -80,7 +82,7 @@ class game extends Component {
           {props.seconds}
         </div>
         <div className='center prescreen'>
-          <Circle color={correctColor} /> 
+          <Circle color={correctColor} />
           <div className='arrow'>
             <div className='point'></div>
             <div className='line'></div>

@@ -1,8 +1,10 @@
 import React from 'react';
 
 const createTable = (gameHistory) => {
+  if (gameHistory === null || gameHistory === undefined) {
+    return <tr>Component failed to load</tr>
+  }
   let table = []
-
   for (let i = 0; i < gameHistory.length; i ++) {
     let children = []
     for (let j = 0; j < 2; j++) {
