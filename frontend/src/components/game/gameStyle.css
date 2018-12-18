@@ -45,6 +45,26 @@
   justify-content: center;
 }
 
+.replay_screen {
+  display: flex;
+  justify-content: space-around;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 5px;
+  text-align: left;
+}
+
+td {
+  padding: 5px;
+  text-align: center;
+}
+
 .right {
   display: flex;
   justify-content: flex-end;

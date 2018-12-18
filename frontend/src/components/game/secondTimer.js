@@ -5,6 +5,7 @@ import Circle from './circle';
 import Replay from './replay';
 import Countdown from 'react-countdown-now';
 
+//Component for the secondary timer used for each of the circles per second
 const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startTime, gameOption, background, onUpdateTime}) => {
 
   let currentColor, correct;
@@ -19,6 +20,7 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
 
   const isHex = (gameOption === 'hex');
 
+  //Calculates the score based on the response from the user
   const calculateScore = () => {
     if (clicked) {
       if (correct) {
@@ -57,6 +59,7 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
     }
   }
 
+  //Randomly generates a color for the middle circle
   const calculateRandomColor = () => {
     let options = [correctColor, incorrectColorOne, incorrectColorTwo];
     let position = Math.floor(Math.random() * (3));
@@ -64,6 +67,7 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
     return options[position];
   }
 
+  //Handles the click of the middle circle and records the time
   const onClick = () => {
     if(!clicked) {
       clicked = true;
@@ -71,6 +75,9 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
     }
   }
 
+  //turns the data found into an object so it can be passed to the backend
+  //after it is converted, the system sends the info to the backend and then
+  //will record the results from the past five games in the state of the game
   const recordData = () => {
     const data = {
       score,
@@ -90,9 +97,11 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
       body: JSON.stringify(data)
     })
     .then(response => console.log(response))
+    //Need to store response in the controller (redux) and pass to previousGames
     .catch(err => console.log(err));
   }
 
+  //Specified by the timer for custom rendering of the center circle
   const renderer = (props) => {
     correct = (currentColor === correctColor);
     calculateRandomColor();
@@ -104,11 +113,12 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
     if (props.total === 0) {
       recordData();
     }
-
+    //Returns either the replay screen option or the center circle that
+    //Changes every second
     return (
       <div>
         {props.total === 0 ?
-        <Replay 
+        <Replay
           onUpdateTime={onUpdateTime}
           score={score}
           right={numRightOnClick+numRightOnNoClick}
@@ -116,7 +126,7 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
         />
         :
         <div className='circleClicked'>
-          <Circle 
+          <Circle
             clickable={true}
             color={currentColor}
             onClick={onClick}
@@ -142,6 +152,7 @@ const SecondTimer = ({correctColor, incorrectColorOne, incorrectColorTwo, startT
     );
   }
 
+  //Used only for the react component used for the countdown system
   return(
     <div>
       <Countdown

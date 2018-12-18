@@ -22,12 +22,6 @@ const Dropdown = ({selectOption, startGame, gameOption, onChangeGameColors, colo
             Default
           </option>
           <option 
-            value='hex' 
-            className='textSelection'
-          >
-          Hex Numbers
-          </option>
-          <option 
             value='Protanopia' 
             className='textSelection'
           >

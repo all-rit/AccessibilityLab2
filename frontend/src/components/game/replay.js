@@ -1,33 +1,56 @@
-import React from 'react';
+import React, {Component} from 'react';
+import ScoreBreakdown from './scoreBreakdown';
+import PreviousGames from './previousGames';
 import './gameStyle.css';
 
-const Replay = ({score, right, wrong, onUpdateTime}) => {
+class Replay extends Component {
 
-  const click = () => {
-    console.log('click');
-    onUpdateTime();
+  constructor(props) {
+    super(props)
+    this.state = {
+      scorePopup: false
+    }
   }
 
-  return(
-    <div>
-      <div className='center'>
-        {score > 0 ?
-        <div>
-          <p className='timeEnd'>Good job! Your final score was {score}.</p>
-          <p className='timeEnd'>That equates to {right} correct clicks and {wrong} incorrect clicks.</p>
+  render(){
+
+    const click = () => {
+      console.log('click');
+      this.props.onUpdateTime();
+    }
+
+    return(
+      <div className='replay_screen'>
+        <div id='left'>
+          <ScoreBreakdown />
         </div>
-        :
-        <div>
-          <p className='timeEnd'>Better luck next time! Your final score was {score}.</p>
-          <p className='timeEnd'>That equates to {right} correct clicks and {wrong} incorrect clicks.</p>
+        <div id='center'>
+          <div>
+            {this.props.score > 0 ?
+            <div>
+              <p className='timeEnd'>Good job! Your final score was
+              {this.props.score}.</p>
+              <p className='timeEnd'>That equates to {this.props.right} correct
+              clicks and {this.props.wrong} incorrect clicks.</p>
+            </div>
+            :
+            <div>
+              <p className='timeEnd'>Better luck next time! Your final score was
+              {this.props.score}.</p>
+              <p className='timeEnd'>That equates to {this.props.right} correct
+              clicks and {this.props.wrong} incorrect clicks.</p>
+            </div>
+            }
+          </div>
+          <div className='center'>
+            <button className='replay' onClick={click}>Play again?</button>
+          </div>
         </div>
-        }
+        <div id='right'>
+        </div>
       </div>
-      <div className='center'>
-        <button className='replay' onClick={click}>Play again?</button>
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Replay;
