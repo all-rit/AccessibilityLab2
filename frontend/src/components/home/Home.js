@@ -3,11 +3,13 @@ import './homeStyle.css'
 import Instructions from '../instructions/instructions';
 import StartGame from './startGame';
 
-const Home = ({correctColor, incorrectColorOne, incorrectColorTwo, startGame, selectOption, background, gameOption, onChangeGameColors}) => {
+const Home = ({correctColor, incorrectColorOne, incorrectColorTwo,
+  startGame, selectOption, background, gameOption, onChangeGameColors}) => {
   const colors = [background, correctColor, incorrectColorOne, incorrectColorTwo];
 
   if(gameOption !== 'default') {
-    onChangeGameColors([`${background}`, `${correctColor}`, `${incorrectColorOne}`, `${incorrectColorTwo}`])
+    onChangeGameColors([`${background}`, `${correctColor}`,
+      `${incorrectColorOne}`, `${incorrectColorTwo}`])
   }
 
   return (
@@ -26,6 +28,17 @@ const Home = ({correctColor, incorrectColorOne, incorrectColorTwo, startGame, se
         incorrectColorOne={incorrectColorOne}
         incorrectColorTwo={incorrectColorTwo}
       />
+      <br></br>
+      <p className='center'>For educational purposes, we record all
+      scores and actions taken in the game, along with any information you
+      choose to give us from our forum.</p>
+      <p className='center'>
+        For further information and to see the other labs
+        currently in development for this project, visit
+        <a href="http://all.rit.edu" style={{cursor:'pointer', paddingLeft:'3px'}}>
+          http://all.rit.edu
+        </a>
+      </p>
     </div>
   );
 }

@@ -73,7 +73,12 @@ class App extends Component {
   }
 
   render() {
-    const {onChangeDefaultColors, onChangeGameColors, gameState, onStartGame, onEndGame, onSelectOption, baseBackground, baseRightCircle, baseWrongCircleOne, baseWrongCircleTwo, gameBackground, gameRightCircle, gameWrongCircleOne, gameWrongCircleTwo, gameOption, popupController, popup, loggedIn, user} = this.props
+    const {onChangeDefaultColors, onChangeGameColors, gameState, onStartGame,
+      onEndGame, onSelectOption, baseBackground, baseRightCircle,
+      baseWrongCircleOne, baseWrongCircleTwo, gameBackground,
+      gameRightCircle, gameWrongCircleOne, gameWrongCircleTwo,
+      gameOption, popupController, popup, loggedIn, user, onResetOption}
+      = this.props
 
     return (
       <div style={{background: `${gameBackground}`}} className='main'>
@@ -98,6 +103,7 @@ class App extends Component {
               gameOption={gameOption}
               background={gameBackground}
               selectOption={onSelectOption}
+              resetOption={onResetOption}
             />
           </div>
           :
