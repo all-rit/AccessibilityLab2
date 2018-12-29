@@ -3,11 +3,13 @@ import './homeStyle.css'
 import Instructions from '../instructions/instructions';
 import StartGame from './startGame';
 
-const Home = ({correctColor, incorrectColorOne, incorrectColorTwo, startGame, selectOption, background, gameOption, onChangeGameColors}) => {
+const Home = ({correctColor, incorrectColorOne, incorrectColorTwo,
+  startGame, selectOption, background, gameOption, onChangeGameColors}) => {
   const colors = [background, correctColor, incorrectColorOne, incorrectColorTwo];
 
   if(gameOption !== 'default') {
-    onChangeGameColors([`${background}`, `${correctColor}`, `${incorrectColorOne}`, `${incorrectColorTwo}`])
+    onChangeGameColors([`${background}`, `${correctColor}`,
+      `${incorrectColorOne}`, `${incorrectColorTwo}`])
   }
 
   return (

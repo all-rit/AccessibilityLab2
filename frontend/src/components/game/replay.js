@@ -14,6 +14,7 @@ class Replay extends Component {
   }
 
   render(){
+    this.props.resetOption();
 
     const click = () => {
       this.props.onUpdateTime();

@@ -25,7 +25,8 @@ class SecondTimer extends Component {
 
   render() {
     const {correctColor, incorrectColorOne, incorrectColorTwo, startTime,
-      gameOption, background, onUpdateTime, selectOption} = this.props;
+      gameOption, background, onUpdateTime, selectOption, resetOption}
+       = this.props;
 
     const isHex = (gameOption === 'hex');
 
@@ -144,6 +145,7 @@ class SecondTimer extends Component {
             right={this.numRightOnClick+this.numRightOnNoClick}
             wrong={this.numWrongOnClick+this.numWrongOnNoClick}
             selectOption={selectOption}
+            resetOption={resetOption}
           />
           :
           <div className='circleClicked'>
