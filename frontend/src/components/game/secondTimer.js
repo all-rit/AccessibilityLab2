@@ -21,7 +21,6 @@ class SecondTimer extends Component {
     this.numWrongOnClick = 0;
     this.numWrongOnNoClick = 0;
     this.first = true;
-    this.gameMode = null;
   }
 
   render() {
@@ -31,13 +30,11 @@ class SecondTimer extends Component {
        = this.props;
 
     const updateMode = (event) => {
-      this.gameMode = event.target.value;
-      console.log(this.gameMode);
+      this.props.selectOption(event);
     }
 
     const resetMode = () => {
-      this.gameMode = 'default'
-      console.log(this.gameMode);
+      this.props.resetOption();
     }
 
     const isHex = (gameOption === 'hex');
@@ -109,20 +106,13 @@ class SecondTimer extends Component {
       let numWrongOnClick = this.numWrongOnClick;
       let numRightOnNoClick = this.numRightOnNoClick;
       let numWrongOnNoClick = this.numWrongOnNoClick;
-      let finalGameMode = null;
-      console.log(this.gameMode);
-      if (this.gameMode === null) {
-        finalGameMode = gameOption.toUpperCase();
-      } else {
-        finalGameMode = this.gameMode.toUpperCase();
-      }
       const data = {
         score,
         numRightOnClick,
         numWrongOnClick,
         numRightOnNoClick,
         numWrongOnNoClick,
-        Mode: [finalGameMode],
+        Mode: [gameOption.toUpperCase()],
       };
 
       const dataJSON = JSON.stringify(data);

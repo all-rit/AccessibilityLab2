@@ -19,7 +19,6 @@ class Replay extends Component {
     this.state.gameMode = 'default'
 
     const recordMode = (event) => {
-      this.props.updateMode(event);
       this.state.gameMode = event.target.value;
     }
 
@@ -28,9 +27,9 @@ class Replay extends Component {
       this.state.gameMode !== 'hex') {
         ColorVision(this.props.onChangeGameColors, this.state.gameMode,
           this.props.colors);
+        this.props.updateMode(this.state.gameMode);
       }
       else if (this.state.gameMode === 'default') {
-        console.log('resetting colors');
         this.props.resetMode();
         this.props.resetColors();
       }

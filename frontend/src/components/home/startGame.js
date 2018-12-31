@@ -6,6 +6,10 @@ import './homeStyle.css';
 const StartGame = ({selectOption, startGame, gameOption,
   onChangeGameColors, colors}) => {
 
+  const changeOption = (event) => {
+    selectOption(event.target.value);
+  }
+
   return (
     <div>
       <div className='center fourthTitle'>
@@ -16,7 +20,7 @@ const StartGame = ({selectOption, startGame, gameOption,
       </div>
       <div className='center'>
         <Dropdown
-          selectOption = {selectOption}
+          selectOption = {changeOption}
         />
         <Start
           startGame={startGame}

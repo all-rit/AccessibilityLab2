@@ -13,8 +13,8 @@ class GameCenter extends Component {
 
   render() {
     const {correctColor, incorrectColorOne, incorrectColorTwo, background,
-      gameOption, resetOption, onChangeGameColors, colors, resetColors}
-      = this.props;
+      gameOption, resetOption, onChangeGameColors, colors, resetColors,
+      selectOption} = this.props;
 
     return (
       <Provider store={this.store}>
@@ -24,6 +24,7 @@ class GameCenter extends Component {
           incorrectColorTwo={incorrectColorTwo}
           background={background}
           gameOption={gameOption}
+          selectOption={selectOption}
           resetOption={resetOption}
           onChangeGameColors={onChangeGameColors}
           colors={colors}

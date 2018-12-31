@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch) => {
   return{
     onChangeDefaultColors: (event) => dispatch(changeDefaultColors(event)),
     onChangeGameColors: (event) => dispatch(changeGameColors(event)),
-    onSelectOption: (event) => dispatch(selectGameOption(event.target.value)),
+    onSelectOption: (event) => dispatch(selectGameOption(event)),
     popupController: (event) => dispatch(activatePopup(event)),
     onStartGame: () => dispatch(startGame()),
     onEndGame: () => dispatch(endGame()),
