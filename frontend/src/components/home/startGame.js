@@ -6,14 +6,13 @@ import './homeStyle.css';
 const StartGame = ({selectOption, startGame, gameOption,
   onChangeGameColors, colors}) => {
 
-  const handleChosenOption = (event) => {
-    selectOption(event);
-  }
-  
   return (
     <div>
       <div className='center fourthTitle'>
-        <p>Choose a color option or optional hex display below and start the game!</p>
+        <p>
+          Choose a color option or optional hex display below and
+          start the game!
+        </p>
       </div>
       <div className='center'>
         <Dropdown

@@ -21,12 +21,24 @@ class SecondTimer extends Component {
     this.numWrongOnClick = 0;
     this.numWrongOnNoClick = 0;
     this.first = true;
+    this.gameMode = null;
   }
 
   render() {
     const {correctColor, incorrectColorOne, incorrectColorTwo, startTime,
-      gameOption, background, onUpdateTime, selectOption, resetOption}
+      gameOption, background, onUpdateTime, resetOption, onChangeGameColors,
+      colors, resetColors}
        = this.props;
+
+    const updateMode = (event) => {
+      this.gameMode = event.target.value;
+      console.log(this.gameMode);
+    }
+
+    const resetMode = () => {
+      this.gameMode = 'default'
+      console.log(this.gameMode);
+    }
 
     const isHex = (gameOption === 'hex');
 
@@ -97,13 +109,20 @@ class SecondTimer extends Component {
       let numWrongOnClick = this.numWrongOnClick;
       let numRightOnNoClick = this.numRightOnNoClick;
       let numWrongOnNoClick = this.numWrongOnNoClick;
+      let finalGameMode = null;
+      console.log(this.gameMode);
+      if (this.gameMode === null) {
+        finalGameMode = gameOption.toUpperCase();
+      } else {
+        finalGameMode = this.gameMode.toUpperCase();
+      }
       const data = {
         score,
         numRightOnClick,
         numWrongOnClick,
         numRightOnNoClick,
         numWrongOnNoClick,
-        Mode: [gameOption.toUpperCase()],
+        Mode: [finalGameMode],
       };
 
       const dataJSON = JSON.stringify(data);
@@ -121,10 +140,7 @@ class SecondTimer extends Component {
 
     //Specified by the timer for custom rendering of the center circle
     const renderer = (props) => {
-      console.log(this.currentColor);
-      console.log(correctColor);
       this.correct = (this.currentColor === correctColor);
-      console.log(this.correct);
       calculateRandomColor();
       if (!this.first) {
         calculateScore();
@@ -144,8 +160,14 @@ class SecondTimer extends Component {
             score={this.score}
             right={this.numRightOnClick+this.numRightOnNoClick}
             wrong={this.numWrongOnClick+this.numWrongOnNoClick}
-            selectOption={selectOption}
             resetOption={resetOption}
+            onChangeGameColors={onChangeGameColors}
+            gameOption={gameOption}
+            colors={colors}
+            resetColors={resetColors}
+            updateMode={updateMode}
+            resetMode={resetMode}
+            gameMode={this.gameMode}
           />
           :
           <div className='circleClicked'>

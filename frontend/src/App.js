@@ -8,7 +8,9 @@ import GameCenter from './components/game/GameCenter';
 import ColorChangePopup from './components/home/colorChangePopup'
 import Header from './components/header/headerMain';
 
-import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup, startGame, endGame, resetOption, resetColors, login} from './controllers/actions';
+import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup,
+  startGame, endGame, resetOption, resetColors, login}
+  from './controllers/actions';
 
 const mapStateToProps = state => {
   return {
@@ -77,8 +79,11 @@ class App extends Component {
       onEndGame, onSelectOption, baseBackground, baseRightCircle,
       baseWrongCircleOne, baseWrongCircleTwo, gameBackground,
       gameRightCircle, gameWrongCircleOne, gameWrongCircleTwo,
-      gameOption, popupController, popup, loggedIn, user, onResetOption}
-      = this.props
+      gameOption, popupController, popup, loggedIn, user, onResetOption,
+      onResetColors} = this.props
+
+    const colors = [baseBackground, baseRightCircle, baseWrongCircleOne,
+      baseWrongCircleTwo];
 
     return (
       <div style={{background: `${gameBackground}`}} className='main'>
@@ -104,6 +109,9 @@ class App extends Component {
               background={gameBackground}
               selectOption={onSelectOption}
               resetOption={onResetOption}
+              onChangeGameColors={onChangeGameColors}
+              colors={colors}
+              resetColors={onResetColors}
             />
           </div>
           :
