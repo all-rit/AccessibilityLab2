@@ -114,3 +114,8 @@
 .submitColorPopup:hover{
   cursor: pointer;
 }
+
+.success {
+  text-align: center;
+  font-size: 20px;
+}

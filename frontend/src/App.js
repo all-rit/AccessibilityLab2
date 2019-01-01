@@ -5,11 +5,13 @@ import './App.css';
 import Title from './components/header/title';
 import Home from './components/home/Home';
 import GameCenter from './components/game/GameCenter';
-import ColorChangePopup from './components/home/colorChangePopup'
+import ColorChangePopup from './components/home/colorChangePopup';
 import Header from './components/header/headerMain';
+import SuccessMessage from './components/home/successMessage';
+import Countdown from 'react-countdown-now';
 
 import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup,
-  startGame, endGame, resetOption, resetColors, login}
+  startGame, endGame, resetOption, resetColors, login, resetChange}
   from './controllers/actions';
 
 const mapStateToProps = state => {
@@ -26,7 +28,8 @@ const mapStateToProps = state => {
     popup: state.changeColors.popup,
     gameState: state.changeGameState.gameState,
     user: state.changeUser.user,
-    loggedIn: state.changeUser.loggedIn
+    loggedIn: state.changeUser.loggedIn,
+    changed: state.changeColors.changed
   }
 }
 
@@ -40,7 +43,8 @@ const mapDispatchToProps = (dispatch) => {
     onEndGame: () => dispatch(endGame()),
     onResetOption: () => dispatch(resetOption()),
     onResetColors: () => dispatch(resetColors()),
-    onLogin: (event) => dispatch(login(event))
+    onLogin: (event) => dispatch(login(event)),
+    onResetChange: () => dispatch(resetChange()),
   }
 }
 
@@ -80,13 +84,36 @@ class App extends Component {
       baseWrongCircleOne, baseWrongCircleTwo, gameBackground,
       gameRightCircle, gameWrongCircleOne, gameWrongCircleTwo,
       gameOption, popupController, popup, loggedIn, user, onResetOption,
-      onResetColors} = this.props
+      onResetColors, changed, onResetChange} = this.props
 
     const colors = [baseBackground, baseRightCircle, baseWrongCircleOne,
       baseWrongCircleTwo];
 
+    const renderer = (props) => {
+      if (props.total > 0) {
+        return(
+          <div className='successPopup'>
+            <SuccessMessage />
+          </div>
+        );
+      } else {
+        onResetChange();
+        return null;
+      }
+    }
+
     return (
       <div style={{background: `${gameBackground}`}} className='main'>
+        {changed?
+          <Countdown
+            date={Date.now() + 2000}
+            intervalDelay={1000}
+            precision={2}
+            renderer={renderer}
+          />
+          :
+          null
+        }
         <Header
           gameState={gameState}
           gameEnded={onEndGame}

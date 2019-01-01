@@ -7,7 +7,8 @@ import{
   ACTIVATE_POPUP,
   START_GAME,
   END_GAME,
-  LOGIN
+  LOGIN,
+  CHANGED_RESET
 } from "./constants.js"
 
 const initialColors = {
@@ -19,7 +20,8 @@ const initialColors = {
   gameRightCircle: '#0000E6',
   gameWrongCircleOne: '#0000CC',
   gameWrongCircleTwo: '#0000FF',
-  popup: false
+  popup: false,
+  changed: false
 }
 
 export const changeColors = (state = initialColors, action = {}) => {
@@ -27,7 +29,7 @@ export const changeColors = (state = initialColors, action = {}) => {
     case UPDATE_DEFAULT_COLORS:
       return Object.assign({}, state, {baseBackground: action.payload[0],
         baseRightCircle: action.payload[1], baseWrongCircleOne: action.payload[2],
-        baseWrongCircleTwo: action.payload[3]});
+        baseWrongCircleTwo: action.payload[3], changed: true});
     case UPDATE_GAME_COLORS:
       return Object.assign({}, state, {gameBackground: action.payload[0],
         gameRightCircle: action.payload[1], gameWrongCircleOne: action.payload[2],
@@ -40,6 +42,8 @@ export const changeColors = (state = initialColors, action = {}) => {
         gameRightCircle: initialColors.baseRightCircle,
         gameWrongCircleOne: initialColors.baseWrongCircleOne,
         gameWrongCircleTwo: initialColors.baseWrongCircleTwo});
+    case CHANGED_RESET:
+      return Object.assign({}, state, {changed: false});
     default:
       return state;
   }

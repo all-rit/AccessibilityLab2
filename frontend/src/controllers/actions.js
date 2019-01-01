@@ -1,13 +1,14 @@
 import {
   UPDATE_DEFAULT_COLORS,
   UPDATE_GAME_COLORS,
-  SELECT_OPTION, 
+  SELECT_OPTION,
   ACTIVATE_POPUP,
   RESET_COLORS,
   RESET_OPTION,
-  START_GAME, 
+  START_GAME,
   END_GAME,
-  LOGIN
+  LOGIN,
+  CHANGED_RESET
 } from './constants.js';
 
 export const changeDefaultColors = (colors) => ({
@@ -49,4 +50,8 @@ export const resetColors = () => ({
 export const login = (user) => ({
   type: LOGIN,
   payload: user
+})
+
+export const resetChange = () => ({
+  type: CHANGED_RESET
 })
