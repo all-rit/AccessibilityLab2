@@ -39,6 +39,7 @@ class Replay extends Component {
     return(
       <div className='replay_screen'>
         <div id='left'>
+          <ScoreBreakdown />
         </div>
         <div id='center'>
           <div>
