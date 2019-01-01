@@ -25,8 +25,17 @@ class SecondTimer extends Component {
 
   render() {
     const {correctColor, incorrectColorOne, incorrectColorTwo, startTime,
-      gameOption, background, onUpdateTime, selectOption, resetOption}
+      gameOption, background, onUpdateTime, resetOption, onChangeGameColors,
+      colors, resetColors}
        = this.props;
+
+    const updateMode = (event) => {
+      this.props.selectOption(event);
+    }
+
+    const resetMode = () => {
+      this.props.resetOption();
+    }
 
     const isHex = (gameOption === 'hex');
 
@@ -121,10 +130,7 @@ class SecondTimer extends Component {
 
     //Specified by the timer for custom rendering of the center circle
     const renderer = (props) => {
-      console.log(this.currentColor);
-      console.log(correctColor);
       this.correct = (this.currentColor === correctColor);
-      console.log(this.correct);
       calculateRandomColor();
       if (!this.first) {
         calculateScore();
@@ -144,8 +150,14 @@ class SecondTimer extends Component {
             score={this.score}
             right={this.numRightOnClick+this.numRightOnNoClick}
             wrong={this.numWrongOnClick+this.numWrongOnNoClick}
-            selectOption={selectOption}
             resetOption={resetOption}
+            onChangeGameColors={onChangeGameColors}
+            gameOption={gameOption}
+            colors={colors}
+            resetColors={resetColors}
+            updateMode={updateMode}
+            resetMode={resetMode}
+            gameMode={this.gameMode}
           />
           :
           <div className='circleClicked'>

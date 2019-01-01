@@ -8,8 +8,7 @@ const Home = ({correctColor, incorrectColorOne, incorrectColorTwo,
   const colors = [background, correctColor, incorrectColorOne, incorrectColorTwo];
 
   if(gameOption !== 'default') {
-    onChangeGameColors([`${background}`, `${correctColor}`,
-      `${incorrectColorOne}`, `${incorrectColorTwo}`])
+    onChangeGameColors(colors);
   }
 
   return (

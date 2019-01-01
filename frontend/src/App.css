@@ -21,3 +21,39 @@
     overflow: scroll;
   }
 }
+
+.successPopup {
+  position: fixed;
+  margin-left: 40px;
+  margin-right: 40px;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: -1;
+  border-left: 3px solid black;
+  border-bottom: 3px solid black;
+  border-right: 3px solid black;
+  animation-duration: 2s;
+  animation-name: successMessage;
+}
+
+@keyframes successMessage {
+  0% {
+    background-color: #00ff00;
+  }
+  50% {
+    background-color: #66ff66;
+  }
+  80% {
+    background-color: #b3ffb3;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+  }
+  100% {
+    background-color: #ccffcc;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+  }
+};

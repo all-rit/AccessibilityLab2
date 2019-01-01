@@ -2,7 +2,7 @@ import React from 'react';
 
 const createTable = (gameHistory) => {
   if (gameHistory === null || gameHistory === undefined) {
-    return <tr>Component failed to load</tr>
+    return <tr><td>Component failed to load</td></tr>
   }
   let table = []
   for (let i = 0; i < gameHistory.length; i ++) {
@@ -19,7 +19,9 @@ const createTable = (gameHistory) => {
 const PreviousGames = ({gameHistory}) => {
   return(
     <table>
-      {createTable(gameHistory)}
+      <tbody>
+        {createTable(gameHistory)}
+      </tbody>
     </table>
   );
 }

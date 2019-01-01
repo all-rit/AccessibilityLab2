@@ -31,7 +31,8 @@ class game extends Component {
 
   render() {
     const {correctColor, incorrectColorOne, incorrectColorTwo,
-      background, gameOption, resetOption} = this.props;
+      background, gameOption, resetOption, onChangeGameColors, colors,
+      resetColors, selectOption} = this.props;
 
   if (this.state.startTime === 0) {
     this.setState({startTime: Date.now()})
@@ -70,8 +71,11 @@ class game extends Component {
             startTime={this.state.startTime}
             background={background}
             gameOption={gameOption}
-            selectOption={this.props.selectOption}
             resetOption={resetOption}
+            selectOption={selectOption}
+            onChangeGameColors={onChangeGameColors}
+            colors={colors}
+            resetColors={resetColors}
           />
         </div>
       );
