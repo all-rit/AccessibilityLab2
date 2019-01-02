@@ -8,7 +8,8 @@ import{
   START_GAME,
   END_GAME,
   LOGIN,
-  CHANGED_RESET
+  CHANGED_RESET,
+  CLOSE_INFO_POPUP
 } from "./constants.js"
 
 const initialColors = {
@@ -81,13 +82,17 @@ export const changeGameState = (state = initialGameState, action = {}) => {
 
 const initialLoginState = {
   user: null,
-  loggedIn: false
+  loggedIn: false,
+  infoPopup: false
 }
 
 export const changeUser = (state = initialLoginState, action = {}) => {
   switch(action.type) {
     case LOGIN:
-      return Object.assign({}, state, {user: action.payload, loggedIn: true})
+      return Object.assign({}, state, {user: action.payload, loggedIn: true,
+      infoPopup: true})
+    case CLOSE_INFO_POPUP:
+      return Object.assign({}, state, {infoPopup: false})
     default:
       return state;
   }

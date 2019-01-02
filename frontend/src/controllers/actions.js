@@ -8,7 +8,8 @@ import {
   START_GAME,
   END_GAME,
   LOGIN,
-  CHANGED_RESET
+  CHANGED_RESET,
+  CLOSE_INFO_POPUP
 } from './constants.js';
 
 export const changeDefaultColors = (colors) => ({
@@ -54,4 +55,8 @@ export const login = (user) => ({
 
 export const resetChange = () => ({
   type: CHANGED_RESET
+})
+
+export const closeInfoPopup = () => ({
+  type: CLOSE_INFO_POPUP
 })

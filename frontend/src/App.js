@@ -9,10 +9,11 @@ import ColorChangePopup from './components/home/colorChangePopup';
 import Header from './components/header/headerMain';
 import SuccessMessage from './components/home/successMessage';
 import Countdown from 'react-countdown-now';
+import Form from './components/forms/form';
 
 import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup,
-  startGame, endGame, resetOption, resetColors, login, resetChange}
-  from './controllers/actions';
+  startGame, endGame, resetOption, resetColors, login, resetChange,
+  closeInfoPopup} from './controllers/actions';
 
 const mapStateToProps = state => {
   return {
@@ -29,7 +30,8 @@ const mapStateToProps = state => {
     gameState: state.changeGameState.gameState,
     user: state.changeUser.user,
     loggedIn: state.changeUser.loggedIn,
-    changed: state.changeColors.changed
+    changed: state.changeColors.changed,
+    infoPopup: state.changeUser.infoPopup,
   }
 }
 
@@ -45,6 +47,7 @@ const mapDispatchToProps = (dispatch) => {
     onResetColors: () => dispatch(resetColors()),
     onLogin: (event) => dispatch(login(event)),
     onResetChange: () => dispatch(resetChange()),
+    onCloseInfoPopup: () => dispatch(closeInfoPopup()),
   }
 }
 
@@ -84,7 +87,8 @@ class App extends Component {
       baseWrongCircleOne, baseWrongCircleTwo, gameBackground,
       gameRightCircle, gameWrongCircleOne, gameWrongCircleTwo,
       gameOption, popupController, popup, loggedIn, user, onResetOption,
-      onResetColors, changed, onResetChange} = this.props
+      onResetColors, changed, onResetChange, onCloseInfoPopup, infoPopup}
+      = this.props
 
     const colors = [baseBackground, baseRightCircle, baseWrongCircleOne,
       baseWrongCircleTwo];
@@ -103,65 +107,73 @@ class App extends Component {
     }
 
     return (
-      <div style={{background: `${gameBackground}`}} className='main'>
-        {changed?
-          <Countdown
-            date={Date.now() + 2000}
-            intervalDelay={1000}
-            precision={2}
-            renderer={renderer}
+      <div>
+        {infoPopup?
+          <Form
+            closeInfoPopup={onCloseInfoPopup}
           />
           :
-          null
-        }
-        <Header
-          gameState={gameState}
-          gameEnded={onEndGame}
-          popupController={popupController}
-          loggedIn={loggedIn}
-          user={user}
-          baseBackground={baseBackground}
-          baseRightCircle={baseRightCircle}
-          baseWrongCircleOne={baseWrongCircleOne}
-          baseWrongCircleTwo={baseWrongCircleTwo}
-          changeGameColors={onChangeGameColors}
-        />
-        {gameState ?
-          <div>
-            <GameCenter
-              correctColor={gameRightCircle}
-              incorrectColorOne={gameWrongCircleOne}
-              incorrectColorTwo={gameWrongCircleTwo}
-              gameOption={gameOption}
-              background={gameBackground}
-              selectOption={onSelectOption}
-              resetOption={onResetOption}
-              onChangeGameColors={onChangeGameColors}
-              colors={colors}
-              resetColors={onResetColors}
-            />
-          </div>
-          :
-          <div>
-            <Title gameState={gameState}/>
-            <Home
-              background={gameBackground}
-              onChangeGameColors={onChangeGameColors}
-              gameOption={gameOption}
-              correctColor={gameRightCircle}
-              incorrectColorOne={gameWrongCircleOne}
-              incorrectColorTwo={gameWrongCircleTwo}
-              startGame={onStartGame}
-              selectOption={onSelectOption}
-            />
-          {popup ?
-            <ColorChangePopup
-              changeDefaultColors={onChangeDefaultColors}
-              changeGameColors={onChangeGameColors}
+          <div style={{background: `${gameBackground}`}} className='main'>
+            {changed?
+              <Countdown
+                date={Date.now() + 2000}
+                intervalDelay={1000}
+                precision={2}
+                renderer={renderer}
+              />
+              :
+              null
+            }
+            <Header
+              gameState={gameState}
+              gameEnded={onEndGame}
               popupController={popupController}
+              loggedIn={loggedIn}
+              user={user}
+              baseBackground={baseBackground}
+              baseRightCircle={baseRightCircle}
+              baseWrongCircleOne={baseWrongCircleOne}
+              baseWrongCircleTwo={baseWrongCircleTwo}
+              changeGameColors={onChangeGameColors}
             />
-            : null
-          }
+            {gameState ?
+              <div>
+                <GameCenter
+                  correctColor={gameRightCircle}
+                  incorrectColorOne={gameWrongCircleOne}
+                  incorrectColorTwo={gameWrongCircleTwo}
+                  gameOption={gameOption}
+                  background={gameBackground}
+                  selectOption={onSelectOption}
+                  resetOption={onResetOption}
+                  onChangeGameColors={onChangeGameColors}
+                  colors={colors}
+                  resetColors={onResetColors}
+                />
+              </div>
+              :
+              <div>
+                <Title gameState={gameState}/>
+                <Home
+                  background={gameBackground}
+                  onChangeGameColors={onChangeGameColors}
+                  gameOption={gameOption}
+                  correctColor={gameRightCircle}
+                  incorrectColorOne={gameWrongCircleOne}
+                  incorrectColorTwo={gameWrongCircleTwo}
+                  startGame={onStartGame}
+                  selectOption={onSelectOption}
+                />
+              {popup ?
+                <ColorChangePopup
+                  changeDefaultColors={onChangeDefaultColors}
+                  changeGameColors={onChangeGameColors}
+                  popupController={popupController}
+                />
+                : null
+              }
+              </div>
+            }
           </div>
         }
       </div>
