@@ -28,9 +28,10 @@ const Home = ({correctColor, incorrectColorOne, incorrectColorTwo,
         incorrectColorTwo={incorrectColorTwo}
       />
       <br></br>
-      <p className='center'>For educational purposes, we record all
-      scores and actions taken in the game, along with any information you
-      choose to give us from our forum.</p>
+      <p className='center noBottomMargin'>
+        For educational purposes, we record all scores and actions taken in the
+        game, along with any information you choose to give us from our forum.
+      </p>
       <p className='center noBottomMargin'>
         For further information and to see the other labs
         currently in development for this project, visit
