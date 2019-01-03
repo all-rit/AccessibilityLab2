@@ -16,9 +16,11 @@ class Replay extends Component {
   }
 
   render(){
+    // eslint-disable-next-line
     this.state.gameMode = 'default'
 
     const recordMode = (event) => {
+      // eslint-disable-next-line
       this.state.gameMode = event.target.value;
     }
 
