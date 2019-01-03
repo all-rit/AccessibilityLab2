@@ -20,6 +20,13 @@
   background: rgba(38,38,38,1);
 }
 
+.colorSelector{
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  margin: auto;
+}
+
 .inlineForm{
   color: rgba(0, 204, 255, 1);
   display: flex;
