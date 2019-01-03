@@ -6,8 +6,12 @@ const Instructions = ({correctColor, incorrectColorOne, incorrectColorTwo}) => {
     <div>
       <p className='thirdTitle center'>Instructions:</p>
       <div className='instruction'>
-        <p className='fourthTitle Left'>When this colored circle pops up, click it!</p>
-        <p className='fourthTitle Right'>When either of these colored circles pop up, don't click them!</p>
+        <p className='fourthTitle Left'>
+          When this colored circle pops up, click it!
+        </p>
+        <p className='fourthTitle Right'>
+          When either of these colored circles pop up, don't click them!
+        </p>
       </div>
       <div className='circles'>
         <div className='correctCircle'>

@@ -14,6 +14,7 @@
   left: 0;
   height: 100%;
   width: 100%;
+  overflow-y: auto;
 }
 
 @media (max-width: 875px){

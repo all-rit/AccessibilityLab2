@@ -3,13 +3,16 @@ import ColorUpdate from './buttons/colorUpdate';
 import {Google} from './buttons/google';
 import Signout from './buttons/signout';
 import Home from './buttons/homeReset.js';
+import Button from './buttons/button';
 
-const Header = ({gameState, popupController, gameEnded, loggedIn, user, baseBackground, baseRightCircle, baseWrongCircleOne, baseWrongCircleTwo, changeGameColors}) => {
+const Header = ({gameState, popupController, gameEnded, loggedIn, user,
+  baseBackground, baseRightCircle, baseWrongCircleOne, baseWrongCircleTwo,
+  changeGameColors, openAboutPage, aboutState, closeAboutPage}) => {
   return (
     <div className='headerStyle'>
-      {gameState? 
-        <Home 
-          gameEnded={gameEnded} 
+      {gameState?
+        <Home
+          gameEnded={gameEnded}
           baseBackground={baseBackground}
           baseRightCircle={baseRightCircle}
           baseWrongCircleOne={baseWrongCircleOne}
@@ -17,9 +20,26 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user, baseBack
           changeGameColors={changeGameColors}
         />
         :
-        <ColorUpdate popupController={popupController}/>
+        <div>
+        {aboutState?
+          <Button
+            clickMethod={closeAboutPage}
+            message={"Home"}
+            fontSizing={"25px"}
+          />
+          :
+          <div className='oneline'>
+            <ColorUpdate popupController={popupController}/>
+            <Button
+              clickMethod={openAboutPage}
+              message={"About Color Vision Deficiencies"}
+              fontSizing={"17px"}
+            />
+          </div>
+        }
+        </div>
       }
-      {loggedIn? 
+      {loggedIn?
         <Signout user={user} />
         :
         <Google />

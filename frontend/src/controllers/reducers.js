@@ -9,7 +9,9 @@ import{
   END_GAME,
   LOGIN,
   CHANGED_RESET,
-  CLOSE_INFO_POPUP
+  CLOSE_INFO_POPUP,
+  ABOUT_STATE,
+  END_ABOUT_STATE
 } from "./constants.js"
 
 const initialColors = {
@@ -66,7 +68,8 @@ export const selectGameOption = (state = initialOption, action = {}) => {
 }
 
 const initialGameState = {
-  gameState: false
+  gameState: false,
+  aboutState: false,
 }
 
 export const changeGameState = (state = initialGameState, action = {}) => {
@@ -75,6 +78,10 @@ export const changeGameState = (state = initialGameState, action = {}) => {
       return {...state, gameState: true}
     case END_GAME:
       return {...state, gameState: false}
+    case ABOUT_STATE:
+      return {...state, aboutState: true}
+    case END_ABOUT_STATE:
+      return {...state, aboutState: false}
     default:
       return state;
   }

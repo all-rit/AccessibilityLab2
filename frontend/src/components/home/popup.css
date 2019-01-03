@@ -106,3 +106,7 @@
     height:10px;
   }
 }
+
+.noBottomMargin {
+  margin-bottom: 0px;
+}

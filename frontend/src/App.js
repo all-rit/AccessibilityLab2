@@ -10,10 +10,11 @@ import Header from './components/header/headerMain';
 import SuccessMessage from './components/home/successMessage';
 import Countdown from 'react-countdown-now';
 import Form from './components/forms/form';
+import AboutInfo from './components/aboutInformation/aboutInfo';
 
 import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup,
   startGame, endGame, resetOption, resetColors, login, resetChange,
-  closeInfoPopup} from './controllers/actions';
+  closeInfoPopup, openAboutPage, closeAboutPage} from './controllers/actions';
 
 const mapStateToProps = state => {
   return {
@@ -32,6 +33,7 @@ const mapStateToProps = state => {
     loggedIn: state.changeUser.loggedIn,
     changed: state.changeColors.changed,
     infoPopup: state.changeUser.infoPopup,
+    aboutState: state.changeGameState.aboutState,
   }
 }
 
@@ -48,6 +50,8 @@ const mapDispatchToProps = (dispatch) => {
     onLogin: (event) => dispatch(login(event)),
     onResetChange: () => dispatch(resetChange()),
     onCloseInfoPopup: () => dispatch(closeInfoPopup()),
+    onOpenAboutPage: () => dispatch(openAboutPage()),
+    onCloseAboutPage: () => dispatch(closeAboutPage())
   }
 }
 
@@ -90,8 +94,8 @@ class App extends Component {
       baseWrongCircleOne, baseWrongCircleTwo, gameBackground,
       gameRightCircle, gameWrongCircleOne, gameWrongCircleTwo,
       gameOption, popupController, popup, loggedIn, user, onResetOption,
-      onResetColors, changed, onResetChange, onCloseInfoPopup, infoPopup}
-      = this.props
+      onResetColors, changed, onResetChange, onCloseInfoPopup, infoPopup,
+      aboutState, onOpenAboutPage, onCloseAboutPage} = this.props
 
     const colors = [baseBackground, baseRightCircle, baseWrongCircleOne,
       baseWrongCircleTwo];
@@ -138,6 +142,9 @@ class App extends Component {
               baseWrongCircleOne={baseWrongCircleOne}
               baseWrongCircleTwo={baseWrongCircleTwo}
               changeGameColors={onChangeGameColors}
+              openAboutPage={onOpenAboutPage}
+              closeAboutPage={onCloseAboutPage}
+              aboutState={aboutState}
             />
             {gameState ?
               <div>
@@ -156,24 +163,30 @@ class App extends Component {
               </div>
               :
               <div>
-                <Title gameState={gameState}/>
-                <Home
-                  background={gameBackground}
-                  onChangeGameColors={onChangeGameColors}
-                  gameOption={gameOption}
-                  correctColor={gameRightCircle}
-                  incorrectColorOne={gameWrongCircleOne}
-                  incorrectColorTwo={gameWrongCircleTwo}
-                  startGame={onStartGame}
-                  selectOption={onSelectOption}
-                />
-              {popup ?
-                <ColorChangePopup
-                  changeDefaultColors={onChangeDefaultColors}
-                  changeGameColors={onChangeGameColors}
-                  popupController={popupController}
-                />
-                : null
+              {aboutState?
+                <AboutInfo />
+                :
+                <div>
+                  <Title gameState={gameState}/>
+                  <Home
+                    background={gameBackground}
+                    onChangeGameColors={onChangeGameColors}
+                    gameOption={gameOption}
+                    correctColor={gameRightCircle}
+                    incorrectColorOne={gameWrongCircleOne}
+                    incorrectColorTwo={gameWrongCircleTwo}
+                    startGame={onStartGame}
+                    selectOption={onSelectOption}
+                  />
+                {popup ?
+                  <ColorChangePopup
+                    changeDefaultColors={onChangeDefaultColors}
+                    changeGameColors={onChangeGameColors}
+                    popupController={popupController}
+                  />
+                  : null
+                }
+                </div>
               }
               </div>
             }
