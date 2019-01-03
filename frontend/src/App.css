@@ -17,6 +17,10 @@
   overflow-y: auto;
 }
 
+a {
+  color: black;
+}
+
 @media (max-width: 875px){
   .main{
     overflow: scroll;

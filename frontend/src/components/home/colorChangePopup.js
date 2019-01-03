@@ -204,7 +204,7 @@ class ColorChangePopup extends React.Component{
     }
 
     const revertCorrectColor = () => {
-      this.setState({background: '#0000E6'});
+      this.setState({correctColor: '#0000E6'});
       this.onControlCorrectPopup(false);
     }
 
@@ -217,7 +217,7 @@ class ColorChangePopup extends React.Component{
     }
 
     const revertIncorrectColorOne = () => {
-      this.setState({background: '#0000CC'});
+      this.setState({incorrectColorOne: '#0000CC'});
       this.onControlIncorrectPopupOne(false);
     }
 
@@ -230,7 +230,7 @@ class ColorChangePopup extends React.Component{
     }
 
     const revertIncorrectColorTwo = () => {
-      this.setState({background: '#0000FF'});
+      this.setState({incorrectColorTwo: '#0000FF'});
       this.onControlIncorrectPopupTwo(false);
     }
 

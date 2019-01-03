@@ -14,8 +14,7 @@ const StartGame = ({selectOption, startGame, gameOption,
     <div>
       <div className='center fourthTitle'>
         <p>
-          Choose a color option or optional hex display below and
-          start the game!
+          Choose a color vision simulation below and start the game!
         </p>
       </div>
       <div className='center'>
