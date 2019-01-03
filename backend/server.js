@@ -44,8 +44,8 @@ db.serialize(function() {
   db.run('CREATE TABLE Users (UserID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, FirstName TEXT , NickName TEXT)');
   db.run('CREATE TABLE LoginHistory (LoginID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, UserID INTEGER NOT NULL, UserSssionID INTEGER NOT NULL, Location TEXT, Login NUMERIC NOT NULL)');
   db.run('CREATE TABLE Login (UserSessionID NOT NULL PRIMARY KEY, UserID INTEGER NOT NULL)');
-  db.run('CREATE TABLE GameStats (GameStatsID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Score INTEGER NOT NULL, CorrectOnClick INTEGER NOT NULL, IncorrectOnClick INTEGER NOT NULL, CorrectOnNoClick INTEGER NOT NULL, IncorrectOnNoClick INTEGER NOT NULL, Mode INTEGER NOT NULL, UserID INTEGER NOT NULL)');
-  db.run('CREATE TABLE ColorChoice (ColorChoiceID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Background TEXT NOT NULL, CorrectColor TEXT NOT NULL, WrongColorOne TEXT NOT NULL, WrongColorTwo TEXT NOT NULL)');
+  db.run('CREATE TABLE COLORS_GameStats (GameStatsID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Score INTEGER NOT NULL, CorrectOnClick INTEGER NOT NULL, IncorrectOnClick INTEGER NOT NULL, CorrectOnNoClick INTEGER NOT NULL, IncorrectOnNoClick INTEGER NOT NULL, Mode INTEGER NOT NULL, UserID INTEGER NOT NULL)');
+  db.run('CREATE TABLE COLORS_UserData (DataID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ClassEnrolled TEXT, OtherUseCase TEXT, ColorVisionDeficiency TEXT, AgeRange TEXT)');
   db.run('CREATE TABLE Mode (MODEID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ModeName TEXT, IsActive BOOLEAN)');
   db.run('INSERT INTO Mode VALUES (?,?,?)', [null, 'DEFAULT', true]);
   db.run('INSERT INTO Mode VALUES (?,?,?)', [null, 'PROTANOPIA', true]);
@@ -225,12 +225,36 @@ app.post('/gameStats', (req, res) => {
         });
       });
     console.log(userID);
-    const info = db.prepare(`INSERT INTO GameStats VALUES (?,?,?,?,?,?,?,?)`, [null, Score, CorrectOnClick, IncorrectOnClick, CorrectOnNoClick, IncorrectOnNoClick, Mode, userID]);
+    const info = db.prepare(`INSERT INTO COLORS_GameStats VALUES (?,?,?,?,?,?,?,?)`, [null, Score, CorrectOnClick, IncorrectOnClick, CorrectOnNoClick, IncorrectOnNoClick, Mode, userID]);
     info.run();
     info.finalize()
     res.status(200);
     res.send('information recorded');
   }
+});
+
+app.post('/formAnswers', (req,res) => {
+  const Nickname = req.body.nickname,
+    Course = req.body.course,
+    UseCase = req.body.useCase,
+    Deficiency = req.body.deficiency,
+    Age = req.body.age;
+  console.log(req.session.token);
+  console.log(Course);
+  db.serialize(function() {
+    db.each('SELECT Login.UserSessionID, Login.UserId FROM Login', function(err, login) {
+      if (req.session.token === login.UserSessionID) {
+        const update = db.prepare(`UPDATE Users SET NickName = ${Nickname} WHERE UserID = ${login.UserID}`);
+        update.run();
+        update.finalize();
+      }
+    })
+    const addFormInfo = db.prepare('INSERT INTO COLORS_UserData VALUES (?,?,?,?,?)', [null, Course, UseCase, Deficiency, Age]);
+    addFormInfo.run();
+    addFormInfo.finalize();
+  });
+  res.status(200);
+  res.send('form information recorded');
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

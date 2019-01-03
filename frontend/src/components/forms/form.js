@@ -15,7 +15,27 @@ class Form extends Component {
   }
 
   onClick = () => {
-    this.props.closeInfoPopup();
+    const {nickname, course, useCase, deficiency, age} = this.state;
+    if (nickname === '' && course === null && useCase === '' &&
+      deficiency === null && age === null) {
+      this.props.closeInfoPopup();
+    } else {
+      const data = {
+        nickname,
+        course,
+        useCase,
+        deficiency,
+        age
+      };
+      fetch('http://localhost:5000/formAnswers', {
+        method: 'POST',
+        headers: new Headers({'content-type': 'application/json'}),
+        body: JSON.stringify(data)
+      })
+      .then(response => console.log(response))
+      .then(this.props.closeInfoPopup())
+      .catch(err => console.log(err));
+    }
   }
 
   onNicknameChange = (event) => {
