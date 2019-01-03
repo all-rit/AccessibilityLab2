@@ -89,8 +89,8 @@ const initialLoginState = {
 export const changeUser = (state = initialLoginState, action = {}) => {
   switch(action.type) {
     case LOGIN:
-      return Object.assign({}, state, {user: action.payload, loggedIn: true,
-      infoPopup: true})
+      return Object.assign({}, state, {user: action.payload[0], loggedIn: true,
+      infoPopup: action.payload[1]})
     case CLOSE_INFO_POPUP:
       return Object.assign({}, state, {infoPopup: false})
     default:

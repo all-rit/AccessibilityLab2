@@ -25,6 +25,7 @@ app.use(express.json());
 
 let hold = null;
 let users = 1;
+let existing = false;
 
 let whitelist = ['http://localhost:3000', 'http://localhost:5000', 'http://tempwebsite.com:3000', 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'];
 let corsOptions = {
@@ -41,15 +42,15 @@ let corsOptions = {
 
 db.serialize(function() {
   db.run('CREATE TABLE Users (UserID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, FirstName TEXT , NickName TEXT)');
-  db.run('CREATE TABLE AllLogins (LoginID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, UserID INTEGER NOT NULL, UserSssionID INTEGER NOT NULL, Location TEXT, Login NUMERIC NOT NULL)');
+  db.run('CREATE TABLE LoginHistory (LoginID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, UserID INTEGER NOT NULL, UserSssionID INTEGER NOT NULL, Location TEXT, Login NUMERIC NOT NULL)');
   db.run('CREATE TABLE Login (UserSessionID NOT NULL PRIMARY KEY, UserID INTEGER NOT NULL)');
   db.run('CREATE TABLE GameStats (GameStatsID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Score INTEGER NOT NULL, CorrectOnClick INTEGER NOT NULL, IncorrectOnClick INTEGER NOT NULL, CorrectOnNoClick INTEGER NOT NULL, IncorrectOnNoClick INTEGER NOT NULL, Mode INTEGER NOT NULL, UserID INTEGER NOT NULL)');
   db.run('CREATE TABLE ColorChoice (ColorChoiceID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Background TEXT NOT NULL, CorrectColor TEXT NOT NULL, WrongColorOne TEXT NOT NULL, WrongColorTwo TEXT NOT NULL)');
-  db.run('CREATE TABLE Mode (MODEID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Type TEXT)');
-  db.run('INSERT INTO Mode VALUES (?,?)', [null, 'DEFAULT']);
-  db.run('INSERT INTO Mode VALUES (?,?)', [null, 'PROTANOPIA']);
-  db.run('INSERT INTO Mode VALUES (?,?)', [null, 'DEUTERANOPIA']);
-  db.run('INSERT INTO Mode VALUES (?,?)', [null, 'TRITANOMALY']);
+  db.run('CREATE TABLE Mode (MODEID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ModeName TEXT, IsActive BOOLEAN)');
+  db.run('INSERT INTO Mode VALUES (?,?,?)', [null, 'DEFAULT', true]);
+  db.run('INSERT INTO Mode VALUES (?,?,?)', [null, 'PROTANOPIA', true]);
+  db.run('INSERT INTO Mode VALUES (?,?,?)', [null, 'DEUTERANOPIA', true]);
+  db.run('INSERT INTO Mode VALUES (?,?,?)', [null, 'TRITANOMALY', true]);
 });
 
 app.use(cors(corsOptions));
@@ -72,10 +73,18 @@ app.get('/main', (req, res) => {
         });
       });
     });
-    res.json({ 
-      status: 'user logged into system',
-      user: `${user}`
-    });
+    if (existing) {
+      res.json({
+        status: 'existing user logged into system',
+        user: `${user}`
+      });
+      existing = false;
+    } else {
+      res.json({
+        status: 'new user logged into system',
+        user: `${user}`
+      })
+    }
   } else if (hold !== null) {
     req.session.token = hold;
     res.cookie('token', hold);
@@ -92,10 +101,18 @@ app.get('/main', (req, res) => {
             user = row.FirstName;
           }
         });
-        res.json({
-          status: 'user logged into system',
-          user: `${user}`
-        });
+        if (existing) {
+          res.json({
+            status: 'existing user logged into system',
+            user: `${user}`
+          });
+          existing = false;
+        } else {
+          res.json({
+            status: 'new user logged into system',
+            user: `${user}`
+          })
+        }
       });
     });
   } else {
@@ -104,13 +121,13 @@ app.get('/main', (req, res) => {
     db.serialize(function() {
       const user = db.prepare('INSERT INTO Users VALUES (?,?,?)', [null, '', '']);
       const login = db.prepare(`INSERT INTO Login VALUES (?,?)`, [req.session.token, users]);
-      const allLogin = db.prepare(`INSERT INTO AllLogins VALUES (?,?,?,?,?)`, [null, users, req.session.token, '', Date.now()]);
+      const loginHistory = db.prepare(`INSERT INTO LoginHistory VALUES (?,?,?,?,?)`, [null, users, req.session.token, '', Date.now()]);
       user.run();
       user.finalize();
       login.run();
       login.finalize();
-      allLogin.run();
-      allLogin.finalize();
+      loginHistory.run();
+      loginHistory.finalize();
       users++;
     });
     res.json({
@@ -119,36 +136,55 @@ app.get('/main', (req, res) => {
   }
 });
 
-app.get('/auth/google', 
+app.get('/auth/google',
   passport.authenticate('google', {
     scope: ['https://www.googleapis.com/auth/userinfo.profile']
   }),
 );
+
+const recordUser = (user, existingUser, num) => {
+  if (num === users) {
+    if (existingUser !== null) {
+      console.log('Found existing user');
+      const loginHistory = db.prepare(`INSERT INTO LoginHistory VALUES (?,?,?,?,?)`, [null, existingUser.UserID, existingUser.UserSessionID, '', Date.now()]);
+      loginHistory.run();
+      loginHistory.finalize();
+      existing = true;
+    } else {
+      console.log('Adding new user');
+      const userInfo = db.prepare(`INSERT INTO Users VALUES (?,?,?)`, [null, user.name.givenName, '']);
+      const login = db.prepare(`INSERT INTO Login VALUES (?,?)`, [user.id, users]);
+      const loginHistory = db.prepare(`INSERT INTO LoginHistory VALUES (?,?,?,?,?)`, [null, users, user.id, '', Date.now()]);
+      userInfo.run();
+      userInfo.finalize();
+      login.run();
+      login.finalize();
+      loginHistory.run();
+      loginHistory.finalize();
+      users++;
+    }
+  }
+}
 
 app.get('/auth/google/callback',
   passport.authenticate('google', {
     failureRedirect: '/'
   }),
   (req,res) => {
-    req.session.token = req.user.token;
+    req.session.token = req.user.profile.id;
     req.session.views = 1;
+    let existingUser = null;
+    let numberOfCalls = 1;
     db.serialize(function() {
-      const user = db.prepare(`INSERT INTO Users VALUES (?,?,?)`, [null, req.user.profile.name.givenName, '']);
-      const login = db.prepare(`INSERT INTO Login VALUES (?,?)`, [req.session.token, users]);
-      const allLogin = db.prepare(`INSERT INTO AllLogins VALUES (?,?,?,?,?)`, [null, users, req.session.token, '', Date.now()]);
-      user.run();
-      user.finalize();
-      login.run();
-      login.finalize();
-      allLogin.run();
-      allLogin.finalize();
-      users++;
-      db.each('SELECT * FROM Users', function(err, user) {
-        console.log(user.UserID + ': ' + user.FirstName);
-      })
-      db.each('SELECT * FROM Login', function(err, login) {
-        console.log(login.UserID + ': ' + login.UserSessionID);
-      })
+      db.each('SELECT Users.FirstName, Users.UserID, Login.UserSessionID from Users INNER JOIN Login ON Login.UserID=Users.UserID', function(err, user) {
+        if (req.user.profile.name.givenName === user.FirstName) {
+          if (req.user.profile.id === user.UserSessionID) {
+            existingUser = user;
+          }
+        }
+        numberOfCalls += 1;
+        recordUser(req.user.profile,  existingUser, numberOfCalls);
+      });
     });
     hold = req.session.token;
     res.redirect('http://localhost:3000');
@@ -164,7 +200,7 @@ app.get('/logout', (req, res) => {
 app.post('/gameStats', (req, res) => {
   const Score = req.body.score,
     CorrectOnClick = req.body.numRightOnClick,
-    IncorrectOnClick = req.body.numWrongOnClick, 
+    IncorrectOnClick = req.body.numWrongOnClick,
     CorrectOnNoClick = req.body.numRightOnNoClick,
     IncorrectOnNoClick = req.body.numWrongOnNoClick,
     Mode = req.body.Mode[0];

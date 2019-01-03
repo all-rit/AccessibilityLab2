@@ -56,8 +56,11 @@ class App extends Component {
   componentDidMount() {
     this.callBackendAPI()
       .then(res => {
-        if (res.status === 'user logged into system') {
-          this.props.onLogin(res.user);
+        console.log(res.status);
+        if (res.status === 'new user logged into system') {
+          this.props.onLogin([res.user, true]);
+        } else if (res.status === 'existing user logged into system') {
+          this.props.onLogin([res.user, false]);
         } else {
           console.log(res.status);
         }
