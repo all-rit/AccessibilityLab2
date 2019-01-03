@@ -4,7 +4,7 @@ import Circle from '../game/circle';
 const Instructions = ({correctColor, incorrectColorOne, incorrectColorTwo}) => {
   return (
     <div>
-      <p className='thirdTitle center'>Instructions:</p>
+      <p className='thirdTitle center lowMargin'>Instructions:</p>
       <div className='instruction'>
         <p className='fourthTitle Left'>
           When this colored circle pops up, click it!

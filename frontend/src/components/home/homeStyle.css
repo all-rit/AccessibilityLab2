@@ -44,6 +44,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-around;
+  margin-bottom: 5px;
 }
 
 .Left{
@@ -122,4 +123,8 @@
 .noBottomMargin {
   margin-top: 5px;
   margin-bottom: 0px;
+}
+
+.lowMargin {
+  margin-bottom: 5px;
 }

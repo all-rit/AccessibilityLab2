@@ -50,7 +50,9 @@ class Replay extends Component {
               </p>
               <p className='timeEnd'>
                 That equates to {this.props.right} correct clicks and
-                {this.props.wrong} incorrect clicks.
+                <span style={{paddingLeft: '7px'}}>
+                  {this.props.wrong} incorrect clicks.
+                </span>
               </p>
             </div>
             :
@@ -60,7 +62,9 @@ class Replay extends Component {
               </p>
               <p className='timeEnd'>
                 That equates to {this.props.right} correct clicks and
-                {this.props.wrong} incorrect clicks.
+                <span style={{paddingLeft: '7px'}}>
+                  {this.props.wrong} incorrect clicks.
+                </span>
               </p>
             </div>
             }
