@@ -46,7 +46,6 @@ class UserStats extends Component {
       })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         this.setSecondData(data)}
       )
       .catch(err => console.log(err))
@@ -87,7 +86,6 @@ class UserStats extends Component {
           data = scores[i]
         }
         for (var key in data) {
-          console.log(key + '->' + data[key])
           if (key === 'GameStatsID' || key === 'UserID') {
             continue;
           } else {

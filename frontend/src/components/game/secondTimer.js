@@ -161,7 +161,7 @@ class SecondTimer extends Component {
             resetColors={resetColors}
             updateMode={updateMode}
             resetMode={resetMode}
-            gameMode={this.gameMode}
+            gameMode={gameOption.toUpperCase()}
           />
           :
           <div className='circleClicked'>

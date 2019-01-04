@@ -27,6 +27,7 @@ app.use(express.json());
 let hold = null;
 let users = 1;
 let existing = false;
+let recording = false;
 
 let whitelist = ['http://localhost:3000', 'http://localhost:5000', 'http://tempwebsite.com:3000', 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'];
 let corsOptions = {
@@ -207,6 +208,7 @@ app.get('/logout', (req, res) => {
 });
 
 app.post('/gameStats', (req, res) => {
+  recording = true;
   const Score = req.body.score,
     CorrectOnClick = req.body.numRightOnClick,
     IncorrectOnClick = req.body.numWrongOnClick,
@@ -230,7 +232,6 @@ app.post('/gameStats', (req, res) => {
         rows.forEach((row) => {
           if (req.session.token === undefined) {
             userID = 1;
-            console.log(userID)
           }
           else if (row.UserSessionID === req.session.token) {
             userID = row.UserID
@@ -240,6 +241,7 @@ app.post('/gameStats', (req, res) => {
     const info = db.prepare(`INSERT INTO COLORS_GameStats VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`, [null, Score, CorrectOnClick, IncorrectOnClick, CorrectOnNoClick, IncorrectOnNoClick, Background, CorrectColor, IncorrectColorOne, IncorrectColorTwo, Mode, userID]);
     info.run();
     info.finalize()
+    recording = false;
     res.status(200);
     res.send('information recorded');
   }
@@ -320,6 +322,25 @@ app.get('/data_scores', (req, res) => {
     SCORES = totalScores;
     completed -= 1
     responseDataScores(res, TOT_GAMES, SCORES, completed)
+  })
+})
+
+const responseUserGames = (res, games) => {
+  res.json({
+    gameHistory: games
+  })
+}
+
+app.get('/previousGames', (req, res) => {
+  let user = 1;
+  if (req.session.token !== null) {
+    user = req.session.token
+  }
+  db.all(`SELECT * FROM COLORS_GameStats`, [], (err, gameHistory) => {
+    if (err) {
+      console.log(err);
+    }
+    responseUserGames(res, gameHistory);
   })
 })
 

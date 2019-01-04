@@ -38,6 +38,8 @@ class Replay extends Component {
       this.props.onUpdateTime();
     }
 
+    console.log(this.props.gameMode);
+
     return(
       <div className='replay_screen'>
         <div id='left'>
@@ -79,7 +81,7 @@ class Replay extends Component {
           </div>
         </div>
         <div id='right'>
-          <PreviousGames />
+          <PreviousGames score={this.props.score} mode={this.props.gameMode}/>
         </div>
       </div>
     );
