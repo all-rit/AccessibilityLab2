@@ -6,6 +6,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const auth = require('./auth');
 const key = require('./serverConstants');
+const admins = require('./superUsers');
 const port = process.env.PORT || 5000;
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -41,10 +42,10 @@ let corsOptions = {
 }
 
 db.serialize(function() {
-  db.run('CREATE TABLE Users (UserID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, FirstName TEXT , NickName TEXT)');
+  db.run('CREATE TABLE Users (UserID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, FirstName TEXT , NickName TEXT, Admin BOOLEAN NOT NULL)');
   db.run('CREATE TABLE LoginHistory (LoginID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, UserID INTEGER NOT NULL, UserSssionID INTEGER NOT NULL, Location TEXT, Login NUMERIC NOT NULL)');
   db.run('CREATE TABLE Login (UserSessionID NOT NULL PRIMARY KEY, UserID INTEGER NOT NULL)');
-  db.run('CREATE TABLE COLORS_GameStats (GameStatsID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Score INTEGER NOT NULL, CorrectOnClick INTEGER NOT NULL, IncorrectOnClick INTEGER NOT NULL, CorrectOnNoClick INTEGER NOT NULL, IncorrectOnNoClick INTEGER NOT NULL, Mode INTEGER NOT NULL, UserID INTEGER NOT NULL)');
+  db.run('CREATE TABLE COLORS_GameStats (GameStatsID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, Score INTEGER NOT NULL, CorrectOnClick INTEGER NOT NULL, IncorrectOnClick INTEGER NOT NULL, CorrectOnNoClick INTEGER NOT NULL, IncorrectOnNoClick INTEGER NOT NULL, Background TEXT NOT NULL, CorrectColor TEXT NOT NULL, WrongColorOne TEXT NOT NULL, WrongColorTwo TEXT NOT NULL, Mode INTEGER NOT NULL, UserID INTEGER NOT NULL)');
   db.run('CREATE TABLE COLORS_UserData (DataID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ClassEnrolled TEXT, OtherUseCase TEXT, ColorVisionDeficiency TEXT, AgeRange TEXT)');
   db.run('CREATE TABLE Mode (MODEID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ModeName TEXT, IsActive BOOLEAN)');
   db.run('INSERT INTO Mode VALUES (?,?,?)', [null, 'DEFAULT', true]);
@@ -90,8 +91,9 @@ app.get('/main', (req, res) => {
     res.cookie('token', hold);
     hold = null;
     db.serialize(function() {
-      let sql = 'SELECT Users.FirstName, Login.UserSessionID FROM Login JOIN Users ON Users.UserID = Login.UserID';
+      let sql = 'SELECT Users.FirstName, Users.Admin, Login.UserSessionID FROM Login JOIN Users ON Users.UserID = Login.UserID';
       let user = '';
+      let admin = false;
       db.all(sql, [], (err, rows) => {
         if (err) {
           console.log(err);
@@ -99,18 +101,21 @@ app.get('/main', (req, res) => {
         rows.forEach((row) => {
           if (row.UserSessionID === req.session.token) {
             user = row.FirstName;
+            admin = row.Admin;
           }
         });
         if (existing) {
           res.json({
             status: 'existing user logged into system',
-            user: `${user}`
+            user: `${user}`,
+            admin: `${admin}`
           });
           existing = false;
         } else {
           res.json({
             status: 'new user logged into system',
-            user: `${user}`
+            user: `${user}`,
+            admin: `${admin}`
           })
         }
       });
@@ -119,7 +124,7 @@ app.get('/main', (req, res) => {
     res.cookie('token', `${users}`)
     req.session.token = `${users}`;
     db.serialize(function() {
-      const user = db.prepare('INSERT INTO Users VALUES (?,?,?)', [null, '', '']);
+      const user = db.prepare('INSERT INTO Users VALUES (?,?,?,?)', [null, '', '', false]);
       const login = db.prepare(`INSERT INTO Login VALUES (?,?)`, [req.session.token, users]);
       const loginHistory = db.prepare(`INSERT INTO LoginHistory VALUES (?,?,?,?,?)`, [null, users, req.session.token, '', Date.now()]);
       user.run();
@@ -152,7 +157,11 @@ const recordUser = (user, existingUser, num) => {
       existing = true;
     } else {
       console.log('Adding new user');
-      const userInfo = db.prepare(`INSERT INTO Users VALUES (?,?,?)`, [null, user.name.givenName, '']);
+      let admin = false;
+      if (admins.scottID === user.id) {
+        admin = true;
+      }
+      const userInfo = db.prepare(`INSERT INTO Users VALUES (?,?,?,?)`, [null, user.name.givenName, '', admin]);
       const login = db.prepare(`INSERT INTO Login VALUES (?,?)`, [user.id, users]);
       const loginHistory = db.prepare(`INSERT INTO LoginHistory VALUES (?,?,?,?,?)`, [null, users, user.id, '', Date.now()]);
       userInfo.run();
@@ -203,6 +212,10 @@ app.post('/gameStats', (req, res) => {
     IncorrectOnClick = req.body.numWrongOnClick,
     CorrectOnNoClick = req.body.numRightOnNoClick,
     IncorrectOnNoClick = req.body.numWrongOnNoClick,
+    Background = req.body.background,
+    CorrectColor = req.body.correctColor,
+    IncorrectColorOne = req.body.incorrectColorOne,
+    IncorrectColorTwo = req.body.incorrectColorTwo,
     Mode = req.body.Mode[0];
   if(Score === undefined) {
     res.status(500);
@@ -224,8 +237,7 @@ app.post('/gameStats', (req, res) => {
           }
         });
       });
-    console.log(userID);
-    const info = db.prepare(`INSERT INTO COLORS_GameStats VALUES (?,?,?,?,?,?,?,?)`, [null, Score, CorrectOnClick, IncorrectOnClick, CorrectOnNoClick, IncorrectOnNoClick, Mode, userID]);
+    const info = db.prepare(`INSERT INTO COLORS_GameStats VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`, [null, Score, CorrectOnClick, IncorrectOnClick, CorrectOnNoClick, IncorrectOnNoClick, Background, CorrectColor, IncorrectColorOne, IncorrectColorTwo, Mode, userID]);
     info.run();
     info.finalize()
     res.status(200);
@@ -239,8 +251,6 @@ app.post('/formAnswers', (req,res) => {
     UseCase = req.body.useCase,
     Deficiency = req.body.deficiency,
     Age = req.body.age;
-  console.log(req.session.token);
-  console.log(Course);
   db.serialize(function() {
     db.each('SELECT Login.UserSessionID, Login.UserId FROM Login', function(err, login) {
       if (req.session.token === login.UserSessionID) {
@@ -256,5 +266,61 @@ app.post('/formAnswers', (req,res) => {
   res.status(200);
   res.send('form information recorded');
 });
+
+const responseDataTotals = (res, totUsers, totLogin, completed) => {
+  if (completed === 0) {
+    res.json({
+      totalUsers: totUsers,
+      totalLogins: totLogin
+    })
+  }
+}
+
+app.get('/data_totals', (req,res) => {
+  let TOT_USERS = 0;
+  let TOT_LOGIN = 0;
+  let completed = 2;
+  db.all('SELECT * FROM USERS', [], (err, totalUsers) => {
+    if (err) {
+      console.log(err)
+    }
+    TOT_USERS = totalUsers.length;
+    completed -= 1;
+    responseDataTotals(res, TOT_USERS, TOT_LOGIN, completed);
+  });
+  db.all('SELECT * FROM LOGIN', [], (err, totalLogins) => {
+    if (err) {
+      console.log(err)
+    }
+    TOT_LOGIN = totalLogins.length;
+    completed -= 1
+    responseDataTotals(res, TOT_USERS, TOT_LOGIN, completed);
+  });
+})
+
+const responseDataScores = (res, totGames, scores, completed) => {
+  if (completed === 0) {
+    console.log(scores);
+    res.json({
+      gamesPlayed: totGames,
+      scores: scores
+    })
+  }
+}
+
+app.get('/data_scores', (req, res) => {
+  let TOT_GAMES = 0;
+  let SCORES = null;
+  let completed = 1;
+  db.all('SELECT * FROM COLORS_GameStats', [], (err, totalScores) => {
+    if (err) {
+      console.log(err)
+    }
+    TOT_GAMES = totalScores.length;
+    SCORES = totalScores;
+    completed -= 1
+    responseDataScores(res, TOT_GAMES, SCORES, completed)
+  })
+})
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

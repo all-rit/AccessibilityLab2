@@ -11,7 +11,9 @@ import {
   CHANGED_RESET,
   CLOSE_INFO_POPUP,
   ABOUT_STATE,
-  END_ABOUT_STATE
+  END_ABOUT_STATE,
+  STAT_STATE,
+  END_STAT_STATE
 } from './constants.js';
 
 export const changeDefaultColors = (colors) => ({
@@ -69,4 +71,12 @@ export const openAboutPage = () => ({
 
 export const closeAboutPage = () => ({
   type: END_ABOUT_STATE
+})
+
+export const openStatPage = () => ({
+  type: STAT_STATE
+})
+
+export const closeStatPage = () => ({
+  type: END_STAT_STATE
 })

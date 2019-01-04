@@ -86,7 +86,7 @@
   text-decoration: none;
   display: block;
   width: 100%;
-  border: none;
+  border: 1px solid black;
 }
 
 .dropdown-content button:hover {

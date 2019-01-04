@@ -11,6 +11,8 @@ export const START_GAME = "START_GAME";
 export const END_GAME = "END_GAME";
 export const ABOUT_STATE = "ABOUT_STATE";
 export const END_ABOUT_STATE = "END_ABOUT_STATE";
+export const STAT_STATE = "STAT_STATE";
+export const END_STAT_STATE = "END_STAT_STATE";
 
 export const LOGIN = "LOGIN";
 export const CLOSE_INFO_POPUP = "CLOSE_INFO_POPUP";

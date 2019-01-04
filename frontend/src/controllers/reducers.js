@@ -11,7 +11,9 @@ import{
   CHANGED_RESET,
   CLOSE_INFO_POPUP,
   ABOUT_STATE,
-  END_ABOUT_STATE
+  END_ABOUT_STATE,
+  STAT_STATE,
+  END_STAT_STATE
 } from "./constants.js"
 
 const initialColors = {
@@ -70,6 +72,7 @@ export const selectGameOption = (state = initialOption, action = {}) => {
 const initialGameState = {
   gameState: false,
   aboutState: false,
+  statState: false,
 }
 
 export const changeGameState = (state = initialGameState, action = {}) => {
@@ -82,6 +85,10 @@ export const changeGameState = (state = initialGameState, action = {}) => {
       return {...state, aboutState: true}
     case END_ABOUT_STATE:
       return {...state, aboutState: false}
+    case STAT_STATE:
+      return {...state, statState: true}
+    case END_STAT_STATE:
+      return {...state, statState: false}
     default:
       return state;
   }
@@ -90,14 +97,15 @@ export const changeGameState = (state = initialGameState, action = {}) => {
 const initialLoginState = {
   user: null,
   loggedIn: false,
-  infoPopup: false
+  infoPopup: false,
+  admin: null
 }
 
 export const changeUser = (state = initialLoginState, action = {}) => {
   switch(action.type) {
     case LOGIN:
       return Object.assign({}, state, {user: action.payload[0], loggedIn: true,
-      infoPopup: action.payload[1]})
+      infoPopup: action.payload[1], admin: action.payload[2]});
     case CLOSE_INFO_POPUP:
       return Object.assign({}, state, {infoPopup: false})
     default:

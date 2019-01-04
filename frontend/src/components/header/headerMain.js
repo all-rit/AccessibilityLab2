@@ -7,7 +7,8 @@ import Button from './buttons/button';
 
 const Header = ({gameState, popupController, gameEnded, loggedIn, user,
   baseBackground, baseRightCircle, baseWrongCircleOne, baseWrongCircleTwo,
-  changeGameColors, openAboutPage, aboutState, closeAboutPage}) => {
+  changeGameColors, openAboutPage, aboutState, closeAboutPage, admin,
+  openStatPage, closeStatPage, statState}) => {
   return (
     <div className='headerStyle'>
       {gameState?
@@ -28,19 +29,29 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
             fontSizing={"25px"}
           />
           :
-          <div className='oneline'>
-            <ColorUpdate popupController={popupController}/>
+          <div>
+          {statState?
             <Button
-              clickMethod={openAboutPage}
-              message={"About Color Vision Deficiencies"}
-              fontSizing={"17px"}
+              clickMethod={closeStatPage}
+              message={"Home"}
+              fontSizing={"25px"}
             />
+            :
+            <div className='oneline'>
+              <ColorUpdate popupController={popupController}/>
+              <Button
+                clickMethod={openAboutPage}
+                message={"About Color Vision Deficiencies"}
+                fontSizing={"17px"}
+              />
+            </div>
+          }
           </div>
         }
         </div>
       }
       {loggedIn?
-        <Signout user={user} />
+        <Signout user={user} admin={admin} openStatPage={openStatPage}/>
         :
         <Google />
       }

@@ -112,6 +112,10 @@ class SecondTimer extends Component {
         numWrongOnClick,
         numRightOnNoClick,
         numWrongOnNoClick,
+        background,
+        correctColor,
+        incorrectColorOne,
+        incorrectColorTwo,
         Mode: [gameOption.toUpperCase()],
       };
 
