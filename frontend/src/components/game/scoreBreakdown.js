@@ -35,15 +35,15 @@ const ScoreBreakdown = () => {
             </tr>
             <tr>
               <td colSpan="2">Incorrect Click</td>
-              <td colSpan="8">-75 pts</td>
+              <td colSpan="8">-50 pts</td>
             </tr>
             <tr>
               <td colSpan="2">No Click on Correct Circle</td>
-              <td colSpan="8">-200 pts</td>
+              <td colSpan="8">-100 pts</td>
             </tr>
             <tr>
               <td colSpan="2">No Click on Incorrect Circle</td>
-              <td colSpan="8">10 pts</td>
+              <td colSpan="8">25 pts</td>
             </tr>
           </tbody>
         </table>
