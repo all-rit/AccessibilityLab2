@@ -302,7 +302,6 @@ app.get('/data_totals', (req,res) => {
 
 const responseDataScores = (res, totGames, scores, completed) => {
   if (completed === 0) {
-    console.log(scores);
     res.json({
       gamesPlayed: totGames,
       scores: scores
