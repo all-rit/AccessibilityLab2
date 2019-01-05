@@ -11,6 +11,7 @@ class UserStats extends Component {
       totalLogins: 0,
       totalGamesPlayed: 0,
       scores: null,
+      userScores: null,
       retrievedUsers: false,
       retrievedScores: false,
     }
@@ -22,13 +23,14 @@ class UserStats extends Component {
   }
 
   setSecondData = (data) => {
+    console.log(data)
     this.setState({totalGamesPlayed:`${data.gamesPlayed}`,
-      scores: data.scores})
+      scores: data.scores, userScores:data.usrScores})
   }
 
   render() {
 
-    const {totalUsers, totalLogins, totalGamesPlayed, scores} = this.state;
+    const {totalUsers, totalLogins, totalGamesPlayed, scores, userScores} = this.state;
 
     const getDataUsers = () => {
       fetch('http://localhost:5000/data_totals', {
@@ -75,8 +77,9 @@ class UserStats extends Component {
     "incorrectColorOne", "incorrectColorTwo", "Mode"]
 
     const scoreTable = () => {
-      let table = [];
-      table.push(<tr><th colSpan='10'>Game Scores</th></tr>);
+      let scoreTable = [];
+      console.log(scores)
+      scoreTable.push(<tr><th colSpan='10' key='-21312312'>Game Scores</th></tr>);
       for (let i = -1; i < totalGamesPlayed; i++) {
         let children = [];
         let data = null;
@@ -92,9 +95,38 @@ class UserStats extends Component {
             children.push(<td key={key}>{data[key]}</td>)
           }
         }
-        table.push(<tr key={i}>{children}</tr>);
+        scoreTable.push(<tr key={i}>{children}</tr>)
       }
-      return table;
+      return scoreTable;
+    }
+
+    const userTable = () => {
+      let userTable = [];
+      let userID = -50;
+      console.log(userScores)
+      userTable.push(<tr><th colSpan='10' key='-3213'>User Scores</th></tr>);
+      for (let i = -1; i < totalGamesPlayed; i++) {
+        let userChildren = [];
+        let data = null;
+        if (i === -1) {
+          data = headers;
+        } else {
+          data = userScores[i]
+          if (data.UserID !== userID) {
+            userID = data.UserID;
+            userTable.push(<tr><td colSpan='10' key={-5000-userID}>User: {userID}</td></tr>);
+          }
+        }
+        for (var key in data) {
+          if (key === 'GameStatsID' || key === 'UserID') {
+            continue;
+          } else {
+            userChildren.push(<td key={key}>{data[key]}</td>)
+          }
+        }
+        userTable.push(<tr key={i}>{userChildren}</tr>);
+      }
+      return userTable;
     }
 
     return (
@@ -123,6 +155,13 @@ class UserStats extends Component {
             <table>
               <tbody>
                 {scoreTable()}
+              </tbody>
+            </table>
+          </div>
+          <div className='center scoreTable'>
+            <table>
+              <tbody>
+                {userTable()}
               </tbody>
             </table>
           </div>

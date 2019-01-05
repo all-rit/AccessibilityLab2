@@ -300,11 +300,12 @@ app.get('/data_totals', (req,res) => {
   });
 })
 
-const responseDataScores = (res, totGames, scores, completed) => {
+const responseDataScores = (res, totGames, scores, userScores, completed) => {
   if (completed === 0) {
     res.json({
       gamesPlayed: totGames,
-      scores: scores
+      scores: scores,
+      usrScores: userScores
     })
   }
 }
@@ -312,15 +313,24 @@ const responseDataScores = (res, totGames, scores, completed) => {
 app.get('/data_scores', (req, res) => {
   let TOT_GAMES = 0;
   let SCORES = null;
-  let completed = 1;
+  let USR_SORT_SCORES = null;
+  let completed = 2;
   db.all('SELECT * FROM COLORS_GameStats', [], (err, totalScores) => {
     if (err) {
       console.log(err)
     }
     TOT_GAMES = totalScores.length;
     SCORES = totalScores;
-    completed -= 1
-    responseDataScores(res, TOT_GAMES, SCORES, completed)
+    completed -= 1;
+    responseDataScores(res, TOT_GAMES, SCORES, USR_SORT_SCORES, completed)
+  })
+  db.all('SELECT * FROM COLORS_GameStats ORDER BY UserID ASC', [], (err, userData) => {
+    if(err) {
+      console.log(err)
+    }
+    completed -= 1;
+    USR_SORT_SCORES = userData;
+    responseDataScores(res, TOT_GAMES, SCORES, USR_SORT_SCORES, completed);
   })
 })
 

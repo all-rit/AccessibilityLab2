@@ -135,6 +135,10 @@ class SecondTimer extends Component {
     //Specified by the timer for custom rendering of the center circle
     const renderer = (props) => {
       this.correct = (this.currentColor === correctColor);
+      let colorIsCorrect = "don't click";
+      if (this.correct) {
+        colorIsCorrect = 'click'
+      }
       calculateRandomColor();
       if (!this.first) {
         calculateScore();
