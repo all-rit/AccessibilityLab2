@@ -65,17 +65,17 @@ class SecondTimer extends Component {
             }
           } else {
             this.numWrongOnClick ++;
-            this.score -= 75;
+            this.score -= 50;
           }
           this.clicked = false;
           this.time = 1;
         } else {
           if (this.correct) {
             this.numWrongOnNoClick ++;
-            this.score -= 200;
+            this.score -= 100;
           } else {
             this.numRightOnNoClick ++;
-            this.score += 10;
+            this.score += 25;
           }
         }
       }
@@ -112,6 +112,10 @@ class SecondTimer extends Component {
         numWrongOnClick,
         numRightOnNoClick,
         numWrongOnNoClick,
+        background,
+        correctColor,
+        incorrectColorOne,
+        incorrectColorTwo,
         Mode: [gameOption.toUpperCase()],
       };
 
@@ -157,7 +161,7 @@ class SecondTimer extends Component {
             resetColors={resetColors}
             updateMode={updateMode}
             resetMode={resetMode}
-            gameMode={this.gameMode}
+            gameMode={gameOption.toUpperCase()}
           />
           :
           <div className='circleClicked'>

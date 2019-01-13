@@ -8,7 +8,12 @@ import {
   START_GAME,
   END_GAME,
   LOGIN,
-  CHANGED_RESET
+  CHANGED_RESET,
+  CLOSE_INFO_POPUP,
+  ABOUT_STATE,
+  END_ABOUT_STATE,
+  STAT_STATE,
+  END_STAT_STATE
 } from './constants.js';
 
 export const changeDefaultColors = (colors) => ({
@@ -54,4 +59,24 @@ export const login = (user) => ({
 
 export const resetChange = () => ({
   type: CHANGED_RESET
+})
+
+export const closeInfoPopup = () => ({
+  type: CLOSE_INFO_POPUP
+})
+
+export const openAboutPage = () => ({
+  type: ABOUT_STATE
+})
+
+export const closeAboutPage = () => ({
+  type: END_ABOUT_STATE
+})
+
+export const openStatPage = () => ({
+  type: STAT_STATE
+})
+
+export const closeStatPage = () => ({
+  type: END_STAT_STATE
 })

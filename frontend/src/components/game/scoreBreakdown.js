@@ -3,13 +3,11 @@ import './gameStyle.css';
 
 const ScoreBreakdown = () => {
   return(
-    <div className='score_popup'>
-      <div className='score_inner'>
+    <div className='dropdown'>
+      <p className='leftTitle'>Score Breakdown &#8690;</p>
+      <div className='dropdown-content'>
         <table>
           <tbody>
-            <tr>
-              <th colSpan="10">Score Breakdown</th>
-              </tr>
             <tr>
               <th rowSpan="2" colSpan="2">Type of Click</th>
               <th colSpan="8">Time in Seconds</th>
@@ -37,15 +35,15 @@ const ScoreBreakdown = () => {
             </tr>
             <tr>
               <td colSpan="2">Incorrect Click</td>
-              <td colSpan="8">-75 pts</td>
+              <td colSpan="8">-50 pts</td>
             </tr>
             <tr>
               <td colSpan="2">No Click on Correct Circle</td>
-              <td colSpan="8">-200 pts</td>
+              <td colSpan="8">-100 pts</td>
             </tr>
             <tr>
               <td colSpan="2">No Click on Incorrect Circle</td>
-              <td colSpan="8">10 pts</td>
+              <td colSpan="8">25 pts</td>
             </tr>
           </tbody>
         </table>

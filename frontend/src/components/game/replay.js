@@ -16,9 +16,11 @@ class Replay extends Component {
   }
 
   render(){
+    // eslint-disable-next-line
     this.state.gameMode = 'default'
 
     const recordMode = (event) => {
+      // eslint-disable-next-line
       this.state.gameMode = event.target.value;
     }
 
@@ -36,6 +38,8 @@ class Replay extends Component {
       this.props.onUpdateTime();
     }
 
+    console.log(this.props.gameMode);
+
     return(
       <div className='replay_screen'>
         <div id='left'>
@@ -50,7 +54,9 @@ class Replay extends Component {
               </p>
               <p className='timeEnd'>
                 That equates to {this.props.right} correct clicks and
-                {this.props.wrong} incorrect clicks.
+                <span style={{paddingLeft: '7px'}}>
+                  {this.props.wrong} incorrect clicks.
+                </span>
               </p>
             </div>
             :
@@ -60,7 +66,9 @@ class Replay extends Component {
               </p>
               <p className='timeEnd'>
                 That equates to {this.props.right} correct clicks and
-                {this.props.wrong} incorrect clicks.
+                <span style={{paddingLeft: '7px'}}>
+                  {this.props.wrong} incorrect clicks.
+                </span>
               </p>
             </div>
             }
@@ -73,7 +81,7 @@ class Replay extends Component {
           </div>
         </div>
         <div id='right'>
-          <PreviousGames />
+          <PreviousGames score={this.props.score} mode={this.props.gameMode}/>
         </div>
       </div>
     );

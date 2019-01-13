@@ -86,7 +86,7 @@
   text-decoration: none;
   display: block;
   width: 100%;
-  border: none;
+  border: 1px solid black;
 }
 
 .dropdown-content button:hover {
@@ -100,4 +100,16 @@
 
 .dropdown p {
   margin: 0px;
+}
+
+.Button {
+  margin-top: 10px;
+  margin-left: 25px;
+  width: 130px;
+  height: 75px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.Button:hover {
+  cursor: pointer;
 }

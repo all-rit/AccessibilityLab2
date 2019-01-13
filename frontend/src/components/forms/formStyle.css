@@ -1,0 +1,48 @@
+.mainForm {
+  background: #00ff00;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  color: black;
+  text-align: center;
+  overflow: auto;
+}
+
+.header1{
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.header2{
+  font-size: 25px;
+  margin-bottom: 5px;
+}
+
+.header3{
+  font-size: 20px;
+  margin-bottom: 0px;
+}
+
+.formQuestions{
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.selectForm{
+  width: 40%;
+  font-size: 20px;
+}
+
+.inputForm{
+  width: 40%;
+  font-size: 20px;
+}
+
+.formSubmit{
+  font-size: 25px;
+  margin-top: 10px;
+}

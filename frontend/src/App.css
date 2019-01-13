@@ -14,6 +14,11 @@
   left: 0;
   height: 100%;
   width: 100%;
+  overflow-y: auto;
+}
+
+a {
+  color: black;
 }
 
 @media (max-width: 875px){
@@ -24,8 +29,6 @@
 
 .successPopup {
   position: fixed;
-  margin-left: 40px;
-  margin-right: 40px;
   top: 0px;
   left: 0px;
   right: 0px;
