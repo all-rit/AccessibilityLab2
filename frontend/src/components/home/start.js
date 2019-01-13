@@ -16,7 +16,7 @@ const Start = ({startGame, gameOption, onChangeGameColors, colors}) => {
         className='start center inline'
         type='submit'
         onClick={startClick}
-        aria-label="When you click this button, move your mouse slightly over to the left. This will allow you to click the circles as they popup on the screen"
+        aria-label="move your mouse slightly over to the left."
       >
         Start
       </button>

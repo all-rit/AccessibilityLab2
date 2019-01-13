@@ -97,6 +97,13 @@ class SecondTimer extends Component {
       }
     }
 
+    const updateColor = (isCorrect) => {
+      var element = document.getElementById('notifyUser');
+      if (element !== null) {
+        element.innerHTML=`${isCorrect}`;
+      }
+    }
+
     //turns the data found into an object so it can be passed to the backend
     //after it is converted, the system sends the info to the backend and then
     //will record the results from the past five games in the state of the game
@@ -135,6 +142,10 @@ class SecondTimer extends Component {
     //Specified by the timer for custom rendering of the center circle
     const renderer = (props) => {
       this.correct = (this.currentColor === correctColor);
+      let isCorrect = "Incorrect"
+      if (this.correct) {
+        isCorrect = "Correct"
+      }
       calculateRandomColor();
       if (!this.first) {
         calculateScore();
@@ -143,6 +154,9 @@ class SecondTimer extends Component {
       }
       if (props.total === 0) {
         recordData();
+      }
+      if (props.total !== 0) {
+        updateColor(isCorrect);
       }
       //Returns either the replay screen option or the center circle that
       //Changes every second
@@ -165,6 +179,13 @@ class SecondTimer extends Component {
           />
           :
           <div className='circleClicked'>
+            <div
+              id='notifyUser'
+              aria-live='polite'
+              aria-atomic='true'
+              className='ariaAlert'
+            >
+            </div>
             <Circle
               clickable={true}
               color={this.currentColor}
