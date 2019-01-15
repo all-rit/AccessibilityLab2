@@ -13,11 +13,13 @@ import Form from './components/forms/form';
 import AboutInfo from './components/aboutInformation/aboutInfo';
 import UserStats from './components/userStatistics/userStats';
 
+//Imports from redux actions
 import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup,
   startGame, endGame, resetOption, resetColors, login, resetChange,
   closeInfoPopup, openAboutPage, closeAboutPage, openStatPage, closeStatPage}
   from './controllers/actions';
 
+//State mapping for redux
 const mapStateToProps = state => {
   return {
     baseBackground: state.changeColors.baseBackground,
@@ -41,6 +43,7 @@ const mapStateToProps = state => {
   }
 }
 
+//Mapping dispatches for redux
 const mapDispatchToProps = (dispatch) => {
   return{
     onChangeDefaultColors: (event) => dispatch(changeDefaultColors(event)),
@@ -61,8 +64,12 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+/*
+Class declaration for main application
+*/
 class App extends Component {
 
+  //Mounting control for backend check
   componentDidMount() {
     this.callBackendAPI()
       .then(res => {
@@ -78,6 +85,7 @@ class App extends Component {
       .catch(err => console.log(err));
     };
 
+    //function call for backend
     callBackendAPI = async () => {
       console.log('sending request to backend');
       const response = await fetch('http://localhost:5000/main');
@@ -89,12 +97,15 @@ class App extends Component {
       return body;
     };
 
+  //Used to establish React GA (google information)
   initializeReactGA() {
     ReactGA.initialize('UA-129523795-1');
     ReactGA.pageView(window.location.pathname);
   }
 
+  //Renderer for class application
   render() {
+    //Props from redux used in the application
     const {onChangeDefaultColors, onChangeGameColors, gameState, onStartGame,
       onEndGame, onSelectOption, baseBackground, baseRightCircle,
       baseWrongCircleOne, baseWrongCircleTwo, gameBackground,
@@ -104,9 +115,12 @@ class App extends Component {
       aboutState, onOpenAboutPage, onCloseAboutPage, admin, onOpenStatPage,
       onCloseStatPage, statState} = this.props
 
+    //establishing array of current colors for the system
     const colors = [baseBackground, baseRightCircle, baseWrongCircleOne,
       baseWrongCircleTwo];
 
+    //custom renderer for top of page popup
+    //popup occurs after a successful change to the colors in the system
     const renderer = (props) => {
       if (props.total > 0) {
         return(
@@ -120,6 +134,7 @@ class App extends Component {
       }
     }
 
+    //Return statement for rendering of the application
     return (
       <div>
         {infoPopup?
