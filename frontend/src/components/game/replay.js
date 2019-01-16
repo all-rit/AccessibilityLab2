@@ -51,7 +51,7 @@ class Replay extends Component {
         <div id='left'>
           <ScoreBreakdown />
         </div>
-        <div id='center'>
+        <div className='pushBack'>
           <div>
             {this.props.score > 0 ?
             <div>
@@ -86,7 +86,7 @@ class Replay extends Component {
             <button className='replay' onClick={click}>Play again?</button>
           </div>
         </div>
-        <div id='right'>
+        <div className='right'>
           <PreviousGames score={this.props.score} mode={this.props.gameMode}/>
         </div>
       </div>
