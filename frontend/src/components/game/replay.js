@@ -5,8 +5,12 @@ import Dropdown from '../home/dropdown';
 import ColorVision from '../colors/colorVision';
 import './gameStyle.css';
 
+/*
+  Class for replay screen and to allow the user to replay the game
+*/
 class Replay extends Component {
 
+  //Constructor to hold state information
   constructor(props) {
     super(props)
     this.state = {
@@ -15,6 +19,7 @@ class Replay extends Component {
     }
   }
 
+  //Renderer for application
   render(){
     // eslint-disable-next-line
     this.state.gameMode = 'default'
@@ -24,6 +29,7 @@ class Replay extends Component {
       this.state.gameMode = event.target.value;
     }
 
+    //Handles restarting the game
     const click = () => {
       if (this.state.gameMode !== 'default' &&
       this.state.gameMode !== 'hex') {

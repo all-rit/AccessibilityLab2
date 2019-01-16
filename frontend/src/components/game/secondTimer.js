@@ -5,7 +5,9 @@ import Circle from './circle';
 import Replay from './replay';
 import Countdown from 'react-countdown-now';
 
-//Component for the secondary timer used for each of the circles per second
+/*
+Component for the secondary timer used for each of the circles per second
+*/
 class SecondTimer extends Component {
 
   //State for score information
@@ -23,16 +25,19 @@ class SecondTimer extends Component {
     this.first = true;
   }
 
+  //Renderer for system
   render() {
     const {correctColor, incorrectColorOne, incorrectColorTwo, startTime,
       gameOption, background, onUpdateTime, resetOption, onChangeGameColors,
       colors, resetColors}
        = this.props;
 
+    //Updates the mode for the game being played
     const updateMode = (event) => {
       this.props.selectOption(event);
     }
 
+    //Resets the mode to 'default'
     const resetMode = () => {
       this.props.resetOption();
     }
