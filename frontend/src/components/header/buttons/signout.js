@@ -1,6 +1,9 @@
 import React from 'react';
 import '../title.css';
 
+/*
+Function for handling the signout of a user
+*/
 const handleSignout = async () => {
   const response = await fetch('http://localhost:5000/logout');
 
@@ -11,6 +14,9 @@ const handleSignout = async () => {
   window.location = response.url;
 }
 
+/*
+Component for the dropdown below a users name on the application
+*/
 const Signout = ({user, admin, openStatPage}) => {
   return (
     <div className='dropdown signinButton'>

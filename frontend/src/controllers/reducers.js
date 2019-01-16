@@ -16,6 +16,7 @@ import{
   END_STAT_STATE
 } from "./constants.js"
 
+//Declaing initial state for the colors in the system
 const initialColors = {
   baseBackground: "#00CC00",
   baseRightCircle: "#0000E6",
@@ -29,6 +30,7 @@ const initialColors = {
   changed: false
 }
 
+//Function for changing the colors for both the game and entire system
 export const changeColors = (state = initialColors, action = {}) => {
   switch(action.type) {
     case UPDATE_DEFAULT_COLORS:
@@ -54,10 +56,12 @@ export const changeColors = (state = initialColors, action = {}) => {
   }
 }
 
+//initial state for the game option
 const initialOption = {
   option: "default",
 }
 
+//Function for changing the game option
 export const selectGameOption = (state = initialOption, action = {}) => {
   switch(action.type) {
     case SELECT_OPTION:
@@ -69,12 +73,14 @@ export const selectGameOption = (state = initialOption, action = {}) => {
   }
 }
 
+//initial state for the other page controllers
 const initialGameState = {
   gameState: false,
   aboutState: false,
   statState: false,
 }
 
+//Function for changing to other pages in the application
 export const changeGameState = (state = initialGameState, action = {}) => {
   switch(action.type) {
     case START_GAME:
@@ -94,6 +100,7 @@ export const changeGameState = (state = initialGameState, action = {}) => {
   }
 }
 
+//Initial state for user information
 const initialLoginState = {
   user: null,
   loggedIn: false,
@@ -101,6 +108,7 @@ const initialLoginState = {
   admin: null
 }
 
+//Function for changing the user information to include login information
 export const changeUser = (state = initialLoginState, action = {}) => {
   switch(action.type) {
     case LOGIN:

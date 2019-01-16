@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 
-//Component for the display of previous games played
+/*
+Component for the display of previous games played
+*/
 class PreviousGames extends Component {
 
+  //constructor for holding state
   constructor(props) {
     super(props)
     this.state = {
@@ -12,12 +15,15 @@ class PreviousGames extends Component {
     }
   }
 
+  //Adds scores to the game history (updates state)
   onAddScores = (data) => {
     this.setState({scores: data.gameHistory, fetchedData: true})
   }
 
+  //renderer for component's display information
   render() {
 
+    //Fetches the previously completed games by the user
     const fetchGames = () => {
       fetch('http://localhost:5000/previousGames', {
         method: 'GET'
@@ -33,6 +39,7 @@ class PreviousGames extends Component {
 
     const headers = ['Score', 'Mode']
 
+    //Creates the tabe to be displayed to the user
     const createTable = () => {
       let table = []
       table.push(<tr><th colSpan='2' key={5000}>Previous Games</th></tr>)

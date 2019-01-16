@@ -2,8 +2,12 @@ import React from 'react';
 import {Pie} from 'react-chartjs-2';
 import './aboutInfoStyle.css';
 
+/*
+Component for displaying information about color vision deficiencies to users
+*/
 const AboutInfo = () => {
 
+  //Data object for the pi graph
   const data ={
     labels: ["Males With A CVD", "Females With A CVD", "Males Without A CVD",
     "Females With A CVD"],
@@ -16,6 +20,7 @@ const AboutInfo = () => {
     }]
   }
 
+  //Return statement for rendering the component
   return (
     <div className='aboutPage'>
       <p className='mainTitle'>

@@ -1,6 +1,10 @@
 import React from 'react';
 import Circle from '../game/circle';
 
+/*
+Component for displaying the instructions at the bottom of the page of the
+individual.
+*/
 const Instructions = ({correctColor, incorrectColorOne, incorrectColorTwo}) => {
   return (
     <div>

@@ -2,8 +2,12 @@ import React, {Component} from 'react';
 import {Pie} from 'react-chartjs-2'
 import './userStats.css';
 
+/*
+Component for displaying user statistics on the user statistics page
+*/
 class UserStats extends Component {
 
+  //Constructor for holding current state information
   constructor(props) {
     super(props);
     this.state = {
@@ -17,21 +21,25 @@ class UserStats extends Component {
     }
   }
 
+  //Handles a gaining of information for login data and total users
   setFirstData = (data) => {
     this.setState({totalUsers:`${data.totalUsers}`,
       totalLogins:`${data.totalLogins}`})
   }
 
+  //Handles a gaining of information for the total games played and scores
   setSecondData = (data) => {
     console.log(data)
     this.setState({totalGamesPlayed:`${data.gamesPlayed}`,
       scores: data.scores, userScores:data.usrScores})
   }
 
+  //Renderer for data display
   render() {
 
     const {totalUsers, totalLogins, totalGamesPlayed, scores, userScores} = this.state;
 
+    //Gets the data for the users in the system
     const getDataUsers = () => {
       fetch('http://localhost:5000/data_totals', {
         method: 'GET',
@@ -42,6 +50,7 @@ class UserStats extends Component {
       this.setState({retrievedUsers:true})
     }
 
+    //Ges the data for the scores in the system
     const getDataScores = () => {
       fetch('http://localhost:5000/data_scores', {
         method: 'GET',
@@ -61,6 +70,8 @@ class UserStats extends Component {
       getDataScores();
     }
 
+    //Object for the pie chart containing a breakdown of users signed in
+    //compared to total users in the system
     const usersPie = {
       labels: ["Number of Users Connected", "Number of Logins"],
       datasets: [{
@@ -72,10 +83,12 @@ class UserStats extends Component {
       }]
     }
 
+    //Headers for the table
     const headers = ["Score", "CorrectOnClick", "IncorrectOnClick",
     "CorrectonNoClick", "IncorrectOnNoClick", "background", "CorrectCircle",
     "incorrectColorOne", "incorrectColorTwo", "Mode"]
 
+    //Generates the score breakdown table from previous games
     const scoreTable = () => {
       let scoreTable = [];
       console.log(scores)
@@ -100,6 +113,7 @@ class UserStats extends Component {
       return scoreTable;
     }
 
+    //Generates the user breakdown take with each user's individual games played
     const userTable = () => {
       let userTable = [];
       let userID = -50;

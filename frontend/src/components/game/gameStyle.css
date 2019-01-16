@@ -156,3 +156,10 @@ td {
   padding-top: 30px;
   font-size: 25px;
 }
+
+.ariaAlert {
+  font-size: 0px;
+  color: transparent;
+  margin: 0px;
+  padding: 0px;
+}

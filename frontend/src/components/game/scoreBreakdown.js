@@ -1,6 +1,9 @@
 import React from 'react';
 import './gameStyle.css';
 
+/*
+Component for displaying a score breakdown table to the user on the replay page
+*/
 const ScoreBreakdown = () => {
   return(
     <div className='dropdown'>

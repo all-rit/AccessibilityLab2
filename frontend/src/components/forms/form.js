@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import './formStyle.css';
 
+/*
+Class for gathering extra information from individuals logging into the system
+*/
 class Form extends Component {
 
+  //Constructor for holding immediate state in the system
   constructor(props) {
     super(props);
     this.state = {
@@ -14,6 +18,7 @@ class Form extends Component {
     }
   }
 
+  //Handles submitting the form information to the backend
   onClick = () => {
     const {nickname, course, useCase, deficiency, age} = this.state;
     if (nickname === '' && course === null && useCase === '' &&
@@ -38,26 +43,32 @@ class Form extends Component {
     }
   }
 
+  //Handles changes to the nickname field (updates state)
   onNicknameChange = (event) => {
     this.setState({nickname: event.target.value})
   }
 
+  //Handles changes to the course fied (updates state)
   onCourseChange = (event) => {
     this.setState({course: event.target.value})
   }
 
+  //Handles changes to the use case field (updates state)
   onUseCaseChange = (event) => {
     this.setState({useCase: event.target.value})
   }
 
+  //Handles changes to the deficiency field (updates state)
   onDeficiencyChange = (event) => {
     this.setState({deficiency: event.target.value})
   }
 
+  //Handles changes to the age field (updates state)
   onAgeChange = (event) => {
     this.setState({age: event.target.value})
   }
 
+  //Renderer method for the system
   render() {
     return (
       <div className='mainForm'>

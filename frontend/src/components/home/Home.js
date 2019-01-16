@@ -3,10 +3,14 @@ import './homeStyle.css'
 import Instructions from '../instructions/instructions';
 import StartGame from './startGame';
 
+/*
+Component for the main home page
+*/
 const Home = ({correctColor, incorrectColorOne, incorrectColorTwo,
   startGame, selectOption, background, gameOption, onChangeGameColors}) => {
   const colors = [background, correctColor, incorrectColorOne, incorrectColorTwo];
 
+  //Handles switching the colors to a simulation for a selected game option
   if(gameOption !== 'default') {
     onChangeGameColors(colors);
   }

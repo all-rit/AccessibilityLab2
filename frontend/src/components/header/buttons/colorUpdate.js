@@ -1,11 +1,14 @@
 import React from 'react';
 import './../title.css';
 
+/*
+Component for the color update button on the color change popup
+*/
 const ColorUpdate = ({popupController}) => {
   return (
     <div>
-      <button 
-        type="button" 
+      <button
+        type="button"
         className="updateColorButton"
         onClick={() => popupController(true)}
       >

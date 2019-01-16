@@ -2,12 +2,19 @@ import React from 'react';
 import Countdown from 'react-countdown-now';
 import './gameStyle.css';
 
+//Object for holding the current background color of the Circle
+//Used to fade to black on each circle
 const style = {
   backgroundColor: ''
 }
 
+/*
+Function for controlling the circles on the screen. Controls both the
+instruction circles and the center circle clicked by the user in the game
+*/
 const Circle = ({color, clickable, onClick}) => {
 
+  //Fades circle to black if the circle is the center one
   const toDark = ({milliseconds}) => {
     style.backgroundColor = color;
     if (milliseconds < 100) {
@@ -23,6 +30,7 @@ const Circle = ({color, clickable, onClick}) => {
     );
   }
 
+  //Controls the circle the user clicks
   if (clickable) {
     return (
       <div>
@@ -36,6 +44,7 @@ const Circle = ({color, clickable, onClick}) => {
     );
   }
 
+  //Controls the circles the user doesn't click (instruction circles)
   else {
     return (
       <span className='circle' style={{backgroundColor: `${color}`}}></span>

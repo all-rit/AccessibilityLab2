@@ -1,5 +1,6 @@
 import hexToRgba from 'hex-to-rgba';
 
+//Check to ensure values are not outside of RGB standards
 const adjustment = (value) => {
   if (value < 0) {
     return 0;
@@ -10,6 +11,7 @@ const adjustment = (value) => {
   }
 }
 
+//Controller for switching a color given a specified matrix
 const switchColors = (colors, matrix) => {
   var red =((colors.R*matrix[0])+(colors.G*matrix[1])+(colors.B*matrix[2])+(colors.A*matrix[3])+matrix[4]);
   var green = ((colors.R*matrix[5])+(colors.G*matrix[6])+(colors.B*matrix[7])+(colors.A*matrix[8])+matrix[9]);
@@ -19,15 +21,19 @@ const switchColors = (colors, matrix) => {
   return({'red':adjustment(red), 'green':adjustment(green), 'blue':adjustment(blue), 'alpha':adjustment(alpha)});
 }
 
+//Matrix information for switching colors
 const matrix = {
   'Protanopia':[0.567,0.433,0,0,0, 0.558,0.442,0,0,0, 0,0.242,0.758,0,0, 0,0,0,1,0],
   'Deuteranopia':[0.625,0.375,0,0,0, 0.7,0.3,0,0,0, 0,0.3,0.7,0,0, 0,0,0,1,0],
   'Tritanomaly':[0.95,0.05,0,0,0, 0,0.433,0.567,0,0, 0,0.475,0.525,0,0, 0,0,0,1,0]
 }
 
-
+/*
+Function for simulating color vision deficiencies
+*/
 const ColorVision = (changeColors, gameOption, colors) => {
 
+  //RGBA results from simulation
   const rgbaColors = {
     'R': 0,
     'G': 0,
@@ -38,6 +44,10 @@ const ColorVision = (changeColors, gameOption, colors) => {
   var updatedColors = [];
   var position = 0;
 
+  /*
+  For each color passed to the calculator, the system will calculate its
+  simulated value and display it to the user for the game
+  */
   colors.forEach((color) => {
     var tempColor = hexToRgba(color);
     tempColor = tempColor.split('rgba');

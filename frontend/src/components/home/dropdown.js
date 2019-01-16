@@ -1,7 +1,11 @@
 import React from 'react';
 
+/*
+Handles the dropdown options for the game mode
+*/
 const Dropdown = ({selectOption}) => {
 
+  //Handles a user switching the game option
   const handleChosenOption = (event) => {
     selectOption(event);
   }
