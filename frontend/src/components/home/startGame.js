@@ -3,9 +3,13 @@ import Start from './start';
 import Dropdown from './dropdown';
 import './homeStyle.css';
 
+/*
+Start game component for rendering all of the instructions for starting a game
+*/
 const StartGame = ({selectOption, startGame, gameOption,
   onChangeGameColors, colors}) => {
 
+  //Handles a game option changing in the dropdown
   const changeOption = (event) => {
     selectOption(event.target.value);
   }

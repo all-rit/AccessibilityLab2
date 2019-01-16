@@ -1,12 +1,16 @@
 import React from 'react';
 import './title.css';
 
+/*
+Displays the title of the page dependent on the state it is in
+State options: Home page or Game apge
+*/
 const Title = ({gameState}) => {
   return (
     <div>
-      {gameState? 
+      {gameState?
         <div>
-          <p 
+          <p
             className='mainTitle'
           >
             Let the Game Begin!
@@ -21,7 +25,7 @@ const Title = ({gameState}) => {
         <div>
           <p
             className='mainTitle'
-          >  
+          >
             Color Clicker
           </p>
           <p

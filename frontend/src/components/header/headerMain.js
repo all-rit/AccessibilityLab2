@@ -5,6 +5,10 @@ import Signout from './buttons/signout';
 import Home from './buttons/homeReset.js';
 import Button from './buttons/button';
 
+/*
+Component for the header of the pages. Controls the buttons and options
+displayed to the users on each page of the appilcation
+*/
 const Header = ({gameState, popupController, gameEnded, loggedIn, user,
   baseBackground, baseRightCircle, baseWrongCircleOne, baseWrongCircleTwo,
   changeGameColors, openAboutPage, aboutState, closeAboutPage, admin,

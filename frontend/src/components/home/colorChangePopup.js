@@ -2,8 +2,12 @@ import React from 'react';
 import {PhotoshopPicker} from 'react-color';
 import './popup.css';
 
+/*
+Class for the adjustment of the colors for the system
+*/
 class ColorChangePopup extends React.Component{
 
+  //constructor that establishes the state of the system
   constructor(props){
     super(props);
     this.state = {
@@ -23,39 +27,48 @@ class ColorChangePopup extends React.Component{
     }
   }
 
+  //Handles changes to the background color (updates state)
   onBackgroundChange = (color, event) => {
     this.setState({background: color.hex})
   }
 
+  //Handles the popup for changning the background color (updates state)
   onControlBackgroundPopup = (event) => {
     this.setState({backgroundPopup: event})
   }
 
+  //Handles changes to the correct circle color (updates state)
   onCorrectColorChange = (color, event) => {
     this.setState({correctColor: color.hex})
   }
 
+  //Handles the popup for changning the correct circle color (updates state)
   onControlCorrectPopup = (event) => {
     this.setState({correctColorPopup: event})
   }
 
+  //Handles changes to the first incorrect circle color (updates state)
   onIncorrectColorOne = (color, event) => {
     console.log('setting incorrect color one')
     this.setState({incorrectColorOne: color.hex})
   }
 
+  //Handles the popup for changning the first incorrect circle color (updates state)
   onControlIncorrectPopupOne = (event) => {
     this.setState({incorrectColorOnePopup: event})
   }
 
+  //Handles changes to the second incorrect circle color (updates state)
   onIncorrectColorTwo = (color, event) => {
     this.setState({incorrectColorTwo: color.hex})
   }
 
+  //Handles the popup for changning second incorrect circle color (updates state)
   onControlIncorrectPopupTwo = (event) => {
     this.setState({incorrectColorTwoPopup: event})
   }
 
+  //Ensures none of the values entered are equal to one another
   ensureNotEqual = () => {
     const {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
     if (background !== correctColor || background !== incorrectColorOne ||
@@ -69,6 +82,7 @@ class ColorChangePopup extends React.Component{
     return false;
   }
 
+  //Ensures all of the formats of the colors are in proper hex format
   ensureProperHex = () => {
     var {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
     var check = [background, correctColor, incorrectColorOne, incorrectColorTwo];
@@ -87,6 +101,7 @@ class ColorChangePopup extends React.Component{
     return true;
   }
 
+  //Ensures none of the colors entered are black to too close to black
   ensureNotBlack = () => {
     const {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
     var check = [background, correctColor, incorrectColorOne, incorrectColorTwo];
@@ -124,6 +139,7 @@ class ColorChangePopup extends React.Component{
     return true;
   }
 
+  //Verifies the input by the user
   verifyInput = () => {
     var {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
 
@@ -151,6 +167,7 @@ class ColorChangePopup extends React.Component{
     return true;
   }
 
+  //Submits the colors for the system
   onButtonSubmit = () => {
     var colors = [this.state.background, this.state.correctColor,
       this.state.incorrectColorOne, this.state.incorrectColorTwo];
@@ -167,6 +184,7 @@ class ColorChangePopup extends React.Component{
     }
   }
 
+  //Renderer for the system
   render() {
 
     const {popupController} = this.props;
@@ -182,53 +200,65 @@ class ColorChangePopup extends React.Component{
       paddingLeft: '5px',
     }
 
+    //Opens the background color change popup
     const changeBackground = () => {
       this.onControlBackgroundPopup(true);
     }
 
+    //Closes the background color change popup
     const closeBackground = () => {
       this.onControlBackgroundPopup(false);
     }
 
+    ///Revers the background color to the default color
     const revertBackground = () => {
       this.setState({background: '#00CC00'});
       this.onControlBackgroundPopup(false);
     }
 
+    //Opens the correct circle color change popup
     const changeCorrectColor = () => {
       this.onControlCorrectPopup(true);
     }
 
+    //Closes the correct circle color change popup
     const closeCorrectColor = () => {
       this.onControlCorrectPopup(false);
     }
 
+    ///Revers the correct circle color to the default color
     const revertCorrectColor = () => {
       this.setState({correctColor: '#0000E6'});
       this.onControlCorrectPopup(false);
     }
 
+    //Opens the first incorrect circle color change popup
     const changeIncorrectColorOne = () => {
       this.onControlIncorrectPopupOne(true);
     }
 
+    //Closes the first incorrect color change popup
     const closeIncorrectColorOne = () => {
       this.onControlIncorrectPopupOne(false);
     }
 
+    ///Revers the first incorrect circle color to the default color
     const revertIncorrectColorOne = () => {
       this.setState({incorrectColorOne: '#0000CC'});
       this.onControlIncorrectPopupOne(false);
     }
 
+    //Opens the second incorrect circle color change popup
     const changeIncorrectColorTwo = () => {
       this.onControlIncorrectPopupTwo(true);
     }
 
+    //Closes the second incorrect color change popup
     const closeIncorrectColorTwo = () => {
       this.onControlIncorrectPopupTwo(false);
     }
 
+    ///Revers the second incorrect circle color to the default color
     const revertIncorrectColorTwo = () => {
       this.setState({incorrectColorTwo: '#0000FF'});
       this.onControlIncorrectPopupTwo(false);
