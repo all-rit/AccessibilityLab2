@@ -353,4 +353,19 @@ app.get('/previousGames', (req, res) => {
   })
 })
 
+app.get('/scoreComparison', (req, res) => {
+  let user = 1;
+  if (req.session.token !== null) {
+    user = req.session.token
+  }
+  db.all('SELECT COLORS_GameStats.Score, COLORS_GameStats.Mode FROM COLORS_GameStats', [], (err, scoreData) => {
+    if (err) {
+      console.log(err);
+    }
+    res.json({
+      scoreHistory: scoreData
+    })
+  })
+})
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
