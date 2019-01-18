@@ -87,9 +87,13 @@ class Replay extends Component {
             <button className='replay' onClick={click}>Play again?</button>
           </div>
         </div>
-        <div className='right'>
-          <PreviousGames score={this.props.score} mode={this.props.gameMode}/>
-          <ScoreComparison />
+        <div className='rightReplay'>
+          <div className='gameHistory'>
+            <PreviousGames score={this.props.score} mode={this.props.gameMode}/>
+          </div>
+          <div className='chart'>
+            <ScoreComparison score={this.props.score} mode={this.props.gameMode}/>
+          </div>
         </div>
       </div>
     );
