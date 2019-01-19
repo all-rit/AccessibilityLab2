@@ -3,6 +3,7 @@ import ScoreBreakdown from './scoreBreakdown';
 import PreviousGames from './previousGames';
 import Dropdown from '../home/dropdown';
 import ColorVision from '../colors/colorVision';
+import ScoreComparison from './scoreComparison';
 import './gameStyle.css';
 
 /*
@@ -51,7 +52,7 @@ class Replay extends Component {
         <div id='left'>
           <ScoreBreakdown />
         </div>
-        <div id='center'>
+        <div className='pushBack'>
           <div>
             {this.props.score > 0 ?
             <div>
@@ -86,8 +87,13 @@ class Replay extends Component {
             <button className='replay' onClick={click}>Play again?</button>
           </div>
         </div>
-        <div id='right'>
-          <PreviousGames score={this.props.score} mode={this.props.gameMode}/>
+        <div className='rightReplay'>
+          <div className='gameHistory'>
+            <PreviousGames score={this.props.score} mode={this.props.gameMode}/>
+          </div>
+          <div className='chart'>
+            <ScoreComparison score={this.props.score} mode={this.props.gameMode}/>
+          </div>
         </div>
       </div>
     );

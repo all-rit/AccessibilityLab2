@@ -18,7 +18,7 @@ const Title = ({gameState}) => {
           <p
             className='secondTitle'
           >
-            Click as fast as you can the right colored circle!
+            Click as fast as you can the correct colored circle!
           </p>
         </div>
         :
@@ -31,7 +31,7 @@ const Title = ({gameState}) => {
           <p
             className='secondTitle'
           >
-            How fast can you click the right colored circle?
+            How fast can you click the correct colored circle?
           </p>
         </div>
       }
