@@ -169,50 +169,47 @@ class SecondTimer extends Component {
         <div>
           {props.total === 0 ?
           <Replay
+            gameEnded={this.props.gameEnded}
             onUpdateTime={onUpdateTime}
             score={this.score}
             right={this.numRightOnClick+this.numRightOnNoClick}
             wrong={this.numWrongOnClick+this.numWrongOnNoClick}
-            resetOption={resetOption}
-            onChangeGameColors={onChangeGameColors}
             gameOption={gameOption}
-            colors={colors}
-            resetColors={resetColors}
-            updateMode={updateMode}
-            resetMode={resetMode}
             gameMode={gameOption.toUpperCase()}
           />
           :
-          <div className='circleClicked'>
-            <div
-              id='notifyUser'
-              aria-live='polite'
-              aria-atomic='true'
-              className='ariaAlert'
-            >
+          <div>
+            <div className='circleClicked'>
+              <div
+                id='notifyUser'
+                aria-live='polite'
+                aria-atomic='true'
+                className='ariaAlert'
+              >
+              </div>
+              <Circle
+                clickable={true}
+                color={this.currentColor}
+                onClick={onClick}
+              />
             </div>
-            <Circle
-              clickable={true}
-              color={this.currentColor}
-              onClick={onClick}
+            <Instructions
+              correctColor={correctColor}
+              incorrectColorOne={incorrectColorOne}
+              incorrectColorTwo={incorrectColorTwo}
+            />
+            <Score
+              score={this.score}
+              rightClick={this.numRightOnClick}
+              wrongClick={this.numWrongOnClick}
+              rightNoClick={this.numRightOnNoClick}
+              wrongNoClick={this.numWrongOnNoClick}
+              isHex={isHex}
+              background={background}
+              currentColor={this.currentColor}
             />
           </div>
           }
-          <Instructions
-            correctColor={correctColor}
-            incorrectColorOne={incorrectColorOne}
-            incorrectColorTwo={incorrectColorTwo}
-          />
-          <Score
-            score={this.score}
-            rightClick={this.numRightOnClick}
-            wrongClick={this.numWrongOnClick}
-            rightNoClick={this.numRightOnNoClick}
-            wrongNoClick={this.numWrongOnNoClick}
-            isHex={isHex}
-            background={background}
-            currentColor={this.currentColor}
-          />
         </div>
       );
     }

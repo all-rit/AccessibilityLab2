@@ -42,12 +42,12 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
             />
             :
             <div className='oneline'>
-              <ColorUpdate popupController={popupController}/>
               <Button
                 clickMethod={openAboutPage}
                 message={"About Color Vision Deficiencies"}
                 fontSizing={"17px"}
               />
+              <ColorUpdate popupController={popupController}/>
             </div>
           }
           </div>

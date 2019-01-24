@@ -175,6 +175,7 @@ class App extends Component {
             {gameState ?
               <div>
                 <GameCenter
+                  gameEnded={onEndGame}
                   correctColor={gameRightCircle}
                   incorrectColorOne={gameWrongCircleOne}
                   incorrectColorTwo={gameWrongCircleTwo}
