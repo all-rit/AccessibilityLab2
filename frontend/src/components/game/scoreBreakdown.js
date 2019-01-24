@@ -7,9 +7,11 @@ Component for displaying a score breakdown table to the user on the replay page
 const ScoreBreakdown = () => {
   return(
     <div>
-      <p className='leftTitle'>Score Breakdown</p>
+      <p style={{marginBottom: '0px', marginTop: '0px', fontSize: '25px'}}>
+        Score Breakdown
+      </p>
       <div>
-        <table style={{marginLeft: '5px'}}>
+        <table>
           <tbody>
             <tr>
               <th rowSpan="2" colSpan="2">Type of Click</th>

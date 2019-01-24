@@ -12,6 +12,7 @@ export const CHANGED_RESET = "CHANGED_RESET";
 //Used to control the different state options (about page, stats page, game page)
 export const START_GAME = "START_GAME";
 export const END_GAME = "END_GAME";
+export const FIRST_GAME = "FIRST_GAME";
 export const ABOUT_STATE = "ABOUT_STATE";
 export const END_ABOUT_STATE = "END_ABOUT_STATE";
 export const STAT_STATE = "STAT_STATE";

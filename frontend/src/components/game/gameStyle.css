@@ -19,6 +19,12 @@
   padding-top: 10px;
 }
 
+.chart {
+  width: 500px;
+  height: 150px;
+  margin-top: 30px;
+}
+
 .startTimer{
   font-style: bold;
   font-size: 60px;
@@ -47,7 +53,7 @@
 
 .replay_screen {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 table, th, td {
@@ -72,16 +78,9 @@ td {
   margin-right: 10px;
 }
 
-.gameHistory {
-  margin-left: 100px;
-}
-
-.chart {
-  margin-right: 100px;
-}
-
-.pushBack {
-  margin-right: 450px;
+.left {
+  display: flex;
+  justify-content: space-around;
 }
 
 .prescreen {
@@ -152,21 +151,6 @@ td {
   .right {
     margin-right: 20px;
   }
-  .pushBack {
-    margin-right: 20px;
-  }
-}
-
-@media (min-width: 500px){
-  .pushBack {
-    margin-right: 50px;
-  }
-}
-
-@media (min-width: 1000px) {
-  .pushBack {
-    margin-right: 0px;
-  }
 }
 
 @media (min-width: 1300px) {
@@ -175,13 +159,6 @@ td {
   }
   .lowMargin {
     margin-top: 0px;
-  }
-  .pushBack {
-    margin-right: 50px;
-    padding-right: 100px;
-  }
-  .rightReplay {
-    margin-right: 50px;
   }
 }
 
