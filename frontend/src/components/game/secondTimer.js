@@ -28,19 +28,7 @@ class SecondTimer extends Component {
   //Renderer for system
   render() {
     const {correctColor, incorrectColorOne, incorrectColorTwo, startTime,
-      gameOption, background, onUpdateTime, resetOption, onChangeGameColors,
-      colors, resetColors}
-       = this.props;
-
-    //Updates the mode for the game being played
-    const updateMode = (event) => {
-      this.props.selectOption(event);
-    }
-
-    //Resets the mode to 'default'
-    const resetMode = () => {
-      this.props.resetOption();
-    }
+      gameOption, background, onUpdateTime} = this.props;
 
     const isHex = (gameOption === 'hex');
 

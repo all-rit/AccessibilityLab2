@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ScoreBreakdown from './scoreBreakdown';
 import PreviousGames from './previousGames';
-import ColorVision from '../colors/colorVision';
 import ScoreComparison from './scoreComparison';
 import './gameStyle.css';
 
