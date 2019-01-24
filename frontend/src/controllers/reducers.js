@@ -13,7 +13,8 @@ import{
   ABOUT_STATE,
   END_ABOUT_STATE,
   STAT_STATE,
-  END_STAT_STATE
+  END_STAT_STATE,
+  FIRST_GAME
 } from "./constants.js"
 
 //Declaing initial state for the colors in the system
@@ -78,6 +79,7 @@ const initialGameState = {
   gameState: false,
   aboutState: false,
   statState: false,
+  firstGame: true,
 }
 
 //Function for changing to other pages in the application
@@ -87,6 +89,8 @@ export const changeGameState = (state = initialGameState, action = {}) => {
       return {...state, gameState: true}
     case END_GAME:
       return {...state, gameState: false}
+    case FIRST_GAME:
+      return {...state, firstGame: false}
     case ABOUT_STATE:
       return {...state, aboutState: true}
     case END_ABOUT_STATE:

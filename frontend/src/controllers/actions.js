@@ -13,7 +13,8 @@ import {
   ABOUT_STATE,
   END_ABOUT_STATE,
   STAT_STATE,
-  END_STAT_STATE
+  END_STAT_STATE,
+  FIRST_GAME,
 } from './constants.js';
 
 /*
@@ -126,4 +127,11 @@ Used to switch pages back to the home page from the stats page
 */
 export const closeStatPage = () => ({
   type: END_STAT_STATE
+})
+
+/*
+Used to declare a game as not the first game
+*/
+export const endFirstGame = () => ({
+  type: FIRST_GAME
 })
