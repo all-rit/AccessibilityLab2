@@ -88,7 +88,7 @@ class App extends Component {
     //function call for backend
     callBackendAPI = async () => {
       console.log('sending request to backend');
-      const response = await fetch('http://localhost:5000/main');
+      const response = await fetch('http://129.21.198.149:5000/main');
       const body = await response.json();
 
       if (response.status !== 200) {

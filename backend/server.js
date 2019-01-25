@@ -58,7 +58,7 @@ db.serialize(function() {
 app.use(cors(corsOptions));
 
 app.get('/main', (req, res) => {
-  console.log(req.session.views);
+  console.log(req.session.token);
   if (req.session.token) {
     res.cookie('token', req.session.token);
     let user = 'temp';

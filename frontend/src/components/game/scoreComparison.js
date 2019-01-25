@@ -61,7 +61,7 @@ class ScoreComparison extends Component {
     }
 
     const fetchData = () => {
-      fetch('http://localhost:5000/scoreComparison', {
+      fetch('http://all.rit.edu:5000/scoreComparison', {
         method: 'GET',
       })
       .then(res => res.json())

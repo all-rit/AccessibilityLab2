@@ -21,8 +21,8 @@
     "redux": "^4.0.1"
   },
   "scripts": {
-    "build": "webpack --mode development",
-    "start": "react-scripts start",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --port 3000 --host 129.21.198.149",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

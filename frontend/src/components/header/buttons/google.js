@@ -16,7 +16,7 @@ export class Google extends Component {
 
   //Handles the call back api controller
   callBackendAPI = async () => {
-    const response = await fetch('http://localhost:5000/auth/google');
+    const response = await fetch('http://all.rit.edu:5000/auth/google');
 
     if (response.status !== 200) {
       throw Error(response.message)

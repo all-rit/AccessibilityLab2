@@ -134,7 +134,7 @@ class SecondTimer extends Component {
       const dataJSON = JSON.stringify(data);
       console.log(dataJSON);
 
-      fetch('http://localhost:5000/gameStats', {
+      fetch('http://all.rit.edu:5000/gameStats', {
         method: 'POST',
         headers: new Headers({'content-type': 'application/json'}),
         body: JSON.stringify(data)
