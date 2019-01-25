@@ -14,7 +14,9 @@ import{
   END_ABOUT_STATE,
   STAT_STATE,
   END_STAT_STATE,
-  FIRST_GAME
+  FIRST_GAME,
+  INFO_STATE,
+  END_INFO_STATE
 } from "./constants.js"
 
 //Declaing initial state for the colors in the system
@@ -77,6 +79,9 @@ export const selectGameOption = (state = initialOption, action = {}) => {
 //initial state for the other page controllers
 const initialGameState = {
   gameState: false,
+  oneGamePlayed: false,
+  alreadyCalled: false,
+  secondInfoState: false,
   aboutState: false,
   statState: false,
   firstGame: true,
@@ -88,7 +93,7 @@ export const changeGameState = (state = initialGameState, action = {}) => {
     case START_GAME:
       return {...state, gameState: true}
     case END_GAME:
-      return {...state, gameState: false}
+      return {...state, gameState: false, oneGamePlayed: true}
     case FIRST_GAME:
       return {...state, firstGame: false}
     case ABOUT_STATE:
@@ -99,6 +104,10 @@ export const changeGameState = (state = initialGameState, action = {}) => {
       return {...state, statState: true}
     case END_STAT_STATE:
       return {...state, statState: false}
+    case INFO_STATE:
+      return {...state, secondInfoState: true}
+    case END_INFO_STATE:
+      return {...state, secondInfoState: false, alreadyCalled: true}
     default:
       return state;
   }
