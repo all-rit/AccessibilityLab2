@@ -164,6 +164,8 @@ class SecondTimer extends Component {
             wrong={this.numWrongOnClick+this.numWrongOnNoClick}
             gameOption={gameOption}
             gameMode={gameOption.toUpperCase()}
+            changeGameColors={this.props.onChangeGameColors}
+            colors={this.props.colors}
           />
           :
           <div>
