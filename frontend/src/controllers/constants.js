@@ -17,6 +17,8 @@ export const ABOUT_STATE = "ABOUT_STATE";
 export const END_ABOUT_STATE = "END_ABOUT_STATE";
 export const STAT_STATE = "STAT_STATE";
 export const END_STAT_STATE = "END_STAT_STATE";
+export const INFO_STATE = "INFO_STATE";
+export const END_INFO_STATE = "END_INFO_STATE";
 
 //Used to login users
 export const LOGIN = "LOGIN";

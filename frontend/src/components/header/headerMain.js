@@ -12,7 +12,7 @@ displayed to the users on each page of the appilcation
 const Header = ({gameState, popupController, gameEnded, loggedIn, user,
   baseBackground, baseRightCircle, baseWrongCircleOne, baseWrongCircleTwo,
   changeGameColors, openAboutPage, aboutState, closeAboutPage, admin,
-  openStatPage, closeStatPage, statState, firstGame}) => {
+  openStatPage, closeStatPage, statState, firstGame, oneGamePlayed}) => {
   return (
     <div className='headerStyle'>
       {gameState?
@@ -51,7 +51,13 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
                   message={"About Color Vision Deficiencies"}
                   fontSizing={"17px"}
                 />
-                <ColorUpdate popupController={popupController}/>
+                <div>
+                {oneGamePlayed?
+                  <ColorUpdate popupController={popupController}/>
+                  :
+                  null
+                }
+                </div>
               </div>
             }
             </div>

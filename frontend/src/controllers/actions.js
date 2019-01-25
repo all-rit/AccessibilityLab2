@@ -15,6 +15,8 @@ import {
   STAT_STATE,
   END_STAT_STATE,
   FIRST_GAME,
+  INFO_STATE,
+  END_INFO_STATE
 } from './constants.js';
 
 /*
@@ -134,4 +136,18 @@ Used to declare a game as not the first game
 */
 export const endFirstGame = () => ({
   type: FIRST_GAME
+})
+
+/*
+Used to declare the info state is active
+*/
+export const enterInfoState = () => ({
+  type: INFO_STATE
+})
+
+/*
+Used to declare the info state is inactive
+*/
+export const closeInfoState = () => ({
+  type: END_INFO_STATE
 })
