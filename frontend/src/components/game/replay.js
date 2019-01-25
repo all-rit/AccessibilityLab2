@@ -25,6 +25,7 @@ class Replay extends Component {
 
     //Handles restarting the game
     const click = () => {
+      this.props.changeGameColors(this.props.colors);
       this.props.gameEnded();
     }
 
