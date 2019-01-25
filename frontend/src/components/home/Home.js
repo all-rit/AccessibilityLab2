@@ -7,7 +7,9 @@ import StartGame from './startGame';
 Component for the main home page
 */
 const Home = ({correctColor, incorrectColorOne, incorrectColorTwo,
-  startGame, selectOption, background, gameOption, onChangeGameColors}) => {
+  startGame, selectOption, background, gameOption, onChangeGameColors,
+  enterInfoState, oneGamePlayed, alreadyCalled}) => {
+
   const colors = [background, correctColor, incorrectColorOne, incorrectColorTwo];
 
   //Handles switching the colors to a simulation for a selected game option
@@ -24,6 +26,9 @@ const Home = ({correctColor, incorrectColorOne, incorrectColorTwo,
           gameOption = {gameOption}
           onChangeGameColors = {onChangeGameColors}
           colors = {colors}
+          enterInfoState = {enterInfoState}
+          oneGamePlayed={oneGamePlayed}
+          alreadyCalled={alreadyCalled}
         />
       </div>
       <Instructions

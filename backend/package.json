@@ -17,6 +17,7 @@
     "express-generator": "^4.16.0",
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",
+    "pg": "^7.8.0",
     "sqlite3": "^4.0.4"
   }
 }

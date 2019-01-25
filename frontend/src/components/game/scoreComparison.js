@@ -75,12 +75,14 @@ class ScoreComparison extends Component {
     }
 
     return (
-      <Bar
-        data={data}
-        options={options}
-        height={100}
-        width={300}
-      />
+      <div className='chart'>
+        <Bar
+          data={data}
+          options={options}
+          height={100}
+          width={300}
+        />
+      </div>
     );
   }
 }

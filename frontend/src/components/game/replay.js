@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import ScoreBreakdown from './scoreBreakdown';
 import PreviousGames from './previousGames';
-import Dropdown from '../home/dropdown';
-import ColorVision from '../colors/colorVision';
 import ScoreComparison from './scoreComparison';
 import './gameStyle.css';
 
@@ -25,34 +23,22 @@ class Replay extends Component {
     // eslint-disable-next-line
     this.state.gameMode = 'default'
 
-    const recordMode = (event) => {
-      // eslint-disable-next-line
-      this.state.gameMode = event.target.value;
-    }
-
     //Handles restarting the game
     const click = () => {
-      if (this.state.gameMode !== 'default' &&
-      this.state.gameMode !== 'hex') {
-        ColorVision(this.props.onChangeGameColors, this.state.gameMode,
-          this.props.colors);
-        this.props.updateMode(this.state.gameMode);
-      }
-      else if (this.state.gameMode === 'default') {
-        this.props.resetMode();
-        this.props.resetColors();
-      }
-      this.props.onUpdateTime();
+      this.props.changeGameColors(this.props.colors);
+      this.props.gameEnded();
     }
 
-    console.log(this.props.gameMode);
-
     return(
-      <div className='replay_screen'>
-        <div id='left'>
-          <ScoreBreakdown />
+      <div>
+        <div className='replay_screen'>
+          <div className='left'>
+            <ScoreBreakdown />
+            <PreviousGames score={this.props.score} mode={this.props.gameMode}/>
+            <ScoreComparison score={this.props.score} mode={this.props.gameMode}/>
+          </div>
         </div>
-        <div className='pushBack'>
+        <div>
           <div>
             {this.props.score > 0 ?
             <div>
@@ -81,18 +67,7 @@ class Replay extends Component {
             }
           </div>
           <div className='center'>
-            <Dropdown
-              selectOption = {recordMode}
-            />
             <button className='replay' onClick={click}>Play again?</button>
-          </div>
-        </div>
-        <div className='rightReplay'>
-          <div className='gameHistory'>
-            <PreviousGames score={this.props.score} mode={this.props.gameMode}/>
-          </div>
-          <div className='chart'>
-            <ScoreComparison score={this.props.score} mode={this.props.gameMode}/>
           </div>
         </div>
       </div>

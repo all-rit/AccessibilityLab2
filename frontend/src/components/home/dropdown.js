@@ -16,7 +16,7 @@ const Dropdown = ({selectOption}) => {
         value='default'
         className='textSelection'
       >
-        Default
+        Default (No Deficiencies)
       </option>
       <option
         value='Protanopia'

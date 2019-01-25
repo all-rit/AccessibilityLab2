@@ -76,7 +76,7 @@ class PreviousGames extends Component {
     }
 
     return(
-      <table>
+      <table style={{marginLeft: '20px', marginRight: '20px', marginTop:'30px'}}>
         <tbody>
           {createTable()}
         </tbody>
