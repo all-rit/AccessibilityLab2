@@ -31,10 +31,10 @@ const Dropdown = ({selectOption}) => {
         Deuteranopia (Green Blindess)
       </option>
       <option
-        value='Tritanomaly'
+        value='Tritanopia'
         className='textSelection'
       >
-        Tritanomaly (Blue Weakness)
+        Tritanopia (Blue Weakness)
       </option>
     </select>
   );

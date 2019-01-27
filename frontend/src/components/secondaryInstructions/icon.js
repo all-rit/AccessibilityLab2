@@ -1,5 +1,5 @@
 import React from 'react';
-import './secondInstructions.css';
+import './secondaryInstructions.css';
 import BellIcon from 'react-bell-icon'
 
 const Icon = ({click}) => {

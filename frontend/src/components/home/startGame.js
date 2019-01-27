@@ -1,14 +1,15 @@
 import React from 'react';
 import Start from './start';
 import Dropdown from './dropdown';
-import Icon from '../secondInstructions/icon';
+import Icon from '../secondaryInstructions/icon';
 import './homeStyle.css';
 
 /*
 Start game component for rendering all of the instructions for starting a game
 */
 const StartGame = ({selectOption, startGame, gameOption,
-  onChangeGameColors, colors, enterInfoState, oneGamePlayed, alreadyCalled}) => {
+  onChangeGameColors, colors, enterInfoState, gamesPlayed, enterSecondInfoState,
+  alreadyCalled}) => {
 
   //Handles a game option changing in the dropdown
   const changeOption = (event) => {
@@ -32,11 +33,24 @@ const StartGame = ({selectOption, startGame, gameOption,
           onChangeGameColors={onChangeGameColors}
           colors={colors}
         />
-        {oneGamePlayed?
+        {gamesPlayed===1?
           <div>
           {!alreadyCalled?
             <div style={{marginLeft: '10px'}}>
               <Icon click={enterInfoState}/>
+            </div>
+            :
+            null
+          }
+          </div>
+          :
+          null
+        }
+        {gamesPlayed===2?
+          <div>
+          {!alreadyCalled?
+            <div style={{marginLeft: '10px'}}>
+              <Icon click={enterSecondInfoState}/>
             </div>
             :
             null

@@ -8,7 +8,7 @@ Component for the main home page
 */
 const Home = ({correctColor, incorrectColorOne, incorrectColorTwo,
   startGame, selectOption, background, gameOption, onChangeGameColors,
-  enterInfoState, oneGamePlayed, alreadyCalled}) => {
+  enterInfoState, gamesPlayed, enterSecondInfoState, alreadyCalled}) => {
 
   const colors = [background, correctColor, incorrectColorOne, incorrectColorTwo];
 
@@ -27,7 +27,8 @@ const Home = ({correctColor, incorrectColorOne, incorrectColorTwo,
           onChangeGameColors = {onChangeGameColors}
           colors = {colors}
           enterInfoState = {enterInfoState}
-          oneGamePlayed={oneGamePlayed}
+          gamesPlayed={gamesPlayed}
+          enterSecondInfoState={enterSecondInfoState}
           alreadyCalled={alreadyCalled}
         />
       </div>

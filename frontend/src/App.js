@@ -13,13 +13,15 @@ import Form from './components/forms/form';
 import AboutInfo from './components/aboutInformation/aboutInfo';
 import UserStats from './components/userStatistics/userStats';
 import LandingPage from './components/LandingPage/landingPage';
-import SecondInstructions from './components/secondInstructions/secondInstructions';
+import SecondInstructions from './components/secondaryInstructions/secondInstructions';
+import ThirdInstructions from './components/secondaryInstructions/thirdInstructions';
 
 //Imports from redux actions
 import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup,
   startGame, endGame, resetOption, resetColors, login, resetChange,
   closeInfoPopup, openAboutPage, closeAboutPage, openStatPage, closeStatPage,
-  endFirstGame, enterInfoState, closeInfoState} from './controllers/actions';
+  endFirstGame, enterInfoState, closeInfoState, enterSecondInfoState,
+  closeSecondInfoState} from './controllers/actions';
 
 //State mapping for redux
 const mapStateToProps = state => {
@@ -44,8 +46,9 @@ const mapStateToProps = state => {
     statState: state.changeGameState.statState,
     firstGame: state.changeGameState.firstGame,
     secondInfoState: state.changeGameState.secondInfoState,
-    oneGamePlayed: state.changeGameState.oneGamePlayed,
-    alreadyCalled: state.changeGameState.alreadyCalled
+    thirdInfoState: state.changeGameState.thirdInfoState,
+    gamesPlayed: state.changeGameState.gamesPlayed,
+    alreadyCalled: state.changeGameState.alreadyCalled,
   }
 }
 
@@ -70,6 +73,8 @@ const mapDispatchToProps = (dispatch) => {
     onEndFirstGame: () => dispatch(endFirstGame()),
     onEnterInfoState: () => dispatch(enterInfoState()),
     onCloseInfoState: () => dispatch(closeInfoState()),
+    onEnterSecondInfoState: () => dispatch(enterSecondInfoState()),
+    onCloseSecondInfoState: () => dispatch(closeSecondInfoState()),
   }
 }
 
@@ -122,8 +127,9 @@ class App extends Component {
       gameOption, popupController, popup, loggedIn, user, onResetOption,
       onResetColors, changed, onResetChange, onCloseInfoPopup, infoPopup,
       aboutState, onOpenAboutPage, onCloseAboutPage, admin, onOpenStatPage,
-      onCloseStatPage, statState, onEndFirstGame, firstGame, oneGamePlayed,
-      alreadyCalled, secondInfoState, onEnterInfoState, onCloseInfoState}
+      onCloseStatPage, statState, onEndFirstGame, firstGame, secondInfoState,
+      onEnterInfoState, onCloseInfoState, thirdInfoState, onEnterSecondInfoState,
+      onCloseSecondInfoState, gamesPlayed, alreadyCalled}
       = this.props
 
     //establishing array of current colors for the system
@@ -183,7 +189,7 @@ class App extends Component {
               openStatPage={onOpenStatPage}
               closeStatPage={onCloseStatPage}
               statState={statState}
-              oneGamePlayed={oneGamePlayed}
+              gamesPlayed={gamesPlayed}
             />
             {gameState ?
               <div>
@@ -212,34 +218,41 @@ class App extends Component {
                   :
                   <div>
                   {secondInfoState?
-                    <SecondInstructions closePage={onCloseInfoState}/>
+                    <SecondInstructions closePage={onCloseInfoState} />
                     :
                     <div>
-                    {firstGame?
-                      <LandingPage endFirstGame={onEndFirstGame}/>
+                    {thirdInfoState?
+                      <ThirdInstructions closePage={onCloseSecondInfoState} />
                       :
                       <div>
-                        <Title gameState={gameState}/>
-                        <Home
-                          background={gameBackground}
-                          onChangeGameColors={onChangeGameColors}
-                          gameOption={gameOption}
-                          correctColor={gameRightCircle}
-                          incorrectColorOne={gameWrongCircleOne}
-                          incorrectColorTwo={gameWrongCircleTwo}
-                          startGame={onStartGame}
-                          selectOption={onSelectOption}
-                          enterInfoState={onEnterInfoState}
-                          oneGamePlayed={oneGamePlayed}
-                          alreadyCalled={alreadyCalled}
-                        />
-                      {popup ?
-                        <ColorChangePopup
-                          changeDefaultColors={onChangeDefaultColors}
-                          changeGameColors={onChangeGameColors}
-                          popupController={popupController}
-                        />
-                        : null
+                      {firstGame?
+                        <LandingPage endFirstGame={onEndFirstGame}/>
+                        :
+                        <div>
+                          <Title gameState={gameState}/>
+                          <Home
+                            background={gameBackground}
+                            onChangeGameColors={onChangeGameColors}
+                            gameOption={gameOption}
+                            correctColor={gameRightCircle}
+                            incorrectColorOne={gameWrongCircleOne}
+                            incorrectColorTwo={gameWrongCircleTwo}
+                            startGame={onStartGame}
+                            selectOption={onSelectOption}
+                            enterInfoState={onEnterInfoState}
+                            gamesPlayed={gamesPlayed}
+                            enterSecondInfoState={onEnterSecondInfoState}
+                            alreadyCalled={alreadyCalled}
+                          />
+                        {popup ?
+                          <ColorChangePopup
+                            changeDefaultColors={onChangeDefaultColors}
+                            changeGameColors={onChangeGameColors}
+                            popupController={popupController}
+                          />
+                          : null
+                        }
+                        </div>
                       }
                       </div>
                     }
