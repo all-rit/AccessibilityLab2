@@ -19,7 +19,6 @@ import{
   END_INFO_STATE,
   INFO_STATE_TWO,
   END_INFO_STATE_TWO,
-  ALREADY_CALLED
 } from "./constants.js"
 
 //Declaing initial state for the colors in the system
@@ -91,7 +90,6 @@ const initialGameState = {
   firstGame: true,
   secondGame: false,
   gamesPlayed: 0,
-  alreadyCalled: false,
 }
 
 //Function for changing to other pages in the application

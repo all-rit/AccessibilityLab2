@@ -21,7 +21,6 @@ export const INFO_STATE = "INFO_STATE";
 export const END_INFO_STATE = "END_INFO_STATE";
 export const INFO_STATE_TWO = "INFO_STATE_TWO";
 export const END_INFO_STATE_TWO = "END_INFO_STATE_TWO";
-export const ALREADY_CALLED = "ALREADY_CALLED";
 
 //Used to login users
 export const LOGIN = "LOGIN";

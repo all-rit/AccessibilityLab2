@@ -19,7 +19,6 @@ import {
   END_INFO_STATE,
   INFO_STATE_TWO,
   END_INFO_STATE_TWO,
-  ALREADY_CALLED,
 } from './constants.js';
 
 /*
@@ -167,11 +166,4 @@ Used to declare the second info page as closed
 */
 export const closeSecondInfoState = () => ({
   type: END_INFO_STATE_TWO
-})
-
-/*
-Used to control already-opened popups
-*/
-export const alreadyCalled = () => ({
-  type: ALREADY_CALLED
 })
