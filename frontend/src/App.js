@@ -15,13 +15,15 @@ import UserStats from './components/userStatistics/userStats';
 import LandingPage from './components/LandingPage/landingPage';
 import SecondInstructions from './components/secondaryInstructions/secondInstructions';
 import ThirdInstructions from './components/secondaryInstructions/thirdInstructions';
+import Leaderboard from './components/userStatistics/leaderboard';
 
 //Imports from redux actions
 import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup,
   startGame, endGame, resetOption, resetColors, login, resetChange,
   closeInfoPopup, openAboutPage, closeAboutPage, openStatPage, closeStatPage,
   endFirstGame, enterInfoState, closeInfoState, enterSecondInfoState,
-  closeSecondInfoState} from './controllers/actions';
+  closeSecondInfoState, openLeaderboard, closeLeaderboard}
+  from './controllers/actions';
 
 //State mapping for redux
 const mapStateToProps = state => {
@@ -49,6 +51,7 @@ const mapStateToProps = state => {
     thirdInfoState: state.changeGameState.thirdInfoState,
     gamesPlayed: state.changeGameState.gamesPlayed,
     alreadyCalled: state.changeGameState.alreadyCalled,
+    leaderboardState: state.changeGameState.leaderboardState
   }
 }
 
@@ -75,6 +78,8 @@ const mapDispatchToProps = (dispatch) => {
     onCloseInfoState: () => dispatch(closeInfoState()),
     onEnterSecondInfoState: () => dispatch(enterSecondInfoState()),
     onCloseSecondInfoState: () => dispatch(closeSecondInfoState()),
+    onOpenLeaderboard: () => dispatch(openLeaderboard()),
+    onCloseLeaderboard: () => dispatch(closeLeaderboard()),
   }
 }
 
@@ -102,7 +107,7 @@ class App extends Component {
     //function call for backend
     callBackendAPI = async () => {
       console.log('sending request to backend');
-      const response = await fetch('http://129.21.198.149:5000/main');
+      const response = await fetch('http://localhost:5000/main');
       const body = await response.json();
 
       if (response.status !== 200) {
@@ -129,8 +134,8 @@ class App extends Component {
       aboutState, onOpenAboutPage, onCloseAboutPage, admin, onOpenStatPage,
       onCloseStatPage, statState, onEndFirstGame, firstGame, secondInfoState,
       onEnterInfoState, onCloseInfoState, thirdInfoState, onEnterSecondInfoState,
-      onCloseSecondInfoState, gamesPlayed, alreadyCalled}
-      = this.props
+      onCloseSecondInfoState, gamesPlayed, alreadyCalled, leaderboardState,
+      onOpenLeaderboard, onCloseLeaderboard} = this.props
 
     //establishing array of current colors for the system
     const colors = [baseBackground, baseRightCircle, baseWrongCircleOne,
@@ -190,6 +195,9 @@ class App extends Component {
               closeStatPage={onCloseStatPage}
               statState={statState}
               gamesPlayed={gamesPlayed}
+              openLeaderboard={onOpenLeaderboard}
+              closeLeaderboard={onCloseLeaderboard}
+              leaderboardState={leaderboardState}
             />
             {gameState ?
               <div>
@@ -225,32 +233,38 @@ class App extends Component {
                       <ThirdInstructions closePage={onCloseSecondInfoState} />
                       :
                       <div>
-                      {firstGame?
-                        <LandingPage endFirstGame={onEndFirstGame}/>
+                      {leaderboardState?
+                        <Leaderboard closeLeaderboard={onCloseLeaderboard}/>
                         :
                         <div>
-                          <Title gameState={gameState}/>
-                          <Home
-                            background={gameBackground}
-                            onChangeGameColors={onChangeGameColors}
-                            gameOption={gameOption}
-                            correctColor={gameRightCircle}
-                            incorrectColorOne={gameWrongCircleOne}
-                            incorrectColorTwo={gameWrongCircleTwo}
-                            startGame={onStartGame}
-                            selectOption={onSelectOption}
-                            enterInfoState={onEnterInfoState}
-                            gamesPlayed={gamesPlayed}
-                            enterSecondInfoState={onEnterSecondInfoState}
-                            alreadyCalled={alreadyCalled}
-                          />
-                        {popup ?
-                          <ColorChangePopup
-                            changeDefaultColors={onChangeDefaultColors}
-                            changeGameColors={onChangeGameColors}
-                            popupController={popupController}
-                          />
-                          : null
+                        {firstGame?
+                          <LandingPage endFirstGame={onEndFirstGame}/>
+                          :
+                          <div>
+                            <Title gameState={gameState}/>
+                            <Home
+                              background={gameBackground}
+                              onChangeGameColors={onChangeGameColors}
+                              gameOption={gameOption}
+                              correctColor={gameRightCircle}
+                              incorrectColorOne={gameWrongCircleOne}
+                              incorrectColorTwo={gameWrongCircleTwo}
+                              startGame={onStartGame}
+                              selectOption={onSelectOption}
+                              enterInfoState={onEnterInfoState}
+                              gamesPlayed={gamesPlayed}
+                              enterSecondInfoState={onEnterSecondInfoState}
+                              alreadyCalled={alreadyCalled}
+                            />
+                          {popup ?
+                            <ColorChangePopup
+                              changeDefaultColors={onChangeDefaultColors}
+                              changeGameColors={onChangeGameColors}
+                              popupController={popupController}
+                            />
+                            : null
+                          }
+                          </div>
                         }
                         </div>
                       }

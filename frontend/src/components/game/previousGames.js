@@ -25,7 +25,7 @@ class PreviousGames extends Component {
 
     //Fetches the previously completed games by the user
     const fetchGames = () => {
-      fetch('http://all.rit.edu:5000/previousGames', {
+      fetch('http://localhost:5000/previousGames', {
         method: 'GET'
       })
       .then(res => res.json())
@@ -67,7 +67,7 @@ class PreviousGames extends Component {
         }
         for (var key in data) {
           if (key === 'Score' || key === 'Mode' || key === '0' || key === '1') {
-            children.push(<td key={key}>{data[key]}</td>)
+            children.push(<td key={key + i}>{data[key]}</td>)
           }
         }
         table.push(<tr key={i}>{children}</tr>)

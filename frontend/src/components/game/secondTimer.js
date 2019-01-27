@@ -119,16 +119,11 @@ class SecondTimer extends Component {
         Mode: [gameOption.toUpperCase()],
       };
 
-      const dataJSON = JSON.stringify(data);
-      console.log(dataJSON);
-
-      fetch('http://all.rit.edu:5000/gameStats', {
+      fetch('http://localhost:5000/gameStats', {
         method: 'POST',
         headers: new Headers({'content-type': 'application/json'}),
         body: JSON.stringify(data)
       })
-      .then(response => console.log(response))
-      //Need to store response in the controller (redux) and pass to previousGames
       .catch(err => console.log(err));
     }
 
@@ -166,6 +161,7 @@ class SecondTimer extends Component {
             gameMode={gameOption.toUpperCase()}
             changeGameColors={this.props.onChangeGameColors}
             colors={this.props.colors}
+            resetOption={this.props.resetOption}
           />
           :
           <div>

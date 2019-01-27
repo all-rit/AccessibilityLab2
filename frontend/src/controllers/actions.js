@@ -19,6 +19,8 @@ import {
   END_INFO_STATE,
   INFO_STATE_TWO,
   END_INFO_STATE_TWO,
+  OPEN_LEADERBOARD,
+  CLOSE_LEADERBOARD
 } from './constants.js';
 
 /*
@@ -166,4 +168,18 @@ Used to declare the second info page as closed
 */
 export const closeSecondInfoState = () => ({
   type: END_INFO_STATE_TWO
+})
+
+/*
+Used to open the leaderboard for any player to see
+*/
+export const openLeaderboard = () => ({
+  type: OPEN_LEADERBOARD
+})
+
+/*
+Used to close the leaderboard for any player to see
+*/
+export const closeLeaderboard = () => ({
+  type: CLOSE_LEADERBOARD
 })

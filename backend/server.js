@@ -368,4 +368,15 @@ app.get('/scoreComparison', (req, res) => {
   })
 })
 
+app.get('/leaderboard', (req,res) => {
+  db.all('SELECT COLORS_GameStats.Score, COLORS_GameStats.Mode FROM COLORS_GameStats ORDER BY COLORS_GameStats.score DESC', [], (err, scoreData) => {
+    if (err) {
+      console.log(err);
+    }
+    res.json({
+      scores: scoreData
+    })
+  })
+})
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
