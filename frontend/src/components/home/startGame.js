@@ -24,15 +24,6 @@ const StartGame = ({selectOption, startGame, gameOption,
         </p>
       </div>
       <div className='center'>
-        <Dropdown
-          selectOption = {changeOption}
-        />
-        <Start
-          startGame={startGame}
-          gameOption={gameOption}
-          onChangeGameColors={onChangeGameColors}
-          colors={colors}
-        />
         {gamesPlayed===1?
           <div>
           {!alreadyCalled?
@@ -40,24 +31,59 @@ const StartGame = ({selectOption, startGame, gameOption,
               <Icon click={enterInfoState}/>
             </div>
             :
-            null
+            <div className='center'>
+              <Dropdown
+                selectOption = {changeOption}
+              />
+              <Start
+                startGame={startGame}
+                gameOption={gameOption}
+                onChangeGameColors={onChangeGameColors}
+                colors={colors}
+              />
+            </div>
           }
           </div>
           :
-          null
-        }
-        {gamesPlayed===2?
           <div>
-          {!alreadyCalled?
-            <div style={{marginLeft: '10px'}}>
-              <Icon click={enterSecondInfoState}/>
+          {gamesPlayed===2?
+            <div>
+            {!alreadyCalled?
+              <div style={{marginLeft: '10px'}}>
+                <Icon click={enterSecondInfoState}/>
+              </div>
+              :
+              <div className='center'>
+                <Dropdown
+                  selectOption = {changeOption}
+                />
+                <Start
+                  startGame={startGame}
+                  gameOption={gameOption}
+                  onChangeGameColors={onChangeGameColors}
+                  colors={colors}
+                />
+              </div>
+            }
             </div>
             :
-            null
+            <div className='center'>
+              {gamesPlayed > 0?
+                <Dropdown
+                  selectOption = {changeOption}
+                />
+                :
+                null
+              }
+              <Start
+                startGame={startGame}
+                gameOption={gameOption}
+                onChangeGameColors={onChangeGameColors}
+                colors={colors}
+              />
+            </div>
           }
           </div>
-          :
-          null
         }
       </div>
     </div>
