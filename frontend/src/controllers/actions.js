@@ -19,7 +19,8 @@ import {
   END_INFO_STATE,
   INFO_STATE_TWO,
   END_INFO_STATE_TWO,
-  ALREADY_CALLED,
+  OPEN_LEADERBOARD,
+  CLOSE_LEADERBOARD
 } from './constants.js';
 
 /*
@@ -170,8 +171,15 @@ export const closeSecondInfoState = () => ({
 })
 
 /*
-Used to control already-opened popups
+Used to open the leaderboard for any player to see
 */
-export const alreadyCalled = () => ({
-  type: ALREADY_CALLED
+export const openLeaderboard = () => ({
+  type: OPEN_LEADERBOARD
+})
+
+/*
+Used to close the leaderboard for any player to see
+*/
+export const closeLeaderboard = () => ({
+  type: CLOSE_LEADERBOARD
 })

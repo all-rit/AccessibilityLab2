@@ -14,7 +14,6 @@ class ScoreComparison extends Component {
   render() {
 
     const handleData = (data) => {
-      console.log(data);
       let defaultTotal = 0;
       let defaultAmount = 0;
       let gameModeTotal = 0;
@@ -28,7 +27,6 @@ class ScoreComparison extends Component {
           gameModeAmount ++;
         }
       });
-      console.log(defaultTotal);
       defaultTotal = defaultTotal/defaultAmount;
       gameModeTotal = gameModeTotal/gameModeAmount;
       if (!isNaN(gameModeTotal)) {
@@ -36,7 +34,6 @@ class ScoreComparison extends Component {
       } else {
         this.setState({scoreData:[this.props.score, defaultTotal, defaultTotal]})
       }
-      console.log(this.state.scoreData)
     }
 
     const data = {
@@ -61,7 +58,7 @@ class ScoreComparison extends Component {
     }
 
     const fetchData = () => {
-      fetch('http://all.rit.edu:5000/scoreComparison', {
+      fetch('http://localhost:5000/scoreComparison', {
         method: 'GET',
       })
       .then(res => res.json())

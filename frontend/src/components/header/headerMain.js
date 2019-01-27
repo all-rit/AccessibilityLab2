@@ -12,7 +12,9 @@ displayed to the users on each page of the appilcation
 const Header = ({gameState, popupController, gameEnded, loggedIn, user,
   baseBackground, baseRightCircle, baseWrongCircleOne, baseWrongCircleTwo,
   changeGameColors, openAboutPage, aboutState, closeAboutPage, admin,
-  openStatPage, closeStatPage, statState, firstGame, gamesPlayed}) => {
+  openStatPage, closeStatPage, statState, firstGame, gamesPlayed,
+  openLeaderboard, closeLeaderboard, leaderboardState}) => {
+
   return (
     <div className='headerStyle'>
       {gameState?
@@ -42,22 +44,43 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
             />
             :
             <div>
-            {firstGame?
-              null
+            {leaderboardState?
+              <Button
+                clickMethod={closeLeaderboard}
+                message={"Home"}
+                fontSizing={"25px"}
+              />
               :
-              <div className='oneline'>
-                <Button
-                  clickMethod={openAboutPage}
-                  message={"About Color Vision Deficiencies"}
-                  fontSizing={"17px"}
-                />
-                <div>
-                {gamesPlayed > 1?
-                  <ColorUpdate popupController={popupController}/>
-                  :
-                  null
-                }
+              <div>
+              {firstGame?
+                null
+                :
+                <div className='oneline'>
+                  <Button
+                    clickMethod={openAboutPage}
+                    message={"About Color Vision Deficiencies"}
+                    fontSizing={"17px"}
+                  />
+                  <div>
+                  {gamesPlayed > 1?
+                    <ColorUpdate popupController={popupController}/>
+                    :
+                    null
+                  }
+                  </div>
+                  <div>
+                    {gamesPlayed > 2?
+                      <Button
+                        clickMethod={openLeaderboard}
+                        message={"Leaderboard"}
+                        fontSizing={"17px"}
+                      />
+                      :
+                      null
+                    }
+                  </div>
                 </div>
+              }
               </div>
             }
             </div>

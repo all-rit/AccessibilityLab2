@@ -19,7 +19,8 @@ import{
   END_INFO_STATE,
   INFO_STATE_TWO,
   END_INFO_STATE_TWO,
-  ALREADY_CALLED
+  OPEN_LEADERBOARD,
+  CLOSE_LEADERBOARD
 } from "./constants.js"
 
 //Declaing initial state for the colors in the system
@@ -91,7 +92,7 @@ const initialGameState = {
   firstGame: true,
   secondGame: false,
   gamesPlayed: 0,
-  alreadyCalled: false,
+  leaderboardState: false,
 }
 
 //Function for changing to other pages in the application
@@ -120,6 +121,10 @@ export const changeGameState = (state = initialGameState, action = {}) => {
       return {...state, thirdInfoState: true}
     case END_INFO_STATE_TWO:
       return {...state, thirdInfoState: false, alreadyCalled: true}
+    case OPEN_LEADERBOARD:
+      return {...state, leaderboardState: true}
+    case CLOSE_LEADERBOARD:
+      return {...state, leaderboardState: false}
     default:
       return state;
   }
