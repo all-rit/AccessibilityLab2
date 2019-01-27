@@ -31,7 +31,7 @@ class Leaderboard extends Component {
       fetchData();
     }
 
-    const headers = ['Score', 'Mode']
+    const headers = ['Rank', 'Score', 'Mode']
 
     const createTable = () => {
       let table = []
@@ -50,9 +50,11 @@ class Leaderboard extends Component {
           data = headers;
         } else {
           data = this.state.scores[i]
+          children.push(<td key={i}>{i+1}</td>)
         }
         for (var key in data) {
-          if (key === 'Score' || key === 'Mode' || key === '0' || key === '1') {
+          if (key === 'Score' || key === 'Mode' || key === '0' || key === '1' ||
+              key === '2') {
             children.push(<td key={key}>{data[key]}</td>)
           }
         }
@@ -63,8 +65,10 @@ class Leaderboard extends Component {
 
     return (
       <div>
-        <p>Super awesome Leaderboard here!</p>
-        <table style={{marginLeft: '20px', marginRight: '20px', marginTop:'30px'}}>
+        <p style={{textAlign: 'center', fontSize: '40px'}}>
+          Leaderboard:
+        </p>
+        <table style={{display: 'flex', justifyContent: 'center'}}>
           <tbody>
             {createTable()}
           </tbody>
