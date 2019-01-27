@@ -12,7 +12,7 @@ displayed to the users on each page of the appilcation
 const Header = ({gameState, popupController, gameEnded, loggedIn, user,
   baseBackground, baseRightCircle, baseWrongCircleOne, baseWrongCircleTwo,
   changeGameColors, openAboutPage, aboutState, closeAboutPage, admin,
-  openStatPage, closeStatPage, statState, firstGame, oneGamePlayed}) => {
+  openStatPage, closeStatPage, statState, firstGame, gamesPlayed}) => {
   return (
     <div className='headerStyle'>
       {gameState?
@@ -52,7 +52,7 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
                   fontSizing={"17px"}
                 />
                 <div>
-                {oneGamePlayed?
+                {gamesPlayed > 1?
                   <ColorUpdate popupController={popupController}/>
                   :
                   null
