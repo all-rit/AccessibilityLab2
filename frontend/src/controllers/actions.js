@@ -20,7 +20,9 @@ import {
   INFO_STATE_TWO,
   END_INFO_STATE_TWO,
   OPEN_LEADERBOARD,
-  CLOSE_LEADERBOARD
+  CLOSE_LEADERBOARD,
+  INFO_STATE_THREE,
+  END_INFO_STATE_THREE
 } from './constants.js';
 
 /*
@@ -182,4 +184,18 @@ Used to close the leaderboard for any player to see
 */
 export const closeLeaderboard = () => ({
   type: CLOSE_LEADERBOARD
+})
+
+/*
+Used to open the third info page
+*/
+export const openThirdInfoState = () => ({
+  type: INFO_STATE_THREE
+})
+
+/*
+Used to close the third info page
+*/
+export const closeThirdInfoState = () => ({
+  type: END_INFO_STATE_THREE
 })

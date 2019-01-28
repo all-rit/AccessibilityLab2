@@ -10,7 +10,8 @@ class GameCenter extends Component {
   render() {
     const {correctColor, incorrectColorOne, incorrectColorTwo, background,
       gameOption, resetOption, onChangeGameColors, colors, resetColors,
-      selectOption, gameEnded} = this.props;
+      selectOption, gameEnded, enterInfoState, enterSecondInfoState, gamesPlayed,
+      enterThirdInfoState} = this.props;
 
     return (
       <Game
@@ -25,6 +26,10 @@ class GameCenter extends Component {
         onChangeGameColors={onChangeGameColors}
         colors={colors}
         resetColors={resetColors}
+        enterInfoState={enterInfoState}
+        enterSecondInfoState={enterSecondInfoState}
+        gamesPlayed={gamesPlayed}
+        enterThirdInfoState={enterThirdInfoState}
       />
     );
   }

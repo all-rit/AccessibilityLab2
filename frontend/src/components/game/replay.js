@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ScoreBreakdown from './scoreBreakdown';
 import PreviousGames from './previousGames';
 import ScoreComparison from './scoreComparison';
+import Button from '../header/buttons/button';
 import './gameStyle.css';
 
 /*
@@ -68,7 +69,31 @@ class Replay extends Component {
             }
           </div>
           <div className='center'>
-            <button className='replay' onClick={click}>Play again?</button>
+            {this.props.gamesPlayed === 0 ?
+              <Button
+                clickMethod={this.props.enterInfoState}
+                message={"Continue"}
+                fontSizing={"25px"}
+              />
+              :
+              <div>
+              {this.props.gamesPlayed === 1 ?
+                <Button
+                  clickMethod={this.props.enterSecondInfoState}
+                  message={"Continue"}
+                  fontSizing={"25px"}
+                />
+                :
+                <div>
+                  <Button
+                    clickMethod={this.props.enterThirdInfoState}
+                    message={"Continue"}
+                    fontSizing={"25px"}
+                  />
+                </div>
+              }
+              </div>
+            }
           </div>
         </div>
       </div>

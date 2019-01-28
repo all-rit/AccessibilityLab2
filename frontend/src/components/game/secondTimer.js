@@ -28,7 +28,8 @@ class SecondTimer extends Component {
   //Renderer for system
   render() {
     const {correctColor, incorrectColorOne, incorrectColorTwo, startTime,
-      gameOption, background, onUpdateTime} = this.props;
+      gameOption, background, onUpdateTime, enterInfoState, enterSecondInfoState,
+      gamesPlayed, enterThirdInfoState} = this.props;
 
     const isHex = (gameOption === 'hex');
 
@@ -162,6 +163,10 @@ class SecondTimer extends Component {
             changeGameColors={this.props.onChangeGameColors}
             colors={this.props.colors}
             resetOption={this.props.resetOption}
+            enterInfoState={enterInfoState}
+            enterSecondInfoState={enterSecondInfoState}
+            gamesPlayed={gamesPlayed}
+            enterThirdInfoState={enterThirdInfoState}
           />
           :
           <div>
