@@ -6,7 +6,13 @@ import './secondaryInstructions.css';
 Page containing the instructions for the second popup the user sees
 this instructional popup covers color vision defiencies
 */
-const SecondInstructions = ({closePage}) => {
+const SecondInstructions = ({closePage, selectOption}) => {
+
+  var alreadyCalled = false;
+  if (!alreadyCalled) {
+    selectOption('Protanopia');
+  }
+
   return (
     <div>
       <p className='secondInstructionTitle'>Instructions Part Two</p>

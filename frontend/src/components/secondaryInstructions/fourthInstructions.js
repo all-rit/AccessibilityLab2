@@ -5,7 +5,18 @@ import './secondaryInstructions.css';
 /*
 Responible for displaying the fourth and final page of instructions to the users
 */
-const FourthInstructions = ({closePage}) => {
+const FourthInstructions = ({closePage, activatePopup, endSystem}) => {
+
+  const changeColors = () => {
+    activatePopup(true);
+    closePage();
+  }
+
+  const endGame = () => {
+    endSystem();
+    closePage();
+  }
+
   return (
     <div>
       <p className='secondInstructionTitle'>Instructions Part Four</p>
@@ -36,12 +47,12 @@ const FourthInstructions = ({closePage}) => {
           fontSizing={"25px"}
         />
         <Button
-          clickMethod={closePage}
+          clickMethod={endGame}
           message={"I'm Finished!"}
           fontSizing={"25px"}
         />
         <Button
-          clickMethod={closePage}
+          clickMethod={changeColors}
           message={"Make Adjustments!"}
           fontSizing={"20px"}
         />

@@ -24,11 +24,23 @@ class Replay extends Component {
     // eslint-disable-next-line
     this.state.gameMode = 'default'
 
-    //Handles restarting the game
-    const click = () => {
+    //Handles the first click
+    const clickFirst = () => {
       this.props.changeGameColors(this.props.colors);
       this.props.resetOption();
-      this.props.gameEnded();
+      this.props.enterInfoState();
+    }
+
+    const clickSecond = () => {
+      this.props.changeGameColors(this.props.colors);
+      this.props.resetOption();
+      this.props.enterSecondInfoState();
+    }
+
+    const clickThird = () => {
+      this.props.changeGameColors(this.props.colors);
+      this.props.resetOption();
+      this.props.enterThirdInfoState();
     }
 
     return(
@@ -71,7 +83,7 @@ class Replay extends Component {
           <div className='center'>
             {this.props.gamesPlayed === 0 ?
               <Button
-                clickMethod={this.props.enterInfoState}
+                clickMethod={clickFirst}
                 message={"Continue"}
                 fontSizing={"25px"}
               />
@@ -79,14 +91,14 @@ class Replay extends Component {
               <div>
               {this.props.gamesPlayed === 1 ?
                 <Button
-                  clickMethod={this.props.enterSecondInfoState}
+                  clickMethod={clickSecond}
                   message={"Continue"}
                   fontSizing={"25px"}
                 />
                 :
                 <div>
                   <Button
-                    clickMethod={this.props.enterThirdInfoState}
+                    clickMethod={clickThird}
                     message={"Continue"}
                     fontSizing={"25px"}
                   />

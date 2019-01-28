@@ -43,11 +43,8 @@ const StartGame = ({selectOption, startGame, gameOption,
         }
       </div>
       <div className='center'>
-        {gamesPlayed===1?
+        {gamesPlayed===0?
           <div className='center'>
-            <Dropdown
-              selectOption = {changeOption}
-            />
             <Start
               startGame={startGame}
               gameOption={gameOption}
@@ -57,11 +54,8 @@ const StartGame = ({selectOption, startGame, gameOption,
           </div>
           :
           <div>
-          {gamesPlayed===2?
+          {gamesPlayed===1?
             <div className='center'>
-              <Dropdown
-                selectOption = {changeOption}
-              />
               <Start
                 startGame={startGame}
                 gameOption={gameOption}
@@ -71,13 +65,9 @@ const StartGame = ({selectOption, startGame, gameOption,
               </div>
             :
             <div className='center'>
-              {gamesPlayed > 0?
-                <Dropdown
-                  selectOption = {changeOption}
-                />
-                :
-                null
-              }
+              <Dropdown
+                selectOption = {changeOption}
+              />
               <Start
                 startGame={startGame}
                 gameOption={gameOption}

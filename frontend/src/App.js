@@ -17,6 +17,7 @@ import SecondInstructions from './components/secondaryInstructions/secondInstruc
 import ThirdInstructions from './components/secondaryInstructions/thirdInstructions';
 import FourthInstructions from './components/secondaryInstructions/fourthInstructions';
 import Leaderboard from './components/userStatistics/leaderboard';
+import Conclusion from './components/secondaryInstructions/conclusion';
 
 //Imports from redux actions
 import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup,
@@ -24,7 +25,7 @@ import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup,
   closeInfoPopup, openAboutPage, closeAboutPage, openStatPage, closeStatPage,
   endFirstGame, enterInfoState, closeInfoState, enterSecondInfoState,
   closeSecondInfoState, openLeaderboard, closeLeaderboard, openThirdInfoState,
-  closeThirdInfoState} from './controllers/actions';
+  closeThirdInfoState, openConclusion} from './controllers/actions';
 
 //State mapping for redux
 const mapStateToProps = state => {
@@ -52,7 +53,8 @@ const mapStateToProps = state => {
     thirdInfoState: state.changeGameState.thirdInfoState,
     gamesPlayed: state.changeGameState.gamesPlayed,
     leaderboardState: state.changeGameState.leaderboardState,
-    fourthInfoState: state.changeGameState.fourthInfoState
+    fourthInfoState: state.changeGameState.fourthInfoState,
+    endSystem: state.changeGameState.endSystem,
   }
 }
 
@@ -82,7 +84,8 @@ const mapDispatchToProps = (dispatch) => {
     onOpenLeaderboard: () => dispatch(openLeaderboard()),
     onCloseLeaderboard: () => dispatch(closeLeaderboard()),
     onOpenThirdInfoState: () => dispatch(openThirdInfoState()),
-    onCloseThirdInfoState: () => dispatch(closeThirdInfoState())
+    onCloseThirdInfoState: () => dispatch(closeThirdInfoState()),
+    onOpenConclusion: () => dispatch(openConclusion())
   }
 }
 
@@ -139,7 +142,8 @@ class App extends Component {
       onEnterInfoState, onCloseInfoState, thirdInfoState, onEnterSecondInfoState,
       onCloseSecondInfoState, gamesPlayed, leaderboardState,
       onOpenLeaderboard, onCloseLeaderboard, fourthInfoState,
-      onOpenThirdInfoState, onCloseThirdInfoState} = this.props
+      onOpenThirdInfoState, onCloseThirdInfoState, endSystem, onOpenConclusion}
+      = this.props
 
     //establishing array of current colors for the system
     const colors = [baseBackground, baseRightCircle, baseWrongCircleOne,
@@ -234,44 +238,60 @@ class App extends Component {
                   :
                   <div>
                   {secondInfoState?
-                    <SecondInstructions closePage={onCloseInfoState} />
+                    <SecondInstructions
+                      closePage={onCloseInfoState}
+                      selectOption={onSelectOption}
+                    />
                     :
                     <div>
                     {thirdInfoState?
-                      <ThirdInstructions closePage={onCloseSecondInfoState} />
+                      <ThirdInstructions
+                        closePage={onCloseSecondInfoState}
+                        activatePopup={popupController}
+                      />
                       :
                       <div>
                       {fourthInfoState?
-                        <FourthInstructions closePage={onCloseThirdInfoState} />
+                        <FourthInstructions
+                          closePage={onCloseThirdInfoState}
+                          activatePopup={popupController}
+                          endSystem={onOpenConclusion}
+                        />
                         :
                         <div>
                         {leaderboardState?
                           <Leaderboard closeLeaderboard={onCloseLeaderboard}/>
                           :
                           <div>
-                          {firstGame?
-                            <LandingPage endFirstGame={onEndFirstGame}/>
+                          {endSystem?
+                            <Conclusion />
                             :
                             <div>
-                              <Title gameState={gameState}/>
-                              <Home
-                                background={gameBackground}
-                                onChangeGameColors={onChangeGameColors}
-                                gameOption={gameOption}
-                                correctColor={gameRightCircle}
-                                incorrectColorOne={gameWrongCircleOne}
-                                incorrectColorTwo={gameWrongCircleTwo}
-                                startGame={onStartGame}
-                                selectOption={onSelectOption}
-                                gamesPlayed={gamesPlayed}
-                              />
-                            {popup ?
-                              <ColorChangePopup
-                                changeDefaultColors={onChangeDefaultColors}
-                                changeGameColors={onChangeGameColors}
-                                popupController={popupController}
-                              />
-                              : null
+                            {firstGame?
+                              <LandingPage endFirstGame={onEndFirstGame}/>
+                              :
+                              <div>
+                                <Title gameState={gameState}/>
+                                <Home
+                                  background={gameBackground}
+                                  onChangeGameColors={onChangeGameColors}
+                                  gameOption={gameOption}
+                                  correctColor={gameRightCircle}
+                                  incorrectColorOne={gameWrongCircleOne}
+                                  incorrectColorTwo={gameWrongCircleTwo}
+                                  startGame={onStartGame}
+                                  selectOption={onSelectOption}
+                                  gamesPlayed={gamesPlayed}
+                                />
+                              {popup ?
+                                <ColorChangePopup
+                                  changeDefaultColors={onChangeDefaultColors}
+                                  changeGameColors={onChangeGameColors}
+                                  popupController={popupController}
+                                />
+                                : null
+                              }
+                              </div>
                             }
                             </div>
                           }
