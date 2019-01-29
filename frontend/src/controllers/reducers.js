@@ -20,7 +20,10 @@ import{
   INFO_STATE_TWO,
   END_INFO_STATE_TWO,
   OPEN_LEADERBOARD,
-  CLOSE_LEADERBOARD
+  CLOSE_LEADERBOARD,
+  INFO_STATE_THREE,
+  END_INFO_STATE_THREE,
+  END_SYSTEM,
 } from "./constants.js"
 
 //Declaing initial state for the colors in the system
@@ -84,7 +87,6 @@ export const selectGameOption = (state = initialOption, action = {}) => {
 const initialGameState = {
   gameState: false,
   oneGamePlayed: false,
-  alreadyCalled: false,
   secondInfoState: false,
   thirdInfoState: false,
   aboutState: false,
@@ -93,6 +95,8 @@ const initialGameState = {
   secondGame: false,
   gamesPlayed: 0,
   leaderboardState: false,
+  fourthInfoState: false,
+  endSystem: false,
 }
 
 //Function for changing to other pages in the application
@@ -102,7 +106,7 @@ export const changeGameState = (state = initialGameState, action = {}) => {
       return {...state, gameState: true}
     case END_GAME:
       return {...state, gameState: false,
-        gamesPlayed: initialGameState.gamesPlayed += 1, alreadyCalled: false}
+        gamesPlayed: initialGameState.gamesPlayed += 1}
     case FIRST_GAME:
       return {...state, firstGame: false}
     case ABOUT_STATE:
@@ -114,17 +118,26 @@ export const changeGameState = (state = initialGameState, action = {}) => {
     case END_STAT_STATE:
       return {...state, statState: false}
     case INFO_STATE:
-      return {...state, secondInfoState: true}
+      return {...state, secondInfoState: true, gameState: false,
+        gamesPlayed: initialGameState.gamesPlayed += 1}
     case END_INFO_STATE:
-      return {...state, secondInfoState: false, alreadyCalled: true}
+      return {...state, secondInfoState: false}
     case INFO_STATE_TWO:
-      return {...state, thirdInfoState: true}
+      return {...state, thirdInfoState: true, gameState: false,
+        gamesPlayed: initialGameState.gamesPlayed += 1}
     case END_INFO_STATE_TWO:
-      return {...state, thirdInfoState: false, alreadyCalled: true}
+      return {...state, thirdInfoState: false}
     case OPEN_LEADERBOARD:
       return {...state, leaderboardState: true}
     case CLOSE_LEADERBOARD:
       return {...state, leaderboardState: false}
+    case INFO_STATE_THREE:
+      return {...state, fourthInfoState: true, gameState: false,
+        gamesPlayed: initialGameState.gamesPlayed += 1}
+    case END_INFO_STATE_THREE:
+      return {...state, fourthInfoState: false}
+    case END_SYSTEM:
+      return {...state, endSystem: true}
     default:
       return state;
   }

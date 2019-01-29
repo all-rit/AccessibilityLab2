@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ScoreBreakdown from './scoreBreakdown';
 import PreviousGames from './previousGames';
 import ScoreComparison from './scoreComparison';
+import Button from '../header/buttons/button';
 import './gameStyle.css';
 
 /*
@@ -23,11 +24,23 @@ class Replay extends Component {
     // eslint-disable-next-line
     this.state.gameMode = 'default'
 
-    //Handles restarting the game
-    const click = () => {
+    //Handles the first click
+    const clickFirst = () => {
       this.props.changeGameColors(this.props.colors);
       this.props.resetOption();
-      this.props.gameEnded();
+      this.props.enterInfoState();
+    }
+
+    const clickSecond = () => {
+      this.props.changeGameColors(this.props.colors);
+      this.props.resetOption();
+      this.props.enterSecondInfoState();
+    }
+
+    const clickThird = () => {
+      this.props.changeGameColors(this.props.colors);
+      this.props.resetOption();
+      this.props.enterThirdInfoState();
     }
 
     return(
@@ -68,7 +81,31 @@ class Replay extends Component {
             }
           </div>
           <div className='center'>
-            <button className='replay' onClick={click}>Play again?</button>
+            {this.props.gamesPlayed === 0 ?
+              <Button
+                clickMethod={clickFirst}
+                message={"Continue"}
+                fontSizing={"25px"}
+              />
+              :
+              <div>
+              {this.props.gamesPlayed === 1 ?
+                <Button
+                  clickMethod={clickSecond}
+                  message={"Continue"}
+                  fontSizing={"25px"}
+                />
+                :
+                <div>
+                  <Button
+                    clickMethod={clickThird}
+                    message={"Continue"}
+                    fontSizing={"25px"}
+                  />
+                </div>
+              }
+              </div>
+            }
           </div>
         </div>
       </div>

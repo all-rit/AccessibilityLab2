@@ -42,7 +42,7 @@ class PreviousGames extends Component {
     //Creates the tabe to be displayed to the user
     const createTable = () => {
       let table = []
-      table.push(<tr><th colSpan='2' key={5000}>Previous Games</th></tr>)
+      table.push(<tr key={'-213213213'}><th colSpan='2' key={5000}>Previous Games</th></tr>)
       let length = 0;
       if (this.state.scores !== null) {
         if (this.state.scores.length <= 3) {

@@ -6,7 +6,12 @@ import './secondaryInstructions.css';
 Page containing the instructions for the second popup the user sees
 this instructional popup covers color contrast
 */
-const ThirdInstructions  = ({closePage}) => {
+const ThirdInstructions  = ({closePage, activatePopup}) => {
+
+  const changeColors = () => {
+    activatePopup(true);
+    closePage();
+  }
 
   return (
     <div>
@@ -43,7 +48,7 @@ const ThirdInstructions  = ({closePage}) => {
       </div>
       <div className='center'>
         <Button
-          clickMethod={closePage}
+          clickMethod={changeColors}
           message={"I'm ready!"}
           fontSizing={"25px"}
         />

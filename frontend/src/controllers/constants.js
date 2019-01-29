@@ -23,6 +23,9 @@ export const INFO_STATE_TWO = "INFO_STATE_TWO";
 export const END_INFO_STATE_TWO = "END_INFO_STATE_TWO";
 export const OPEN_LEADERBOARD = "OPEN_LEADERBOARD";
 export const CLOSE_LEADERBOARD = "CLOSE_LEADERBOARD";
+export const INFO_STATE_THREE = "INFO_STATE_THREE";
+export const END_INFO_STATE_THREE = "END_INFO_STATE_THREE";
+export const END_SYSTEM = "END_SYSTEM";
 
 //Used to login users
 export const LOGIN = "LOGIN";
