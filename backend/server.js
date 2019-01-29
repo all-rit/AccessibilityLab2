@@ -29,7 +29,7 @@ let users = 1;
 let existing = false;
 let recording = false;
 
-let whitelist = ['http://localhost:3000', 'http://localhost:5000', 'http://tempwebsite.com:3000', 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'];
+let whitelist = ['localhost', 'http://all.rit.edu'];
 let corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
