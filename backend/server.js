@@ -29,7 +29,7 @@ let users = 1;
 let existing = false;
 let recording = false;
 
-let whitelist = ['localhost, all.rit,edu'];
+let whitelist = ['localhost', 'http://all.rit.edu'];
 let corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {

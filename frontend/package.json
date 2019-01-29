@@ -6,6 +6,7 @@
     "@babel/plugin-proposal-class-properties": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
     "chart.js": "^2.7.3",
+    "dotenv": "^6.2.0",
     "hex-rgb": "^3.0.0",
     "hex-to-rgba": "^1.0.2",
     "react": "^16.7.0",
@@ -23,8 +24,8 @@
   },
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --port 3000 --host 129.21.198.149",
-    "test": "react-scripts start",
+    "start": "webpack-dev-server --mode development --port 3000 --env.ENVIRONMENT=production --config webpack.config.js --host 129.21.198.149",
+    "test": "webpack-dev-server --mode development --port 3000 --env.ENVIRONMENT=local --config webpack.config.js --host 127.0.0.1",
     "eject": "react-scripts eject"
   },
   "browserslist": [
