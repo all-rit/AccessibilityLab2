@@ -25,7 +25,7 @@ class PreviousGames extends Component {
 
     //Fetches the previously completed games by the user
     const fetchGames = () => {
-      fetch('http://localhost:5000/previousGames', {
+      fetch(process.env.API_URL + '/previousGames', {
         method: 'GET'
       })
       .then(res => res.json())

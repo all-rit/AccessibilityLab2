@@ -120,7 +120,7 @@ class SecondTimer extends Component {
         Mode: [gameOption.toUpperCase()],
       };
 
-      fetch('http://localhost:5000/gameStats', {
+      fetch(process.env.API_URL + '/gameStats', {
         method: 'POST',
         headers: new Headers({'content-type': 'application/json'}),
         body: JSON.stringify(data)
