@@ -29,14 +29,17 @@ let users = 1;
 let existing = false;
 let recording = false;
 
-let whitelist = ['localhost', 'http://all.rit.edu'];
+let whitelist = ['http://localhost', 'http://all.rit.edu'];
 let corsOptions = {
   origin: function (origin, callback) {
+    console.log(origin);
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else if (origin === undefined) {
       callback(null, true)
     } else {
+      console.log("Error url: " + origin);
+      console.log("Comparison to all: " + ('http://all.rit.edu' === origin))
       callback(new Error('Not allowed by CORS'))
     }
   }
@@ -197,14 +200,14 @@ app.get('/auth/google/callback',
       });
     });
     hold = req.session.token;
-    res.redirect('http://localhost:3000');
+    res.redirect('http://all.rit.edu:3000');
   }
 );
 
 app.get('/logout', (req, res) => {
   req.logout();
   req.session = null;
-  res.redirect('http://localhost:3000');
+  res.redirect('http://all.rit.edu:3000');
 });
 
 app.post('/gameStats', (req, res) => {
