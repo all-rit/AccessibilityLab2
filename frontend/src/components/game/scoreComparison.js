@@ -58,7 +58,7 @@ class ScoreComparison extends Component {
     }
 
     const fetchData = () => {
-      fetch('http://localhost:5000/scoreComparison', {
+      fetch(process.env.API_URL + '/scoreComparison', {
         method: 'GET',
       })
       .then(res => res.json())
