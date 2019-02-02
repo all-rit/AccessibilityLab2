@@ -7,31 +7,34 @@ import '../title.css';
 Class for handling the google signin button
 */
 export class Google extends Component {
-
+  
   //Constructor for binding the callback api to the state
   constructor(props) {
-    super(props);
-    this.callBackendAPI = this.callBackendAPI.bind(this);
+    super(props)
   }
-
-  //Handles the call back api controller
-  callBackendAPI = async () => {
-    const response = await fetch(process.env.API_URL + '/auth/google');
-
-    if (response.status !== 200) {
-      throw Error(response.message)
-    }
-    console.log(response.url);
-    window.location = response.url;
-  };
 
   //Renderer for button
   render() {
+
+    //Handles the call back api controller
+    const clickMethod = () => {
+      fetch(process.env.API_URL + '/auth/google', {
+        method: 'GET',
+	credentials:'include',
+      })
+      .then(res => res.json())
+      .then(data => {
+	console.log(data);
+      	window.location.href = data.link;
+      })
+      .catch(error => console.log(error))
+    };
+
     return (
       <div>
         <GoogleButton
           className='signinButton'
-          onClick={() => this.callBackendAPI()}
+          onClick={clickMethod}
         />
       </div>
     );

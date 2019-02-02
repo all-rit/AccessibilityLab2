@@ -4,35 +4,41 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(':memory:');
 const passport = require('passport');
 const bodyParser = require('body-parser');
+const queryString = require('query-string');
 const auth = require('./auth');
 const key = require('./serverConstants');
+const googleLogin = require('./google-util');
 const admins = require('./superUsers');
 const port = process.env.PORT || 5000;
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
-const cookieSession = require('cookie-session');
+const expressSession = require('express-session');
+const Pool = require('pg').Pool
 
 auth(passport);
 app.use(passport.initialize());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieSession({
-  name: 'session',
-  keys: [key.key],
-  httpOnly: false
+app.use(expressSession({
+  secret: [key.key],
+  resave: false,
+  saveUninitialized: true,
 }));
-app.use(cookieParser());
 app.use(express.json());
 
-let hold = null;
-let users = 1;
 let existing = false;
 let recording = false;
+
+const pool = new Pool({
+  user: 'all_user',
+  host: 'localhost',
+  database: 'all_db',
+  password: '',
+  port: 5432,
+})
 
 let whitelist = ['http://localhost', 'http://all.rit.edu'];
 let corsOptions = {
   origin: function (origin, callback) {
-    console.log(origin);
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else if (origin === undefined) {
@@ -42,7 +48,8 @@ let corsOptions = {
       console.log("Comparison to all: " + ('http://all.rit.edu' === origin))
       callback(new Error('Not allowed by CORS'))
     }
-  }
+  },
+  credentials: true,
 }
 
 db.serialize(function() {
@@ -60,11 +67,18 @@ db.serialize(function() {
 
 app.use(cors(corsOptions));
 
+const sessionResponse = (stat, userName, admin, res) => {
+  res.json({
+    status: stat,
+    user: userName,
+    admin: admin
+  })
+}
+
 app.get('/main', (req, res) => {
-  console.log(req.session.token);
+  console.log('session token: ' + req.session.token);
   if (req.session.token) {
-    res.cookie('token', req.session.token);
-    let user = 'temp';
+    /*
     db.serialize(function() {
       let sql = 'select * from login join users on userid';
       db.all(sql, [], (err, rows) => {
@@ -78,55 +92,33 @@ app.get('/main', (req, res) => {
         });
       });
     });
-    if (existing) {
-      res.json({
-        status: 'existing user logged into system',
-        user: `${user}`
-      });
-      existing = false;
-    } else {
-      res.json({
-        status: 'new user logged into system',
-        user: `${user}`
-      })
-    }
-  } else if (hold !== null) {
-    req.session.token = hold;
-    res.cookie('token', hold);
-    hold = null;
-    db.serialize(function() {
-      let sql = 'SELECT Users.FirstName, Users.Admin, Login.UserSessionID FROM Login JOIN Users ON Users.UserID = Login.UserID';
-      let user = '';
-      let admin = false;
-      db.all(sql, [], (err, rows) => {
-        if (err) {
-          console.log(err);
-        }
-        rows.forEach((row) => {
-          if (row.UserSessionID === req.session.token) {
-            user = row.FirstName;
-            admin = row.Admin;
-          }
-        });
-        if (existing) {
-          res.json({
-            status: 'existing user logged into system',
-            user: `${user}`,
-            admin: `${admin}`
-          });
-          existing = false;
-        } else {
-          res.json({
-            status: 'new user logged into system',
-            user: `${user}`,
-            admin: `${admin}`
-          })
-        }
-      });
+    */
+    let sql = `SELECT Session.UserSessionID, Session.UserID, Users.UserID, Users.FirstName, Users.Admin FROM session INNER JOIN Users ON Users.UserID = Session.UserID WHERE Session.UserSessionID=${req.session.token}`;
+    pool.query(sql, [], (error, info) => {
+      if (error) {
+        console.log(error);
+      }
+      if (info.rowCount !== 0) {
+        user = info.rows[0].firstname;
+	console.log(user);
+	if (user === null) {
+	  sessionResponse('guest user', null, res);
+	} else {
+          pool.query(`SELECT * FROM Login WHERE Login.UserSessionID=${req.session.token}`, (error, logins) => {
+            if (error) {
+	      console.log(error);
+	    }
+      	    if (logins.rowCount > 1) {
+	      sessionResponse('existing user logged into system', info.rows[0].firstname, info.rows[0].admin, res);
+            } else {
+	      sessionResponse('new user logged into system', info.rows[0].firstname, info.rows[0],admin, res);
+            }
+	  })
+	}
+      }
     });
   } else {
-    res.cookie('token', `${users}`)
-    req.session.token = `${users}`;
+    /*
     db.serialize(function() {
       const user = db.prepare('INSERT INTO Users VALUES (?,?,?,?)', [null, '', '', false]);
       const login = db.prepare(`INSERT INTO Login VALUES (?,?)`, [req.session.token, users]);
@@ -137,80 +129,142 @@ app.get('/main', (req, res) => {
       login.finalize();
       loginHistory.run();
       loginHistory.finalize();
-      users++;
+    */
+    let sqlOne = 'INSERT INTO Users (UserID, Admin) VALUES (default, $1)';
+    pool.query(sqlOne, [false], (error, response) => {
+      if (error) {
+	console.log(error);
+      }
     });
-    res.json({
-      status: 'user not logged into system'
-    });
+    var userID = 0;
+    pool.query("SELECT NEXTVAL('users_userid_seq')", [], (error, response) => {
+      if (error) {
+        console.log(error);
+      }
+      userID = (response.rows[0].nextval) - 1;
+      console.log('userID: ' + userID);
+      let sqlTwo = 'INSERT INTO Session (UserSessionID, UserID) VALUES ($1, $2)';
+      pool.query(sqlTwo, [userID, userID], (error, response) => {
+        if (error) {
+	  console.log(error);
+        }
+      });
+      let sqlThree = 'INSERT INTO Login (LoginID, UserID, UserSessionID, Login) VALUES (DEFAULT, $1, $2, current_timestamp)';
+      pool.query(sqlThree, [userID, userID], (error, response) => {
+        if (error) {
+	  console.log(error);
+        }
+      });
+      pool.query(`SELECT setval('users_userid_seq', ${userID})`, [], (error, response) => {
+      	if (error) {
+	  console.log(error);
+	}
+      });
+      req.session.token = userID;
+      console.log('session token from new user set: ' + req.session.token);
+      res.json({
+        status: 'user not logged into system'
+      });
+   });
   }
 });
 
-app.get('/auth/google',
-  passport.authenticate('google', {
-    scope: ['https://www.googleapis.com/auth/userinfo.profile']
-  }),
+app.get('/auth/google', (req, res) => {
+    var signinLink = googleLogin.googleUrl();
+    res.json({
+      link: signinLink 
+    })
+  }
 );
 
-const recordUser = (user, existingUser, num) => {
-  if (num === users) {
-    if (existingUser !== null) {
+const recordUser = (user, existingUser, res, req) => {
+    if (existingUser.length !== undefined) { 
+      let userID = existingUser.UserID;
+      console.log('userID: ' + userID);
+      let sessionID = existingUser.UserSessionID;
+      console.log(sessionID);
+      let sql = "INSERT INTO Login (LoginID, UserID, UserSessionID, Login) VALUES (DEFAULT, $1, $2, current_timestamp)"
+      let values = [userID, sessionID];
       console.log('Found existing user');
-      const loginHistory = db.prepare(`INSERT INTO LoginHistory VALUES (?,?,?,?,?)`, [null, existingUser.UserID, existingUser.UserSessionID, '', Date.now()]);
-      loginHistory.run();
-      loginHistory.finalize();
+      console.log('existing user: ' + existingUser);
+      pool.query(sql, values, (error, res) => {
+	if (error) {
+	  console.log(error);
+	}
+      });
       existing = true;
+      req.session.token = req.user.profile.id;
+      req.session.save((err) => {if(error){console.log(err)}});
+      res.redirect('http://all.rit.edu');
     } else {
       console.log('Adding new user');
       let admin = false;
       if (admins.scottID === user.id) {
         admin = true;
       }
-      const userInfo = db.prepare(`INSERT INTO Users VALUES (?,?,?,?)`, [null, user.name.givenName, '', admin]);
-      const login = db.prepare(`INSERT INTO Login VALUES (?,?)`, [user.id, users]);
-      const loginHistory = db.prepare(`INSERT INTO LoginHistory VALUES (?,?,?,?,?)`, [null, users, user.id, '', Date.now()]);
-      userInfo.run();
-      userInfo.finalize();
-      login.run();
-      login.finalize();
-      loginHistory.run();
-      loginHistory.finalize();
-      users++;
+      let sqlOne = "INSERT INTO Users (UserID, FirstName, Admin) VALUES (DEFAULT, $1, $2)";
+      let valuesOne = [user.name.givenName, admin];
+      pool.query(sqlOne, valuesOne, (error, res) => {
+      	if (error) {
+	  console.log(error);
+	}
+      });
+      pool.query("SELECT NEXTVAL('users_userid_seq')", [], (error, res) => {
+          if (error) {
+            console.log(error);
+          }
+        let userID = (res.rows[0].nextval) - 1;
+        let sqlTwo = "INSERT INTO Session (UserSessionID, UserID) VALUES ($1, $2)";
+        let valuesTwo = [user.id, userID];
+        pool.query(sqlTwo, valuesTwo, (error, res) => {
+      	  if (error) {
+	    console.log(error);
+	  }
+        });
+        let sqlThree = "INSERT INTO Login (LoginID, UserID, UserSessionID, Login) VALUES (DEFAULT, $1, $2, current_timestamp)";
+        let valuesThree = [userID, user.id];
+        pool.query(sqlThree, valuesThree, (error, res) => {
+      	  if (error) {
+	    console.log(error);
+	  }
+        });
+      	pool.query(`SELECT setval('users_userid_seq', ${userID})`, [], (error, response) => {
+      	  if (error) {
+	    console.log(error);
+	  }
+        });
+      });
+      req.session.token = req.user.profile.id;
+      req.session.save((err) => {if(err){console.log(err)}});
+      res.redirect('http://all.rit.edu');
     }
-  }
 }
 
-app.get('/auth/google/callback',
-  passport.authenticate('google', {
-    failureRedirect: '/'
-  }),
-  (req,res) => {
-    req.session.token = req.user.profile.id;
-    req.session.views = 1;
-    let existingUser = null;
-    let numberOfCalls = 1;
-    db.serialize(function() {
-      db.each('SELECT Users.FirstName, Users.UserID, Login.UserSessionID from Users INNER JOIN Login ON Login.UserID=Users.UserID', function(err, user) {
-        if (req.user.profile.name.givenName === user.FirstName) {
-          if (req.user.profile.id === user.UserSessionID) {
-            existingUser = user;
-          }
-        }
-        numberOfCalls += 1;
-        recordUser(req.user.profile,  existingUser, numberOfCalls);
-      });
-    });
-    hold = req.session.token;
-    res.redirect('http://all.rit.edu:3000');
-  }
+app.get('/auth/google/callback', 
+    passport.authenticate('google', {
+      failureRedirect: '/'
+    }),
+    (req, res) => {
+    	pool.query(`SELECT Users.FirstName, Users.UserID, Login.UserSessionID from Users INNER JOIN Login ON Login.UserID=Users.UserID WHERE Login.UserSessionID=${req.user.profile.id}`, (error, results) => {
+      	if (error) {
+          console.log(error);
+      	}
+	console.log('length of results: ' + results.length);
+      	recordUser(req.user.profile, results, res, req);
+    	})
+    }
 );
 
 app.get('/logout', (req, res) => {
   req.logout();
-  req.session = null;
-  res.redirect('http://all.rit.edu:3000');
+  req.session.token = null;
+  res.json({
+    url: 'http://all.rit.edu'
+  })
 });
 
 app.post('/gameStats', (req, res) => {
+  console.log('session token in gameStats request: ' + req.session.token);
   recording = true;
   const Score = req.body.score,
     CorrectOnClick = req.body.numRightOnClick,
@@ -221,13 +275,14 @@ app.post('/gameStats', (req, res) => {
     CorrectColor = req.body.correctColor,
     IncorrectColorOne = req.body.incorrectColorOne,
     IncorrectColorTwo = req.body.incorrectColorTwo,
-    Mode = req.body.Mode[0];
+    Mode = req.body.Mode[0].toLowerCase();
   if(Score === undefined) {
     res.status(500);
     res.send('error with information provided');
   } else {
     let userID = 1;
-    let sql = 'select * from login';
+    let sql = `SELECT Session.UserID FROM Session WHERE Session.UserSessionID=${req.session.token}`;
+      /*
       db.all(sql, [], (err, rows) => {
         if (err) {
           console.log(err);
@@ -241,10 +296,30 @@ app.post('/gameStats', (req, res) => {
           }
         });
       });
-    const info = db.prepare(`INSERT INTO COLORS_GameStats VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`, [null, Score, CorrectOnClick, IncorrectOnClick, CorrectOnNoClick, IncorrectOnNoClick, Background, CorrectColor, IncorrectColorOne, IncorrectColorTwo, Mode, userID]);
-    info.run();
-    info.finalize()
-    recording = false;
+      */
+      pool.query(sql, [], (error, users) => {
+        if (error) {
+	  console.log(error)
+	}
+	userID = users.rows[0].userid;
+      });
+      let sqlTwo = "SELECT COLORS_GameMode.ModeID, COLORS_GameMode.ModeName FROM COLORS_GameMode";
+      pool.query(sqlTwo, [], (error, result) => {
+        if (error) {
+          console.log(error);
+	}
+        let modeID = 0;	
+	result.rows.forEach((row) => {
+	  if (row.modename === Mode) {
+	    modeID = row.modeid;
+    	  }
+        });
+      	pool.query('INSERT INTO COLORS_GameStats (GameStatsID,  Score, CorrectOnClick, IncorrectOnClick, CorrectOnNoClick, IncorrectOnNoClick, Background, CorrectCircle, IncorrectCircleOne, IncorrectCircleTwo, Mode, UserID) VALUES (DEFAULT, $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)', [Score, CorrectOnClick, IncorrectOnClick, CorrectOnNoClick, IncorrectOnNoClick, Background, CorrectColor, IncorrectColorOne, IncorrectColorTwo, modeID, userID], (error, results) => {
+          if (error) {
+            console.log(error);
+	  }
+      });
+    });
     res.status(200);
     res.send('information recorded');
   }
@@ -285,6 +360,7 @@ app.get('/data_totals', (req,res) => {
   let TOT_USERS = 0;
   let TOT_LOGIN = 0;
   let completed = 2;
+  /*
   db.all('SELECT * FROM USERS', [], (err, totalUsers) => {
     if (err) {
       console.log(err)
@@ -299,6 +375,24 @@ app.get('/data_totals', (req,res) => {
     }
     TOT_LOGIN = totalLogins.length;
     completed -= 1
+    responseDataTotals(res, TOT_USERS, TOT_LOGIN, completed);
+  });
+  */
+  pool.query('SELECT * FROM users', [], (err, totalUsers) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(totalUsers);
+    TOT_USERS = totalUsers.length;
+    completed -= 1;
+    responseDataTotals(res, TOT_USERS, TOT_LOGIN, completed);
+    });
+  pool.query('SELECT * FROM LOGIN', [], (err, totalLogins) => {
+    if (err) {
+      console.log(err)
+    }
+    TOT_LOGIN = totalLogins.length;
+    completed -= 1;
     responseDataTotals(res, TOT_USERS, TOT_LOGIN, completed);
   });
 })
@@ -318,6 +412,7 @@ app.get('/data_scores', (req, res) => {
   let SCORES = null;
   let USR_SORT_SCORES = null;
   let completed = 2;
+  /*
   db.all('SELECT * FROM COLORS_GameStats', [], (err, totalScores) => {
     if (err) {
       console.log(err)
@@ -335,6 +430,25 @@ app.get('/data_scores', (req, res) => {
     USR_SORT_SCORES = userData;
     responseDataScores(res, TOT_GAMES, SCORES, USR_SORT_SCORES, completed);
   })
+  */
+  pool.query('SELECT * FROM COLORS_GameStats', [], (err, totalScores) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log('totalScores data: ' + totalScores);
+    TOT_GAMES = totalScores.length;
+    SCORES = totalScores;
+    completed -= 1;
+    resonseDataScores(res, TOT_GAMES, SCORES, USR_SORT_SCORES, completed);
+  });
+  pool.query('SELECT * FROM COLORS_GameStats ORDER BY UserID ASC', [], (err, userData) => {
+    if (err) {
+      console.log(err);
+    }
+    completed -= 1;
+    USR_SORT_SCORES = userData;
+    responseDataScores(res, TOT_GAMES, SCORES, USR_SORT_SCORES, completed);
+  });
 })
 
 const responseUserGames = (res, games) => {
@@ -348,12 +462,27 @@ app.get('/previousGames', (req, res) => {
   if (req.session.token !== null) {
     user = req.session.token
   }
+  /*
   db.all(`SELECT * FROM COLORS_GameStats`, [], (err, gameHistory) => {
     if (err) {
       console.log(err);
     }
     responseUserGames(res, gameHistory);
   })
+  */
+  pool.query(`SELECT Session.UserID FROM session WHERE session.UserSessionID=${req.session.token}`, (error, response) => {
+    if (error) { 
+      console.log(error);
+    }
+    let userID = response.rows[0].userid;
+    console.log('userID from SELECT: ' + userID);
+    pool.query(`SELECT COLORS_Gamestats.Score, COLORS_GameMode.ModeName FROM COLORS_GameStats INNER JOIN COLORS_GameMode ON COLORS_GameStats.Mode=COLORS_GameMode.ModeID WHERE COLORS_GameStats.UserID=${userID}`, (error, results) => {
+      if (error) {
+        console.log(error);
+      }
+      responseUserGames(res, results.rows)
+    })
+  });
 })
 
 app.get('/scoreComparison', (req, res) => {
@@ -361,6 +490,7 @@ app.get('/scoreComparison', (req, res) => {
   if (req.session.token !== null) {
     user = req.session.token
   }
+  /*
   db.all('SELECT COLORS_GameStats.Score, COLORS_GameStats.Mode FROM COLORS_GameStats', [], (err, scoreData) => {
     if (err) {
       console.log(err);
@@ -369,9 +499,19 @@ app.get('/scoreComparison', (req, res) => {
       scoreHistory: scoreData
     })
   })
+  */
+  pool.query('SELECT COLORS_GameStats.Score, COLORS_GameMode.ModeName FROM COLORS_GameStats INNER JOIN COLORS_GameMode ON COLORS_GameStats.Mode=COLORS_GameMode.ModeID', (error, results) => {
+    if (error) {
+      console.log(error);
+    }
+    res.json({
+      scoreHistory: results.rows
+    })
+  })
 })
 
 app.get('/leaderboard', (req,res) => {
+  /*
   db.all('SELECT COLORS_GameStats.Score, COLORS_GameStats.Mode FROM COLORS_GameStats ORDER BY COLORS_GameStats.score DESC', [], (err, scoreData) => {
     if (err) {
       console.log(err);
@@ -380,6 +520,15 @@ app.get('/leaderboard', (req,res) => {
       scores: scoreData
     })
   })
+  */
+  pool.query('SELECT COLORS_GameStats.Score, COLORS_GameMode.ModeName FROM COLORS_GameStats INNER JOIN COLORS_GameMode ON COLORS_GameStats.Mode=COLORS_GameMode.ModeID ORDER BY COLORS_GameStats.score DESC', [], (err, scoreData) => {
+    if (err) {
+      console.log(err);
+    }
+    res.json({
+      scores: scoreData.rows
+    })
+  });
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

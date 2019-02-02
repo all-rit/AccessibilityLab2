@@ -41,8 +41,9 @@ class UserStats extends Component {
 
     //Gets the data for the users in the system
     const getDataUsers = () => {
-      fetch('http://localhost:5000/data_totals', {
+      fetch(process.env.API_URL + '/data_totals', {
         method: 'GET',
+	credentials: 'include',
       })
       .then(res => res.json())
       .then(data => this.setFirstData(data))
@@ -52,7 +53,7 @@ class UserStats extends Component {
 
     //Ges the data for the scores in the system
     const getDataScores = () => {
-      fetch('http://localhost:5000/data_scores', {
+      fetch(process.env.API_URL + '/data_scores', {
         method: 'GET',
       })
       .then(res => res.json())

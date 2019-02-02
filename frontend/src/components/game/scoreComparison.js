@@ -19,11 +19,11 @@ class ScoreComparison extends Component {
       let gameModeTotal = 0;
       let gameModeAmount = 0;
       data.scoreHistory.forEach((element) => {
-        if (element.Mode === "DEFAULT") {
-          defaultTotal += element.Score;
+        if (element.modename === "main") {
+          defaultTotal += element.score;
           defaultAmount ++;
-        } else if (element.Mode === this.props.mode.toUpperCase()) {
-          gameModeTotal += element.Score;
+        } else if (element.modename === this.props.mode.toLowerCase()) {
+          gameModeTotal += element.score;
           gameModeAmount ++;
         }
       });
@@ -60,6 +60,7 @@ class ScoreComparison extends Component {
     const fetchData = () => {
       fetch(process.env.API_URL + '/scoreComparison', {
         method: 'GET',
+	credentials: 'include',
       })
       .then(res => res.json())
       .then(data => handleData(data))

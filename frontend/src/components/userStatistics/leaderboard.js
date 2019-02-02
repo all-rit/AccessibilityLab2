@@ -13,13 +13,15 @@ class Leaderboard extends Component {
 
   render() {
 
-    const handleData = (data) => {
+    const handleData = (data) => { 
+      console.log(data);
       this.setState({scores: data.scores})
     }
 
     const fetchData = () => {
-      fetch('http://localhost:5000/leaderboard', {
+      fetch(process.env.API_URL +'/leaderboard', {
         method: 'GET',
+	credentials: 'include',
       })
       .then(res => res.json())
       .then(data => handleData(data))
@@ -52,10 +54,15 @@ class Leaderboard extends Component {
           data = this.state.scores[i]
           children.push(<td key={i}>{i+1}</td>)
         }
+	const defaultControl = 'default';
         for (var key in data) {
-          if (key === 'Score' || key === 'Mode' || key === '0' || key === '1' ||
+          if (key === 'score' || key === 'modename' || key === '0' || key === '1' ||
               key === '2') {
-            children.push(<td key={key}>{data[key]}</td>)
+            if (data[key] === 'main') {
+	      children.push(<td key={key}>{defaultControl}</td>)
+            } else {
+              children.push(<td key={key}>{data[key]}</td>)
+	    }
           }
         }
         table.push(<tr key={i}>{children}</tr>)

@@ -123,6 +123,7 @@ class SecondTimer extends Component {
       fetch(process.env.API_URL + '/gameStats', {
         method: 'POST',
         headers: new Headers({'content-type': 'application/json'}),
+	credentials: 'include',
         body: JSON.stringify(data)
       })
       .catch(err => console.log(err));

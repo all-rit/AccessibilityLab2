@@ -13,7 +13,7 @@ const Dropdown = ({selectOption}) => {
   return (
     <select className='selection' onChange={handleChosenOption}>
       <option
-        value='default'
+        value='Main'
         className='textSelection'
       >
         Default (No Deficiencies)

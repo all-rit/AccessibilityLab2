@@ -26,7 +26,8 @@ class PreviousGames extends Component {
     //Fetches the previously completed games by the user
     const fetchGames = () => {
       fetch(process.env.API_URL + '/previousGames', {
-        method: 'GET'
+        method: 'GET',
+	credentials: 'include'
       })
       .then(res => res.json())
       .then(data => this.onAddScores(data))
@@ -66,8 +67,12 @@ class PreviousGames extends Component {
           }
         }
         for (var key in data) {
-          if (key === 'Score' || key === 'Mode' || key === '0' || key === '1') {
-            children.push(<td key={key + i}>{data[key]}</td>)
+          if (key === 'score' || key === 'mode' || key === 'modename' || key === '0' || key === '1') {
+	    if (data[key] === 'MAIN' || data[key] === 'main') {
+	      children.push(<td key={key + i}>DEFAULT</td>)
+	    } else {
+              children.push(<td key={key + i}>{data[key]}</td>)
+	    }
           }
         }
         table.push(<tr key={i}>{children}</tr>)

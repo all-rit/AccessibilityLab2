@@ -98,7 +98,6 @@ class App extends Component {
   componentDidMount() {
     this.callBackendAPI()
       .then(res => {
-        console.log(res.status);
         if (res.status === 'new user logged into system') {
           this.props.onLogin([res.user, true, res.admin]);
         } else if (res.status === 'existing user logged into system') {
@@ -113,7 +112,7 @@ class App extends Component {
     //function call for backend
     callBackendAPI = async () => {
       console.log('sending request to backend');
-      const response = await fetch(process.env.API_URL + '/main');
+      const response = await fetch(process.env.API_URL + '/main', {method: 'get', credentials:'include'});
       const body = await response.json();
 
       if (response.status !== 200) {

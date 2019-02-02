@@ -2,6 +2,7 @@ const path= require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 let HTMLWebpackPlugin = require('html-webpack-plugin');
 let HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
@@ -49,6 +50,10 @@ module.exports = (env) => {
       filename: 'transformed.js',
       path: path.resolve(__dirname + '/build')
     },
-    plugins: [HTMLWebpackPluginConfig, new webpack.DefinePlugin(envKeys)]
+    plugins: [
+      HTMLWebpackPluginConfig, 
+      new CopyWebpackPlugin([{from: './public/favicon.ico'}]),
+      new webpack.DefinePlugin(envKeys), 
+    ]
   };
 };

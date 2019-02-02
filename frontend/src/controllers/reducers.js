@@ -68,7 +68,7 @@ export const changeColors = (state = initialColors, action = {}) => {
 
 //initial state for the game option
 const initialOption = {
-  option: "default",
+  option: "Main",
 }
 
 //Function for changing the game option
@@ -77,7 +77,7 @@ export const selectGameOption = (state = initialOption, action = {}) => {
     case SELECT_OPTION:
       return {...state, option: action.payload};
     case RESET_OPTION:
-      return {...state, option: 'default'};
+      return {...state, option: 'Main'};
     default:
       return state;
   }
