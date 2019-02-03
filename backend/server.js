@@ -178,10 +178,11 @@ app.get('/auth/google', (req, res) => {
 );
 
 const recordUser = (user, existingUser, res, req) => {
-    if (existingUser.length !== undefined) { 
-      let userID = existingUser.UserID;
+    if (existingUser.rowCount !== undefined) {
+      console.log(existingUser.rows[0]);
+      let userID = existingUser.rows[0].userid;
       console.log('userID: ' + userID);
-      let sessionID = existingUser.UserSessionID;
+      let sessionID = existingUser.rows[0].usersessionid;
       console.log(sessionID);
       let sql = "INSERT INTO Login (LoginID, UserID, UserSessionID, Login) VALUES (DEFAULT, $1, $2, current_timestamp)"
       let values = [userID, sessionID];
@@ -194,7 +195,7 @@ const recordUser = (user, existingUser, res, req) => {
       });
       existing = true;
       req.session.token = req.user.profile.id;
-      req.session.save((err) => {if(error){console.log(err)}});
+      req.session.save((err) => {if(err){console.log(err)}});
       res.redirect('http://all.rit.edu');
     } else {
       console.log('Adding new user');
@@ -249,7 +250,7 @@ app.get('/auth/google/callback',
       	if (error) {
           console.log(error);
       	}
-	console.log('length of results: ' + results.length);
+	console.log('length of results: ' + results.rowCount);
       	recordUser(req.user.profile, results, res, req);
     	})
     }
@@ -382,8 +383,7 @@ app.get('/data_totals', (req,res) => {
     if (err) {
       console.log(err);
     }
-    console.log(totalUsers);
-    TOT_USERS = totalUsers.length;
+    TOT_USERS = totalUsers.rowCount;
     completed -= 1;
     responseDataTotals(res, TOT_USERS, TOT_LOGIN, completed);
     });
@@ -391,7 +391,7 @@ app.get('/data_totals', (req,res) => {
     if (err) {
       console.log(err)
     }
-    TOT_LOGIN = totalLogins.length;
+    TOT_LOGIN = totalLogins.rowCount;
     completed -= 1;
     responseDataTotals(res, TOT_USERS, TOT_LOGIN, completed);
   });
@@ -435,18 +435,17 @@ app.get('/data_scores', (req, res) => {
     if (err) {
       console.log(err);
     }
-    console.log('totalScores data: ' + totalScores);
-    TOT_GAMES = totalScores.length;
-    SCORES = totalScores;
+    TOT_GAMES = totalScores.rowCount;
+    SCORES = totalScores.rows;
     completed -= 1;
-    resonseDataScores(res, TOT_GAMES, SCORES, USR_SORT_SCORES, completed);
+    responseDataScores(res, TOT_GAMES, SCORES, USR_SORT_SCORES, completed);
   });
   pool.query('SELECT * FROM COLORS_GameStats ORDER BY UserID ASC', [], (err, userData) => {
     if (err) {
       console.log(err);
     }
     completed -= 1;
-    USR_SORT_SCORES = userData;
+    USR_SORT_SCORES = userData.rows;
     responseDataScores(res, TOT_GAMES, SCORES, USR_SORT_SCORES, completed);
   });
 })

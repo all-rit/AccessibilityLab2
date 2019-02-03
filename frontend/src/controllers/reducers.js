@@ -28,14 +28,14 @@ import{
 
 //Declaing initial state for the colors in the system
 const initialColors = {
-  baseBackground: "#00CC00",
-  baseRightCircle: "#0000E6",
-  baseWrongCircleOne: "#0000CC",
-  baseWrongCircleTwo: "#0000FF",
-  gameBackground: '#00CC00',
-  gameRightCircle: '#0000E6',
-  gameWrongCircleOne: '#0000CC',
-  gameWrongCircleTwo: '#0000FF',
+  baseBackground: "#01581F",
+  baseRightCircle: "#B44040",
+  baseWrongCircleOne: "#948534",
+  baseWrongCircleTwo: "#57CC14",
+  gameBackground: '#01581F',
+  gameRightCircle: '#B44040',
+  gameWrongCircleOne: '#948534',
+  gameWrongCircleTwo: '#57CC14',
   popup: false,
   changed: false
 }
@@ -97,6 +97,7 @@ const initialGameState = {
   leaderboardState: false,
   fourthInfoState: false,
   endSystem: false,
+  infoStateFourPrevOpen: false,
 }
 
 //Function for changing to other pages in the application
@@ -114,7 +115,7 @@ export const changeGameState = (state = initialGameState, action = {}) => {
     case END_ABOUT_STATE:
       return {...state, aboutState: false}
     case STAT_STATE:
-      return {...state, statState: true}
+      return {...state, statState: true, aboutState: false, gameState: false, leaderboardState: false}
     case END_STAT_STATE:
       return {...state, statState: false}
     case INFO_STATE:
@@ -128,9 +129,9 @@ export const changeGameState = (state = initialGameState, action = {}) => {
     case END_INFO_STATE_TWO:
       return {...state, thirdInfoState: false}
     case OPEN_LEADERBOARD:
-      return {...state, leaderboardState: true}
+      return {...state, leaderboardState: true, infoStateFourPrevOpen: initialGameState.fourthInfoState, fourthInfoState: false}
     case CLOSE_LEADERBOARD:
-      return {...state, leaderboardState: false}
+      return {...state, leaderboardState: false, fourthInfoState: initialGameState.infoStateFourPrevOpen}
     case INFO_STATE_THREE:
       return {...state, fourthInfoState: true, gameState: false,
         gamesPlayed: initialGameState.gamesPlayed += 1}

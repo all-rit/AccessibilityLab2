@@ -92,7 +92,6 @@ class UserStats extends Component {
     //Generates the score breakdown table from previous games
     const scoreTable = () => {
       let scoreTable = [];
-      console.log(scores)
       scoreTable.push(<tr><th colSpan='10' key='-21312312'>Game Scores</th></tr>);
       for (let i = -1; i < totalGamesPlayed; i++) {
         let children = [];
@@ -103,7 +102,7 @@ class UserStats extends Component {
           data = scores[i]
         }
         for (var key in data) {
-          if (key === 'GameStatsID' || key === 'UserID') {
+          if (key === 'gamestatsid' || key === 'userid') {
             continue;
           } else {
             children.push(<td key={key}>{data[key]}</td>)
@@ -127,13 +126,13 @@ class UserStats extends Component {
           data = headers;
         } else {
           data = userScores[i]
-          if (data.UserID !== userID) {
-            userID = data.UserID;
+          if (data.userid !== userID) {
+            userID = data.userid;
             userTable.push(<tr><td colSpan='10' key={-5000-userID}>User: {userID}</td></tr>);
           }
         }
         for (var key in data) {
-          if (key === 'GameStatsID' || key === 'UserID') {
+          if (key === 'gamestatsid' || key === 'userid') {
             continue;
           } else {
             userChildren.push(<td key={key}>{data[key]}</td>)
