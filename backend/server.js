@@ -102,7 +102,7 @@ app.get('/main', (req, res) => {
         user = info.rows[0].firstname;
 	console.log(user);
 	if (user === null) {
-	  sessionResponse('guest user', null, res);
+	  sessionResponse('guest user', null, false,  res);
 	} else {
           pool.query(`SELECT * FROM Login WHERE Login.UserSessionID=${req.session.token}`, (error, logins) => {
             if (error) {
@@ -111,7 +111,7 @@ app.get('/main', (req, res) => {
       	    if (logins.rowCount > 1) {
 	      sessionResponse('existing user logged into system', info.rows[0].firstname, info.rows[0].admin, res);
             } else {
-	      sessionResponse('new user logged into system', info.rows[0].firstname, info.rows[0],admin, res);
+	      sessionResponse('new user logged into system', info.rows[0].firstname, info.rows[0].admin, res);
             }
 	  })
 	}
@@ -178,8 +178,7 @@ app.get('/auth/google', (req, res) => {
 );
 
 const recordUser = (user, existingUser, res, req) => {
-    if (existingUser.rowCount !== undefined) {
-      console.log(existingUser.rows[0]);
+    if (existingUser.rowCount !== undefined && existingUser.rowCount !== 0) {
       let userID = existingUser.rows[0].userid;
       console.log('userID: ' + userID);
       let sessionID = existingUser.rows[0].usersessionid;
