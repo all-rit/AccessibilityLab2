@@ -5,6 +5,7 @@ import { Switch } from 'react-router'
 import './index.css';
 import App from './App';
 import SuppMaterials from './suppMaterials';
+import CaseStudy from './caseStudy';
 import {Provider} from 'react-redux';
 import {createStore, combineReducers} from 'redux';
 import {changeColors, selectGameOption, changeGameState, changeUser} from './controllers/reducers';
@@ -21,6 +22,7 @@ ReactDOM.render((
       <Switch>
         <Route exact path="/" component={App}/>
         <Route path="/suppMaterials" component={SuppMaterials} />
+        <Route path="/caseStudy" component={CaseStudy} />
         <Route component={SuppMaterials} />
       </Switch>
     </Router>
