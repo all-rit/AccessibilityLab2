@@ -202,6 +202,12 @@ const recordUser = (user, existingUser, res, req) => {
       if (admins.scottID === user.id) {
         admin = true;
       }
+      else if (admins.steveID === user.id) {
+        admin = true;
+      }
+      else if (admins.danID === user.id) {
+        admin = true;
+      }
       let sqlOne = "INSERT INTO Users (UserID, FirstName, Admin) VALUES (DEFAULT, $1, $2)";
       let valuesOne = [user.name.givenName, admin];
       pool.query(sqlOne, valuesOne, (error, res) => {
