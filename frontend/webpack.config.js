@@ -27,7 +27,8 @@ module.exports = (env) => {
     },
     devServer: {
       compress: true,
-      public: 'all.rit.edu'
+      public: 'all.rit.edu',
+      historyApiFallback: true,
     },
     module: {
       rules: [
@@ -41,6 +42,26 @@ module.exports = (env) => {
           }
         },
         {
+          test:/\.(gif|png|jpe?g|svg)$/i,
+          use: [
+            'file-loader',
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                bypassOnDebug: true,
+                disable: true
+              }
+            }
+          ],
+        },
+        {
+          test: /\.(html)$/,
+          loader: 'html-loader',
+          options: {
+            attrs: [':data-src']
+          }
+        },
+        {
           test: /\.css$/,
           loader: ['style-loader', 'css-loader']
         },
@@ -48,7 +69,8 @@ module.exports = (env) => {
     },
     output: {
       filename: 'transformed.js',
-      path: path.resolve(__dirname + '/build')
+      path: path.resolve(__dirname + 'dist'),
+      publicPath: '/'
     },
     plugins: [
       HTMLWebpackPluginConfig, 
