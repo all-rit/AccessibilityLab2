@@ -1,0 +1,31 @@
+.suppTitle {
+  text-align: center;
+  font-size: 50px;
+}
+
+.elements{
+  border: 3px solid black;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.suppP {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+.caseStudy {
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 20px;
+}
+
+.img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: 700px;
+  width: 400px;
+}
