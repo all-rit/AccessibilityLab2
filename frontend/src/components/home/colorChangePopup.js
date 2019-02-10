@@ -175,10 +175,11 @@ class ColorChangePopup extends React.Component{
     this.setState({errorEqual: false})
     this.setState({errorHex: false})
     this.setState({errorDarkBackground: false})
+    console.log(colors);
     if (this.verifyInput()) {
       this.props.changeDefaultColors(colors);
       this.props.changeGameColors(colors);
-      this.props.popupController(false);
+      this.props.closeColorChange();
     } else {
       this.errorInInput = true;
     }
@@ -186,6 +187,10 @@ class ColorChangePopup extends React.Component{
 
   //Renderer for the system
   render() {
+
+    if (this.props.background !== 'white') {
+      this.props.toWhiteBackground();
+    }
 
     const {popupController} = this.props;
 
@@ -265,8 +270,8 @@ class ColorChangePopup extends React.Component{
     }
 
     return (
-      <div className='popup' onClick={handleBounds}>
-        <div className='popup_inner' ref={node => {this.node = node;}}>
+      <div>
+        <div>
           {this.state.errorLength ?
             <p className='error'>Error in the length of the string entered</p>
                 : null

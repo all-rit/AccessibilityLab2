@@ -5,7 +5,7 @@ import './aboutInfoStyle.css';
 /*
 Component for displaying information about color vision deficiencies to users
 */
-const AboutInfo = () => {
+const AboutInfo = ({toWhiteBackground, background}) => {
 
   //Data object for the pi graph
   const data ={
@@ -18,6 +18,10 @@ const AboutInfo = () => {
       data:[416.67, 25, 4583.33, 4975],
       borderWidth: '2',
     }]
+  }
+
+  if (background !== 'white') {
+    toWhiteBackground();
   }
 
   //Return statement for rendering the component

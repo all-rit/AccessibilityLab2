@@ -8,6 +8,8 @@ export const UPDATE_GAME_COLORS = "UPDATE_GAME_COLORS";
 export const ACTIVATE_POPUP = "ACTIVATE_POPUP";
 export const RESET_COLORS = "RESET_COLORS";
 export const CHANGED_RESET = "CHANGED_RESET";
+export const BACKGROUND_TO_WHITE = "BACKGROUND_TO_WHITE";
+export const RESET_BACKGROUND = "RESET_BACKGROUND";
 
 //Used to control the different state options (about page, stats page, game page)
 export const START_GAME = "START_GAME";
@@ -26,6 +28,8 @@ export const CLOSE_LEADERBOARD = "CLOSE_LEADERBOARD";
 export const INFO_STATE_THREE = "INFO_STATE_THREE";
 export const END_INFO_STATE_THREE = "END_INFO_STATE_THREE";
 export const END_SYSTEM = "END_SYSTEM";
+export const COLOR_CHANGE = "COLOR_CHANGE";
+export const END_COLOR_CHANGE = "END_COLOR_CHANGE";
 
 //Used to login users
 export const LOGIN = "LOGIN";

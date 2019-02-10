@@ -13,7 +13,11 @@ class Leaderboard extends Component {
 
   render() {
 
-    const handleData = (data) => { 
+    if (this.props.background !== 'white') {
+      this.props.toWhiteBackground();
+    }
+
+    const handleData = (data) => {
       console.log(data);
       this.setState({scores: data.scores})
     }

@@ -6,11 +6,16 @@ import './secondaryInstructions.css';
 Page containing the instructions for the second popup the user sees
 this instructional popup covers color contrast
 */
-const ThirdInstructions  = ({closePage, activatePopup}) => {
+const ThirdInstructions  = ({closePage, activatePopup, toWhiteBackground,
+  background}) => {
 
   const changeColors = () => {
     activatePopup(true);
     closePage();
+  }
+
+  if (background !== 'white') {
+    toWhiteBackground();
   }
 
   return (

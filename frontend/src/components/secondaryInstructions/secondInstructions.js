@@ -6,11 +6,20 @@ import './secondaryInstructions.css';
 Page containing the instructions for the second popup the user sees
 this instructional popup covers color vision defiencies
 */
-const SecondInstructions = ({closePage, selectOption}) => {
+const SecondInstructions = ({closePage, selectOption, toWhiteBackground,
+  background}) => {
 
   var alreadyCalled = false;
   if (!alreadyCalled) {
     selectOption('Protanopia');
+  }
+
+  if (background !== 'white') {
+    toWhiteBackground();
+  }
+
+  const closeInstructions = () => {
+    closePage();
   }
 
   return (
@@ -47,7 +56,7 @@ const SecondInstructions = ({closePage, selectOption}) => {
       </div>
       <div className='center'>
         <Button
-          clickMethod={closePage}
+          clickMethod={closeInstructions}
           message={"I'm ready!"}
           fontSizing={"25px"}
         />
