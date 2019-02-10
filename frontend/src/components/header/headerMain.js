@@ -13,7 +13,8 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
   baseBackground, baseRightCircle, baseWrongCircleOne, baseWrongCircleTwo,
   changeGameColors, openAboutPage, aboutState, closeAboutPage, admin,
   openStatPage, closeStatPage, statState, firstGame, gamesPlayed,
-  openLeaderboard, closeLeaderboard, leaderboardState}) => {
+  openLeaderboard, closeLeaderboard, leaderboardState, openColorChange,
+  colorChange}) => {
 
   return (
     <div className='headerStyle'>
@@ -55,30 +56,38 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
               {firstGame?
                 null
                 :
-                <div className='oneline'>
-                  <Button
-                    clickMethod={openAboutPage}
-                    message={"About Color Vision Deficiencies"}
-                    fontSizing={"17px"}
-                  />
-                  <div>
-                  {gamesPlayed > 1?
-                    <ColorUpdate popupController={popupController}/>
-                    :
-                    null
-                  }
-                  </div>
-                  <div>
-                    {gamesPlayed > 2?
-                      <Button
-                        clickMethod={openLeaderboard}
-                        message={"Leaderboard"}
-                        fontSizing={"17px"}
+                <div>
+                {colorChange?
+                  null
+                  :
+                  <div className='oneline'>
+                    <Button
+                      clickMethod={openAboutPage}
+                      message={"About Color Vision Deficiencies"}
+                      fontSizing={"17px"}
+                    />
+                    <div>
+                    {gamesPlayed > 1?
+                      <ColorUpdate
+                        openColorChange={openColorChange}
                       />
                       :
                       null
                     }
+                    </div>
+                    <div>
+                      {gamesPlayed > 2?
+                        <Button
+                          clickMethod={openLeaderboard}
+                          message={"Leaderboard"}
+                          fontSizing={"17px"}
+                        />
+                        :
+                        null
+                      }
+                    </div>
                   </div>
+                }
                 </div>
               }
               </div>
