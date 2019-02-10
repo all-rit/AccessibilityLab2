@@ -3,10 +3,14 @@ import Button from '../header/buttons/button';
 import {Google} from '../header/buttons/google';
 import MainInstructions from './mainInstructions';
 
-const LandingPage = ({endFirstGame}) => {
+const LandingPage = ({endFirstGame, toWhiteBackground, background}) => {
 
   const closePage = () => {
     endFirstGame();
+  }
+
+  if (background !== 'white') {
+    toWhiteBackground();
   }
 
   return (

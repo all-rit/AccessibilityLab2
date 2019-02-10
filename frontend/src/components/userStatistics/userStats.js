@@ -37,6 +37,10 @@ class UserStats extends Component {
   //Renderer for data display
   render() {
 
+    if (this.props.background !== 'white') {
+      this.props.toWhiteBackground();
+    }
+
     const {totalUsers, totalLogins, totalGamesPlayed, scores, userScores} = this.state;
 
     //Gets the data for the users in the system

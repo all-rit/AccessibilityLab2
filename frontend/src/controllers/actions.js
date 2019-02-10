@@ -23,7 +23,11 @@ import {
   CLOSE_LEADERBOARD,
   INFO_STATE_THREE,
   END_INFO_STATE_THREE,
-  END_SYSTEM
+  END_SYSTEM,
+  BACKGROUND_TO_WHITE,
+  RESET_BACKGROUND,
+  COLOR_CHANGE,
+  END_COLOR_CHANGE,
 } from './constants.js';
 
 /*
@@ -206,4 +210,33 @@ Used to open the conclusion page of the application
 */
 export const openConclusion = () => ({
   type: END_SYSTEM
+})
+
+/*
+Used to change the background to white
+*/
+export const toWhiteBackground = () => ({
+  type: BACKGROUND_TO_WHITE
+})
+
+/*
+Used to change the background from white back to the previous value
+*/
+export const resetBackground = (color) => ({
+  type: RESET_BACKGROUND,
+  payload: color
+})
+
+/*
+Used to open the color change page
+*/
+export const openColorChange = () => ({
+  type: COLOR_CHANGE
+})
+
+/*
+Used to close the color change page
+*/
+export const closeColorChange = () => ({
+  type: END_COLOR_CHANGE
 })

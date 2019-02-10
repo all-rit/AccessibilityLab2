@@ -4,13 +4,13 @@ import './../title.css';
 /*
 Component for the color update button on the color change popup
 */
-const ColorUpdate = ({popupController}) => {
+const ColorUpdate = ({openColorChange}) => {
   return (
     <div>
       <button
         type="button"
         className="updateColorButton"
-        onClick={() => popupController(true)}
+        onClick={openColorChange}
       >
         Update Colors
       </button>

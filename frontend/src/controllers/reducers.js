@@ -24,6 +24,10 @@ import{
   INFO_STATE_THREE,
   END_INFO_STATE_THREE,
   END_SYSTEM,
+  BACKGROUND_TO_WHITE,
+  RESET_BACKGROUND,
+  COLOR_CHANGE,
+  END_COLOR_CHANGE,
 } from "./constants.js"
 
 //Declaing initial state for the colors in the system
@@ -44,6 +48,7 @@ const initialColors = {
 export const changeColors = (state = initialColors, action = {}) => {
   switch(action.type) {
     case UPDATE_DEFAULT_COLORS:
+      console.log('updating system colors: ' + action.payload)
       return Object.assign({}, state, {baseBackground: action.payload[0],
         baseRightCircle: action.payload[1], baseWrongCircleOne: action.payload[2],
         baseWrongCircleTwo: action.payload[3], changed: true});
@@ -59,6 +64,11 @@ export const changeColors = (state = initialColors, action = {}) => {
         gameRightCircle: initialColors.baseRightCircle,
         gameWrongCircleOne: initialColors.baseWrongCircleOne,
         gameWrongCircleTwo: initialColors.baseWrongCircleTwo});
+    case BACKGROUND_TO_WHITE:
+      return {...state, gameBackground: 'white'}
+    case RESET_BACKGROUND:
+      console.log('Resetting background: ' + action.payload)
+      return {...state, gameBackground: action.payload}
     case CHANGED_RESET:
       return Object.assign({}, state, {changed: false});
     default:
@@ -98,6 +108,7 @@ const initialGameState = {
   fourthInfoState: false,
   endSystem: false,
   infoStateFourPrevOpen: false,
+  colorChangeState: false,
 }
 
 //Function for changing to other pages in the application
@@ -139,6 +150,10 @@ export const changeGameState = (state = initialGameState, action = {}) => {
       return {...state, fourthInfoState: false}
     case END_SYSTEM:
       return {...state, endSystem: true}
+    case COLOR_CHANGE:
+      return {...state, colorChangeState: true, fourthInfoState: false, thirdInfoState: false}
+    case END_COLOR_CHANGE:
+      return {...state, colorChangeState: false}
     default:
       return state;
   }

@@ -8,13 +8,20 @@ Component for the main home page
 */
 const Home = ({correctColor, incorrectColorOne, incorrectColorTwo,
   startGame, selectOption, background, gameOption, onChangeGameColors,
-  enterInfoState, gamesPlayed, enterSecondInfoState, alreadyCalled}) => {
+  enterInfoState, gamesPlayed, enterSecondInfoState, alreadyCalled,
+  resetBackground, baseBackground}) => {
 
   const colors = [background, correctColor, incorrectColorOne, incorrectColorTwo];
 
   //Handles switching the colors to a simulation for a selected game option
   if(gameOption !== 'default') {
     onChangeGameColors(colors);
+  }
+
+  console.log(background)
+  if (background === 'white') {
+    console.log(baseBackground)
+    resetBackground(baseBackground);
   }
 
   return (

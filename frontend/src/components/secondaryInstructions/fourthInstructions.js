@@ -5,7 +5,8 @@ import './secondaryInstructions.css';
 /*
 Responible for displaying the fourth and final page of instructions to the users
 */
-const FourthInstructions = ({closePage, activatePopup, endSystem}) => {
+const FourthInstructions = ({closePage, activatePopup, endSystem,
+  toWhiteBackground, background}) => {
 
   const changeColors = () => {
     activatePopup(true);
@@ -14,6 +15,14 @@ const FourthInstructions = ({closePage, activatePopup, endSystem}) => {
 
   const endGame = () => {
     endSystem();
+    closePage();
+  }
+
+  if (background !== 'white') {
+    toWhiteBackground();
+  }
+
+  const closeInstructions = () => {
     closePage();
   }
 
@@ -42,7 +51,7 @@ const FourthInstructions = ({closePage, activatePopup, endSystem}) => {
       </div>
       <div className='center'>
         <Button
-          clickMethod={closePage}
+          clickMethod={closeInstructions}
           message={"Continue Playing!"}
           fontSizing={"25px"}
         />
