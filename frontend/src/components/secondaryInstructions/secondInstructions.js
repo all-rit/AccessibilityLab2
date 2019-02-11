@@ -27,9 +27,9 @@ const SecondInstructions = ({closePage, selectOption, toWhiteBackground,
       <p className='secondInstructionTitle'>Instructions Part Two</p>
       <div>
         <p className='instructionInfo'>
-          Good job so far! As you can see, this game is very difficult to
-          to get high (or even positive) score in. Its even more difficult
-          to users with a color vision deficiency.
+          Good job so far! As you can see, this game isn't too difficult
+          to get high (or even positive) score in. However, to a user with a color
+	  vision deficiency, it is.
         </p>
         <p className='instructionInfo'>
           A color vision deficiency (also sometimes referred to as color blindness)

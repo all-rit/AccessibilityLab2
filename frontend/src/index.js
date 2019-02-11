@@ -23,7 +23,7 @@ ReactDOM.render((
         <Route exact path="/" component={App}/>
         <Route path="/suppMaterials" component={SuppMaterials} />
         <Route path="/caseStudy" component={CaseStudy} />
-        <Route component={SuppMaterials} />
+        <Route component={App} />
       </Switch>
     </Router>
   </Provider>),

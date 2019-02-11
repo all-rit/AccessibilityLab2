@@ -151,6 +151,7 @@ export const changeGameState = (state = initialGameState, action = {}) => {
     case END_SYSTEM:
       return {...state, endSystem: true}
     case COLOR_CHANGE:
+      console.log('moving to color change state')
       return {...state, colorChangeState: true, fourthInfoState: false, thirdInfoState: false}
     case END_COLOR_CHANGE:
       return {...state, colorChangeState: false}

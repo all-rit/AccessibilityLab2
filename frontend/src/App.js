@@ -263,7 +263,7 @@ class App extends Component {
                     {thirdInfoState?
                       <ThirdInstructions
                         closePage={onCloseSecondInfoState}
-                        activatePopup={popupController}
+                        activatePopup={onOpenColorChange}
                         toWhiteBackground={onToWhiteBackground}
                         background={baseBackground}
                       />

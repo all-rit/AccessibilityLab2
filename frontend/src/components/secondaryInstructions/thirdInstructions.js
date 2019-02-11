@@ -10,8 +10,7 @@ const ThirdInstructions  = ({closePage, activatePopup, toWhiteBackground,
   background}) => {
 
   const changeColors = () => {
-    activatePopup(true);
-    closePage();
+    activatePopup();
   }
 
   if (background !== 'white') {

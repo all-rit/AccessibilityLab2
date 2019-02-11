@@ -11,6 +11,7 @@ const SuppMaterials = () => {
           &#10142; Slide show is available to view via google slides
           <a
             href='https://docs.google.com/presentation/d/1jsPoCObj6a4n9jdxsXQxW3KVHYLJB7rAU2eauUQ4ZCM/edit?usp=sharing'
+	    target='_blank'
             style={{marginLeft: '4px'}}
           >
             here
