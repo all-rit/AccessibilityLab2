@@ -149,7 +149,7 @@ class App extends Component {
       onOpenLeaderboard, onCloseLeaderboard, fourthInfoState,
       onOpenThirdInfoState, onCloseThirdInfoState, endSystem, onOpenConclusion,
       onToWhiteBackground, onResetBackground, onOpenColorChange,
-      onCloseColorChange, colorChange} = this.props
+      onCloseColorChange, colorChange, infoStateThreePrevOpen} = this.props
 
     //establishing array of current colors for the system
     const colors = [baseBackground, baseRightCircle, baseWrongCircleOne,
@@ -214,6 +214,8 @@ class App extends Component {
               leaderboardState={leaderboardState}
               openColorChange={onOpenColorChange}
               colorChange={colorChange}
+              closeColorChange={onCloseColorChange}
+              openSecondInfoState={onEnterSecondInfoState}
             />
             {gameState ?
               <div>

@@ -67,7 +67,6 @@ export const changeColors = (state = initialColors, action = {}) => {
     case BACKGROUND_TO_WHITE:
       return {...state, gameBackground: 'white'}
     case RESET_BACKGROUND:
-      console.log('Resetting background: ' + action.payload)
       return {...state, gameBackground: action.payload}
     case CHANGED_RESET:
       return Object.assign({}, state, {changed: false});
@@ -131,12 +130,12 @@ export const changeGameState = (state = initialGameState, action = {}) => {
       return {...state, statState: false}
     case INFO_STATE:
       return {...state, secondInfoState: true, gameState: false,
-        gamesPlayed: initialGameState.gamesPlayed += 1}
+        gamesPlayed: initialGameState.gamesPlayed = 1}
     case END_INFO_STATE:
       return {...state, secondInfoState: false}
     case INFO_STATE_TWO:
       return {...state, thirdInfoState: true, gameState: false,
-        gamesPlayed: initialGameState.gamesPlayed += 1}
+        gamesPlayed: initialGameState.gamesPlayed = 2}
     case END_INFO_STATE_TWO:
       return {...state, thirdInfoState: false}
     case OPEN_LEADERBOARD:
@@ -145,13 +144,12 @@ export const changeGameState = (state = initialGameState, action = {}) => {
       return {...state, leaderboardState: false, fourthInfoState: initialGameState.infoStateFourPrevOpen}
     case INFO_STATE_THREE:
       return {...state, fourthInfoState: true, gameState: false,
-        gamesPlayed: initialGameState.gamesPlayed += 1}
+        gamesPlayed: initialGameState.gamesPlayed = 3}
     case END_INFO_STATE_THREE:
       return {...state, fourthInfoState: false}
     case END_SYSTEM:
       return {...state, endSystem: true}
     case COLOR_CHANGE:
-      console.log('moving to color change state')
       return {...state, colorChangeState: true, fourthInfoState: false, thirdInfoState: false}
     case END_COLOR_CHANGE:
       return {...state, colorChangeState: false}
