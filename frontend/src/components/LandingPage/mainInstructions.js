@@ -1,4 +1,5 @@
 import React from 'react';
+import Circle from '../game/circle';
 import './landingpage.css';
 
 const MainInstructions = () => {
@@ -9,8 +10,11 @@ const MainInstructions = () => {
       </p>
       <p className='instructionList'>
         You are about to play a game involving three colored circles, the same
-        size as the one above this text.
+        size as the one below this text.
       </p>
+      <div className='center'>
+        <Circle color={'blue'} clickable={false}/>
+      </div>
       <p className='instructionList'>
         A circle will be focused in the center of the screen that you will need
         to click.
