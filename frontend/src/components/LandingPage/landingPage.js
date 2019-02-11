@@ -3,7 +3,7 @@ import Button from '../header/buttons/button';
 import {Google} from '../header/buttons/google';
 import MainInstructions from './mainInstructions';
 
-const LandingPage = ({endFirstGame, toWhiteBackground, background}) => {
+const LandingPage = ({endFirstGame, toWhiteBackground, background, loggedIn}) => {
 
   const closePage = () => {
     endFirstGame();
@@ -20,16 +20,22 @@ const LandingPage = ({endFirstGame, toWhiteBackground, background}) => {
       </div>
       <div id='Body'>
         <MainInstructions />
-        <p
-          className='instructionList'
-          style={{marginTop: '40px', marginBottom:'10px'}}
-        >
-          To help track your game history and to help ensure we are providing
-          you with the best possible learning experience, please sign in with google.
-        </p>
-        <div className='center'>
-          <Google />
-        </div>
+        {!loggedIn?
+          <div>
+            <p
+              className='instructionList'
+              style={{marginTop: '40px', marginBottom:'10px'}}
+            >
+              To help track your game history and to help ensure we are providing
+              you with the best possible learning experience, please sign in with google.
+            </p>
+            <div className='center'>
+              <Google />
+            </div>
+          </div>
+          :
+          null
+        }
         <p
           className='instructionList'
           style={{marginTop: '40px', marginBottom:'10px'}}
