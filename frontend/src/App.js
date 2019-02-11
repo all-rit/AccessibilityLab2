@@ -296,6 +296,7 @@ class App extends Component {
                                 endFirstGame={onEndFirstGame}
                                 toWhiteBackground={onToWhiteBackground}
                                 background={baseBackground}
+                                loggedIn={loggedIn}
                               />
                               :
                               <div>
