@@ -60,9 +60,10 @@ class Replay extends Component {
                 Good job! Your final score was {this.props.score}.
               </p>
               <p className='timeEnd'>
-                That equates to {this.props.right} correct clicks and
+                That means that out of {this.props.possibleCorrect} correctly
+                colored circles appearing you clicked
                 <span style={{paddingLeft: '7px'}}>
-                  {this.props.wrong} incorrect clicks.
+                  {this.props.rightOnClick}!
                 </span>
               </p>
             </div>
@@ -72,9 +73,10 @@ class Replay extends Component {
                 Better luck next time! Your final score was {this.props.score}.
               </p>
               <p className='timeEnd'>
-                That equates to {this.props.right} correct clicks and
+                That means that out of {this.props.possibleCorrect} correctly
+                colored circles appearing that you clicked
                 <span style={{paddingLeft: '7px'}}>
-                  {this.props.wrong} incorrect clicks.
+                  {this.props.rightOnClick}!
                 </span>
               </p>
             </div>
