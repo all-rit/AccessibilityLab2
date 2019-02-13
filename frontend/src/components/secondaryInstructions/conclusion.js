@@ -24,11 +24,13 @@ const Conclusion = ({resetSystem}) => {
       <p className='instructionInfo'>
         If you would like to play through this again, click the button below!
       </p>
-      <Button
-        clickMethod={resetFullSystem}
-        message={"Play Again!"}
-        fontSizing={"25px"}
-      />
+      <div className='center'>
+        <Button
+          clickMethod={resetFullSystem}
+          message={"Play Again!"}
+          fontSizing={"25px"}
+        />
+      </div>
     </div>
   );
 }
