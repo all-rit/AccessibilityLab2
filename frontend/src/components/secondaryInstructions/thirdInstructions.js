@@ -7,7 +7,12 @@ Page containing the instructions for the second popup the user sees
 this instructional popup covers color contrast
 */
 const ThirdInstructions  = ({closePage, activatePopup, toWhiteBackground,
-  background}) => {
+  background, selectOption}) => {
+
+  let alreadyCalled = false;
+  if (!alreadyCalled) {
+    selectOption('Protanopia');
+  }
 
   const changeColors = () => {
     activatePopup();

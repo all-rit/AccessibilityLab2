@@ -25,6 +25,7 @@ import {
   END_INFO_STATE_THREE,
   END_SYSTEM,
   BACKGROUND_TO_WHITE,
+  BACKGROUND_TO_GREY,
   RESET_BACKGROUND,
   COLOR_CHANGE,
   END_COLOR_CHANGE,
@@ -217,6 +218,13 @@ Used to change the background to white
 */
 export const toWhiteBackground = () => ({
   type: BACKGROUND_TO_WHITE
+})
+
+/*
+Used to change the background to dark grey
+*/
+export const toGreyBackground = () => ({
+  type: BACKGROUND_TO_GREY
 })
 
 /*

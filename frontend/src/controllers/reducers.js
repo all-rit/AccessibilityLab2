@@ -25,6 +25,7 @@ import{
   END_INFO_STATE_THREE,
   END_SYSTEM,
   BACKGROUND_TO_WHITE,
+  BACKGROUND_TO_GREY,
   RESET_BACKGROUND,
   COLOR_CHANGE,
   END_COLOR_CHANGE,
@@ -66,6 +67,8 @@ export const changeColors = (state = initialColors, action = {}) => {
         gameWrongCircleTwo: initialColors.baseWrongCircleTwo});
     case BACKGROUND_TO_WHITE:
       return {...state, gameBackground: 'white'}
+    case BACKGROUND_TO_GREY:
+      return {...state, gameBackground: 'rgba(38,38,38,1)'}
     case RESET_BACKGROUND:
       return {...state, gameBackground: action.payload}
     case CHANGED_RESET:

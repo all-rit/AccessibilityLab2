@@ -188,8 +188,8 @@ class ColorChangePopup extends React.Component{
   //Renderer for the system
   render() {
 
-    if (this.props.background !== 'white') {
-      this.props.toWhiteBackground();
+    if (this.props.background !== 'rgba(38,38,38,1)') {
+      this.props.toGreyBackground();
     }
 
     const {popupController} = this.props;
@@ -306,7 +306,7 @@ class ColorChangePopup extends React.Component{
                     onChangeComplete={this.onBackgroundChange}
                     onAccept={closeBackground}
                     onCancel={revertBackground}
-                    color={this.state.background}
+                    color={this.state.background == ''?this.props.colors[0]:this.state.background}
                   />
                 </div>
                 :
@@ -332,7 +332,7 @@ class ColorChangePopup extends React.Component{
                     onChangeComplete={this.onCorrectColorChange}
                     onAccept={closeCorrectColor}
                     onCancel={revertCorrectColor}
-                    color={this.state.correctColor}
+                    color={this.state.correctColor == ''?this.props.colors[1]:this.state.correctColor}
                   />
                 </div>
                 :
@@ -358,7 +358,7 @@ class ColorChangePopup extends React.Component{
                     onChangeComplete={this.onIncorrectColorOne}
                     onAccept={closeIncorrectColorOne}
                     onCancel={revertIncorrectColorOne}
-                    color={this.state.incorrectColorOne}
+                    color={this.state.incorrectColorOne == ''?this.props.colors[2]:this.state.incorrectColorOne}
                   />
                 </div>
                 :
@@ -384,7 +384,7 @@ class ColorChangePopup extends React.Component{
                     onChangeComplete={this.onIncorrectColorTwo}
                     onAccept={closeIncorrectColorTwo}
                     onCancel={revertIncorrectColorTwo}
-                    color={this.state.incorrectColorTwo}
+                    color={this.state.incorrectColorTwo == ''?this.props.colors[3]:this.state.incorrectColorTwo}
                   />
                 </div>
                 :

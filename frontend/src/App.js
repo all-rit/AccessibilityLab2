@@ -26,7 +26,7 @@ import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup,
   endFirstGame, enterInfoState, closeInfoState, enterSecondInfoState,
   closeSecondInfoState, openLeaderboard, closeLeaderboard, openThirdInfoState,
   closeThirdInfoState, openConclusion, toWhiteBackground, resetBackground,
-  openColorChange, closeColorChange} from './controllers/actions';
+  openColorChange, closeColorChange, toGreyBackground} from './controllers/actions';
 
 //State mapping for redux
 const mapStateToProps = state => {
@@ -91,7 +91,8 @@ const mapDispatchToProps = (dispatch) => {
     onToWhiteBackground: () => dispatch(toWhiteBackground()),
     onResetBackground: (event) => dispatch(resetBackground(event)),
     onOpenColorChange: () => dispatch(openColorChange()),
-    onCloseColorChange: () => dispatch(closeColorChange())
+    onCloseColorChange: () => dispatch(closeColorChange()),
+    onToGreyBackground: () => dispatch(toGreyBackground()),
   }
 }
 
@@ -149,7 +150,8 @@ class App extends Component {
       onOpenLeaderboard, onCloseLeaderboard, fourthInfoState,
       onOpenThirdInfoState, onCloseThirdInfoState, endSystem, onOpenConclusion,
       onToWhiteBackground, onResetBackground, onOpenColorChange,
-      onCloseColorChange, colorChange, infoStateThreePrevOpen} = this.props
+      onCloseColorChange, colorChange, infoStateThreePrevOpen, onToGreyBackground}
+      = this.props
 
     //establishing array of current colors for the system
     const colors = [baseBackground, baseRightCircle, baseWrongCircleOne,
@@ -265,6 +267,7 @@ class App extends Component {
                     {thirdInfoState?
                       <ThirdInstructions
                         closePage={onCloseSecondInfoState}
+                        selectOption={onSelectOption}
                         activatePopup={onOpenColorChange}
                         toWhiteBackground={onToWhiteBackground}
                         background={baseBackground}
@@ -309,7 +312,7 @@ class App extends Component {
                                   popupController={popupController}
                                   closeColorChange={onCloseColorChange}
                                   colors={colors}
-                                  toWhiteBackground={onToWhiteBackground}
+                                  toGreyBackground={onToGreyBackground}
                                   background={baseBackground}
                                 />
                                 :
