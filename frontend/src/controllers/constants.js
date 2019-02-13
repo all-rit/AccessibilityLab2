@@ -1,6 +1,7 @@
 //Used to select the game option
 export const SELECT_OPTION = "SELECT_OPTION";
 export const RESET_OPTION = "RESET_OPTION";
+export const RESET = "RESET";
 
 //Used to control the color change popup
 export const UPDATE_DEFAULT_COLORS = "UPDATE_DEFAULT_COLORS";

@@ -26,7 +26,8 @@ import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup,
   endFirstGame, enterInfoState, closeInfoState, enterSecondInfoState,
   closeSecondInfoState, openLeaderboard, closeLeaderboard, openThirdInfoState,
   closeThirdInfoState, openConclusion, toWhiteBackground, resetBackground,
-  openColorChange, closeColorChange, toGreyBackground} from './controllers/actions';
+  openColorChange, closeColorChange, toGreyBackground, resetSystem}
+  from './controllers/actions';
 
 //State mapping for redux
 const mapStateToProps = state => {
@@ -93,6 +94,7 @@ const mapDispatchToProps = (dispatch) => {
     onOpenColorChange: () => dispatch(openColorChange()),
     onCloseColorChange: () => dispatch(closeColorChange()),
     onToGreyBackground: () => dispatch(toGreyBackground()),
+    onResetSystem: () => dispatch(resetSystem()),
   }
 }
 
@@ -150,8 +152,8 @@ class App extends Component {
       onOpenLeaderboard, onCloseLeaderboard, fourthInfoState,
       onOpenThirdInfoState, onCloseThirdInfoState, endSystem, onOpenConclusion,
       onToWhiteBackground, onResetBackground, onOpenColorChange,
-      onCloseColorChange, colorChange, infoStateThreePrevOpen, onToGreyBackground}
-      = this.props
+      onCloseColorChange, colorChange, infoStateThreePrevOpen, onToGreyBackground,
+      onResetSystem} = this.props
 
     //establishing array of current colors for the system
     const colors = [baseBackground, baseRightCircle, baseWrongCircleOne,
@@ -293,7 +295,7 @@ class App extends Component {
                           :
                           <div>
                           {endSystem?
-                            <Conclusion />
+                            <Conclusion resetSystem={onResetSystem}/>
                             :
                             <div>
                             {firstGame?
