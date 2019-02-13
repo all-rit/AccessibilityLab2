@@ -312,7 +312,7 @@ class ColorChangePopup extends React.Component{
                 :
                 <button
                   onClick={changeBackground}
-                  style={{backgroundColor:`${this.state.background}`}}
+                  style={{backgroundColor:`${this.state.background == ''?this.props.colors[0]:this.state.background}`}}
                   className='form'
                 >
                 </button>
@@ -338,7 +338,7 @@ class ColorChangePopup extends React.Component{
                 :
                 <button
                   onClick={changeCorrectColor}
-                  style={{backgroundColor:`${this.state.correctColor}`}}
+                  style={{backgroundColor:`${this.state.correctColor == ''?this.props.colors[1]:this.state.correctColor}`}}
                   className='form'
                 >
                 </button>
@@ -364,7 +364,7 @@ class ColorChangePopup extends React.Component{
                 :
                 <button
                   onClick={changeIncorrectColorOne}
-                  style={{backgroundColor:`${this.state.incorrectColorOne}`}}
+                  style={{backgroundColor:`${this.state.incorrectColorOne == ''?this.props.colors[2]:this.state.incorrectColorOne}`}}
                   className='form'
                 >
                 </button>
@@ -390,7 +390,7 @@ class ColorChangePopup extends React.Component{
                 :
                 <button
                   onClick={changeIncorrectColorTwo}
-                  style={{backgroundColor:`${this.state.incorrectColorTwo}`}}
+                  style={{backgroundColor:`${this.state.incorrectColorTwo == ''?this.props.colors[3]:this.state.incorrectColorTwo}`}}
                   className='form'
                 >
                 </button>
