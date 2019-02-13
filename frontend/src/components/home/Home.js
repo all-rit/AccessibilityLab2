@@ -18,9 +18,7 @@ const Home = ({correctColor, incorrectColorOne, incorrectColorTwo,
     onChangeGameColors(colors);
   }
 
-  console.log(background)
   if (background === 'white') {
-    console.log(baseBackground)
     resetBackground(baseBackground);
   }
 

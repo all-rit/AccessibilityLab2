@@ -25,9 +25,11 @@ import {
   END_INFO_STATE_THREE,
   END_SYSTEM,
   BACKGROUND_TO_WHITE,
+  BACKGROUND_TO_GREY,
   RESET_BACKGROUND,
   COLOR_CHANGE,
   END_COLOR_CHANGE,
+  RESET,
 } from './constants.js';
 
 /*
@@ -220,6 +222,13 @@ export const toWhiteBackground = () => ({
 })
 
 /*
+Used to change the background to dark grey
+*/
+export const toGreyBackground = () => ({
+  type: BACKGROUND_TO_GREY
+})
+
+/*
 Used to change the background from white back to the previous value
 */
 export const resetBackground = (color) => ({
@@ -239,4 +248,11 @@ Used to close the color change page
 */
 export const closeColorChange = () => ({
   type: END_COLOR_CHANGE
+})
+
+/*
+Used to reset the system from the conclusion page
+*/
+export const resetSystem = () => ({
+  type: RESET
 })

@@ -15,6 +15,7 @@ class SecondTimer extends Component {
     super(props);
     this.currentColor = null;
     this.correct = null;
+    this.possibleCorrect = 0;
     this.clicked = false;
     this.time = 1;
     this.score = 0;
@@ -40,6 +41,7 @@ class SecondTimer extends Component {
         if (this.clicked) {
           if (this.correct) {
             this.numRightOnClick ++;
+            this.possibleCorrect ++;
             if (this.time < .1) {
               this.score += 100;
             } else if (this.time > .1 && this.time < .21) {
@@ -66,6 +68,7 @@ class SecondTimer extends Component {
         } else {
           if (this.correct) {
             this.numWrongOnNoClick ++;
+            this.possibleCorrect ++;
             this.score -= 100;
           } else {
             this.numRightOnNoClick ++;
@@ -160,6 +163,8 @@ class SecondTimer extends Component {
             right={this.numRightOnClick+this.numRightOnNoClick}
             wrong={this.numWrongOnClick+this.numWrongOnNoClick}
             gameOption={gameOption}
+            possibleCorrect={this.possibleCorrect}
+            rightOnClick={this.numRightOnClick}
             gameMode={gameOption.toUpperCase()}
             changeGameColors={this.props.onChangeGameColors}
             colors={this.props.colors}

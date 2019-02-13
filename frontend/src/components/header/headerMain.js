@@ -14,7 +14,16 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
   changeGameColors, openAboutPage, aboutState, closeAboutPage, admin,
   openStatPage, closeStatPage, statState, firstGame, gamesPlayed,
   openLeaderboard, closeLeaderboard, leaderboardState, openColorChange,
-  colorChange}) => {
+  colorChange, closeColorChange, openSecondInfoState}) => {
+
+  const backButton = () => {
+    if (gamesPlayed == 2) {
+      closeColorChange();
+      openSecondInfoState();
+    } else {
+      closeColorChange();
+    }
+  }
 
   return (
     <div className='headerStyle'>
@@ -58,7 +67,11 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
                 :
                 <div>
                 {colorChange?
-                  null
+                  <Button
+                    clickMethod={backButton}
+                    message={"Back"}
+                    fontSizing={"25px"}
+                  />
                   :
                   <div className='oneline'>
                     <Button

@@ -8,11 +8,6 @@ Responible for displaying the fourth and final page of instructions to the users
 const FourthInstructions = ({closePage, activatePopup, endSystem,
   toWhiteBackground, background}) => {
 
-  const changeColors = () => {
-    activatePopup(true);
-    closePage();
-  }
-
   const endGame = () => {
     endSystem();
     closePage();
@@ -61,7 +56,7 @@ const FourthInstructions = ({closePage, activatePopup, endSystem,
           fontSizing={"25px"}
         />
         <Button
-          clickMethod={changeColors}
+          clickMethod={activatePopup}
           message={"Make Adjustments!"}
           fontSizing={"20px"}
         />

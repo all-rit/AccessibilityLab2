@@ -29,13 +29,16 @@ const StartGame = ({selectOption, startGame, gameOption,
             </p>
             :
             <div>
-            {gamesPlayed>1?
+            {gamesPlayed===2?
+              <p>
+                Click the button to restart the game with the same color vision
+                defiency!
+              </p>
+              :
               <p>
                 Choose a color vision defiency and click the button to start the
                 game!
               </p>
-              :
-              null
             }
             </div>
           }
@@ -54,7 +57,7 @@ const StartGame = ({selectOption, startGame, gameOption,
           </div>
           :
           <div>
-          {gamesPlayed===1?
+          {gamesPlayed < 3?
             <div className='center'>
               <Start
                 startGame={startGame}

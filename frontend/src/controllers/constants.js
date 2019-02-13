@@ -1,6 +1,7 @@
 //Used to select the game option
 export const SELECT_OPTION = "SELECT_OPTION";
 export const RESET_OPTION = "RESET_OPTION";
+export const RESET = "RESET";
 
 //Used to control the color change popup
 export const UPDATE_DEFAULT_COLORS = "UPDATE_DEFAULT_COLORS";
@@ -9,6 +10,7 @@ export const ACTIVATE_POPUP = "ACTIVATE_POPUP";
 export const RESET_COLORS = "RESET_COLORS";
 export const CHANGED_RESET = "CHANGED_RESET";
 export const BACKGROUND_TO_WHITE = "BACKGROUND_TO_WHITE";
+export const BACKGROUND_TO_GREY = "BACKGROUND_TO_GREY"
 export const RESET_BACKGROUND = "RESET_BACKGROUND";
 
 //Used to control the different state options (about page, stats page, game page)

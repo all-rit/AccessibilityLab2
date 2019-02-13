@@ -25,9 +25,11 @@ import{
   END_INFO_STATE_THREE,
   END_SYSTEM,
   BACKGROUND_TO_WHITE,
+  BACKGROUND_TO_GREY,
   RESET_BACKGROUND,
   COLOR_CHANGE,
   END_COLOR_CHANGE,
+  RESET,
 } from "./constants.js"
 
 //Declaing initial state for the colors in the system
@@ -66,11 +68,24 @@ export const changeColors = (state = initialColors, action = {}) => {
         gameWrongCircleTwo: initialColors.baseWrongCircleTwo});
     case BACKGROUND_TO_WHITE:
       return {...state, gameBackground: 'white'}
+    case BACKGROUND_TO_GREY:
+      return {...state, gameBackground: 'rgba(38,38,38,1)'}
     case RESET_BACKGROUND:
-      console.log('Resetting background: ' + action.payload)
       return {...state, gameBackground: action.payload}
     case CHANGED_RESET:
       return Object.assign({}, state, {changed: false});
+    case RESET:
+      return {...state, baseBackground: "#01581F",
+        baseRightCircle: "#B44040",
+        baseWrongCircleOne: "#948534",
+        baseWrongCircleTwo: "#57CC14",
+        gameBackground: '#01581F',
+        gameRightCircle: '#B44040',
+        gameWrongCircleOne: '#948534',
+        gameWrongCircleTwo: '#57CC14',
+        popup: false,
+        changed: false
+      }
     default:
       return state;
   }
@@ -87,6 +102,8 @@ export const selectGameOption = (state = initialOption, action = {}) => {
     case SELECT_OPTION:
       return {...state, option: action.payload};
     case RESET_OPTION:
+      return {...state, option: 'Main'};
+    case RESET:
       return {...state, option: 'Main'};
     default:
       return state;
@@ -131,12 +148,12 @@ export const changeGameState = (state = initialGameState, action = {}) => {
       return {...state, statState: false}
     case INFO_STATE:
       return {...state, secondInfoState: true, gameState: false,
-        gamesPlayed: initialGameState.gamesPlayed += 1}
+        gamesPlayed: initialGameState.gamesPlayed = 1}
     case END_INFO_STATE:
       return {...state, secondInfoState: false}
     case INFO_STATE_TWO:
       return {...state, thirdInfoState: true, gameState: false,
-        gamesPlayed: initialGameState.gamesPlayed += 1}
+        gamesPlayed: initialGameState.gamesPlayed = 2}
     case END_INFO_STATE_TWO:
       return {...state, thirdInfoState: false}
     case OPEN_LEADERBOARD:
@@ -145,16 +162,31 @@ export const changeGameState = (state = initialGameState, action = {}) => {
       return {...state, leaderboardState: false, fourthInfoState: initialGameState.infoStateFourPrevOpen}
     case INFO_STATE_THREE:
       return {...state, fourthInfoState: true, gameState: false,
-        gamesPlayed: initialGameState.gamesPlayed += 1}
+        gamesPlayed: initialGameState.gamesPlayed = 3}
     case END_INFO_STATE_THREE:
       return {...state, fourthInfoState: false}
     case END_SYSTEM:
       return {...state, endSystem: true}
     case COLOR_CHANGE:
-      console.log('moving to color change state')
       return {...state, colorChangeState: true, fourthInfoState: false, thirdInfoState: false}
     case END_COLOR_CHANGE:
       return {...state, colorChangeState: false}
+    case RESET:
+      return {...state, gameState: false,
+        oneGamePlayed: false,
+        secondInfoState: false,
+        thirdInfoState: false,
+        aboutState: false,
+        statState: false,
+        firstGame: true,
+        secondGame: false,
+        gamesPlayed: 0,
+        leaderboardState: false,
+        fourthInfoState: false,
+        endSystem: false,
+        infoStateFourPrevOpen: false,
+        colorChangeState: false,
+      }
     default:
       return state;
   }
