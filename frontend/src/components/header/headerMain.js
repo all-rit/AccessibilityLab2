@@ -114,7 +114,13 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
       {loggedIn?
         <Signout user={user} admin={admin} openStatPage={openStatPage}/>
         :
-        <Google />
+        <div>
+          {firstGame?
+            <Google />
+            :
+            null
+          }
+        </div>
       }
     </div>
   );
