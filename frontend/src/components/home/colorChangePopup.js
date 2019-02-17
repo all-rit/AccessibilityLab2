@@ -143,10 +143,14 @@ class ColorChangePopup extends React.Component{
   verifyInput = () => {
     var {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
 
-    if (background.length !== 7 || correctColor.length !== 7 ||
-      incorrectColorOne.length !== 7 || incorrectColorTwo.length !== 7) {
-      this.setState({errorLength: true})
-      return false;
+    if (background.length !== 7) {
+      this.setState({background: this.props.colors[0]})
+    } if (correctColor.length !== 7) {
+      this.setState({correctColor: this.props.colors[1]})
+    } if (incorrectColorOne.length !== 7) {
+      this.setState({incorrectColorOne: this.props.colors[2]})
+    } if (incorrectColorTwo.length !== 7) {
+      this.setState({incorrectColorTwo: this.props.colors[3]})
     }
 
     if (!this.ensureNotEqual()) {
@@ -175,8 +179,10 @@ class ColorChangePopup extends React.Component{
     this.setState({errorEqual: false})
     this.setState({errorHex: false})
     this.setState({errorDarkBackground: false})
-    console.log(colors);
     if (this.verifyInput()) {
+      colors = [this.state.background, this.state.correctColor,
+        this.state.incorrectColorOne, this.state.incorrectColorTwo];
+      console.log(colors);
       this.props.changeDefaultColors(colors);
       this.props.changeGameColors(colors);
       this.props.closeColorChange();
@@ -269,6 +275,13 @@ class ColorChangePopup extends React.Component{
       this.onControlIncorrectPopupTwo(false);
     }
 
+    if (this.state.background == '') {
+      this.setState({background: this.props.colors[0],
+        correctColor: this.props.colors[1], incorrectColorOne: this.props.colors[2],
+        incorrectColorTwo: this.props.colors[3]
+      })
+    }
+
     return (
       <div>
         <div>
@@ -306,13 +319,13 @@ class ColorChangePopup extends React.Component{
                     onChangeComplete={this.onBackgroundChange}
                     onAccept={closeBackground}
                     onCancel={revertBackground}
-                    color={this.state.background == ''?this.props.colors[0]:this.state.background}
+                    color={this.state.background}
                   />
                 </div>
                 :
                 <button
                   onClick={changeBackground}
-                  style={{backgroundColor:`${this.state.background == ''?this.props.colors[0]:this.state.background}`}}
+                  style={{backgroundColor: this.state.background}}
                   className='form'
                 >
                 </button>
@@ -332,13 +345,13 @@ class ColorChangePopup extends React.Component{
                     onChangeComplete={this.onCorrectColorChange}
                     onAccept={closeCorrectColor}
                     onCancel={revertCorrectColor}
-                    color={this.state.correctColor == ''?this.props.colors[1]:this.state.correctColor}
+                    color={this.state.correctColor}
                   />
                 </div>
                 :
                 <button
                   onClick={changeCorrectColor}
-                  style={{backgroundColor:`${this.state.correctColor == ''?this.props.colors[1]:this.state.correctColor}`}}
+                  style={{backgroundColor: this.state.correctColor}}
                   className='form'
                 >
                 </button>
@@ -358,13 +371,13 @@ class ColorChangePopup extends React.Component{
                     onChangeComplete={this.onIncorrectColorOne}
                     onAccept={closeIncorrectColorOne}
                     onCancel={revertIncorrectColorOne}
-                    color={this.state.incorrectColorOne == ''?this.props.colors[2]:this.state.incorrectColorOne}
+                    color={this.state.incorrectColorOne}
                   />
                 </div>
                 :
                 <button
                   onClick={changeIncorrectColorOne}
-                  style={{backgroundColor:`${this.state.incorrectColorOne == ''?this.props.colors[2]:this.state.incorrectColorOne}`}}
+                  style={{backgroundColor:this.state.incorrectColorOne}}
                   className='form'
                 >
                 </button>
@@ -384,13 +397,13 @@ class ColorChangePopup extends React.Component{
                     onChangeComplete={this.onIncorrectColorTwo}
                     onAccept={closeIncorrectColorTwo}
                     onCancel={revertIncorrectColorTwo}
-                    color={this.state.incorrectColorTwo == ''?this.props.colors[3]:this.state.incorrectColorTwo}
+                    color={this.state.incorrectColorTwo}
                   />
                 </div>
                 :
                 <button
                   onClick={changeIncorrectColorTwo}
-                  style={{backgroundColor:`${this.state.incorrectColorTwo == ''?this.props.colors[3]:this.state.incorrectColorTwo}`}}
+                  style={{backgroundColor:this.state.incorrectColorTwo}}
                   className='form'
                 >
                 </button>

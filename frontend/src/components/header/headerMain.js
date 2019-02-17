@@ -67,11 +67,21 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
                 :
                 <div>
                 {colorChange?
-                  <Button
-                    clickMethod={backButton}
-                    message={"Back"}
-                    fontSizing={"25px"}
-                  />
+                  <div className='inlineForm'>
+                    <Button
+                      clickMethod={backButton}
+                      message={"Back"}
+                      fontSizing={"25px"}
+                    />
+                    <p
+                      className='mainColor secondTitle'
+                      style={{marginTop: '15px', marginLeft: '25px'}}
+                    >
+                      &#60;div&#62;
+                      Adjust the colors below to be in better color contrast
+                      &#60;/div&#62;
+                    </p>
+                  </div>
                   :
                   <div className='oneline'>
                     <Button
