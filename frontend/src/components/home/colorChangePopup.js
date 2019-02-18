@@ -82,24 +82,48 @@ class ColorChangePopup extends React.Component{
     return false;
   }
 
-  //Ensures all of the formats of the colors are in proper hex format
-  ensureProperHex = () => {
-    var {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
-    var check = [background, correctColor, incorrectColorOne, incorrectColorTwo];
-    console.log(check)
-    for (var i = 0; i < check.length; i++) {
-      var color = check[i];
-      if (color[0] === "#") {
-        color = color.slice(1,8)
-        if (color.replace(/[^a-f0-9]+$/i, '@') !== color) {
-          return false;
-        }
-      } else {
-        return false;
-      }
+  checkAlert = () => {
+    const {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
+    let changed = 0;
+    if (background !== this.props.colors[0]) {
+      changed++;
     }
-    return true;
+    if (correctColor !== this.props.colors[1]) {
+      changed++;
+    }
+    if (incorrectColorOne !== this.props.colors[2]) {
+      changed++;
+    }
+    if (incorrectColorTwo !== this.props.colors[3]) {
+      changed++;
+    }
+    if (changed != 4) {
+      return window.confirm(`You have only changed ${changed} of the four colors.
+        Are you sure you would like to submit?`)
+    }
+    else {
+      return true;
+    }
   }
+
+  // //Ensures all of the formats of the colors are in proper hex format
+  // ensureProperHex = () => {
+  //   var {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
+  //   var check = [background, correctColor, incorrectColorOne, incorrectColorTwo];
+  //   console.log(check)
+  //   for (var i = 0; i < check.length; i++) {
+  //     var color = check[i];
+  //     if (color[0] === "#") {
+  //       color = color.slice(1,8)
+  //       if (color.replace(/[^a-f0-9]+$/i, '@') !== color) {
+  //         return false;
+  //       }
+  //     } else {
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
 
   //Ensures none of the colors entered are black to too close to black
   ensureNotBlack = () => {
@@ -143,32 +167,32 @@ class ColorChangePopup extends React.Component{
   verifyInput = () => {
     var {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
 
-    if (background.length !== 7) {
-      this.setState({background: this.props.colors[0]})
-    } if (correctColor.length !== 7) {
-      this.setState({correctColor: this.props.colors[1]})
-    } if (incorrectColorOne.length !== 7) {
-      this.setState({incorrectColorOne: this.props.colors[2]})
-    } if (incorrectColorTwo.length !== 7) {
-      this.setState({incorrectColorTwo: this.props.colors[3]})
-    }
+    // if (background.length !== 7) {
+    //   this.setState({background: this.props.colors[0]})
+    // } if (correctColor.length !== 7) {
+    //   this.setState({correctColor: this.props.colors[1]})
+    // } if (incorrectColorOne.length !== 7) {
+    //   this.setState({incorrectColorOne: this.props.colors[2]})
+    // } if (incorrectColorTwo.length !== 7) {
+    //   this.setState({incorrectColorTwo: this.props.colors[3]})
+    // }
 
     if (!this.ensureNotEqual()) {
       this.setState({errorEqual: true})
       return false;
     }
 
-    if (!this.ensureProperHex()) {
-      this.setState({errorHex: true})
-      return false;
-    }
+    // if (!this.ensureProperHex()) {
+    //   this.setState({errorHex: true})
+    //   return false;
+    // }
 
     if (!this.ensureNotBlack()) {
       this.setState({errorDarkBackground: true})
       return false;
     }
 
-    return true;
+    return this.checkAlert();
   }
 
   //Submits the colors for the system
