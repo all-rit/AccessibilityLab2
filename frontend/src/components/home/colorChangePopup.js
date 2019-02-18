@@ -106,25 +106,6 @@ class ColorChangePopup extends React.Component{
     }
   }
 
-  // //Ensures all of the formats of the colors are in proper hex format
-  // ensureProperHex = () => {
-  //   var {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
-  //   var check = [background, correctColor, incorrectColorOne, incorrectColorTwo];
-  //   console.log(check)
-  //   for (var i = 0; i < check.length; i++) {
-  //     var color = check[i];
-  //     if (color[0] === "#") {
-  //       color = color.slice(1,8)
-  //       if (color.replace(/[^a-f0-9]+$/i, '@') !== color) {
-  //         return false;
-  //       }
-  //     } else {
-  //       return false;
-  //     }
-  //   }
-  //   return true;
-  // }
-
   //Ensures none of the colors entered are black to too close to black
   ensureNotBlack = () => {
     const {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
