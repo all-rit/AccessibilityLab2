@@ -14,7 +14,7 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
   changeGameColors, openAboutPage, aboutState, closeAboutPage, admin,
   openStatPage, closeStatPage, statState, firstGame, gamesPlayed,
   openLeaderboard, closeLeaderboard, leaderboardState, openColorChange,
-  colorChange, closeColorChange, openSecondInfoState}) => {
+  colorChange, closeColorChange, openSecondInfoState, thirdInfoState}) => {
 
   const backButton = () => {
     if (gamesPlayed == 2) {
@@ -90,7 +90,7 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
                       fontSizing={"17px"}
                     />
                     <div>
-                    {gamesPlayed > 1?
+                    {gamesPlayed > 1 && !thirdInfoState?
                       <ColorUpdate
                         openColorChange={openColorChange}
                       />

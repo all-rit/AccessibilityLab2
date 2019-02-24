@@ -218,6 +218,7 @@ class App extends Component {
               closeLeaderboard={onCloseLeaderboard}
               leaderboardState={leaderboardState}
               openColorChange={onOpenColorChange}
+              thirdInfoState={thirdInfoState}
               colorChange={colorChange}
               closeColorChange={onCloseColorChange}
               openSecondInfoState={onEnterSecondInfoState}
