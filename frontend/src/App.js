@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import ReactGA from 'react-ga';
+import "@reach/dialog/styles.css";
 import './App.css';
 import Title from './components/header/title';
 import Home from './components/home/Home';

@@ -1,5 +1,6 @@
 import React from 'react';
 import {PhotoshopPicker} from 'react-color';
+import { Dialog } from "@reach/dialog";
 import './popup.css';
 
 /*
@@ -23,7 +24,9 @@ class ColorChangePopup extends React.Component{
       backgroundPopup: false,
       correctColorPopup: false,
       incorrectColorOnePopup: false,
-      incorrectColorTwoPopup: false
+      incorrectColorTwoPopup: false,
+      confirmPopup: false,
+      numberChanged: 0,
     }
   }
 
@@ -71,10 +74,12 @@ class ColorChangePopup extends React.Component{
   //Ensures none of the values entered are equal to one another
   ensureNotEqual = () => {
     const {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
-    if (background !== correctColor || background !== incorrectColorOne ||
-      background !== incorrectColorTwo) {
-      if (correctColor !== incorrectColorOne || correctColor !== incorrectColorTwo) {
-        if (incorrectColorOne !== incorrectColorTwo) {
+    if (background.toUpperCase() !== correctColor.toUpperCase() &&
+      background.toUpperCase() !== incorrectColorOne.toUpperCase() &&
+      background.toUpperCase() !== incorrectColorTwo.toUpperCase()) {
+      if (correctColor.toUpperCase() !== incorrectColorOne.toUpperCase() &&
+        correctColor.toUpperCase() !== incorrectColorTwo.toUpperCase()) {
+        if (incorrectColorOne.toUpperCase() !== incorrectColorTwo.toUpperCase()) {
           return true;
         }
       }
@@ -98,11 +103,11 @@ class ColorChangePopup extends React.Component{
       changed++;
     }
     if (changed != 4) {
-      return window.confirm(`You have only changed ${changed} of the four colors.
-        Are you sure you would like to submit?`)
-    }
-    else {
-      return true;
+      this.setState({confirmPopup: true, numberChanged: changed})
+      // return window.confirm(`You have only changed ${changed} of the four colors.
+      //   Are you sure you would like to submit?`)
+    } else {
+      this.onFinalSubmit();
     }
   }
 
@@ -146,34 +151,24 @@ class ColorChangePopup extends React.Component{
 
   //Verifies the input by the user
   verifyInput = () => {
-    var {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
-
-    // if (background.length !== 7) {
-    //   this.setState({background: this.props.colors[0]})
-    // } if (correctColor.length !== 7) {
-    //   this.setState({correctColor: this.props.colors[1]})
-    // } if (incorrectColorOne.length !== 7) {
-    //   this.setState({incorrectColorOne: this.props.colors[2]})
-    // } if (incorrectColorTwo.length !== 7) {
-    //   this.setState({incorrectColorTwo: this.props.colors[3]})
-    // }
-
     if (!this.ensureNotEqual()) {
       this.setState({errorEqual: true})
-      return false;
     }
-
-    // if (!this.ensureProperHex()) {
-    //   this.setState({errorHex: true})
-    //   return false;
-    // }
-
-    if (!this.ensureNotBlack()) {
+    else if (!this.ensureNotBlack()) {
       this.setState({errorDarkBackground: true})
-      return false;
     }
+    else {
+      this.checkAlert();
+    }
+  }
 
-    return this.checkAlert();
+  onFinalSubmit = () => {
+    let colors = [this.state.background, this.state.correctColor,
+    this.state.incorrectColorOne, this.state.incorrectColorTwo];
+    console.log(colors);
+    this.props.changeDefaultColors(colors);
+    this.props.changeGameColors(colors);
+    this.props.closeColorChange();
   }
 
   //Submits the colors for the system
@@ -184,16 +179,7 @@ class ColorChangePopup extends React.Component{
     this.setState({errorEqual: false})
     this.setState({errorHex: false})
     this.setState({errorDarkBackground: false})
-    if (this.verifyInput()) {
-      colors = [this.state.background, this.state.correctColor,
-        this.state.incorrectColorOne, this.state.incorrectColorTwo];
-      console.log(colors);
-      this.props.changeDefaultColors(colors);
-      this.props.changeGameColors(colors);
-      this.props.closeColorChange();
-    } else {
-      this.errorInInput = true;
-    }
+    this.verifyInput()
   }
 
   //Renderer for the system
@@ -290,29 +276,62 @@ class ColorChangePopup extends React.Component{
     return (
       <div>
         <div>
-          {this.state.errorLength ?
-            <p className='error'>Error in the length of the string entered</p>
+          {this.state.confirmPopup ?
+            <Dialog>
+              <p className='center fourthTitle'>
+                You've changed {this.state.numberChanged} out of the 4 colors.
+                Are you sure you would like to submit?
+              </p>
+              <div className='center'>
+                <button
+                  onClick={() => this.setState({confirmPopup: false})}
+                  className="buttonPopup"
+                >
+                  No
+                </button>
+                <button
+                  onClick={() => this.onFinalSubmit()}
+                  className="buttonPopup"
+                >
+                  Yes
+                </button>
+              </div>
+            </Dialog>
                 : null
           }
           {this.state.errorEqual ?
-            <p className='error'>
-              Two or more of the values entered were equal to one another
-            </p>
-              : null
-          }
-          {this.state.errorHex ?
-            <p className='error'>
-              Hex information entered was incorrect. Please make sure to have
-              '#' in the hex string
-            </p>
+            <Dialog>
+              <p className='fourthTitle center'>
+                Two of your entered colors are equal to one another.
+                Please make adjustments and submit again.
+              </p>
+              <div className='center'>
+                <button
+                  onClick={() => this.setState({errorEqual: false})}
+                  className="buttonPopup"
+                >
+                  Make changes
+                </button>
+              </div>
+            </Dialog>
               : null
           }
           {this.state.errorDarkBackground ?
-              <p className='error'>
-                Background elements were too close to or were black.
-                This is not allowed.
+            <Dialog>
+              <p className='fourthTitle center'>
+                One or more of the colors you entered are too dark.
+                Please make adjustments and submit again.
               </p>
-              : null
+              <div className='center'>
+                <button
+                  onClick={() => this.setState({errorDarkBackground: false})}
+                  className="buttonPopup"
+                >
+                  Make changes
+                </button>
+              </div>
+            </Dialog>
+            : null
           }
           <div className='mainColor tab'>
             <p className='boarder'>.home &#123;</p>
