@@ -205,6 +205,7 @@ class SecondTimer extends Component {
               isHex={isHex}
               background={background}
               currentColor={this.currentColor}
+              gameMode={gameOption}
             />
           </div>
           }
