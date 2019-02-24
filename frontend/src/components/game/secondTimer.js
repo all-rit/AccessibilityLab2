@@ -160,10 +160,11 @@ class SecondTimer extends Component {
             gameEnded={this.props.gameEnded}
             onUpdateTime={onUpdateTime}
             score={this.score}
-            right={this.numRightOnClick+this.numRightOnNoClick}
-            wrong={this.numWrongOnClick+this.numWrongOnNoClick}
+            rightClick={this.numRightOnClick}
+            rightNoClick={this.numRightOnNoClick}
+            wrongClick={this.numWrongOnClick}
+            wrongNoClick={this.numWrongOnNoClick}
             gameOption={gameOption}
-            possibleCorrect={this.possibleCorrect}
             rightOnClick={this.numRightOnClick}
             gameMode={gameOption.toUpperCase()}
             changeGameColors={this.props.onChangeGameColors}
@@ -204,6 +205,7 @@ class SecondTimer extends Component {
               isHex={isHex}
               background={background}
               currentColor={this.currentColor}
+              gameMode={gameOption}
             />
           </div>
           }
