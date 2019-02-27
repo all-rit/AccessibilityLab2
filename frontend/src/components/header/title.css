@@ -113,3 +113,12 @@
 .Button:hover {
   cursor: pointer;
 }
+
+.deficiencyCheck {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-left: 25px;
+  font-size: 25px;
+  padding-top: 10px;
+}

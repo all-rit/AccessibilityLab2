@@ -14,7 +14,7 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
   changeGameColors, openAboutPage, aboutState, closeAboutPage, admin,
   openStatPage, closeStatPage, statState, firstGame, gamesPlayed,
   openLeaderboard, closeLeaderboard, leaderboardState, openColorChange,
-  colorChange, closeColorChange, openSecondInfoState, thirdInfoState}) => {
+  colorChange, closeColorChange, openSecondInfoState, thirdInfoState, gameMode}) => {
 
   const backButton = () => {
     if (gamesPlayed == 2) {
@@ -28,14 +28,19 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
   return (
     <div className='headerStyle'>
       {gameState?
-        <Home
-          gameEnded={gameEnded}
-          baseBackground={baseBackground}
-          baseRightCircle={baseRightCircle}
-          baseWrongCircleOne={baseWrongCircleOne}
-          baseWrongCircleTwo={baseWrongCircleTwo}
-          changeGameColors={changeGameColors}
-        />
+        <div className='oneline center'>
+          <Home
+            gameEnded={gameEnded}
+            baseBackground={baseBackground}
+            baseRightCircle={baseRightCircle}
+            baseWrongCircleOne={baseWrongCircleOne}
+            baseWrongCircleTwo={baseWrongCircleTwo}
+            changeGameColors={changeGameColors}
+          />
+          <p className='deficiencyCheck'>
+            Vision Deficiency Simulation: {gameMode === 'Main'?' Off':' On'}
+          </p>
+        </div>
         :
         <div>
         {aboutState?
