@@ -201,6 +201,7 @@ class App extends Component {
               popupController={popupController}
               loggedIn={loggedIn}
               user={user}
+              gameMode={gameOption}
               baseBackground={baseBackground}
               baseRightCircle={baseRightCircle}
               baseWrongCircleOne={baseWrongCircleOne}
