@@ -284,16 +284,16 @@ class ColorChangePopup extends React.Component{
               </p>
               <div className='center'>
                 <button
-                  onClick={() => this.setState({confirmPopup: false})}
-                  className="buttonPopup"
-                >
-                  No
-                </button>
-                <button
                   onClick={() => this.onFinalSubmit()}
                   className="buttonPopup"
                 >
                   Yes
+                </button>
+                <button
+                  onClick={() => this.setState({confirmPopup: false})}
+                  className="buttonPopup"
+                >
+                  No
                 </button>
               </div>
             </Dialog>

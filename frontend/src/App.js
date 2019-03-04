@@ -186,7 +186,7 @@ class App extends Component {
           <div style={{background: `${gameBackground}`}} className='main'>
             {changed?
               <Countdown
-                date={Date.now() + 2000}
+                date={Date.now() + 5000}
                 intervalDelay={1000}
                 precision={2}
                 renderer={renderer}

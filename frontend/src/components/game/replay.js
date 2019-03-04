@@ -45,14 +45,16 @@ class Replay extends Component {
 
     return(
       <div>
-        <div className='replay_screen'>
-          <div className='left'>
-            <ScoreBreakdown />
-            <PreviousGames score={this.props.score} mode={this.props.gameMode}/>
-            <ScoreComparison score={this.props.score} mode={this.props.gameMode}/>
-          </div>
-        </div>
-        <div>
+        {/*
+         <div className='replay_screen'>
+           <div className='left'>
+             <ScoreBreakdown />
+             <PreviousGames score={this.props.score} mode={this.props.gameMode}/>
+             <ScoreComparison score={this.props.score} mode={this.props.gameMode}/>
+           </div>
+         </div>
+        */}
+        <div style={{marginTop: '100px'}}>
           <div>
             {this.props.score > 0 ?
             <div>
