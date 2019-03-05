@@ -25,9 +25,12 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
     }
   }
 
-  return (
-    <div className='headerStyle'>
-      {gameState?
+  if (gameState) {
+    return (
+      <div
+        className='headerStyle'
+        style={{background: "black"}}
+      >
         <div className='oneline center'>
           <Home
             gameEnded={gameEnded}
@@ -41,8 +44,24 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
             Vision Deficiency Simulation: {gameMode === 'Main'?' Off':' On'}
           </p>
         </div>
-        :
-        <div>
+        {loggedIn?
+          <Signout user={user} admin={admin} openStatPage={openStatPage}/>
+          :
+          <div>
+            {firstGame?
+              <Google />
+              :
+              null
+            }
+          </div>
+        }
+      </div>
+    );
+  }
+
+  return (
+    <div className='headerStyle'>
+      <div>
         {aboutState?
           <Button
             clickMethod={closeAboutPage}
@@ -80,7 +99,8 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
                     />
                     <p
                       className='mainColor secondTitle'
-                      style={{marginTop: '15px', marginLeft: '25px'}}
+                      style={{marginTop: '15px', marginLeft: '25px',
+                      background: 'rgba(38,38,38,1)'}}
                     >
                       Adjust the colors below to be in better color contrast
                     </p>
@@ -123,7 +143,6 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
           </div>
         }
         </div>
-      }
       {loggedIn?
         <Signout user={user} admin={admin} openStatPage={openStatPage}/>
         :

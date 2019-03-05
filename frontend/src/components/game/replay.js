@@ -54,7 +54,7 @@ class Replay extends Component {
            </div>
          </div>
         */}
-        <div style={{marginTop: '100px'}}>
+        <div style={{marginTop: '75px'}}>
           <div>
             {this.props.score > 0 ?
             <div>
@@ -73,11 +73,18 @@ class Replay extends Component {
               <p className='timeEnd'>
                 Better luck next time! Your final score was {this.props.score}.
               </p>
+              <p className='timeEnd'>That equates to:</p>
               <p className='timeEnd'>
-                That equates to {this.props.rightClick} correctly clicked
-                circles, {this.props.rightNoClick} correctly not clicked
-                circles, {this.props.wrongClick} incorrectly clicked
-                circles, and {this.props.wrongNoClick} missed circles.
+                {this.props.rightClick} correctly clicked circles
+              </p>
+              <p className='timeEnd'>
+                {this.props.rightNoClick} correctly not clicked circles
+              </p>
+              <p className='timeEnd'>
+                {this.props.wrongClick} incorrectly clicked circles
+              </p>
+              <p className='timeEnd'>
+                {this.props.wrongNoClick} missed circles
               </p>
             </div>
             }
