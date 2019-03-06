@@ -205,4 +205,13 @@ td {
 
 .replayBreakdown {
   font-size: 25px;
+  background: lightBlue;
+}
+
+.positiveData {
+  background-color: green;
+}
+
+.negativeData {
+  background-color: red
 }

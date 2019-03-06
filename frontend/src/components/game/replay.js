@@ -66,27 +66,67 @@ class Replay extends Component {
               </p>
             }
             <div>
-              <table style={{boarder: 'none'}} className="center">
+              <table style={{backgroud: 'white'}} className="center">
                 <tbody style={{border: '2px solid black'}}>
                   <tr>
                     <td className='replayBreakdown'>Final Score</td>
-                    <td className='replayBreakdown'>{this.props.score}</td>
+                    {this.props.score > 0 ?
+                      <td className='replayBreakdown positiveData'>
+                        {this.props.score}
+                      </td>
+                      :
+                      <td className='replayBreakdown negativeData'>
+                        {this.props.score}
+                      </td>
+                    }
                   </tr>
                   <tr>
                     <td className='replayBreakdown'>Correctly clicked circles</td>
-                    <td className='replayBreakdown'>{this.props.rightClick}</td>
+                    {this.props.rightClick - this.props.wrongNoClick > 0 ?
+                      <td className='replayBreakdown positiveData'>
+                        {this.props.rightClick}
+                      </td>
+                      :
+                      <td className='replayBreakdown negativeData'>
+                        {this.props.rightClick}
+                      </td>
+                    }
                   </tr>
                   <tr>
                     <td className='replayBreakdown'>Correctly not clicked circles</td>
-                    <td className='replayBreakdown'>{this.props.rightNoClick}</td>
+                    {this.props.rightNoClick > 0 ?
+                      <td className='replayBreakdown positiveData'>
+                        {this.props.rightNoClick}
+                      </td>
+                      :
+                      <td className='replayBreakdown negativeData'>
+                        {this.props.rightNoClick}
+                      </td>
+                    }
                   </tr>
                   <tr>
                     <td className='replayBreakdown'>Incorrectly clicked circles</td>
-                    <td className='replayBreakdown'>{this.props.wrongClick}</td>
+                    {this.props.wrongClick == 0 ?
+                      <td className='replayBreakdown positiveData'>
+                        {this.props.wrongClick}
+                      </td>
+                      :
+                      <td className='replayBreakdown negativeData'>
+                        {this.props.wrongClick}
+                      </td>
+                    }
                   </tr>
                   <tr>
                     <td className='replayBreakdown'>Missed clicks</td>
-                    <td className='replayBreakdown'>{this.props.wrongNoClick}</td>
+                    {this.props.wrongNoClick == 0 ?
+                      <td className='replayBreakdown positiveData'>
+                        {this.props.wrongNoClick}
+                      </td>
+                      :
+                      <td className='replayBreakdown negativeData'>
+                        {this.props.wrongNoClick}
+                      </td>
+                    }
                   </tr>
                 </tbody>
               </table>
