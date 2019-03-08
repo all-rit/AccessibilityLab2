@@ -33,7 +33,7 @@ const SuppMaterials = () => {
             </Link>
           </span>
         </p>
-        <p className='suppP'>
+        <p className='suppP' style={{paddingTop: '20px'}}>
           &#10142; You can also go back to the main application
           <span style={{marginLeft: '4px'}}>
             <Link to='/'>

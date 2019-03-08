@@ -26,6 +26,44 @@
   margin-left: auto;
   margin-right: auto;
   width: 50%;
-  height: 700px;
-  width: 400px;
+  height: 500px;
+  width: 300px;
+}
+
+.colorImage {
+  height: 300px;
+  width: 500px;
+}
+
+.group {
+  display: flex;
+  justify-content: space-around;
+  margin: 0px 50px 0px 50px;
+}
+
+.accessibilityImage {
+  height: 500px;
+  width: 300px;
+}
+
+.caseStudyText {
+  margin-top: 0px;
+  text-align: center;
+}
+
+.extraMarginOne {
+  margin-top: 7em;
+}
+
+.extraMarginTwo {
+  margin-top: 5em;
+}
+
+.extraMarginThree {
+  margin-top: 3em;
+}
+
+.linkTag {
+  margin-left: 3px;
+  margin-right: 3px;
 }
