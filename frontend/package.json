@@ -30,7 +30,7 @@
     "semantic-ui-react": "^0.85.0"
   },
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack --mode production --env.ENVIRONMENT=production --config webpack.config.js",
     "start": "webpack-dev-server --mode development --port 3000 --env.ENVIRONMENT=production --config webpack.config.js --host 129.21.198.149",
     "test": "webpack-dev-server --mode development --port 3000 --env.ENVIRONMENT=local --config webpack.config.js --host 127.0.0.1",
     "eject": "react-scripts eject"
