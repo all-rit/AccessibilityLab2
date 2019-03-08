@@ -22,8 +22,8 @@ const FourthInstructions = ({closePage, activatePopup, endSystem,
   }
 
   return (
-    <div>
-      <p className='secondInstructionTitle'>Instructions Part Four</p>
+    <div className="instructionsContainer">
+      <p className='secondInstructionTitle'>Nice work!</p>
       <div>
         <p className='instructionInfo'>
           Now that you've made some adjustments and played the game again,

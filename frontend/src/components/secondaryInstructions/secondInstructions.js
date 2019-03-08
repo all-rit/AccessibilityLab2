@@ -41,18 +41,12 @@ const SecondInstructions = ({closePage, selectOption, toWhiteBackground,
           the ability to simulate what an individual with this deficiency would
           see.
         </li>
-          {/*
-        <li className='instructionsItem'>
-          There are three main color vision defiencies: Protanopia (Red blindness),
+          <br /><br />
+        <h2>Did you know?</h2>
+        <li className='instructionsItem' style={{"listStyleType": "none"}}>
+          There are three main color vision deficiencies: Protanopia (Red blindness),
           Deuteranopia (Green blindness), and Tritanopia (Blue blindness).
-          These are all options for simulation for the game. Check them all
-          out and see how much your score changes!
-        </li>
-          */}
-        <li className='instructionsItem'>
-          Using the dropdown next to the start page, select one of the options
-          and play the game again. Remember, you are tying to get the highest
-          score possible! When you're readty, click the button below.
+          These are all options for simulation for in the game.
         </li>
       </ul>
       <div className='center'>

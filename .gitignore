@@ -56,8 +56,8 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
-.env.local
+frontend/.env
+frontend/.env.local
 
 # next.js build output
 .next
@@ -67,6 +67,7 @@ backend/serverConstants.js
 backend/superUsers.js
 backend/server.js
 
-frontend/dist/
+frontend/dist/*
+!frontend/dist/.htaccess
 
 .idea/
