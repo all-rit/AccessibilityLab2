@@ -18,7 +18,7 @@ const store = createStore(rootReducer);
 
 ReactDOM.render((
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={browserHistory} basename="/Lab2">
       <Switch>
         <Route exact path="/" component={App}/>
         <Route path="/suppMaterials" component={SuppMaterials} />
