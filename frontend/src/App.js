@@ -195,6 +195,7 @@ class App extends Component {
               null
             }
             <Header
+              endSystem={endSystem}
               gameState={gameState}
               firstGame={firstGame}
               gameEnded={onEndGame}
