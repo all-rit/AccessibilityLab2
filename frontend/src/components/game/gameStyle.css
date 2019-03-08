@@ -56,7 +56,7 @@
   justify-content: space-around;
 }
 
-table, th, td {
+th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
@@ -201,4 +201,17 @@ td {
   color: transparent;
   margin: 0px;
   padding: 0px;
+}
+
+.replayBreakdown {
+  font-size: 25px;
+  background: lightBlue;
+}
+
+.positiveData {
+  background-color: green;
+}
+
+.negativeData {
+  background-color: red
 }

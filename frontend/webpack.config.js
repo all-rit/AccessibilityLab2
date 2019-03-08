@@ -69,8 +69,8 @@ module.exports = (env) => {
     },
     output: {
       filename: 'transformed.js',
-      path: path.resolve(__dirname + 'dist'),
-      publicPath: '/'
+      path: path.resolve('./dist'),
+      publicPath: '/Lab2'
     },
     plugins: [
       HTMLWebpackPluginConfig, 

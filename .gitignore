@@ -67,4 +67,6 @@ backend/serverConstants.js
 backend/superUsers.js
 backend/server.js
 
-frontend/dist*
+frontend/dist/
+
+.idea/

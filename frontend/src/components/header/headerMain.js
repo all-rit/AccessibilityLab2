@@ -14,7 +14,7 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
   changeGameColors, openAboutPage, aboutState, closeAboutPage, admin,
   openStatPage, closeStatPage, statState, firstGame, gamesPlayed,
   openLeaderboard, closeLeaderboard, leaderboardState, openColorChange,
-  colorChange, closeColorChange, openSecondInfoState}) => {
+  colorChange, closeColorChange, openSecondInfoState, thirdInfoState, gameMode}) => {
 
   const backButton = () => {
     if (gamesPlayed == 2) {
@@ -25,19 +25,43 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
     }
   }
 
+  if (gameState) {
+    return (
+      <div
+        className='headerStyle'
+        style={{background: "black"}}
+      >
+        <div className='oneline center'>
+          <Home
+            gameEnded={gameEnded}
+            baseBackground={baseBackground}
+            baseRightCircle={baseRightCircle}
+            baseWrongCircleOne={baseWrongCircleOne}
+            baseWrongCircleTwo={baseWrongCircleTwo}
+            changeGameColors={changeGameColors}
+          />
+          <p className='deficiencyCheck'>
+            Vision Deficiency Simulation: {gameMode === 'Main'?' Off':' On'}
+          </p>
+        </div>
+        {loggedIn?
+          <Signout user={user} admin={admin} openStatPage={openStatPage}/>
+          :
+          <div>
+            {firstGame?
+              <Google />
+              :
+              null
+            }
+          </div>
+        }
+      </div>
+    );
+  }
+
   return (
     <div className='headerStyle'>
-      {gameState?
-        <Home
-          gameEnded={gameEnded}
-          baseBackground={baseBackground}
-          baseRightCircle={baseRightCircle}
-          baseWrongCircleOne={baseWrongCircleOne}
-          baseWrongCircleTwo={baseWrongCircleTwo}
-          changeGameColors={changeGameColors}
-        />
-        :
-        <div>
+      <div>
         {aboutState?
           <Button
             clickMethod={closeAboutPage}
@@ -75,11 +99,10 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
                     />
                     <p
                       className='mainColor secondTitle'
-                      style={{marginTop: '15px', marginLeft: '25px'}}
+                      style={{marginTop: '15px', marginLeft: '25px',
+                      background: 'rgba(38,38,38,1)'}}
                     >
-                      &#60;div&#62;
                       Adjust the colors below to be in better color contrast
-                      &#60;/div&#62;
                     </p>
                   </div>
                   :
@@ -90,7 +113,7 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
                       fontSizing={"17px"}
                     />
                     <div>
-                    {gamesPlayed > 1?
+                    {gamesPlayed > 1 && !thirdInfoState?
                       <ColorUpdate
                         openColorChange={openColorChange}
                       />
@@ -120,7 +143,6 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
           </div>
         }
         </div>
-      }
       {loggedIn?
         <Signout user={user} admin={admin} openStatPage={openStatPage}/>
         :

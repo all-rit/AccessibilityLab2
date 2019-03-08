@@ -5,7 +5,7 @@ import './title.css';
 Displays the title of the page dependent on the state it is in
 State options: Home page or Game apge
 */
-const Title = ({gameState}) => {
+const Title = ({gameState, replay}) => {
   return (
     <div>
       {gameState?
@@ -23,16 +23,33 @@ const Title = ({gameState}) => {
         </div>
         :
         <div>
-          <p
-            className='mainTitle'
-          >
-            Color Clicker
-          </p>
-          <p
-            className='secondTitle'
-          >
-            How fast can you click the correct colored circle?
-          </p>
+        {replay?
+          <div>
+            <p
+              className='mainTitle'
+            >
+              Game Over!
+            </p>
+            <p
+              className='secondTitle'
+            >
+              Check out your score and click the button when ready to move on!
+            </p>
+          </div>
+          :
+          <div>
+            <p
+              className='mainTitle'
+            >
+              Color Clicker
+            </p>
+            <p
+              className='secondTitle'
+            >
+              How fast can you click the correct colored circle?
+            </p>
+          </div>
+        }
         </div>
       }
     </div>

@@ -37,11 +37,16 @@ class game extends Component {
     //Controls the top right page countdown clock
     const mainTimerRenderer = (props) => {
       if (props.total === 0) {
-        return null;
+        return (<Title gameState={false} replay={true}/>);
       } else {
         let milliseconds = props.milliseconds;
         milliseconds = milliseconds / 100;
-        return (<div className='timer right'>{props.seconds}.{milliseconds}</div>);
+        return (
+          <div>
+            <div className='timer right'>{props.seconds}.{milliseconds}</div>
+            <Title gameState={true} replay={false}/>
+          </div>
+        );
       }
     }
 
@@ -57,7 +62,6 @@ class game extends Component {
               precision={1}
               renderer={mainTimerRenderer}
             />
-            <Title gameState={true} />
             <SecondTimer
               gameEnded={gameEnded}
               onUpdateTime={updateTime}
@@ -83,7 +87,7 @@ class game extends Component {
       //Instruction display during inital countdown
       return (
         <div>
-          <Title gameState={true} />
+          <Title gameState={true} replay={false} />
           <div className='timer startTimer'>
             {props.seconds}
           </div>

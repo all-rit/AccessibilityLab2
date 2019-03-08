@@ -36,7 +36,7 @@ a {
   border-left: 3px solid black;
   border-bottom: 3px solid black;
   border-right: 3px solid black;
-  animation-duration: 2s;
+  animation-duration: 5s;
   animation-name: successMessage;
 }
 

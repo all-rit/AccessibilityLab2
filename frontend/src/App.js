@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import ReactGA from 'react-ga';
+import "@reach/dialog/styles.css";
 import './App.css';
 import Title from './components/header/title';
 import Home from './components/home/Home';
@@ -185,7 +186,7 @@ class App extends Component {
           <div style={{background: `${gameBackground}`}} className='main'>
             {changed?
               <Countdown
-                date={Date.now() + 2000}
+                date={Date.now() + 5000}
                 intervalDelay={1000}
                 precision={2}
                 renderer={renderer}
@@ -200,6 +201,7 @@ class App extends Component {
               popupController={popupController}
               loggedIn={loggedIn}
               user={user}
+              gameMode={gameOption}
               baseBackground={baseBackground}
               baseRightCircle={baseRightCircle}
               baseWrongCircleOne={baseWrongCircleOne}
@@ -217,6 +219,7 @@ class App extends Component {
               closeLeaderboard={onCloseLeaderboard}
               leaderboardState={leaderboardState}
               openColorChange={onOpenColorChange}
+              thirdInfoState={thirdInfoState}
               colorChange={colorChange}
               closeColorChange={onCloseColorChange}
               openSecondInfoState={onEnterSecondInfoState}

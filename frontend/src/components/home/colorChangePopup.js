@@ -1,5 +1,6 @@
 import React from 'react';
 import {PhotoshopPicker} from 'react-color';
+import { Dialog } from "@reach/dialog";
 import './popup.css';
 
 /*
@@ -23,7 +24,9 @@ class ColorChangePopup extends React.Component{
       backgroundPopup: false,
       correctColorPopup: false,
       incorrectColorOnePopup: false,
-      incorrectColorTwoPopup: false
+      incorrectColorTwoPopup: false,
+      confirmPopup: false,
+      numberChanged: 0,
     }
   }
 
@@ -71,10 +74,12 @@ class ColorChangePopup extends React.Component{
   //Ensures none of the values entered are equal to one another
   ensureNotEqual = () => {
     const {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
-    if (background !== correctColor || background !== incorrectColorOne ||
-      background !== incorrectColorTwo) {
-      if (correctColor !== incorrectColorOne || correctColor !== incorrectColorTwo) {
-        if (incorrectColorOne !== incorrectColorTwo) {
+    if (background.toUpperCase() !== correctColor.toUpperCase() &&
+      background.toUpperCase() !== incorrectColorOne.toUpperCase() &&
+      background.toUpperCase() !== incorrectColorTwo.toUpperCase()) {
+      if (correctColor.toUpperCase() !== incorrectColorOne.toUpperCase() &&
+        correctColor.toUpperCase() !== incorrectColorTwo.toUpperCase()) {
+        if (incorrectColorOne.toUpperCase() !== incorrectColorTwo.toUpperCase()) {
           return true;
         }
       }
@@ -98,32 +103,13 @@ class ColorChangePopup extends React.Component{
       changed++;
     }
     if (changed != 4) {
-      return window.confirm(`You have only changed ${changed} of the four colors.
-        Are you sure you would like to submit?`)
-    }
-    else {
-      return true;
+      this.setState({confirmPopup: true, numberChanged: changed})
+      // return window.confirm(`You have only changed ${changed} of the four colors.
+      //   Are you sure you would like to submit?`)
+    } else {
+      this.onFinalSubmit();
     }
   }
-
-  // //Ensures all of the formats of the colors are in proper hex format
-  // ensureProperHex = () => {
-  //   var {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
-  //   var check = [background, correctColor, incorrectColorOne, incorrectColorTwo];
-  //   console.log(check)
-  //   for (var i = 0; i < check.length; i++) {
-  //     var color = check[i];
-  //     if (color[0] === "#") {
-  //       color = color.slice(1,8)
-  //       if (color.replace(/[^a-f0-9]+$/i, '@') !== color) {
-  //         return false;
-  //       }
-  //     } else {
-  //       return false;
-  //     }
-  //   }
-  //   return true;
-  // }
 
   //Ensures none of the colors entered are black to too close to black
   ensureNotBlack = () => {
@@ -165,34 +151,24 @@ class ColorChangePopup extends React.Component{
 
   //Verifies the input by the user
   verifyInput = () => {
-    var {background, correctColor, incorrectColorOne, incorrectColorTwo} = this.state;
-
-    // if (background.length !== 7) {
-    //   this.setState({background: this.props.colors[0]})
-    // } if (correctColor.length !== 7) {
-    //   this.setState({correctColor: this.props.colors[1]})
-    // } if (incorrectColorOne.length !== 7) {
-    //   this.setState({incorrectColorOne: this.props.colors[2]})
-    // } if (incorrectColorTwo.length !== 7) {
-    //   this.setState({incorrectColorTwo: this.props.colors[3]})
-    // }
-
     if (!this.ensureNotEqual()) {
       this.setState({errorEqual: true})
-      return false;
     }
-
-    // if (!this.ensureProperHex()) {
-    //   this.setState({errorHex: true})
-    //   return false;
-    // }
-
-    if (!this.ensureNotBlack()) {
+    else if (!this.ensureNotBlack()) {
       this.setState({errorDarkBackground: true})
-      return false;
     }
+    else {
+      this.checkAlert();
+    }
+  }
 
-    return this.checkAlert();
+  onFinalSubmit = () => {
+    let colors = [this.state.background, this.state.correctColor,
+    this.state.incorrectColorOne, this.state.incorrectColorTwo];
+    console.log(colors);
+    this.props.changeDefaultColors(colors);
+    this.props.changeGameColors(colors);
+    this.props.closeColorChange();
   }
 
   //Submits the colors for the system
@@ -203,16 +179,7 @@ class ColorChangePopup extends React.Component{
     this.setState({errorEqual: false})
     this.setState({errorHex: false})
     this.setState({errorDarkBackground: false})
-    if (this.verifyInput()) {
-      colors = [this.state.background, this.state.correctColor,
-        this.state.incorrectColorOne, this.state.incorrectColorTwo];
-      console.log(colors);
-      this.props.changeDefaultColors(colors);
-      this.props.changeGameColors(colors);
-      this.props.closeColorChange();
-    } else {
-      this.errorInInput = true;
-    }
+    this.verifyInput()
   }
 
   //Renderer for the system
@@ -309,161 +276,260 @@ class ColorChangePopup extends React.Component{
     return (
       <div>
         <div>
-          {this.state.errorLength ?
-            <p className='error'>Error in the length of the string entered</p>
+          {this.state.confirmPopup ?
+            <Dialog>
+              <p className='center fourthTitle'>
+                You've changed {this.state.numberChanged} out of the 4 colors.
+                Are you sure you would like to submit?
+              </p>
+              <div className='center'>
+                <button
+                  onClick={() => this.onFinalSubmit()}
+                  className="buttonPopup"
+                >
+                  Yes
+                </button>
+                <button
+                  onClick={() => this.setState({confirmPopup: false})}
+                  className="buttonPopup"
+                >
+                  No
+                </button>
+              </div>
+            </Dialog>
                 : null
           }
           {this.state.errorEqual ?
-            <p className='error'>
-              Two or more of the values entered were equal to one another
-            </p>
-              : null
-          }
-          {this.state.errorHex ?
-            <p className='error'>
-              Hex information entered was incorrect. Please make sure to have
-              '#' in the hex string
-            </p>
+            <Dialog>
+              <p className='fourthTitle center'>
+                Two of your entered colors are equal to one another.
+                Please make adjustments and submit again.
+              </p>
+              <div className='center'>
+                <button
+                  onClick={() => this.setState({errorEqual: false})}
+                  className="buttonPopup"
+                >
+                  Make changes
+                </button>
+              </div>
+            </Dialog>
               : null
           }
           {this.state.errorDarkBackground ?
-              <p className='error'>
-                Background elements were too close to or were black.
-                This is not allowed.
+            <Dialog>
+              <p className='fourthTitle center'>
+                One or more of the colors you entered are too dark.
+                Please make adjustments and submit again.
               </p>
-              : null
+              <div className='center'>
+                <button
+                  onClick={() => this.setState({errorDarkBackground: false})}
+                  className="buttonPopup"
+                >
+                  Make changes
+                </button>
+              </div>
+            </Dialog>
+            : null
           }
           <div className='mainColor tab'>
-            <p className='boarder'>.home &#123;</p>
-            <div className='inlineForm'>
-              <p className='tab boarder'>background: </p>
-              {this.state.backgroundPopup?
-                <div className='colorSelector'>
-                  <PhotoshopPicker
-                    onChangeComplete={this.onBackgroundChange}
-                    onAccept={closeBackground}
-                    onCancel={revertBackground}
-                    color={this.state.background}
-                  />
+            <pre className='code'>
+              <code>
+                <p className='boarder' style={{width: '90%', marginLeft: "12px"}}>
+                  .home &#123;
+                </p>
+                <div className='inlineForm'>
+                  <code>
+                    <p className='tab boarder' style={{marginLeft: "12px"}}>
+                      background:
+                    </p>
+                    {this.state.backgroundPopup?
+                      <div className='colorSelector'>
+                        <PhotoshopPicker
+                          onChangeComplete={this.onBackgroundChange}
+                          onAccept={closeBackground}
+                          onCancel={revertBackground}
+                          color={this.state.background}
+                        />
+                      </div>
+                      :
+                      <button
+                        onClick={changeBackground}
+                        style={{backgroundColor: this.state.background}}
+                        className='form'
+                      >
+                      </button>
+                    }
+                    <p className='popupArrow'>&#8690;</p>
+                    <p className='boarder'>
+                      ; &#47;&#47;Adjust this to change the background of the page
+                    </p>
+                  </code>
                 </div>
-                :
-                <button
-                  onClick={changeBackground}
-                  style={{backgroundColor: this.state.background}}
-                  className='form'
-                >
-                </button>
-              }
-              <p className='popupArrow'>&#8690;</p>
-              <p className='boarder'>
-                ; &#47;&#47;Adjust this to change the background of the page
-              </p>
-            </div>
-            <p className='boarder'> &#125;</p>
-            <p className='boarder'>.correctCircle &#123;</p>
-            <div className='inlineForm'>
-              <p className='tab boarder'>color: </p>
-              {this.state.correctColorPopup?
-                <div className='colorSelector'>
-                  <PhotoshopPicker
-                    onChangeComplete={this.onCorrectColorChange}
-                    onAccept={closeCorrectColor}
-                    onCancel={revertCorrectColor}
-                    color={this.state.correctColor}
-                  />
+
+
+                <div style={{display: 'flex', flexWrap: 'wrap'}}>
+                  <code  style={{width: '90%'}}>
+                    <p className='boarder' style={{marginLeft: "12px"}}> &#125;</p>
+                  </code>
+                  <code>
+                    <p className='boarder' style={{marginLeft: "12px"}}>
+                      .correctCircle &#123;
+                    </p>
+                  </code>
                 </div>
-                :
-                <button
-                  onClick={changeCorrectColor}
-                  style={{backgroundColor: this.state.correctColor}}
-                  className='form'
-                >
-                </button>
-              }
-              <p className='popupArrow'>&#8690;</p>
-              <p className='boarder'>
-                ; &#47;&#47;Adjust this to change the correct color option
-              </p>
-            </div>
-            <p className='boarder'> &#125;</p>
-            <p className='boarder'>.incorrectCircleOne &#123;</p>
-            <div className='inlineForm'>
-              <p className='tab boarder'>color: </p>
-              {this.state.incorrectColorOnePopup?
-                <div className='colorSelector'>
-                  <PhotoshopPicker
-                    onChangeComplete={this.onIncorrectColorOne}
-                    onAccept={closeIncorrectColorOne}
-                    onCancel={revertIncorrectColorOne}
-                    color={this.state.incorrectColorOne}
-                  />
+                <div className='inlineForm'>
+                  <code>
+                    <p className='tab boarder' style={{marginLeft: "12px"}}>
+                      color:
+                    </p>
+                    {this.state.correctColorPopup?
+                      <div className='colorSelector'>
+                        <PhotoshopPicker
+                          onChangeComplete={this.onCorrectColorChange}
+                          onAccept={closeCorrectColor}
+                          onCancel={revertCorrectColor}
+                          color={this.state.correctColor}
+                        />
+                      </div>
+                      :
+                      <button
+                        onClick={changeCorrectColor}
+                        style={{backgroundColor: this.state.correctColor}}
+                        className='form'
+                      >
+                      </button>
+                    }
+                    <p className='popupArrow'>&#8690;</p>
+                    <p className='boarder'>
+                      ; &#47;&#47;Adjust this to change the correct color option
+                    </p>
+                  </code>
                 </div>
-                :
-                <button
-                  onClick={changeIncorrectColorOne}
-                  style={{backgroundColor:this.state.incorrectColorOne}}
-                  className='form'
-                >
-                </button>
-              }
-              <p className='popupArrow'>&#8690;</p>
-              <p className='boarder'>
-                ; &#47;&#47;Adjust this to change the first incorrect color option
-              </p>
-            </div>
-            <p className='boarder'> &#125;</p>
-            <p className='boarder'>.incorrectCircleTwo &#123;</p>
-            <div className='inlineForm'>
-              <p className='tab boarder'>color: </p>
-              {this.state.incorrectColorTwoPopup?
-                <div className='colorSelector'>
-                  <PhotoshopPicker
-                    onChangeComplete={this.onIncorrectColorTwo}
-                    onAccept={closeIncorrectColorTwo}
-                    onCancel={revertIncorrectColorTwo}
-                    color={this.state.incorrectColorTwo}
-                  />
+                <div style={{display: 'flex', flexWrap: 'wrap'}}>
+                  <code style={{width: '100%'}}>
+                    <p className='boarder' style={{marginLeft: "12px"}}>
+                      &#125;
+                    </p>
+                  </code>
+                  <code>
+                    <p className='boarder' style={{marginLeft: "12px"}}>
+                      .incorrectCircleOne &#123;
+                    </p>
+                  </code>
                 </div>
-                :
-                <button
-                  onClick={changeIncorrectColorTwo}
-                  style={{backgroundColor:this.state.incorrectColorTwo}}
-                  className='form'
-                >
-                </button>
-              }
-              <p className='popupArrow'>&#8690;</p>
-              <p className='boarder'>
-                ; &#47;&#47;Adjust this to change the other incorrect color option
-              </p>
-            </div>
-            <p className='boarder'> &#125;</p>
-            <p className='boarder'> .center &#123;</p>
-            <p className='tab boarder inlineForm'>
-              display: <span style={whiteColor}> flex; </span>
-            </p>
-            <p className='tab boarder inlineForm'>
-              <span style={whiteColor}>justify-</span>content: center;
-            </p>
-            <p className='boarder'> &#125;</p>
-            <p className='boarder'> .header &#123;</p>
-            <p className='tab boarder inlineForm'> font-size: 30px;</p>
-            <p className='tab boarder inlineForm'>
-              display: <span style={whiteColor}> flex; </span>
-            </p>
-            <p className='tab boarder inlineForm'>
-              <span style={whiteColor}>justify-</span>content: center;
-            </p>
-            <p className='boarder'> &#125;</p>
-            <button
-              type='submit'
-              name='submitButton'
-              className='submitColorPopup'
-              onClick={this.onButtonSubmit}
-            >
-              Submit
-            </button>
+                <div className='inlineForm'>
+                  <code>
+                    <p className='tab boarder' style={{marginLeft: "12px"}}>
+                      color:
+                    </p>
+                    {this.state.incorrectColorOnePopup?
+                      <div className='colorSelector'>
+                        <PhotoshopPicker
+                          onChangeComplete={this.onIncorrectColorOne}
+                          onAccept={closeIncorrectColorOne}
+                          onCancel={revertIncorrectColorOne}
+                          color={this.state.incorrectColorOne}
+                        />
+                      </div>
+                      :
+                      <button
+                        onClick={changeIncorrectColorOne}
+                        style={{backgroundColor:this.state.incorrectColorOne}}
+                        className='form'
+                      >
+                      </button>
+                    }
+                    <p className='popupArrow'>&#8690;</p>
+                    <p className='boarder'>
+                      ; &#47;&#47;Adjust this to change the first incorrect color option
+                    </p>
+                  </code>
+                </div>
+                <div style={{display: 'flex', flexWrap: 'wrap'}}>
+                  <code style={{width: '100%'}}>
+                    <p className='boarder' style={{marginLeft: "10px"}}> &#125;</p>
+                  </code>
+                  <code>
+                    <p className='boarder'>.incorrectCircleTwo &#123;</p>
+                  </code>
+                </div>
+                <div className='inlineForm'>
+                  <code>
+                    <p className='tab boarder'>color: </p>
+                    {this.state.incorrectColorTwoPopup?
+                      <div className='colorSelector'>
+                        <PhotoshopPicker
+                          onChangeComplete={this.onIncorrectColorTwo}
+                          onAccept={closeIncorrectColorTwo}
+                          onCancel={revertIncorrectColorTwo}
+                          color={this.state.incorrectColorTwo}
+                        />
+                      </div>
+                      :
+                      <button
+                        onClick={changeIncorrectColorTwo}
+                        style={{backgroundColor:this.state.incorrectColorTwo}}
+                        className='form'
+                      >
+                      </button>
+                    }
+                    <p className='popupArrow'>&#8690;</p>
+                    <p className='boarder'>
+                      ; &#47;&#47;Adjust this to change the other incorrect color option
+                    </p>
+                  </code>
+                </div>
+                <code style={{width: '100%'}}>
+                  <p className='boarder'> &#125;</p>
+                </code>
+                <code style={{width: '100%'}}>
+                  <p className='boarder'> .center &#123;</p>
+                </code>
+                <code style={{width: '100%', flexWrap: 'nowrap'}}>
+                  <p className='tab boarder inlineForm'>
+                    display: <span style={whiteColor}> flex; </span>
+                  </p>
+                </code>
+                <code style={{width: '100%', flexWrap: 'nowrap'}}>
+                  <p className='tab boarder inlineForm'>
+                    <span style={whiteColor}>justify-</span>content: center;
+                  </p>
+                </code>
+                <code style={{width: '100%', flexWrap: 'nowrap'}}>
+                  <p className='boarder'> &#125;</p>
+                </code>
+                <code style={{width: '100%', flexWrap: 'nowrap'}}>
+                  <p className='boarder'> .header &#123;</p>
+                </code>
+                <code style={{width: '100%', flexWrap: 'nowrap'}}>
+                  <p className='tab boarder inlineForm'> font-size: 30px;</p>
+                </code>
+                <code style={{width: '100%', flexWrap: 'nowrap'}}>
+                  <p className='tab boarder inlineForm'>
+                    display: <span style={whiteColor}> flex; </span>
+                  </p>
+                </code>
+                <code style={{width: '100%', flexWrap: 'nowrap'}}>
+                  <p className='tab boarder inlineForm'>
+                  <span style={whiteColor}>justify-</span>content: center;
+                  </p>
+                </code>
+                <code style={{width: '100%', flexWrap: 'nowrap'}}>
+                  <p className='boarder'> &#125;</p>
+                </code>
+              </code>
+            </pre>
           </div>
+          <button
+            type='submit'
+            name='submitButton'
+            className='submitColorPopup'
+            onClick={this.onButtonSubmit}
+          >
+            Submit
+          </button>
         </div>
       </div>
     );
