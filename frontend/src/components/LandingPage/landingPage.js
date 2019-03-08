@@ -21,7 +21,7 @@ const LandingPage = ({endFirstGame, toWhiteBackground, background, loggedIn}) =>
       <div id='Body'>
         <MainInstructions />
         {!loggedIn?
-          <div>
+          <div className="instructionsContainer">
             <p
               className='instructionList'
               style={{marginTop: '40px', marginBottom:'10px'}}
@@ -50,6 +50,7 @@ const LandingPage = ({endFirstGame, toWhiteBackground, background, loggedIn}) =>
             fontSizing={"25px"}
           />
         </div>
+          <br /><br /><br />
       </div>
     </div>
   );
