@@ -10,7 +10,7 @@ const AboutInfo = ({toWhiteBackground, background}) => {
   //Data object for the pi graph
   const data ={
     labels: ["Males With A CVD", "Females With A CVD", "Males Without A CVD",
-    "Females With A CVD"],
+    "Females Without A CVD"],
     datasets: [{
       label: 'Color Visions Deficiencies in a Population of 10,000 People',
       borderColor: 'black',
