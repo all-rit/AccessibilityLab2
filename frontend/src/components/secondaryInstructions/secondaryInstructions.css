@@ -18,3 +18,15 @@
     margin-bottom: 30px;
   }
 }
+
+.instructionsContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  display: table;
+}
+
+.instructionsItem {
+  text-align: left;
+  font-size: 20px;
+  list-style-type: none;
+}

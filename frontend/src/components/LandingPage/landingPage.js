@@ -21,9 +21,9 @@ const LandingPage = ({endFirstGame, toWhiteBackground, background, loggedIn}) =>
       <div id='Body'>
         <MainInstructions />
         {!loggedIn?
-          <div>
+          <div className="mainInstructionsContainer">
             <p
-              className='instructionList'
+              className='mainInstructionList'
               style={{marginTop: '40px', marginBottom:'10px'}}
             >
               To help track your game history and to help ensure we are providing
@@ -37,10 +37,10 @@ const LandingPage = ({endFirstGame, toWhiteBackground, background, loggedIn}) =>
           null
         }
         <p
-          className='instructionList'
+          className='mainInstructionList'
           style={{marginTop: '40px', marginBottom:'10px'}}
         >
-          Now that you've been familarized with the instructions, click the
+          Now that you've been familiarized with the instructions, click the
           button to continue onto the game!
         </p>
         <div className='center'>
@@ -50,6 +50,7 @@ const LandingPage = ({endFirstGame, toWhiteBackground, background, loggedIn}) =>
             fontSizing={"25px"}
           />
         </div>
+          <br /><br /><br />
       </div>
     </div>
   );
