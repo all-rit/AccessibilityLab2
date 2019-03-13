@@ -19,6 +19,11 @@ import ThirdInstructions from './components/secondaryInstructions/thirdInstructi
 import FourthInstructions from './components/secondaryInstructions/fourthInstructions';
 import Leaderboard from './components/userStatistics/leaderboard';
 import Conclusion from './components/secondaryInstructions/conclusion';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faIgloo } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faIgloo)
 
 //Imports from redux actions
 import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup,

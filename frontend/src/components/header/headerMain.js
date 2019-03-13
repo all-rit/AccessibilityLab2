@@ -3,6 +3,7 @@ import ColorUpdate from './buttons/colorUpdate';
 import {Google} from './buttons/google';
 import Signout from './buttons/signout';
 import Home from './buttons/homeReset.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from './buttons/button';
 
 /*
@@ -82,7 +83,7 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
             {leaderboardState?
               <Button
                 clickMethod={closeLeaderboard}
-                message={"Home"}
+                message={"Back"}
                 fontSizing={"25px"}
               />
               :
@@ -105,6 +106,7 @@ const Header = ({gameState, popupController, gameEnded, loggedIn, user,
                     >
                       Adjust the colors below to be in better color contrast
                     </p>
+                    <FontAwesomeIcon icon="fa-question-circle" />
                   </div>
                   :
                   <div className='oneline'>
