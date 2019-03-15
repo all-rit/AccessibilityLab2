@@ -39,6 +39,10 @@
   font-size: 25px;
 }
 
+@media (min-width: 1200px) and (max-width: 1600px) {
+
+}
+
 .instruction{
   display: flex;
   flex-direction: row;

@@ -185,7 +185,7 @@ class Header extends Component {
                     <div className='oneline'>
                       <Button
                         clickMethod={openAboutPage}
-                        message={"About Color Vision Deficiencies"}
+                        message={"About"}
                         fontSizing={"17px"}
                       />
                       <div>
@@ -201,7 +201,7 @@ class Header extends Component {
                         {gamesPlayed > 2 && !endSystem?
                           <Button
                             clickMethod={openLeaderboard}
-                            message={"Leaderboard"}
+                            message={"Leader board"}
                             fontSizing={"17px"}
                           />
                           :
