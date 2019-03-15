@@ -5,16 +5,19 @@ import './suppMaterials.css';
 const CaseStudy = () => {
   return (
     <div>
-      <p className='suppTitle'>Case study:</p>
+      <p className='suppTitle'>Case study On Color Contrast</p>
       <div className='group'>
         <div>
           <img
             src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/64_365_Color_Macro_%285498808099%29.jpg/300px-64_365_Color_Macro_%285498808099%29.jpg'
-            alt='Color base picture'
+            alt='Colored Pencils Aligned in a circle'
             className='colorImage'
           >
           </img>
           <p className='caseStudyText'>Figure 1</p>
+          <p className='caseStudyText'>
+            Colored pencils showing off color differences.
+          </p>
         </div>
         <p className='caseStudy extraMarginThree'>
           In order to establish accessibility standards throughout government-run technology applications, allowing for anyone with or without a disability to interact with fundamental government websites, kiosks, and mobile applications,
@@ -51,6 +54,10 @@ const CaseStudy = () => {
           <img src={require("./airbnb.png")} alt='AirBnB Example' className='img'>
           </img>
           <p className='caseStudyText'>Figure 2</p>
+          <p className='caseStudyText'>
+            A potential landing page for the popular housing app, AirBnB, showing
+            off the dangers of poor color contrast
+          </p>
         </div>
       </div>
       <div className='group'>
@@ -61,6 +68,10 @@ const CaseStudy = () => {
           >
           </img>
           <p className='caseStudyText'>Figure 3</p>
+          <p className='caseStudyText'>
+            Different color contrasts on different backgrounds. Shows good and
+            bad options for each square.
+          </p>
         </div>
         <p className='caseStudy extraMarginTwo'>
           The importance of color contrast rings true throughout the internet, as multiple publications each year host lists featuring the
@@ -119,11 +130,14 @@ const CaseStudy = () => {
         <div>
           <img
             src='http://design.samsung.com/global/m/contents/accessibility_design/img/main_title.gif'
-            alt='accessibility for all'
+            alt='accessibility for all banner'
             className='accessibilityImage'
           >
           </img>
           <p className='caseStudyText'>Figure 4</p>
+          <p className='caseStudyText'>
+            A call to action to ensure all applications are accessible to everyone
+          </p>
         </div>
       </div>
       <Link
