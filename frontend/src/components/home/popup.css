@@ -24,6 +24,31 @@ code {
   flex-wrap: wrap;
   font-size: 25px;
 }
+
+.boarder{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 25px;
+}
+
+@media (min-width: 1200px) and (max-width: 1600px) {
+  code {
+    font-size: 20px;
+  }
+  .boarder {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1200px) {
+  code {
+    font-size: 18px;
+  }
+  .boarder {
+    font-size: 18px;
+  }
+}
+
 .popup{
   position: fixed;
   width: 100%;
@@ -102,12 +127,6 @@ code {
 .center{
   display: flex;
   justify-content: center;
-}
-
-.boarder{
-  margin-top: 0px;
-  margin-bottom: 0px;
-  font-size: 25px;
 }
 
 .tab{

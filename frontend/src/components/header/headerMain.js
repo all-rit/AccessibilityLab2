@@ -201,7 +201,7 @@ class Header extends Component {
                         {gamesPlayed > 2 && !endSystem?
                           <Button
                             clickMethod={openLeaderboard}
-                            message={"Leader board"}
+                            message={"Leader Board"}
                             fontSizing={"17px"}
                           />
                           :

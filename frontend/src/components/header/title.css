@@ -73,7 +73,7 @@
   }
   .secondTitle{
     font-size: 35px;
-    margin-top: 8px;
+    margin-top: 5px;
     margin-bottom: 8px;
   }
   .button {
@@ -81,9 +81,11 @@
   }
   .backButton {
     font-size: 20px;
+    margin-top: 0px;
   }
   .deficiencyCheck {
     font-size: 20px;
+    margin-top: 10px;
   }
 }
 
