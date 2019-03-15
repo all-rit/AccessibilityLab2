@@ -23,6 +23,8 @@ ReactDOM.render((
         <Route exact path="/" component={App}/>
         <Route path="/suppMaterials" component={SuppMaterials} />
         <Route path="/caseStudy" component={CaseStudy} />
+        <Route path='/ccQuiz' component={() => { window.location = 'https://goo.gl/forms/S0Vufy6tlr7FGQMf2'; return null;} }/>
+        <Route path='/QRS' component={() => { window.location = 'https://docs.google.com/spreadsheets/d/1W9gQudgXebsgFGqt2qy73MBfeA6kv1ZqS1sqn1Sh1-c/edit?usp=sharing'; return null;} }/>
         <Route component={App} />
       </Switch>
     </Router>

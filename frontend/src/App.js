@@ -21,9 +21,9 @@ import Leaderboard from './components/userStatistics/leaderboard';
 import Conclusion from './components/secondaryInstructions/conclusion';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faIgloo } from '@fortawesome/free-solid-svg-icons'
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faIgloo)
+library.add(faQuestionCircle)
 
 //Imports from redux actions
 import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup,
