@@ -57,7 +57,7 @@ const FourthInstructions = ({closePage, activatePopup, endSystem,
         />
         <Button
           clickMethod={activatePopup}
-          message={"Make Adjustments!"}
+          message={"Make Changes!"}
           fontSizing={"20px"}
         />
       </div>

@@ -215,3 +215,109 @@ td {
 .negativeData {
   background-color: red
 }
+
+@media (min-width: 1200px) and (max-width: 1600px) {
+  .circle {
+    height: 70px;
+    width: 70px;
+  }
+  .circleClicked {
+    margin-top: 65px;
+    margin-bottom: 45px;
+  }
+  .timer {
+    font-size: 30px;
+  }
+  .startTimer {
+    font-size: 50px;
+  }
+  .replay {
+    font-size: 22px;
+  }
+  .timeEnd {
+    font-size: 18px;
+  }
+  .prescreenText {
+    font-size: 16px;
+  }
+  .scoreElement {
+    font-size: 16px;
+  }
+  .leftTitle {
+    font-size: 18px;
+  }
+  .replayBreakdown {
+    font-size: 18px;
+  }
+}
+
+
+@media (min-width: 1650px) {
+  .circle {
+    height: 75px;
+    width: 75px;
+  }
+  .circleClicked {
+    margin-top: 80px;
+    margin-bottom: 55px;
+  }
+  .timer {
+    font-size: 40px;
+  }
+  .startTimer {
+    font-size: 60px;
+  }
+  .replay {
+    font-size: 28px;
+  }
+  .timeEnd {
+    font-size: 25px;
+  }
+  .prescreenText {
+    font-size: 20px;
+  }
+  .scoreElement {
+    font-size: 20px;
+  }
+  .leftTitle {
+    font-size: 25px;
+  }
+  .replayBreakdown {
+    font-size: 25px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1200px){
+  .circle {
+    height: 65px;
+    width: 65px;
+  }
+  .circleClicked {
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+  .timer {
+    font-size: 30px;
+  }
+  .startTimer {
+    font-size: 50px;
+  }
+  .replay {
+    font-size: 20px;
+  }
+  .timeEnd {
+    font-size: 18px;
+  }
+  .prescreenText {
+    font-size: 16px;
+  }
+  .scoreElement {
+    font-size: 16px;
+  }
+  .leftTitle {
+    font-size: 18px;
+  }
+  .replayBreakdown {
+    font-size: 20px;
+  }
+}

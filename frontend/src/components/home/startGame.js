@@ -18,24 +18,24 @@ const StartGame = ({selectOption, startGame, gameOption,
     <div>
       <div className='center fourthTitle'>
         {gamesPlayed===0?
-          <p>
+          <p style={{marginBottom: '10px', marginTop: '10px'}}>
             Click the button to start the game!
           </p>
           :
           <div>
           {gamesPlayed===1?
-            <p>
+            <p style={{marginBottom: '10px', marginTop: '10px'}}>
               Click the button to start the game with a color vision defiency!
             </p>
             :
             <div>
             {gamesPlayed===2?
-              <p>
+              <p style={{marginBottom: '10px', marginTop: '10px'}}>
                 Click the button to restart the game with the same color vision
                 defiency!
               </p>
               :
-              <p>
+              <p style={{marginBottom: '10px', marginTop: '10px'}}>
                 Choose a color vision defiency and click the button to start the
                 game!
               </p>

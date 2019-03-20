@@ -14,7 +14,6 @@ const Button = ({clickMethod, message, fontSizing}) => {
   return (
     <button
       onClick={onClick}
-      style={{fontSize:`${fontSizing}`}}
       className='Button'
     >
       {message}

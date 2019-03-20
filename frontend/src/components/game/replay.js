@@ -132,7 +132,7 @@ class Replay extends Component {
               </table>
             </div>
           </div>
-          <div className='center'>
+          <div className='center' style={{marginLeft: '-25px'}}>
             {this.props.gamesPlayed === 0 ?
               <Button
                 clickMethod={clickFirst}
