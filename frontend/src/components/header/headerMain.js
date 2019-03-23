@@ -22,8 +22,7 @@ class Header extends Component {
   }
 
   render() {
-    const {gameState, popupController, gameEnded, loggedIn, user,
-      baseBackground, baseRightCircle, baseWrongCircleOne, baseWrongCircleTwo,
+    const {gameState, popupController, gameEnded, loggedIn, user,colors, goBackFromGame,
       changeGameColors, openAboutPage, aboutState, closeAboutPage, admin,
       openStatPage, closeStatPage, statState, firstGame, gamesPlayed,
       openLeaderboard, closeLeaderboard, leaderboardState, openColorChange,
@@ -35,6 +34,7 @@ class Header extends Component {
         closeColorChange();
         openSecondInfoState();
       } else {
+        changeGameColors(colors);
         closeColorChange();
       }
     }
@@ -55,15 +55,14 @@ class Header extends Component {
         >
           <div className='oneline center'>
             <Home
-              gameEnded={gameEnded}
-              baseBackground={baseBackground}
-              baseRightCircle={baseRightCircle}
-              baseWrongCircleOne={baseWrongCircleOne}
-              baseWrongCircleTwo={baseWrongCircleTwo}
+              gameEnded={goBackFromGame}
+              colors={colors}
               changeGameColors={changeGameColors}
             />
             <p className='deficiencyCheck'>
-              Vision Deficiency Simulation: {gameMode === 'Main'?' Off':' On'}
+              Vision Deficiency Simulation: <span style={{fontWeight: 'bold'}}>
+                {gameMode === 'Main'?' Off':' On'}
+              </span>
             </p>
           </div>
           {loggedIn?
@@ -135,7 +134,7 @@ class Header extends Component {
           {aboutState?
             <Button
               clickMethod={closeAboutPage}
-              message={"Home"}
+              message={"Back"}
               fontSizing={"25px"}
             />
             :

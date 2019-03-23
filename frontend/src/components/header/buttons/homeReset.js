@@ -3,12 +3,11 @@ import React from 'react';
 /*
 Component for the home reset button
 */
-const HomeReset = ({gameEnded, changeGameColors, baseBackground, baseRightCircle, baseWrongCircleOne, baseWrongCircleTwo}) => {
+const HomeReset = ({gameEnded, changeGameColors, colors}) => {
 
   //Handles a click of the button
   const handleClick = () => {
-    changeGameColors([baseBackground, baseRightCircle, baseWrongCircleOne,
-      baseWrongCircleTwo]);
+    changeGameColors(colors);
     gameEnded();
   }
 
@@ -19,7 +18,7 @@ const HomeReset = ({gameEnded, changeGameColors, baseBackground, baseRightCircle
         className='backButton'
         onClick={handleClick}
       >
-        Home
+        Back
       </button>
     </div>
   );

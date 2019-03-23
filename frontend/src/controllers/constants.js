@@ -32,6 +32,7 @@ export const END_INFO_STATE_THREE = "END_INFO_STATE_THREE";
 export const END_SYSTEM = "END_SYSTEM";
 export const COLOR_CHANGE = "COLOR_CHANGE";
 export const END_COLOR_CHANGE = "END_COLOR_CHANGE";
+export const BACK_GAME = "BACK_GAME";
 
 //Used to login users
 export const LOGIN = "LOGIN";
