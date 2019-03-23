@@ -30,6 +30,7 @@ import{
   COLOR_CHANGE,
   END_COLOR_CHANGE,
   RESET,
+  BACK_GAME
 } from "./constants.js"
 
 //Declaing initial state for the colors in the system
@@ -50,7 +51,6 @@ const initialColors = {
 export const changeColors = (state = initialColors, action = {}) => {
   switch(action.type) {
     case UPDATE_DEFAULT_COLORS:
-      console.log('updating system colors: ' + action.payload)
       return Object.assign({}, state, {baseBackground: action.payload[0],
         baseRightCircle: action.payload[1], baseWrongCircleOne: action.payload[2],
         baseWrongCircleTwo: action.payload[3], changed: true});
@@ -124,7 +124,6 @@ const initialGameState = {
   leaderboardState: false,
   fourthInfoState: false,
   endSystem: false,
-  infoStateFourPrevOpen: false,
   colorChangeState: false,
 }
 
@@ -136,6 +135,8 @@ export const changeGameState = (state = initialGameState, action = {}) => {
     case END_GAME:
       return {...state, gameState: false,
         gamesPlayed: initialGameState.gamesPlayed += 1}
+    case BACK_GAME:
+      return {...state, gameState: false}
     case FIRST_GAME:
       return {...state, firstGame: false}
     case ABOUT_STATE:
@@ -157,9 +158,9 @@ export const changeGameState = (state = initialGameState, action = {}) => {
     case END_INFO_STATE_TWO:
       return {...state, thirdInfoState: false}
     case OPEN_LEADERBOARD:
-      return {...state, leaderboardState: true, infoStateFourPrevOpen: initialGameState.fourthInfoState, fourthInfoState: false}
+      return {...state, leaderboardState: true}
     case CLOSE_LEADERBOARD:
-      return {...state, leaderboardState: false, fourthInfoState: initialGameState.infoStateFourPrevOpen}
+      return {...state, leaderboardState: false}
     case INFO_STATE_THREE:
       return {...state, fourthInfoState: true, gameState: false,
         gamesPlayed: initialGameState.gamesPlayed = 3}

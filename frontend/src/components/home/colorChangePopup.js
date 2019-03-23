@@ -1,6 +1,7 @@
 import React from 'react';
 import {PhotoshopPicker} from 'react-color';
 import { Dialog } from "@reach/dialog";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './popup.css';
 
 /*
@@ -27,6 +28,10 @@ class ColorChangePopup extends React.Component{
       incorrectColorTwoPopup: false,
       confirmPopup: false,
       numberChanged: 0,
+      backgroundHelp: false,
+      correctHelp: false,
+      incorrectOneHelp: false,
+      incorrectTwoHelp: false
     }
   }
 
@@ -52,7 +57,6 @@ class ColorChangePopup extends React.Component{
 
   //Handles changes to the first incorrect circle color (updates state)
   onIncorrectColorOne = (color, event) => {
-    console.log('setting incorrect color one')
     this.setState({incorrectColorOne: color.hex})
   }
 
@@ -165,7 +169,6 @@ class ColorChangePopup extends React.Component{
   onFinalSubmit = () => {
     let colors = [this.state.background, this.state.correctColor,
     this.state.incorrectColorOne, this.state.incorrectColorTwo];
-    console.log(colors);
     this.props.changeDefaultColors(colors);
     this.props.changeGameColors(colors);
     this.props.closeColorChange();
@@ -266,6 +269,22 @@ class ColorChangePopup extends React.Component{
       this.onControlIncorrectPopupTwo(false);
     }
 
+    const openHelpBackgroundDialog = () => {
+      this.setState({backgroundHelp: true})
+    }
+
+    const openHelpCorrectColorDialog = () => {
+      this.setState({correctHelp: true})
+    }
+
+    const openHelpIncorrectColorOneDialog = () => {
+      this.setState({incorrectOneHelp: true})
+    }
+
+    const openHelpIncorrectColorTwoDialog = () => {
+      this.setState({incorrectTwoHelp: true})
+    }
+
     if (this.state.background == '') {
       this.setState({background: this.props.colors[0],
         correctColor: this.props.colors[1], incorrectColorOne: this.props.colors[2],
@@ -333,6 +352,113 @@ class ColorChangePopup extends React.Component{
             </Dialog>
             : null
           }
+          {this.state.backgroundHelp ?
+            <Dialog>
+              <p className='mainInstructionsItem'>
+                This line changes the color of the background of the screen.
+              </p>
+              <p className='mainInstructionsItem'>
+                Click on the colored box and move the color to anything you want!
+              </p>
+              <p className='mainInstructionsItem'>
+                <span style={{fontWeight: 'bold'}}>
+                  Suggestion:
+                </span>
+                Make this color very light so the other circles can
+                be darker to fit within the color contrast standards
+              </p>
+              <div className='center'>
+                <button
+                  onClick={() => this.setState({backgroundHelp: false})}
+                  className="buttonPopup"
+                >
+                  Close Help
+                </button>
+              </div>
+            </Dialog>
+                : null
+          }
+          {this.state.correctHelp ?
+            <Dialog>
+            <p className='mainInstructionsItem'>
+              This line changes the color of the circle you are supposed to click.
+            </p>
+            <p className='mainInstructionsItem'>
+              Click on the colored box and move the color to anything that follows
+              the proper 7:1 color contrast ratio.
+            </p>
+            <p className='mainInstructionsItem'>
+              <span style={{fontWeight: 'bold'}}>
+                Suggestion:
+              </span>
+              If you made the background a light color, make this a
+              dark color.
+            </p>
+              <div className='center'>
+                <button
+                  onClick={() => this.setState({correctHelp: false})}
+                  className="buttonPopup"
+                >
+                  Close Help
+                </button>
+              </div>
+            </Dialog>
+                : null
+          }
+          {this.state.incorrectOneHelp ?
+            <Dialog>
+            <p className='mainInstructionsItem'>
+              This line changes the color of one the circles you are not supposed to click.
+            </p>
+            <p className='mainInstructionsItem'>
+              Click on the colored box and move the color to anything that follows
+              the proper 7:1 color contrast ratio.
+            </p>
+            <p className='mainInstructionsItem'>
+              <span style={{fontWeight: 'bold'}}>
+                Suggestion:
+              </span>
+              If you made the background a light color, make this a
+              dark color.
+            </p>
+              <div className='center'>
+                <button
+                  onClick={() => this.setState({incorrectOneHelp: false})}
+                  className="buttonPopup"
+                >
+                  Close Help
+                </button>
+              </div>
+            </Dialog>
+                : null
+          }
+          {this.state.incorrectTwoHelp ?
+            <Dialog>
+              <p className='mainInstructionsItem'>
+                This line changes the color of one the circles you are not supposed to click.
+              </p>
+              <p className='mainInstructionsItem'>
+                Click on the colored box and move the color to anything that follows
+                the proper 7:1 color contrast ratio.
+              </p>
+              <p className='mainInstructionsItem'>
+                <span style={{fontWeight: 'bold'}}>
+                  Suggestion:
+                </span>
+                If you made the background a light color, make this a
+                dark color.
+              </p>
+              <div className='center'>
+                <button
+                  onClick={() => this.setState({incorrectTwoHelp: false})}
+                  className="buttonPopup"
+                >
+                  Close Help
+                </button>
+              </div>
+            </Dialog>
+                : null
+          }
           <div className='mainColor tab'>
             <pre className='code'>
               <code>
@@ -365,6 +491,12 @@ class ColorChangePopup extends React.Component{
                     <p className='boarder'>
                       ; &#47;&#47;Adjust this to change the background of the page
                     </p>
+                    <FontAwesomeIcon
+                      icon="question-circle"
+                      size={"1x"}
+                      style={{marginTop: '5px', marginLeft:'5px'}}
+                      onClick={() => openHelpBackgroundDialog()}
+                    />
                   </code>
                 </div>
 
@@ -405,8 +537,15 @@ class ColorChangePopup extends React.Component{
                     <p className='boarder'>
                       ; &#47;&#47;Adjust this to change the correct color option
                     </p>
+                    <FontAwesomeIcon
+                      icon="question-circle"
+                      size={"1x"}
+                      style={{marginTop: '5px', marginLeft:'5px'}}
+                      onClick={() => openHelpCorrectColorDialog()}
+                    />
                   </code>
                 </div>
+
                 <div style={{display: 'flex', flexWrap: 'wrap'}}>
                   <code style={{width: '100%'}}>
                     <p className='boarder' style={{marginLeft: "12px"}}>
@@ -445,8 +584,15 @@ class ColorChangePopup extends React.Component{
                     <p className='boarder'>
                       ; &#47;&#47;Adjust this to change the first incorrect color option
                     </p>
+                    <FontAwesomeIcon
+                      icon="question-circle"
+                      size={"1x"}
+                      style={{marginTop: '5px', marginLeft:'5px'}}
+                      onClick={() => openHelpIncorrectColorOneDialog()}
+                    />
                   </code>
                 </div>
+
                 <div style={{display: 'flex', flexWrap: 'wrap'}}>
                   <code style={{width: '100%'}}>
                     <p className='boarder' style={{marginLeft: "10px"}}> &#125;</p>
@@ -479,8 +625,15 @@ class ColorChangePopup extends React.Component{
                     <p className='boarder'>
                       ; &#47;&#47;Adjust this to change the other incorrect color option
                     </p>
+                    <FontAwesomeIcon
+                      icon="question-circle"
+                      size={"1x"}
+                      style={{marginTop: '5px', marginLeft:'5px'}}
+                      onClick={() => openHelpIncorrectColorTwoDialog()}
+                    />
                   </code>
                 </div>
+
                 <code style={{width: '100%'}}>
                   <p className='boarder'> &#125;</p>
                 </code>

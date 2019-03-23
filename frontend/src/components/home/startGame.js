@@ -24,16 +24,26 @@ const StartGame = ({selectOption, startGame, gameOption,
           :
           <div>
           {gamesPlayed===1?
-            <p style={{marginBottom: '10px', marginTop: '10px'}}>
-              Click the button to start the game with a color vision defiency!
-            </p>
+            <div>
+              <p style={{marginBottom: '10px', marginTop: '10px'}}>
+                Click the button to start the game with a color vision defiency!
+              </p>
+              <p>
+                Warning: simulated color vision deficiency active on next game page
+              </p>
+            </div>
             :
             <div>
             {gamesPlayed===2?
-              <p style={{marginBottom: '10px', marginTop: '10px'}}>
-                Click the button to restart the game with the same color vision
-                defiency!
-              </p>
+              <div>
+                <p style={{marginBottom: '10px', marginTop: '10px'}}>
+                  Click the button to restart the game with the same color vision
+                  defiency!
+                </p>
+                <p>
+                  Warning: simulated color vision deficiency active on next game page
+                </p>
+              </div>
               :
               <p style={{marginBottom: '10px', marginTop: '10px'}}>
                 Choose a color vision defiency and click the button to start the

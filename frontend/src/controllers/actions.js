@@ -30,6 +30,7 @@ import {
   COLOR_CHANGE,
   END_COLOR_CHANGE,
   RESET,
+  BACK_GAME
 } from './constants.js';
 
 /*
@@ -255,4 +256,8 @@ Used to reset the system from the conclusion page
 */
 export const resetSystem = () => ({
   type: RESET
+})
+
+export const goBackFromGame = () => ({
+  type: BACK_GAME
 })

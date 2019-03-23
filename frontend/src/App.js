@@ -32,7 +32,7 @@ import {changeDefaultColors, changeGameColors, selectGameOption, activatePopup,
   endFirstGame, enterInfoState, closeInfoState, enterSecondInfoState,
   closeSecondInfoState, openLeaderboard, closeLeaderboard, openThirdInfoState,
   closeThirdInfoState, openConclusion, toWhiteBackground, resetBackground,
-  openColorChange, closeColorChange, toGreyBackground, resetSystem}
+  openColorChange, closeColorChange, toGreyBackground, resetSystem, goBackFromGame}
   from './controllers/actions';
 
 //State mapping for redux
@@ -101,6 +101,7 @@ const mapDispatchToProps = (dispatch) => {
     onCloseColorChange: () => dispatch(closeColorChange()),
     onToGreyBackground: () => dispatch(toGreyBackground()),
     onResetSystem: () => dispatch(resetSystem()),
+    onGoBackFromGame: () => dispatch(goBackFromGame())
   }
 }
 
@@ -159,7 +160,7 @@ class App extends Component {
       onOpenThirdInfoState, onCloseThirdInfoState, endSystem, onOpenConclusion,
       onToWhiteBackground, onResetBackground, onOpenColorChange,
       onCloseColorChange, colorChange, infoStateThreePrevOpen, onToGreyBackground,
-      onResetSystem} = this.props
+      onResetSystem, onGoBackFromGame} = this.props
 
     //establishing array of current colors for the system
     const colors = [baseBackground, baseRightCircle, baseWrongCircleOne,
@@ -203,15 +204,12 @@ class App extends Component {
               endSystem={endSystem}
               gameState={gameState}
               firstGame={firstGame}
-              gameEnded={onEndGame}
               popupController={popupController}
               loggedIn={loggedIn}
               user={user}
               gameMode={gameOption}
-              baseBackground={baseBackground}
-              baseRightCircle={baseRightCircle}
-              baseWrongCircleOne={baseWrongCircleOne}
-              baseWrongCircleTwo={baseWrongCircleTwo}
+              colors={colors}
+              goBackFromGame={onGoBackFromGame}
               changeGameColors={onChangeGameColors}
               openAboutPage={onOpenAboutPage}
               closeAboutPage={onCloseAboutPage}
@@ -285,19 +283,19 @@ class App extends Component {
                       />
                       :
                       <div>
-                      {fourthInfoState?
-                        <FourthInstructions
-                          closePage={onCloseThirdInfoState}
-                          activatePopup={onOpenColorChange}
-                          endSystem={onOpenConclusion}
+                      {leaderboardState?
+                        <Leaderboard
+                          closeLeaderboard={onCloseLeaderboard}
                           toWhiteBackground={onToWhiteBackground}
                           background={baseBackground}
                         />
                         :
                         <div>
-                        {leaderboardState?
-                          <Leaderboard
-                            closeLeaderboard={onCloseLeaderboard}
+                        {fourthInfoState?
+                          <FourthInstructions
+                            closePage={onCloseThirdInfoState}
+                            activatePopup={onOpenColorChange}
+                            endSystem={onOpenConclusion}
                             toWhiteBackground={onToWhiteBackground}
                             background={baseBackground}
                           />
