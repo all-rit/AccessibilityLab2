@@ -182,11 +182,9 @@ class Header extends Component {
                     </div>
                     :
                     <div className='oneline'>
-                      <Button
-                        clickMethod={openAboutPage}
-                        message={"About"}
-                        fontSizing={"17px"}
-                      />
+                      <button onClick={openAboutPage} >
+                        About Colorblindness
+                      </button>
                       <div>
                       {gamesPlayed > 1 && !thirdInfoState && !endSystem?
                         <ColorUpdate
