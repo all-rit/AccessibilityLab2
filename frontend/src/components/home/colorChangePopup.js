@@ -361,7 +361,7 @@ class ColorChangePopup extends React.Component{
                 Click on the colored box and move the color to anything you want!
               </p>
               <p className='mainInstructionsItem'>
-                <span style={{fontWeight: 'bold', marginRight: '3px'}}>
+                <span style={{fontWeight: 'bold', marginRight: '5px'}}>
                   Suggestion:
                 </span>
                 Make this color very light so the other circles can
@@ -388,7 +388,7 @@ class ColorChangePopup extends React.Component{
               the proper 7:1 color contrast ratio.
             </p>
             <p className='mainInstructionsItem'>
-              <span style={{fontWeight: 'bold', marginRight: '3px'}}>
+              <span style={{fontWeight: 'bold', marginRight: '5px'}}>
                 Suggestion:
               </span>
               If you made the background a light color, make this a
@@ -415,7 +415,7 @@ class ColorChangePopup extends React.Component{
               the proper 7:1 color contrast ratio.
             </p>
             <p className='mainInstructionsItem'>
-              <span style={{fontWeight: 'bold', marginRight: '3px'}}>
+              <span style={{fontWeight: 'bold', marginRight: '5px'}}>
                 Suggestion:
               </span>
               If you made the background a light color, make this a
@@ -442,7 +442,7 @@ class ColorChangePopup extends React.Component{
                 the proper 7:1 color contrast ratio.
               </p>
               <p className='mainInstructionsItem'>
-                <span style={{fontWeight: 'bold', marginRight: '3px'}}>
+                <span style={{fontWeight: 'bold', marginRight: '5px'}}>
                   Suggestion:
                 </span>
                 If you made the background a light color, make this a
