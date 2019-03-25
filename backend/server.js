@@ -195,7 +195,7 @@ const recordUser = (user, existingUser, res, req) => {
       existing = true;
       req.session.token = req.user.profile.id;
       req.session.save((err) => {if(err){console.log(err)}});
-      res.redirect('http://all.rit.edu');
+      res.redirect('http://all.rit.edu/Lab2');
     } else {
       console.log('Adding new user');
       let admin = false;
@@ -242,13 +242,13 @@ const recordUser = (user, existingUser, res, req) => {
       });
       req.session.token = req.user.profile.id;
       req.session.save((err) => {if(err){console.log(err)}});
-      res.redirect('http://all.rit.edu');
+      res.redirect('http://all.rit.edu/Lab2');
     }
 }
 
 app.get('/auth/google/callback', 
     passport.authenticate('google', {
-      failureRedirect: '/'
+      failureRedirect: '/Lab2'
     }),
     (req, res) => {
     	pool.query(`SELECT Users.FirstName, Users.UserID, Login.UserSessionID from Users INNER JOIN Login ON Login.UserID=Users.UserID WHERE Login.UserSessionID=${req.user.profile.id}`, (error, results) => {

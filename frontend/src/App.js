@@ -115,7 +115,7 @@ class App extends Component {
     this.callBackendAPI()
       .then(res => {
         if (res.status === 'new user logged into system') {
-          this.props.onLogin([res.user, true, res.admin]);
+          this.props.onLogin([res.user, false, res.admin]);
         } else if (res.status === 'existing user logged into system') {
           this.props.onLogin([res.user, false, res.admin]);
         } else {
