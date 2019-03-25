@@ -29,7 +29,8 @@ const StartGame = ({selectOption, startGame, gameOption,
                 Click the button to start the game with a color vision defiency!
               </p>
               <p>
-                Warning: simulated color vision deficiency active on next game page
+                The colorblindness emulation feature will now be made active.
+                You will experience the game as someone with colorblindness would.
               </p>
             </div>
             :
@@ -41,7 +42,8 @@ const StartGame = ({selectOption, startGame, gameOption,
                   defiency!
                 </p>
                 <p>
-                  Warning: simulated color vision deficiency active on next game page
+                  The Colorblindness emulation feature will now be made active. 
+                  You will experience the game as someone with colorblindness would.
                 </p>
               </div>
               :
