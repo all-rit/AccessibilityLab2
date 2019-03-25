@@ -182,7 +182,7 @@ class Header extends Component {
                     </div>
                     :
                     <div className='oneline'>
-                      <button onClick={openAboutPage} >
+                      <button onClick={openAboutPage} className='Button'>
                         About Colorblindness
                       </button>
                       <div>
