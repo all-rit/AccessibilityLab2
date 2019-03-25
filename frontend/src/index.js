@@ -23,7 +23,7 @@ ReactDOM.render((
         <Route exact path="/" component={App}/>
         <Route path="/suppMaterials" component={SuppMaterials} />
         <Route path="/caseStudy" component={CaseStudy} />
-        <Route path='/lecture' component={() => window.location = 'https://docs.google.com/presentation/d/1ylWIGVRfCr8-vLXGrY3OgkxZEJbNRBMj5Y8CRTG4rY0/edit?usp=sharing'; return null;}/>
+        <Route path='/lecture' component={() => { window.location = 'https://docs.google.com/presentation/d/1ylWIGVRfCr8-vLXGrY3OgkxZEJbNRBMj5Y8CRTG4rY0/edit?usp=sharing'; return null;} }/>
         <Route path='/ccQuiz1' component={() => { window.location = 'https://forms.gle/AnMXeaXREWPAfW2b9'; return null;} }/>
         <Route path='/ccQuiz2' component={() => { window.location = 'https://forms.gle/1GYgSNE65VrsA94JA'; return null;} }/>
         <Route path='/ccQuiz3' component={() => { window.location = 'https://forms.gle/eH5vGTzXsyrYGPf6A'; return null;} }/>

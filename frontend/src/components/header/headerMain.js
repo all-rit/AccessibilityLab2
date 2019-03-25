@@ -60,7 +60,8 @@ class Header extends Component {
               changeGameColors={changeGameColors}
             />
             <p className='deficiencyCheck'>
-              Vision Deficiency Simulation: <span style={{fontWeight: 'bold'}}>
+              Vision Deficiency Simulation:
+              <span style={{fontWeight: 'bold', marginLeft: '3px'}}>
                 {gameMode === 'Main'?' Off':' On'}
               </span>
             </p>
@@ -182,7 +183,11 @@ class Header extends Component {
                     </div>
                     :
                     <div className='oneline'>
-                      <button onClick={openAboutPage} className='Button'>
+                      <button
+                        onClick={openAboutPage}
+                        className='Button'
+                        style={{fontSize: '16px'}}
+                      >
                         About Colorblindness
                       </button>
                       <div>
