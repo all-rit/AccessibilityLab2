@@ -66,17 +66,6 @@ class Header extends Component {
               </span>
             </p>
           </div>
-          {loggedIn?
-            <Signout user={user} admin={admin} openStatPage={openStatPage}/>
-            :
-            <div>
-              {firstGame?
-                <Google />
-                :
-                null
-              }
-            </div>
-          }
         </div>
       );
     }
