@@ -212,12 +212,12 @@ class Header extends Component {
             </div>
           }
           </div>
-        {loggedIn?
-          <Signout user={user} admin={admin} openStatPage={openStatPage}/>
+        {firstGame?
+          <Google />
           :
           <div>
-            {firstGame?
-              <Google />
+            {loggedIn?
+              <Signout user={user} admin={admin} openStatPage={openStatPage}/>
               :
               null
             }
