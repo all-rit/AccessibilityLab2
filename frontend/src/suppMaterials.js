@@ -19,7 +19,7 @@ const SuppMaterials = () => {
         </p>
         <div style={{display: 'flex', justifyContent: 'start'}}>
           <p className='suppP'>
-            &#10142; Video available <a href='https://www.youtube.com/watch?v=d6KKsmmOKEI&t=232s'>here</a>
+            &#10142; Video available <a href='https://www.youtube.com/watch?v=d6KKsmmOKEI'>here</a>
           </p>
         </div>
         <p className='suppP'>
