@@ -26,11 +26,13 @@ const StartGame = ({selectOption, startGame, gameOption,
           {gamesPlayed===1?
             <div>
               <p style={{marginBottom: '10px', marginTop: '10px'}}>
-                Click the button to start the game with a color vision defiency!
+                You will now conduct the same game of clicking on the correct
+                colored circle, but this time with a vision deficiency emulation
+                feature turned on. You will now experience the game just as
+                someone with colorblindness would.
               </p>
               <p>
-                The colorblindness emulation feature will now be made active.
-                You will experience the game as someone with colorblindness would.
+                Click the button to start the game.
               </p>
             </div>
             :
@@ -39,16 +41,16 @@ const StartGame = ({selectOption, startGame, gameOption,
               <div>
                 <p style={{marginBottom: '10px', marginTop: '10px'}}>
                   Click the button to restart the game with the same color vision
-                  defiency!
+                  deficiency!
                 </p>
                 <p>
-                  The Colorblindness emulation feature will now be made active. 
+                  The Colorblindness emulation feature will now be made active.
                   You will experience the game as someone with colorblindness would.
                 </p>
               </div>
               :
               <p style={{marginBottom: '10px', marginTop: '10px'}}>
-                Choose a color vision defiency and click the button to start the
+                Choose a color vision deficiency and click the button to start the
                 game!
               </p>
             }

@@ -27,14 +27,16 @@ const ThirdInstructions  = ({closePage, activatePopup, toWhiteBackground,
       <p className='secondInstructionTitle'>Instructions -- Part Three</p>
       <ul>
         <li className='instructionsItem'>
-          As you can see, this game is quite tricky with the colors we are
-          currently using. This is due to the colors being in contrast with
-          both the background and the other circles.
+          As you can see, this game can be very difficult for users who are
+          colorblind. The game was not created in an accessible manner for these
+          users. This is due to the colors being in contrast with both the
+          background and the other circles.
         </li>
           <br /><br />
 
         <li className='instructionsItem'>
-          You can change the colors with the <strong>Update Colors</strong> button in the upper left.
+          You can change the colors with the <strong>Update Colors</strong>
+          button in the upper left corner of the next screen.
         </li>
           <br />
         <li className='instructionsItem'>

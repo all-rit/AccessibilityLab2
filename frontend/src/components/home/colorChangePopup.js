@@ -355,6 +355,9 @@ class ColorChangePopup extends React.Component{
           {this.state.backgroundHelp ?
             <Dialog>
               <p className='mainInstructionsItem'>
+                Tips for completing the activity:
+              </p>
+              <p className='mainInstructionsItem'>
                 This line changes the color of the background of the screen.
               </p>
               <p className='mainInstructionsItem'>
@@ -380,6 +383,9 @@ class ColorChangePopup extends React.Component{
           }
           {this.state.correctHelp ?
             <Dialog>
+            <p className='mainInstructionsItem'>
+              Tips for completing the activity:
+            </p>
             <p className='mainInstructionsItem'>
               This line changes the color of the circle you are supposed to click.
             </p>
@@ -408,6 +414,9 @@ class ColorChangePopup extends React.Component{
           {this.state.incorrectOneHelp ?
             <Dialog>
             <p className='mainInstructionsItem'>
+              Tips for completing the activity:
+            </p>
+            <p className='mainInstructionsItem'>
               This line changes the color of one the circles you are not supposed to click.
             </p>
             <p className='mainInstructionsItem'>
@@ -434,6 +443,9 @@ class ColorChangePopup extends React.Component{
           }
           {this.state.incorrectTwoHelp ?
             <Dialog>
+              <p className='mainInstructionsItem'>
+                Tips for completing the activity:
+              </p>
               <p className='mainInstructionsItem'>
                 This line changes the color of one the circles you are not supposed to click.
               </p>
