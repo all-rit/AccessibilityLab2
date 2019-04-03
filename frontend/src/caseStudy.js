@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import './suppMaterials.css';
+import airbnb from "./airbnb.png";
 
 const CaseStudy = () => {
   return (
@@ -51,7 +52,7 @@ const CaseStudy = () => {
           help to ensure this standard is met. Color contrast calculators work by a user inputting a background color as well as the color of the text they are hoping to use for their application. An algorithm is used to determine how, when justified on top of one another, what ratio of difference there is between the two colors. This ratio is then used to determine if the color contrast is high enough for an individual with a color vision deficiency to be able to discern between the two colors. If the ratio is too low, an individual with a color vision deficiency could potentially either miss altogether or have a very difficult time seeing text that could be vital to their use of the application. An example of this would be a user agreement hidden behind too low of contrasting colors, like in the AirBnB example above (Figure 2). An individual with a color vision deficiency could miss the agreement and then could violate the company’s guidelines. In court, the individual with the deficiency could sue the company for damages, as they were unable to see the rules and regulations in the first place. With proper color contrast, this issue can be avoided, and the individual would be able to see the agreement, ensuring that the individual could not sue for damages. The proper WCAG AAA standard places proper color contrast at a rating of seven to one for font sizing twelve pixels to eighteen pixels, and four point five to one for font sizing eighteen pixels or above.
         </p>
         <div>
-          <img src={require("./airbnb.png")} alt='AirBnB Example' className='img'>
+          <img src={airbnb} alt='AirBnB Example' className='img'>
           </img>
           <p className='caseStudyText'>Figure 2</p>
           <p className='caseStudyText'>
