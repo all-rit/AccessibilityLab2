@@ -217,7 +217,7 @@ class Header extends Component {
           :
           <div>
             {firstGame?
-              <Google  />
+              <Google />
               :
               null
             }

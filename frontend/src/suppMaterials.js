@@ -19,10 +19,7 @@ const SuppMaterials = () => {
         </p>
         <div style={{display: 'flex', justifyContent: 'start'}}>
           <p className='suppP'>
-            &#10142; Video is currently unavailable.
-          </p>
-          <p style={{marginLeft: '4px'}} className='suppP'>
-            Check back later to watch an interview with individuals who have color vision deficiencies!
+            &#10142; Video available <a href='https://www.youtube.com/watch?v=d6KKsmmOKEI&t=232s'>here</a>
           </p>
         </div>
         <p className='suppP'>
