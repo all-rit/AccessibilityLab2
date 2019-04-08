@@ -141,24 +141,24 @@ app.get('/main', (req, res) => {
       if (error) {
         console.log(error);
       }
-      userID = (response.rows[0].nextval) - 1;
-      console.log('userID: ' + userID);
-      let sqlTwo = 'INSERT INTO Session (UserSessionID, UserID) VALUES ($1, $2)';
-      pool.query(sqlTwo, [userID, userID], (error, response) => {
+      userID = (response.rows[0].nextval - 1);
+      pool.query(`SELECT SETVAL('users_userid_seq',${userID},'true')`, [], (error, response) => {
         if (error) {
-	  console.log(error);
-        }
-      });
-      let sqlThree = 'INSERT INTO Login (LoginID, UserID, UserSessionID, Login) VALUES (DEFAULT, $1, $2, current_timestamp)';
-      pool.query(sqlThree, [userID, userID], (error, response) => {
-        if (error) {
-	  console.log(error);
-        }
-      });
-      pool.query(`SELECT setval('users_userid_seq', ${userID})`, [], (error, response) => {
-      	if (error) {
-	  console.log(error);
+  	  console.log(error);
 	}
+      	console.log('userID: ' + userID);
+      	let sqlTwo = 'INSERT INTO Session (UserSessionID, UserID) VALUES ($1, $2)';
+      	pool.query(sqlTwo, [userID, userID], (error, response) => {
+          if (error) {
+	    console.log(error);
+          }
+        });
+        let sqlThree = 'INSERT INTO Login (LoginID, UserID, UserSessionID, Login) VALUES (DEFAULT, $1, $2, current_timestamp)';
+        pool.query(sqlThree, [userID, userID], (error, response) => {
+          if (error) {
+	    console.log(error);
+          }
+        });
       });
       req.session.token = userID;
       console.log('session token from new user set: ' + req.session.token);
