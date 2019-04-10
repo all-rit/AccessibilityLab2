@@ -165,7 +165,7 @@ class Header extends Component {
                       </p>
                       <FontAwesomeIcon
                         icon="question-circle"
-                        size={"3x"}
+                        size={"2x"}
                         style={{marginTop: "15px"}}
                         onClick={() => openHelpDialog()}
                       />
@@ -174,8 +174,7 @@ class Header extends Component {
                     <div className='oneline'>
                       <button
                         onClick={openAboutPage}
-                        className='Button'
-                        style={{fontSize: '16px'}}
+                        className='Button aboutButton'
                       >
                         About Colorblindness
                       </button>
