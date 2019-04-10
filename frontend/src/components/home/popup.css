@@ -142,6 +142,20 @@ code {
   border: 0px;
 }
 
+.popupArrow{
+  height: 10px;
+  padding-top: 6px;
+  margin-bottom: 0px;
+}
+
+.buttonPopup {
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 35px;
+  width: auto;
+  font-size: 25px;
+}
+
 @media (max-width: 1200px) {
   .submitColorPopup{
     width: 150px;
@@ -160,16 +174,20 @@ code {
   }
 }
 
-.popupArrow{
-  height: 10px;
-  padding-top: 6px;
-  margin-bottom: 0px;
-}
-
-.buttonPopup {
-  margin-left: 10px;
-  margin-right: 10px;
-  height: 35px;
-  width: auto;
-  font-size: 25px;
+@media (max-width: 600px) {
+  code {
+    font-size: 12px;
+  }
+  .boarder {
+    font-size: 12px;
+  }
+  .form {
+    margin-left: 5px;
+    height: 10px;
+    width: 30px;
+  }
+  .colorSelector {
+    width: 300px;
+    height: auto;
+  }
 }

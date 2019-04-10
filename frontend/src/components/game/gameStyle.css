@@ -240,6 +240,9 @@ td {
   .prescreenText {
     font-size: 16px;
   }
+  .prescreen {
+    margin-left: 300px;
+  }
   .scoreElement {
     font-size: 16px;
   }
@@ -311,6 +314,10 @@ td {
   .prescreenText {
     font-size: 16px;
   }
+  .prescreen {
+    margin-top: 60px;
+    margin-left: 250px;
+  }
   .scoreElement {
     font-size: 16px;
   }
@@ -319,5 +326,51 @@ td {
   }
   .replayBreakdown {
     font-size: 20px;
+  }
+}
+
+@media (max-width: 600px){
+  .circle {
+    height: 30px;
+    width: 30px;
+  }
+  .circleClicked {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  .timer {
+    font-size: 16px;
+  }
+  .startTimer {
+    font-size: 20px;
+  }
+  .replay {
+    font-size: 16px;
+  }
+  .timeEnd {
+    font-size: 12px;
+  }
+  .prescreenText {
+    display: none;
+    font-size: 0px;
+  }
+  .prescreen {
+    margin-top: 20px;
+    margin-left: 130px;
+  }
+  .scoreElement {
+    font-size: 12px;
+  }
+  .leftTitle {
+    font-size: 12px;
+  }
+  .replayBreakdown {
+    font-size: 14px;
+  }
+  .point {
+    display: none;
+  }
+  .line {
+    display: none;
   }
 }

@@ -30,3 +30,18 @@
   font-size: 20px;
   list-style-type: none;
 }
+
+@media (max-width: 600px) {
+  .instructionsItem {
+    font-size: 12px;
+  }
+  .secondInstructionTitle {
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+  .instructionInfo {
+    font-size: 12px;
+    margin-left: 20px;
+    margin-top: 5px;
+  }
+}

@@ -46,6 +46,31 @@
   background-color: black;
 }
 
+.aboutButton {
+  font-size: 16px;
+}
+
+.signinButton {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.updateColorButton{
+  word-wrap: break-word;
+  margin-top: 10px;
+  margin-left: 10px;
+  color: light-grey;
+  text-align: center;
+  width: 120px;
+  font-size: 20px;
+  padding: 10px 10px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.updateColorButton:hover {
+  cursor: pointer;
+}
+
 @media (min-width: 1650px) {
   .mainTitle{
     font-size: 50px;
@@ -76,7 +101,7 @@
     margin-top: 5px;
     margin-bottom: 8px;
   }
-  .button {
+  .Button {
     font-size: 20px;
   }
   .backButton {
@@ -100,7 +125,7 @@
     margin-top: 5px;
     margin-bottom: 5px;
   }
-  .button {
+  .Button {
     font-size: 18px;
   }
   .backButton {
@@ -111,31 +136,50 @@
   }
 }
 
-.updateColorButton{
-  word-wrap: break-word;
-  margin-top: 10px;
-  margin-left: 10px;
-  color: light-grey;
-  text-align: center;
-  width: 120px;
-  font-size: 20px;
-  padding: 10px 10px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
-
-.updateColorButton:hover {
-  cursor: pointer;
+@media (max-width: 600px) {
+  .mainTitle{
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .secondTitle{
+    font-size: 16px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+  .Button {
+    font-size: 12px;
+    width: 100px;
+    height: 40px;
+  }
+  .backButton {
+    font-size: 12px;
+    width: 50px;
+    height: auto;
+    margin-top: 5px;
+  }
+  .deficiencyCheck {
+    font-size: 12px;
+  }
+  .signinButton {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100px;
+    height: auto;
+  }
+  .aboutButton {
+    font-size: 12px;
+  }
+  .updateColorButton {
+    width: 100px;
+    font-size: 12px;
+  }
 }
 
 .headerStyle {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.signinButton {
-  margin-top: 10px;
-  margin-right: 10px;
 }
 
 .username {
