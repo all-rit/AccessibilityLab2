@@ -39,10 +39,6 @@
   font-size: 25px;
 }
 
-@media (min-width: 1200px) and (max-width: 1600px) {
-
-}
-
 .instruction{
   display: flex;
   flex-direction: row;
@@ -97,17 +93,61 @@
     height:15px;
     padding-top: 13px;
   }
+  .fourthTitle {
+    font-size: 18px;
+  }
+  .thirdTitle {
+    font-size: 20px;
+  }
+  .allLink {
+    cursor: pointer;
+    margin-left: 3px;
+  }
 }
 
 @media (max-width: 600px){
   .correctCircle{
     margin-right: 100px;
   }
+  .fourthTitle {
+    font-size: 12px;
+  }
+  .thirdTitle {
+    font-size: 12px;
+  }
+  .allLink {
+    cursor: pointer;
+    margin-left: 1px;
+  }
+  .start{
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  .Right {
+    margin-right: 100px;
+    margin-left: 50px;
+  }
+  .Left {
+    margin-right: 50px;
+    margin-left: 100px;
+  }
+  .selection {
+    width: 200px;
+    height: 20px;
+    font-size: 16px;
+  }
+  .textSelection {
+    font-size: 16px;
+  }
 }
 
 @media (min-width: 1200px){
   .correctCircle{
     margin-right: 450px;
+  }
+  .allLink {
+    cursor: pointer;
+    margin-left: 5px;
   }
 }
 

@@ -217,7 +217,7 @@ class ColorChangePopup extends React.Component{
 
     ///Revers the background color to the default color
     const revertBackground = () => {
-      this.setState({background: '#00CC00'});
+      this.setState({background: this.state.background});
       this.onControlBackgroundPopup(false);
     }
 
@@ -233,7 +233,7 @@ class ColorChangePopup extends React.Component{
 
     ///Revers the correct circle color to the default color
     const revertCorrectColor = () => {
-      this.setState({correctColor: '#0000E6'});
+      this.setState({correctColor: this.state.correctCircle});
       this.onControlCorrectPopup(false);
     }
 
@@ -249,7 +249,7 @@ class ColorChangePopup extends React.Component{
 
     ///Revers the first incorrect circle color to the default color
     const revertIncorrectColorOne = () => {
-      this.setState({incorrectColorOne: '#0000CC'});
+      this.setState({incorrectColorOne: this.state.incorrectColorOne});
       this.onControlIncorrectPopupOne(false);
     }
 
@@ -265,7 +265,7 @@ class ColorChangePopup extends React.Component{
 
     ///Revers the second incorrect circle color to the default color
     const revertIncorrectColorTwo = () => {
-      this.setState({incorrectColorTwo: '#0000FF'});
+      this.setState({incorrectColorTwo: this.state.incorrectColorTwo});
       this.onControlIncorrectPopupTwo(false);
     }
 
