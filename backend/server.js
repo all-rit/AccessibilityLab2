@@ -13,7 +13,7 @@ const port = process.env.PORT || 5000;
 const cors = require('cors');
 const expressSession = require('express-session');
 const Pool = require('pg').Pool
-
+const dotenv = require('dotenv').config();
 auth(passport);
 app.use(passport.initialize());
 app.use(bodyParser.json());
@@ -32,7 +32,7 @@ const pool = new Pool({
   user: 'all_user',
   host: 'localhost',
   database: 'all_db',
-  password: '',
+  password: process.env.DB_PASS.,
   port: 5432,
 })
 
@@ -141,7 +141,8 @@ app.get('/main', (req, res) => {
       if (error) {
         console.log(error);
       }
-      userID = (response.rows[0].nextval - 1);
+      console.log(response.rows[0].nextval);
+      userID = (response.rows[0].nextval);
       pool.query(`SELECT SETVAL('users_userid_seq',${userID},'true')`, [], (error, response) => {
         if (error) {
   	  console.log(error);
@@ -219,7 +220,7 @@ const recordUser = (user, existingUser, res, req) => {
           if (error) {
             console.log(error);
           }
-        let userID = (res.rows[0].nextval) - 1;
+        let userID = (res.rows[0].nextval);
         let sqlTwo = "INSERT INTO Session (UserSessionID, UserID) VALUES ($1, $2)";
         let valuesTwo = [user.id, userID];
         pool.query(sqlTwo, valuesTwo, (error, res) => {
@@ -234,7 +235,7 @@ const recordUser = (user, existingUser, res, req) => {
 	    console.log(error);
 	  }
         });
-      	pool.query(`SELECT setval('users_userid_seq', ${userID})`, [], (error, response) => {
+      	pool.query(`SELECT setval('users_userid_seq', ${userID + 1})`, [], (error, response) => {
       	  if (error) {
 	    console.log(error);
 	  }
