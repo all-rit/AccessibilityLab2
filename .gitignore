@@ -66,7 +66,7 @@ frontend/.env.local
 backend/serverConstants.js
 backend/superUsers.js
 backend/server.js
-
+backend/.env
 frontend/dist/*
 !frontend/dist/.htaccess
 
