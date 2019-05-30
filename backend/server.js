@@ -32,7 +32,7 @@ const pool = new Pool({
   user: 'all_user',
   host: 'localhost',
   database: 'all_db',
-  password: process.env.DB_PASS.,
+  password: process.env.DB_PASS,
   port: 5432,
 })
 
