@@ -1,0 +1,26 @@
+.results {
+  padding: 2rem 0;
+
+  &__title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+  }
+
+  &__sentence {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.result {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  margin-bottom: 0.75rem;
+  max-width: 300px;
+  font-size: 1.25rem;
+
+  &__category {
+    font-weight: bold;
+  }
+}

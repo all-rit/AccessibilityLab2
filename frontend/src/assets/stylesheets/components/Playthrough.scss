@@ -1,0 +1,72 @@
+.playthrough {
+  padding: 2rem 0;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+
+  &__title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  &__content {
+    font-size: 1.15rem;
+  }
+
+  &__sentence:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+
+  &__list {
+    margin-bottom: 2rem;
+    margin-left: 2.5rem;
+    list-style-type: disc;
+
+    > li {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__results {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 2rem;
+  }
+
+  &__game {
+    font-size: 0.9rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 0 0.5rem;
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+
+  &__description {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-decoration: underline;
+  }
+
+  &__result {
+    display: grid;
+    margin-bottom: 0.75rem;
+    grid-template-columns: 2fr 1fr;
+  }
+
+  &__category {
+    font-weight: bold;
+  }
+
+  &__value {
+    text-align: center;
+  }
+
+  hr {
+    border: 0;
+    height: 1px;
+    background-color: black;
+  }
+}

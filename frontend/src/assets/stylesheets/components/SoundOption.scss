@@ -1,0 +1,25 @@
+.sound_icon {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  background-image: image("../../images/volume_on.svg");
+  background-size: contain;
+
+  &--off {
+    background-image: image("../../images/volume_off.svg");
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+  }
+}
+
+.sound_icon-container {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.sound_icon__message {
+  margin-left: 0.5rem;
+}

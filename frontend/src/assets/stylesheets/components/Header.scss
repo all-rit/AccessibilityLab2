@@ -1,0 +1,47 @@
+.header {
+  display: grid;
+  min-height: 78px;
+  grid-template-columns: 1fr 1fr;
+
+  &__column {
+    padding: 1rem;
+    font-size: 1.5rem;
+  }
+}
+
+.google__button {
+  width: 191px;
+  height: 46px;
+  display: inline-block;
+  background-image: image("../../images/btn_google_signin_dark_normal_web.png");
+
+  &:not(&--disabled):hover {
+    background-image: image(
+      "../../images/btn_google_signin_dark_focus_web.png"
+    );
+  }
+
+  &:not(&--disabled):active {
+    background-image: image(
+      "../../images/btn_google_signin_dark_pressed_web.png"
+    );
+  }
+
+  &--disabled {
+    background-image: image(
+      "../../images/btn_google_signin_dark_disabled_web.png"
+    );
+    cursor: not-allowed;
+  }
+}
+
+.welcome {
+  position: relative;
+
+  &__logout {
+    font-size: 0.8rem;
+    position: absolute;
+    bottom: -1.15rem;
+    right: 0.05rem;
+  }
+}
