@@ -127,22 +127,25 @@ const AboutInfo = ({ toWhiteBackground, background }) => {
         For more information, please visit the following websites:
       </p>
       <p className="center">
-        <a href="http://www.colourblindawareness.org/" className="padding">
+
+          <a href="http://www.colourblindawareness.org/" target="_blank" className="padding">
           colourblindawareness.org
         </a>
+
         <a
           href="https://www.aoa.org/patients-and-public/eye-and-vision-problems/glossary-of-eye-and-vision-conditions/color-deficiency"
+          target="_blank"
           className="padding"
         >
           aoa.org
         </a>
-        <a href="https://www.color-blindness.com/" className="padding">
+        <a href="https://www.color-blindness.com/" target="_blank" className="padding">
           color-blindness.com/
         </a>
       </p>
       <p className="center">
         The information for this page was gathered from
-        <a href="http://www.colourblindawareness.org/" className="padding">
+        <a href="http://www.colourblindawareness.org/" target="_blank" className="padding">
           colourblindawareness.org
         </a>
       </p>
