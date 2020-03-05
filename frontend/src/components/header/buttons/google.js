@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import "../title.css";
-import "../../../../src/assets/stylesheets/components/Header.scss"
+import './../../../assets/stylesheets/components/Header.css';
 /*
 Class for handling the google signin button
 */

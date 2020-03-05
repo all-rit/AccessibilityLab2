@@ -1,0 +1,34 @@
+.header {
+    display: grid;
+    min-height: 78px;
+    grid-template-columns: 1fr 1fr;
+}
+.header__column {
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+.google__button {
+    width: 191px;
+    height: 46px;
+    display: inline-block;
+    background-image: url("../../images/btn_google_signin_dark_normal_web.png");
+}
+.google__button--disabled:hover {
+    background-image: url("../../images/btn_google_signin_dark_focus_web.png");
+}
+.google__button--disabled:active {
+    background-image: url("../../images/btn_google_signin_dark_pressed_web.png");
+}
+.google__button--disabled {
+    background-image: url("../../images/btn_google_signin_dark_disabled_web.png");
+    cursor: not-allowed;
+}
+.welcome {
+    position: relative;
+}
+.welcome__logout {
+    font-size: 0.8rem;
+    position: absolute;
+    bottom: -1.15rem;
+    right: 0.05rem;
+}
