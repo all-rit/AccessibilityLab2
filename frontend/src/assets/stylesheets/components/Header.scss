@@ -13,22 +13,22 @@
   width: 191px;
   height: 46px;
   display: inline-block;
-  background-image: image("../../images/btn_google_signin_dark_normal_web.png");
+  background-image: url("../../images/btn_google_signin_dark_normal_web.png");
 
   &:not(&--disabled):hover {
-    background-image: image(
+    background-image: url(
       "../../images/btn_google_signin_dark_focus_web.png"
     );
   }
 
   &:not(&--disabled):active {
-    background-image: image(
+    background-image: url(
       "../../images/btn_google_signin_dark_pressed_web.png"
     );
   }
 
   &--disabled {
-    background-image: image(
+    background-image: url(
       "../../images/btn_google_signin_dark_disabled_web.png"
     );
     cursor: not-allowed;

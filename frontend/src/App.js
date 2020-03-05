@@ -101,122 +101,122 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <nav
-          class="navbar navbar-expand-lg navbar-dark fixed-top"
-          id="mainNav"
-          style={{ backgroundColor: "#484848", height: "12%" }}
-        >
-          <div class="container">
-            <img
-              src={logo}
-              style={{
-                paddingRight: "20px",
-                paddingBottom: "10px",
-                paddingTop: "10px",
-                marginTop: "-10px"
-              }}
-              alt="Computing Accessibility"
-            ></img>
-            <a class="navbar-brand js-scroll-trigger" href="#home">
-              Accessibility Learning Labs
-            </a>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-              <ul class="navbar-nav text-uppercase ml-auto">
-                <li class="nav-item">
-                  <a
-                    class="nav-link js-scroll-trigger"
-                    href="http://all.rit.edu"
-                    alt="Home page"
-                  >
-                    Home
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link js-scroll-trigger"
-                    onClick={this.handleAbout}
-                    href="#about"
-                    alt="About Section"
-                  >
-                    About
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link js-scroll-trigger"
-                    onClick={this.handleReading}
-                    href="#reading"
-                    alt="Reading"
-                  >
-                    Reading
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link js-scroll-trigger"
-                    onClick={this.handleGame}
-                    href="#game"
-                    alt="Game"
-                  >
-                    Game
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link js-scroll-trigger"
-                    onClick={this.handleVideo}
-                    href="#video"
-                    alt="Videos"
-                  >
-                    Video
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link js-scroll-trigger"
-                    onClick={this.handleQuiz}
-                    href="#quiz"
-                    alt="Quiz"
-                  >
-                    Quiz
-                  </a>
-                </li>
-              </ul>
+        <div>
+          <nav
+              class="navbar navbar-expand-lg navbar-dark fixed-top"
+              id="mainNav"
+              style={{ backgroundColor: "#484848", height: "12%", fontSize: "90%" }}
+          >
+            <div class="container">
+              <img
+                  src={logo}
+                  style={{
+                    paddingRight: "20px",
+                    paddingBottom: "10px",
+                    paddingTop: "10px",
+                    marginTop: "-10px"
+                  }}
+                  alt="Computing Accessibility"
+              ></img>
+              <a class="navbar-brand js-scroll-trigger" href="#home">
+                Accessibility Learning Labs
+              </a>
+              <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ml-auto">
+                  <li class="nav-item">
+                    <a
+                        class="nav-link js-scroll-trigger"
+                        href="http://all.rit.edu"
+                        alt="Home page"
+                    >
+                      Home
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                        class="nav-link js-scroll-trigger"
+                        onClick={this.handleAbout}
+                        href="#about"
+                        alt="About Section"
+                    >
+                      About
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                        class="nav-link js-scroll-trigger"
+                        onClick={this.handleReading}
+                        href="#reading"
+                        alt="Reading"
+                    >
+                      Reading
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                        class="nav-link js-scroll-trigger"
+                        onClick={this.handleGame}
+                        href="#game"
+                        alt="Game"
+                    >
+                      Game
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                        class="nav-link js-scroll-trigger"
+                        onClick={this.handleVideo}
+                        href="#video"
+                        alt="Videos"
+                    >
+                      Video
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                        class="nav-link js-scroll-trigger"
+                        onClick={this.handleQuiz}
+                        href="#quiz"
+                        alt="Quiz"
+                    >
+                      Quiz
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <Google />
             </div>
+          </nav>
+
+          <div>{section[this.state.count]}</div>
+
+
+          <div class="container">
+            <button
+                className="btn btn-second btn-xl text-uppercase js-scroll-trigger back "
+                onClick={this.handleDecrement}
+                disabled={this.disappearBack() ? "disabled" : false}
+            >
+              back
+            </button>
+            <button
+                className="btn btn-primary btn-xl text-uppercase js-scroll-trigger next"
+                onClick={this.handleIncrement}
+                disabled={this.disappearNext() ? "disabled" : false}
+            >
+              next
+            </button>
+            <footer class="footer">
+              <div class="btn-change">
+                <Change />
+              </div>
+              <div class="btn-information">
+                These buttons are disabled so as to not interfere with the
+                accessibility-related portions of the lab.
+              </div>
+            </footer>
           </div>
-          <Google />
-        </nav>
-
-        <div>{section[this.state.count]}</div>
-
-        <button
-          class="btn btn-second btn-xl text-uppercase js-scroll-trigger back "
-          onClick={this.handleDecrement}
-          disabled={this.disappearBack() ? "disabled" : false}
-        >
-          back
-        </button>
-        <button
-          class="btn btn-primary btn-xl text-uppercase js-scroll-trigger next"
-          onClick={this.handleIncrement}
-          disabled={this.disappearNext() ? "disabled" : false}
-        >
-          next
-        </button>
-
-        <footer class="footer">
-          <div class="btn-change">
-            <p>
-              <Change />
-              <br />
-              <br />
-              These buttons are disabled so as to not interfere with the
-              accessibility-related portions of the lab.
-            </p>
-          </div>
-        </footer>
-      </div>
+        </div>
     );
   }
 }
