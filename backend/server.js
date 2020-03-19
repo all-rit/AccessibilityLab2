@@ -36,7 +36,7 @@ const pool = new Pool({
   port: 5432,
 })
 
-let whitelist = ['http://localhost', 'http://all.rit.edu'];
+let whitelist = ['http://localhost', 'http://all.rit.edu','http://localhost:3000', 'http://localhost:5000'];
 let corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -173,7 +173,7 @@ app.get('/main', (req, res) => {
 app.get('/auth/google', (req, res) => {
     var signinLink = googleLogin.googleUrl();
     res.json({
-      link: signinLink 
+      link: signinLink
     })
   }
 );
@@ -247,7 +247,7 @@ const recordUser = (user, existingUser, res, req) => {
     }
 }
 
-app.get('/auth/google/callback', 
+app.get('/auth/google/callback',
     passport.authenticate('google', {
       failureRedirect: '/Lab2'
     }),
@@ -315,7 +315,7 @@ app.post('/gameStats', (req, res) => {
         if (error) {
           console.log(error);
 	}
-        let modeID = 0;	
+        let modeID = 0;
 	result.rows.forEach((row) => {
 	  if (row.modename === Mode) {
 	    modeID = row.modeid;
@@ -476,7 +476,7 @@ app.get('/previousGames', (req, res) => {
   })
   */
   pool.query(`SELECT Session.UserID FROM session WHERE session.UserSessionID=${req.session.token}`, (error, response) => {
-    if (error) { 
+    if (error) {
       console.log(error);
     }
     let userID = response.rows[0].userid;
