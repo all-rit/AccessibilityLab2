@@ -24,7 +24,11 @@ const About = ({ title, description, links }) => {
         </div>
       </section>
       <div class="row">
-        Description of what this lab is for and what you will learn.
+        In this lab, you will learn about why it is important to create
+        software that is accessible to users with visual impairments.
+        You will learn about different color vision deficiencies, utilize
+        your knowledge in a game about visual impairments, watch
+        several related videos, and take a quiz. Click "Next" to start!
       </div>
     </div>
   );
