@@ -142,6 +142,7 @@ class App extends Component {
                         onClick={this.handleAbout}
                         href="#about"
                         alt="About Section"
+                        style={this.state.count===0? activeStyle: null}
                     >
                       About
                     </a>
