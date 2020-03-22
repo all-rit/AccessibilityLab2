@@ -100,6 +100,7 @@ class App extends Component {
   };
 
   render() {
+    const activeStyle = {color: "#fed136"};
     return (
         <div>
           <nav
@@ -124,6 +125,7 @@ class App extends Component {
               <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
                   <li class="nav-item">
+
                     <a
                         class="nav-link js-scroll-trigger"
                         href="http://all.rit.edu"
@@ -133,7 +135,9 @@ class App extends Component {
                     </a>
                   </li>
                   <li class="nav-item">
+
                     <a
+                        style={this.state.count===0? activeStyle: null}
                         class="nav-link js-scroll-trigger"
                         onClick={this.handleAbout}
                         href="#about"
@@ -148,6 +152,7 @@ class App extends Component {
                         onClick={this.handleReading}
                         href="#reading"
                         alt="Reading"
+                        style={this.state.count===1? activeStyle: null}
                     >
                       Reading
                     </a>
@@ -158,6 +163,7 @@ class App extends Component {
                         onClick={this.handleGame}
                         href="#game"
                         alt="Game"
+                        style={this.state.count===2? activeStyle: null}
                     >
                       Game
                     </a>
@@ -168,6 +174,7 @@ class App extends Component {
                         onClick={this.handleVideo}
                         href="#video"
                         alt="Videos"
+                        style={this.state.count===3? activeStyle: null}
                     >
                       Video
                     </a>
@@ -178,6 +185,7 @@ class App extends Component {
                         onClick={this.handleQuiz}
                         href="#quiz"
                         alt="Quiz"
+                        style={this.state.count===4? activeStyle: null}
                     >
                       Quiz
                     </a>
