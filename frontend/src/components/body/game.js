@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./../../vendor/bootstrap/css/bootstrap.min.css";
 import "@reach/dialog/styles.css";
 import "./../../css/agency.min.css";
-import "./../../assets/stylesheets/pages/CaseStudy.scss";
+import "./../../assets/stylesheets/pages/CaseStudy.css";
 import "./../../css/style.css";
 
 import { connect } from "react-redux";
