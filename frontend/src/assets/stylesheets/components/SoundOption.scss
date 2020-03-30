@@ -2,11 +2,11 @@
   width: 35px;
   height: 35px;
   cursor: pointer;
-  background-image: url("../../images/volume_on.svg");
+  background-image: url("./../../images/volume_on.svg");
   background-size: contain;
 
   &--off {
-    background-image: url("../../images/volume_off.svg");
+    background-image: url("./../../images/volume_off.svg");
   }
 
   &--disabled {
