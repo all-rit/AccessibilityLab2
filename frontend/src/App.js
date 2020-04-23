@@ -11,6 +11,7 @@ import "./vendor/bootstrap/css/bootstrap.min.css";
 import "./css/agency.min.css";
 import "./css/style.css";
 
+
 const section = {
   0: <About />,
   1: <Reading />,
@@ -105,21 +106,28 @@ class App extends Component {
           <nav
               class="navbar navbar-expand-lg navbar-dark fixed-top"
               id="mainNav"
-              style={{ backgroundColor: "#484848", height: "12%", fontSize: "90%" }}
-          >
-            <div class="container">
-              <img
-                  src={logo}
-                  style={{
-                    paddingRight: "20px",
-                    paddingBottom: "10px",
-                    paddingTop: "10px",
-                    marginTop: "-10px"
-                  }}
-                  alt="Computing Accessibility"
+              style={{
+                backgroundColor: "#3d3d3d",
+                zIndex: "1",
+                position: "fixed",
+                width: "100%",
+                fontSize: "90%",
+                overflow: "hidden"
+              }}>
+            <div class="container labcontainer">
+              <div className="logo-container justify-content-center">
+              <img className="logo img-fluid"
+                   src={logo}
+                   style={{
+                     paddingRight: "20px",
+                     paddingBottom: "10px",
+                     paddingTop: "10px",
+                     marginTop: "-10px"
+                   }}
+                   alt="Computing Accessibility"
               ></img>
+              </div>
               <a class="navbar-brand js-scroll-trigger" href="http://all.rit.edu">
-                Accessibility Learning Labs
               </a>
               <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
@@ -184,7 +192,7 @@ class App extends Component {
                   </li>
                 </ul>
               </div>
-              <Google />
+
             </div>
           </nav>
 

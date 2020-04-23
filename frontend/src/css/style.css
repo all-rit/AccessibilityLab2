@@ -77,6 +77,15 @@ hr.horiz {
   background-color: white;
 }
 
+.logo-container{
+  width:340px;
+}
+.logo{
+  width:100%;
+  height:auto;
+
+}
+
 .center-div{
   text-align:center;
 }
