@@ -1,0 +1,23 @@
+.app {
+  text-align: center;
+
+  &__name {
+    font-size: 3.125rem;
+  }
+
+  &__instructions {
+    font-size: 1.25rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  &__list {
+    margin-bottom: 2rem;
+    margin-left: 2.5rem;
+    list-style-type: disc;
+
+    > li {
+      margin-bottom: 0.5rem;
+    }
+  }
+}

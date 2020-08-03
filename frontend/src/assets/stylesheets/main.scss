@@ -7,6 +7,8 @@
 @import "base/base";
 @import "base/helpers";
 
+@import "components/App";
+
 @import "components/CodeEditor";
 @import "components/Header";
 @import "components/Instructions";
@@ -22,3 +24,4 @@
 
 @import "pages/Supplementary";
 @import "pages/CaseStudy";
+@import "pages/quiz";
