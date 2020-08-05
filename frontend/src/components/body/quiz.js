@@ -1,17 +1,17 @@
 import React from "react";
+import Quiz from "./../../quiz/App"
 import "./../../vendor/bootstrap/css/bootstrap.min.css";
 import "./../../css/agency.min.css";
 import "./../../css/style.css";
-import Form from "./../forms/form";
 
-const Quiz = ({ title, description, links }) => {
+const Reading = ({ title, description, links }) => {
   if (links === undefined) {
     links = [null, null, null];
   }
 
   return (
     <div class="container">
-      <section class="page-section" style={{ paddingBottom: "25px" }}>
+      <section class="page-section" style={{ paddingBottom: "0px" }}>
         <div class="container">
           <div class="row">
             <div class="col-lg-12 text-center">
@@ -22,13 +22,11 @@ const Quiz = ({ title, description, links }) => {
               </h2>
             </div>
           </div>
-          <div class="row">
-            <Form />
-          </div>
         </div>
       </section>
+      <Quiz/>
     </div>
   );
 };
 
-export default Quiz;
+export default Reading;
