@@ -28,6 +28,6 @@ jobs:
         script: |
           cd research
           chmod -R g+w AccessibilityLab2
-          cd AccessibilityLab2/client
+          cd AccessibilityLab2/frontend
           npm install
           npm run-script build
