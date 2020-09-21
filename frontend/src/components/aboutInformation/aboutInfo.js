@@ -91,14 +91,14 @@ const AboutInfo = ({ toWhiteBackground, background }) => {
       </p>
       <div>
         <p className="center fourthTitle">
-          What, in the eye, is causing colors to be percieved in this way?
+          What, in the eye, is causing colors to be perceived in this way?
         </p>
         <p className="center margin">
           For individuals with Protanomaly, Deuteranomaly, and Tritanomaly, they
           are considered dichromatic, meaning that they only have two types of
-          cones in their eyes to percieve colors. People without these
+          cones in their eyes to perceived colors. People without these
           deficiencies have three cones and each cone is responsible for
-          percieving red, green, and blue. This is where the reduced sensitivity
+          perceiving red, green, and blue. This is where the reduced sensitivity
           comes from, as the reduction in one cone causes a section of the color
           spectrum to not be viewable to the individual. This section happens to
           overlap for individuals with Protanomaly and Deuteranomaly, which is

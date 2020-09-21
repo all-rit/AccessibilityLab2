@@ -19,6 +19,7 @@
     "image-webpack-loader": "^4.6.0",
     "node-sass": "^4.13.1",
     "npm": "^6.9.0",
+    "rc-color-picker": "^1.2.6",
     "react": "^16.7.0",
     "react-bell-icon": "^1.0.0",
     "react-chartjs-2": "^2.7.4",
@@ -32,6 +33,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.8",
+    "reactstrap": "^8.6.0",
     "redux": "^4.0.5",
     "semantic-ui-react": "^0.85.0"
   },

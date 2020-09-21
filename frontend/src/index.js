@@ -14,6 +14,8 @@ import {
   changeGameState,
   changeUser
 } from "./controllers/reducers";
+import app from './reducers/AppReducer';
+
 
 let browserHistory = Router.browserHistory;
 
@@ -21,7 +23,8 @@ const rootReducer = combineReducers({
   changeColors,
   selectGameOption,
   changeGameState,
-  changeUser
+  changeUser,
+  app 
 });
 
 const store = createStore(rootReducer);
