@@ -1,107 +1,119 @@
 var quizQuestions = [
     {
-        question: "What is an audio cue?",
+        question: "What are the most common colors in colorblindedness?",
         answers: [
             {
                 val: 0,
-                content: "A vibration that conveys key information"
+                content: ""
             },
             {
                 val: 1,
-                content: "A playing sound that conveys key information"
+                content: ""
             },
             {
                 val: 0,
-                content: "A visual indicator that conveys key information"
+                content: ""
             },
             {
                 val: 0,
-                content: "None of the above"
+                content: ""
             }
 
         ],
         multiChoice: false
     },
     {
-        question: "How many people (aged 18 and over) with hearing loss are there in the United States?",
+        question: "Are women more likely to be affected by a CVD?",
         answers: [
             {
                 val: 0,
-                content: "20-30 million people"
+                content: ""
             },
             {
                 val: 1,
-                content: "30-40 million people"
+                content: ""
             },
             {
                 val: 0,
-                content: "40-50 million people"
+                content: ""
             },
             {
                 val: 0,
-                content: "50-60 million people"
+                content: ""
             }
+
         ],
         multiChoice: false
     },
     {
-        question: "When should accessibility be considered in the development process?",
+        question: "What is the cure to protanomaly?",
         answers: [
             {
                 val: 0,
-                content: "At the end"
+                content: ""
             },
             {
                 val: 1,
-                content: "From the beginning"
+                content: ""
             },
             {
                 val: 0,
-                content: "Whenever the developer feels it's necessary"
+                content: ""
             },
             {
                 val: 0,
-                content: "Only if it's needed for the project"
+                content: ""
             }
+
         ],
         multiChoice: false
     },
     {
-        question: "What does the 'Perceivable' accessibility principle mean?",
+        question: "What is a major difference between  monochromacy and other CVDs?",
         answers: [
             {
                 val: 0,
-                content: "User interface components and navigation must be operable."
+                content: ""
             },
             {
                 val: 1,
-                content: "Information and user interface components must be presentable to users in ways they can perceive."
+                content: ""
             },
             {
                 val: 0,
-                content: "Information and the operation of user interface must be understandable."
+                content: ""
             },
             {
                 val: 0,
-                content: "None of the above"
+                content: ""
             }
+
         ],
         multiChoice: false
     },
     {
-        question: "Do users with hearing loss have a disadvantage when they use applications that utilize audio cues?",
+        question: "What, in the eye, causes color vision deficiency?",
         answers: [
             {
+                val: 0,
+                content: ""
+            },
+            {
                 val: 1,
-                content: "Yes"
+                content: ""
             },
             {
                 val: 0,
-                content: "No"
+                content: ""
+            },
+            {
+                val: 0,
+                content: ""
             }
+
         ],
         multiChoice: false
-    }
+    },
 ];
 
 export default quizQuestions;
