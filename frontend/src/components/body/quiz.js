@@ -2,9 +2,10 @@ import React from "react";
 import "./../../vendor/bootstrap/css/bootstrap.min.css";
 import "./../../css/agency.min.css";
 import "./../../css/style.css";
-import Form from "./../forms/form";
+// import Form from "./../forms/form";
+import Quiz from "./../../quiz/App";
 
-const Quiz = ({ title, description, links }) => {
+const QuizLab2 = ({ title, description, links }) => {
   if (links === undefined) {
     links = [null, null, null];
   }
@@ -22,13 +23,11 @@ const Quiz = ({ title, description, links }) => {
               </h2>
             </div>
           </div>
-          <div class="row">
-            <Form />
-          </div>
         </div>
       </section>
+      <Quiz />
     </div>
   );
 };
 
-export default Quiz;
+export default QuizLab2;

@@ -6,7 +6,8 @@ const LandingPage = ({
   endFirstGame,
   toWhiteBackground,
   background,
-  loggedIn
+  loggedIn,
+  startGame
 }) => {
   const closePage = () => {
     endFirstGame();

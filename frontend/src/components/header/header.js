@@ -64,7 +64,7 @@ const handleQuiz = (actions,state) => {
 };
 
 const alert_check = (state)=> {
-    if (state.game.state !== "GAME_IDLE" && state.app.body === 2){
+    if (state.changeGameState.gameState === true && state.app.body === 2){
         alert("The game is still in progress! Please complete the game");
         return true
     }
