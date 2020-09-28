@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../App.css';
-
+// import '../index.css'
 function QuestionCount(props) {
   return (
     <div className="quiz questionCount">
