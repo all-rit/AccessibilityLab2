@@ -3,7 +3,7 @@ var quizQuestions = [
         question: "What are the most common colors in colorblindedness?",
         answers: [
             {
-                val: 1,
+                val: 0,
                 content: "Red"
             },
             {
@@ -11,16 +11,16 @@ var quizQuestions = [
                 content: "Green"
             },
             {
-                val: 1,
+                val: 0,
                 content: "Blue"
             },
             {
-                val: 1,
+                val: 0,
                 content: "Grey"
             }
 
         ],
-        multiChoice: true
+        multiChoice: false
     },
     {
         question: "Are women more likely to be affected by a CVD?",

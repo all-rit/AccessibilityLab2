@@ -7,12 +7,23 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .align-right {
   text-align: right;
 }
+
+.nextButton {
+  margin: 20px;
+  padding: 8px !important;
+}
+
 .quizCode {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+h2 {
+  font-weight: 400 !important;
 }
 
 * {
@@ -47,7 +58,7 @@
 
 /* Quiz Component */
 .answerOptions {
-  margin: 0 !important;
+  margin: 16px;
   padding: 0 !important;
   list-style: none !important;
 }

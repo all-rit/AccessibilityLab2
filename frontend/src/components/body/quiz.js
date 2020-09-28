@@ -12,7 +12,7 @@ const QuizLab2 = ({ title, description, links }) => {
 
   return (
     <div class="container">
-      <section class="page-section" style={{ paddingBottom: "25px" }}>
+      <section class="page-section" style={{ paddingBottom: "0px" }}>
         <div class="container">
           <div class="row">
             <div class="col-lg-12 text-center">
