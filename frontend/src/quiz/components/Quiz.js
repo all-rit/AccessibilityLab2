@@ -21,7 +21,7 @@ function Quiz(props) {
 
 
     return (
-        <div className="quiz container shadow" key={props.questionId}>
+        <div className="quiz quizContainer shadow" key={props.questionId}>
             <QuestionCount counter={props.questionId} total={props.questionTotal}/>
             <Question content={props.question}/>
             <ul className="answerOptions">

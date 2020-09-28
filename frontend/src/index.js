@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Switch } from "react-router";
-import "./index.css";
 import App from "./App";
 import SuppMaterials from "./suppMaterials";
 import CaseStudy from "./caseStudy";
@@ -24,7 +23,7 @@ const rootReducer = combineReducers({
   selectGameOption,
   changeGameState,
   changeUser,
-  app 
+  app
 });
 
 const store = createStore(rootReducer);
