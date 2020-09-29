@@ -1,7 +1,13 @@
 .study {
     margin: 2rem auto;
     font-size: 1.5rem;
+    line-height: 1.75;
+    font-family: "Open Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #fcfcfc;
 }
+
 .study > h1 {
     margin-bottom: 3rem;
 }
@@ -23,7 +29,8 @@
 .study p {
     text-align: justify;
     margin-bottom: 3rem;
-    font-size: 1.25rem;
+    font-size: 1.30rem;
+    padding: 0;
 }
 .study img {
     width: 50%;

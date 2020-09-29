@@ -311,7 +311,7 @@ class ColorChangePopup extends React.Component {
     }
 
     return (
-      <div>
+      <div style={{marginBottom: "2rem"}}>
         <div>
           {this.state.confirmPopup ? (
             <Dialog>

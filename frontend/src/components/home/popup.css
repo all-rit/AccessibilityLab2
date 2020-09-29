@@ -159,18 +159,18 @@ code {
 @media (max-width: 1200px) {
   .submitColorPopup{
     width: 150px;
-    height: 40px;
     font-size: 25px;
     margin-left: 40%;
+    margin-bottom: 1rem;
   }
 }
 
 @media (min-width: 1200px) {
   .submitColorPopup{
     width: 150px;
-    height: 40px;
     font-size: 25px;
     margin-left: 45%;
+    margin-bottom: 1rem;
   }
 }
 

@@ -15,7 +15,7 @@ const Video = ({ link, title }) => {
             </div>
           </div>
           <div class="row">
-            <h4>Here are some videos to aid in understanding the material.</h4>
+            <h4 style={{fontWeight: "normal"}}>Here are some videos to aid in understanding the material.</h4>
           </div>
           <div class="row">
             <iframe

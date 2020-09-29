@@ -37,7 +37,7 @@ const ThirdInstructions  = ({closePage, activatePopup, toWhiteBackground,
         <li className='instructionsItem'>
           You can change the colors with the
           <strong style={{marginLeft: '3px'}}>
-            Update Colors
+            Update Colors 
           </strong>
           button in the upper left corner of the next screen.
         </li>

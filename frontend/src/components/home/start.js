@@ -18,7 +18,7 @@ const Start = ({startGame, gameOption, onChangeGameColors, colors}) => {
 
   return (
       <button
-        className='start center inline'
+        className='btn btn-light start center inline'
         type='submit'
         onClick={startClick}
         aria-label="move your mouse slightly over to the left."
