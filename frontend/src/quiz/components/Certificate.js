@@ -52,7 +52,7 @@ class Certificate extends Component {
             <div style={{width:"100%", height:"auto", padding:"20px", border: "10px solid #787878"}}>
                 <div style={{width:"100%", height:"auto", border: "5px solid #787878"}}>
                     <div style={{width:"50%", margin: "auto"}}>
-                    <span style={{fontSize:"50px", fontWeight:"bold",textAlign:"center"}}>
+                    <span style={{fontSize:"50px", fontWeight:"500",textAlign:"center"}}>
                             Certificate of Completion
                     </span>
                     </div>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import AnswerOption from "./AnswerOption";
 import quizQuestions from "../api/quizQuestions";
 import Certificate from "./Certificate";
+import "./../index.css";
 
 function Result(props) {
 

@@ -59,15 +59,15 @@ var quizQuestions = [
             },
             {
                 val: 0,
+                content: "Individuals with this deficiency can see only red."
+            },
+            {
+                val: 0,
+                content: "Individuals with this deficiency can see only green."
+            },
+            {
+                val: 0,
                 content: "Individuals with this deficiency can see only red and green."
-            },
-            {
-                val: 0,
-                content: "Individuals with this deficiency can see only one color."
-            },
-            {
-                val: 0,
-                content: "Individuals with this deficiency can only see "
             }
 
         ],
