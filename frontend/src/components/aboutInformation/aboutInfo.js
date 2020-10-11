@@ -37,8 +37,10 @@ const AboutInfo = ({ toWhiteBackground, background }) => {
         <Pie data={data} height={100} />
       </div>
       <p className="center margin">
-        Color Vision Deficiencies (or CVDs) affects 1 in 12 men (8%) and 1 in
-        200 Women across the world.
+        CVDs affect about 4.4% of people worldwide.
+      </p>
+      <p className="center margin">
+        CVDs affect 1 in 11 men (9%) and 1 in 200 (0.5%) women worldwide.
       </p>
       <p className="center margin">
         The pie chart above shows this data in a population of 10,000 people.
@@ -113,7 +115,7 @@ const AboutInfo = ({ toWhiteBackground, background }) => {
         </p>
         <p className="center margin">
           Color Vision Deficiencies are normally caused by genetic conditions
-          and are usually inheritied from an individual's parents. Men are more
+          and are usually inherited from an individual's parents. Men are more
           often impacted than women because the gene is carried in the X
           chromosome. There can be some other cases that cause color vision
           deficiencies however their causes are still being researched to

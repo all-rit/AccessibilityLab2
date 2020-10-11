@@ -1,6 +1,28 @@
 var quizQuestions = [
     {
-        question: "There are more females without a color vision deficiency compared to males, according to the data.",
+        question: "What is the total percentage of people affected by a color vision deficiency?",
+        answers: [
+            {
+                val: 0,
+                content: "9%"
+            },
+            {
+                val: 1,
+                content: "4.4%"
+            },
+            {
+                val: 0,
+                content: "0.5%"
+            },
+            {
+                val: 0,
+                content: "10%"
+            }
+        ],
+        multiChoice: false
+    },
+    {
+        question: "Men are more likely to be affected by a color vision deficiency than women.",
         answers: [
             {
                 val: 1,
@@ -14,83 +36,61 @@ var quizQuestions = [
         multiChoice: false
     },
     {
-        question: "Women are more likely to be affected by a color vision deficiency.",
+        question: "Is there a known cure to color vision deficiencies?",
         answers: [
             {
                 val: 0,
-                content: "True"
+                content: "Yes"
             },
             {
                 val: 1,
-                content: "False"
-            }
-        ],
-        multiChoice: false
-    },
-    {
-        question: "Which of the following is a known cause of color vision deficiencies?",
-        answers: [
-            {
-                val: 0,
-                content: "A gene that is carried in the Y chromosome."
-            },
-            {
-                val: 1,
-                content: "Genetic conditions that are usually inherited from an individual's parents."
-            },
-            {
-                val: 0,
-                content: "Rubbing your eyes too hard when they feel itchy."
-            },
-            {
-                val: 0,
-                content: "Uncorrected refractive errors in the eye."
+                content: "No"
             }
 
         ],
         multiChoice: false
     },
     {
-        question: "What is a major difference between monochromacy and other CVDs?",
+        question: "What is the most common color vision deficiency?",
         answers: [
             {
                 val: 1,
-                content: "Individuals with this deficiency can see no colors at all."
+                content: "Red and green"
             },
             {
                 val: 0,
-                content: "Individuals with this deficiency can see only red."
+                content: "Blue"
             },
             {
                 val: 0,
-                content: "Individuals with this deficiency can see only green."
+                content: "Grey"
             },
             {
                 val: 0,
-                content: "Individuals with this deficiency can see only red and green."
+                content: "Black"
             }
 
         ],
         multiChoice: false
     },
     {
-        question: "What, in the eye, causes color to be perceived in the way they are to a person with a color vision deficiency?",
+        question: "What the main cause of color vision deficiencies?",
         answers: [
             {
                 val: 0,
-                content: "There is more sensitivity in each of the two cones in the eyes."
+                content: "The cause is unknown"
             },
             {
                 val: 0,
-                content: "There is more sensitivity in each of the three cones in the eyes."
+                content: "Uncorrected refractive errors in the eye"
             },
             {
                 val: 0,
-                content: "The eyes are shaped differently than individuals without a color vision deficiency."
+                content: "Rubbing your eyes too hard when they feel itchy"
             },
             {
                 val: 1,
-                content: "Individuals with a CVD have only two types of cones to perceive colors."
+                content: "A gene that is carried in the X chromosome"
             }
 
         ],
