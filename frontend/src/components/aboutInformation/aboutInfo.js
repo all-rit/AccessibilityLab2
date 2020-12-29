@@ -69,7 +69,7 @@ const AboutInfo = ({ toWhiteBackground, background }) => {
       <div>
         <p className="center fourthTitle">Tritanomaly (trī′tə-nŏm′ə-lē):</p>
         <p className="center margin">
-          There is a reduced sensitivity to blue right. Most people with this
+          There is a reduced sensitivity to blue light. Most people with this
           have issues distinguishing between blue and yellow, violet and red,
           and blue and green. Most of the colors someone with this would see are
           pink, red, black, white, grey, and turquoise. This CVD is extremely
@@ -81,7 +81,7 @@ const AboutInfo = ({ toWhiteBackground, background }) => {
         <p className="center margin">
           Individuals with this deficiency can see no colors at all. Everything
           is a shade of grey that ranges between white and black. This is
-          incredibly rare (approximately 1 in 33,000 people are diagnosed With
+          incredibly rare (approximately 1 in 33,000 people are diagnosed with
           this condition). Due to the range of colors these individuals can see,
           it can make some tasks in life difficult to preform.
         </p>
