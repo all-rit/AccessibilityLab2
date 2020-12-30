@@ -60,7 +60,7 @@ class Replay extends Component {
               </p>
             )}
             <div>
-              <table style={{ backgroud: "white" }} className="center">
+              <table className="center">
                 <tbody style={{ border: "2px solid black" }}>
                   <tr>
                     <td className="replayBreakdown">Final Score</td>
