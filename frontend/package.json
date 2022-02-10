@@ -17,7 +17,7 @@
     "html-loader": "^0.5.5",
     "i": "^0.3.6",
     "image-webpack-loader": "^4.6.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "npm": "^6.9.0",
     "rc-color-picker": "^1.2.6",
     "react": "^16.7.0",
